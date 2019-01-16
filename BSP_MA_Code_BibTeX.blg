@@ -1,0 +1,17 @@
+This is BibTeX, Version 0.99dThe top-level auxiliary file: BSP_MA_Code_BibTeX.aux
+A level-1 auxiliary file: chapter/conflicting_paradigms.aux
+A level-1 auxiliary file: chapter/cache.aux
+A level-1 auxiliary file: quotes/hennessy.aux
+A level-1 auxiliary file: quotes/drepper.aux
+The style file: gerabbrv.bst
+Database file #1: Literatur.bib
+Warning--entry type for "about_oop" isn't style-file defined
+--line 30 of file Literatur.bib
+Warning--entry type for "lang_ratings" isn't style-file defined
+--line 46 of file Literatur.bib
+Warning--entry type for "hopl" isn't style-file defined
+--line 90 of file Literatur.bib
+Warning--to sort, need author or key in lang_ratings
+Warning--empty journal in fabian
+Warning--can't use both volume and number fields in luk
+(There were 6 warnings)

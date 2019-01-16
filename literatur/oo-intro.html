@@ -1,0 +1,269 @@
+
+<!-- saved from url=(0060)http://web.eecs.utk.edu/~huangj/CS302S04/notes/oo-intro.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252"><style>@media print {#ghostery-purple-box {display:none !important}}</style></head><body><h1> A Brief History of Object-Oriented Programming </h1>
+
+SIMULA was the first object language. As its name suggests it was
+used to create simulations. Alan Kay, who was at the University
+of Utah at the time, liked what he saw in the SIMULA language. He
+had a vision of a personal computer that would provide graphics-oriented
+applications and he felt that a language like SIMULA would provide
+a good way for non-specialists to create these applications. He sold
+his vision to Xerox Parc and in the early 1970s, a team headed by
+Alan Kay at Xerox Parc created the first personal computer called the
+Dynabook. Smalltalk  was the object-oriented language developed for
+programming the Dynabook. It was a simulation and graphics-oriented
+programming language. Smalltalk exists to this day although it is
+not widely used commercially.
+<p>
+The idea of object-oriented programming gained momentum in the 1970s
+and in the early 1980s Bjorn Stroustrup integrated object-oriented programming
+into the C language. The resulting language was called C++ and it became
+the first object-oriented language to be widely used commercially. 
+</p><p>
+In the early 1990s a group at Sun led by James Gosling developed a simpler
+version of C++ called Java that was meant to be a programming language
+for video-on-demand applications. This project was going nowhere until
+the group re-oriented its focus and marketed Java as a language for
+programming Internet applications. The language has gained widespread
+popularity as the Internet has boomed, although its market penetration
+has been limited by its inefficiency.
+</p><p>
+</p><h1> Objects </h1>    
+
+Object-oriented programming is first and foremost about objects. Initially
+object-oriented languages were geared toward modeling real world objects
+so the objects in a program corresponded to real world objects. Examples
+might include:
+<p>
+</p><ol>
+<li> Simulations of a factory floor--objects represent machines and raw 
+materials
+<p>
+</p></li><li> Simulations of a planetary system--objects represent celestial bodies
+    such as planets, stars, asteroids, and gas clouds
+<p>
+</p></li><li> A PC desktop--objects represent windows, documents, programs, and 
+    folders
+<p>
+</p></li><li> An operating system--objects represent system resources such as the
+    CPU, memory, disks, tapes, mice, and other I/O devices
+</li></ol>
+<p>
+The idea with an object is that it
+advertises the types of data that it will store and the types of operations
+that it allow to manipulate that data. However, it hides its
+implementation from the user. For a real world analogy, think of a radio.
+The purpose of a radio is to play the program content of radio stations 
+(actually translate broadcast signals into sounds that humans can understand).
+A radio has various dials that allow you to control functions such as
+the station you are tuned to, the volume, the tone, the bass, the power,
+and so on. These dials represent the operations that you can use to
+manipulate the radio. The implementation of the radio is hidden from you.
+It could be implemented using vacuum tubes or solid state transistors, or
+some other technology. The point is you do not need to know. The fact that
+the implementation is hidden from you allows radio manufacturers to upgrade
+the technology within radios without requiring you to relearn how to use
+a radio. 
+</p><p>
+The idea is the same with objects. An object advertises the set of functions
+it will perform for you but does not reveal its implementation. Think of
+it as a black box. For example, think of the objects on a desktop. For
+simplicity think of two types of objects, a document and a program. A document
+contains data and a program contains executable statements. The desktop
+needs some functions to manipulate these objects. For example, it needs to
+be able to copy, cut, and paste these objects. It does not care how these
+objects are implemented. It just needs them to perform those three functions.
+Consequently both documents and programs provide functions that allow them
+to be copied, cut, and pasted. 
+</p><p>
+As another example, consider a stack. A stack provides a set of operations
+such as push, pop, isempty, and top. If the stack is implemented as an
+object, its implementation will be hidden from the program. It may be
+implemented as an array, a queue, or some other data structure. The program
+does not need to know how the array is implemented. Its only concern is
+that the stack provide the specified operations and that the operations
+provide the desired behavior. 
+</p><p>
+The set of operations provided by an object is called its <b>interface</b>.
+The interface defines both the names of the operations and the behavior of
+these operations. In essence the interface is a contract between the object
+and the program that uses it. The object guarantees that it will provide
+the advertised set of operations and that they will behave in a specified
+fashion. Any object that adheres to this contract can be used interchangeably
+by the program. Hence the implementation of an object can be changed without
+affecting the behavior of a program. For example, we can replace a stack
+object that is implemented as an array with a stack object that is implemented
+as a queue without affecting the behavior of the program.
+</p><p>
+</p><h1> Classes </h1>
+
+An object is not much good if each one must be custom crafted. For example,
+radios would not be nearly as prevalent if each one was handcrafted. What
+is needed is a way to provide a blueprint for an object and a way for
+a "factory" to use this blueprint to mass produce objects. Classes provide
+this mechanism in object-oriented programming. A <b>class</b> is a factory
+that is able to mass produce objects. The programmer provides a class
+with a blueprint of the desired type of object. A "blueprint" is actually
+composed of:
+<ol>
+<li> A declaration of a set of variables that the object will possess, 
+</li><li> A declaration of the set of operations that the object will provide, and 
+</li><li> A set of function definitions that implements each of these operations. 
+</li></ol>
+The set of variables possessed by each object are called <b>instance
+variables</b>. The set of operations that the object provides are
+called <b>methods</b>. For most practical purposes, a method is like a
+function. 
+<p>
+When a program wants a new instance of an object, it asks the appropriate
+class to create a new object for it. The class allocates memory to hold
+the object's instance variables and returns the object to the program. Each
+object knows which class created it so that when an operation is requested
+for that object, it can look up in the class the function that implements 
+that operation and call that function. 
+
+</p><h1> Inheritance </h1> 
+
+To motivate inheritance, think of a radio alarm clock. A radio alarm clock
+has all of the functions of a radio plus additional functions to handle
+the alarm clock. If we adopt the radio's interface for the radio alarm clock,
+then someone who knows how to operate a radio will also know how to
+operate the radio portion of the radio alarm clock. Hence, rather than 
+designing the radio alarm clock from scratch, we can extend or inherit
+the interface defined by the radio. Of course, we can also use the
+existing implementation for a radio and extend it to handle the alarm
+clock functions.
+<p>
+In object-oriented programming, <b>Inheritance</b> means the inheritance
+of another object's interface, and possibly its implementation as well. 
+Inheritance is accomplished by stating that a new class is a <b>subclass</b>
+of an existing class. The class that is inherited from is called the
+<b>superclass</b>. The subclass always inherits the superclass's complete
+interface. It can extend the interface but it cannot delete any operations
+from the interface. The subclass also inherits the superclass's implementation,
+or in other words, the functions that implement the superclass's operations.
+However, the subclass is free to define new functions for these operations.
+This is called <b>overriding</b> the superclass's implementation. The subclass
+can selectively pick and choose which functions it overrides. Any functions
+that are not overridden are inherited. 
+</p><p>
+There is a great deal of debate about how to use inheritance. In particular,
+the debate swirls about whether inheritance should be used when you
+want to inherit an interface or whether it should be used when you
+want to inherit implementation. For example, suppose that you want to
+define a search object that stores (key, value) pairs and allows values
+to be looked up by providing their keys. More precisely, let us say that
+the search object supports the following operations:
+</p><p>
+</p><ul>
+<li> insert: Adds a (key, value) pair to the object.
+</li><li> delete: Deletes a (key, value) pair from the object.
+</li><li> lookup: Given a key retrieves the value associated with that key
+       from the object.
+</li></ul>
+<p>
+Later we decide that we want a new object that allows us to traverse
+the (key, value) pairs in sorted order. The new object should support
+the above operations plus two additional operations, <tt>rewind</tt>
+that puts us back to the beginning, and <tt>next</tt> that returns the
+next (key, value) pair. Since the new object supports all of the
+operations of the original search object, we can make the new object
+inherit the original object's interface. This is an example of interface
+inheritance.
+</p><p>
+To give an example of implementation inheritance, suppose that we want 
+to implement the original search object using a binary search
+tree. The binary search tree probably already has an implementation for
+these three operations but it may not use these names for the operations.
+If we wanted to inherit the binary tree's implementation, we would make
+the search object be a subclass of the binary tree. We could then make
+the insert, delete, and lookup operations call the appropriate binary tree
+operations. Of course, we could also scrap our proposed interface and
+use the names of the binary tree interface instead. 
+</p><p>
+Does something seem wrong with this picture? Well, remember that an
+object is supposed to hide its implementation and that it should be
+interchangeable with other objects that implement the same interface.
+We can't very well scrap the interface and use the binary tree's interface
+because that would tie the interface to the binary tree's interface.
+So we should hold firm on our originally proposed interface. However,
+there's another problem.
+By making the search object inherit from the binary tree, we've also
+made its implementation dependent on the binary tree. 
+</p><p>
+Hopefully the above example shows why implementation inheritance may
+not be a good idea. In general I've found that inheritance should be
+used only when you want to inherit an interface. If it so happens that
+the implementation you get can be also be used, well and good. There
+are other ways to re-use implementation and we will discuss those later
+in the course.
+
+</p><h1> Abstract Data Types </h1> 
+
+Objects provide an ideal mechanism for implementing abstract data types.
+An abstract data type is:
+<ol>
+<li> A type of data, and
+</li><li> A set of operations for manipulating that data. 
+</li></ol>
+<p>
+Examples of abstract data types include stacks, trees, and hash tables.
+The reason for the word "abstract" is that an abstract data type defines
+only the set of operations it supports (i.e., its interface). It does not
+define an implementation. In order to make the data type concrete one must
+provide an implementation.
+</p><p>
+An object is a nice implementation vehicle for abstract data types since
+the data stored by the object can represent the abstract data type's data
+and the object's interface can represents the abstract data type's set
+of operations.
+
+</p><h1> Execution Model </h1>
+
+One of the original purposes for object languages was to model applications
+that have multiple objects that may be operating simultaneously. For
+example, the machines on a factory floor operate simultaneously. In an
+operating system the various input devices, such as disks, the keyboard,
+and the mouse, may be operating simultaneously. In a computer game various
+players, either human or computer-generated, may be operating simultaneously.
+<p>
+These applications all have something in a common--they do not have a
+single thread of control. Instead control is distributed throughout the
+application. At any given moment multiple objects may want to perform
+some action. Conventional imperative languages like C have trouble
+modeling this type of application because they have a single thread of
+control. Object languages solved this problem by making everything an
+object and having control reside within each object. That is, at any given
+moment multiple objects could be executing an operation (at least this
+is the conceptual model--a computer with a sequential processor might 
+simulate this model by interleaving the execution of the operations). Objects
+would communicate with one another by passing messages. A message is
+simply an invocation of an operation in another object. For example, an
+operating system might queue input events arriving from various input
+devices. Each input device might be represented as an object and the input
+event queue might be represented as an object. Each time an input device
+receives an input event, it would invoke the operation on the event
+queue that adds an input event to the queue. 
+</p><p>
+Smalltalk and Java are two well known examples of this "everything is an
+object" concept. They are also well suited for modeling distributed
+responsibility. Unfortunately, not every application needs to have
+distributed responsibility and that is where these object-oriented languages
+run into problems. People try to force this model onto applications that
+are more naturally modeled using a single thread of control. When this
+happens, programmers, especially programmers learning object-oriented
+programming, get confused. 
+</p><p>
+In this course we will use C++ which has a different execution model.
+It retains the notion of a central thread of control. Objects provide
+services to the central thread of control. For example, a stack object
+provides a stack service. We will primarily use objects to implement
+abstract data types. Using objects in this way will give us the advantages
+of data encapsulation and code re-use. Data encapsulation means that
+the implementation of an object is hidden and hence we can interchange
+objects with different implementations but the same interface. Code
+re-use means that we can use the same object in different applications,
+so we don't have to write the code twice.
+
+
+</p></body></html>
