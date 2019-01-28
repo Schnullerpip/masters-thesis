@@ -20,6 +20,8 @@
 \usepackage[T1]{fontenc}
 \usepackage{cite}
 \usepackage[numbers]{natbib}
+\usepackage{booktabs}
+\usepackage{wrapfig}
 
 %
 % Bitte in der folgenden Zeile den Zitierstandard festlegen
@@ -115,8 +117,11 @@
 \newcommand{\refcode}[1]{Code \ref{#1}}
 \newcommand{\refcodep}[1]{(see \refcode{#1})}
 
-\newcommand{\refsec}[1]{section \ref{#1}}
-\newcommand{\refsecp}[1]{(see section \ref{#1})}
+\newcommand{\refsec}[1]{Section \ref{#1}}
+\newcommand{\refsecp}[1]{(see \refsec{#1})}
+
+\newcommand{\reftable}[1]{Table \ref{#1}}
+\newcommand{\reftablep}[1]{(see \reftable{#1})}
 
 \maketitle
 
@@ -124,22 +129,13 @@
 % .. und hier beginnt die eigentliche Arbeit. Viel Erfolg beim Verfassen!
 %
 \include{chapter/conflicting_paradigms}
-\include{chapter/cache}
+\include{chapter/motivation}
+\include{chapter/compiler_as_mediator}
 
 \chapter{Quotes}
 \include{quotes/hennessy}
 \include{quotes/drepper}
 
-
-
-Hier wird auf die Formel \ref{Gl1} verwiesen.
-
-\begin{align}
-x = -\frac{p}{2}\pm\sqrt{\frac{p^2}{4}-q}\label{Gl1}
-\end{align}
-\begin{align}
-x = -\frac{p}{2}\pm\sqrt{\frac{p^2}{4}-q}\label{Gl2}
-\end{align}
 
 %
 % Hier beginnen die Verzeichnisse.
