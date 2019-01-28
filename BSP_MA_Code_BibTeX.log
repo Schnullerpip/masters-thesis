@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6930 64-bit) (preloaded format=pdflatex 2019.1.14)  26 JAN 2019 15:28
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6930 64-bit) (preloaded format=pdflatex 2019.1.14)  28 JAN 2019 18:29
 entering extended mode
 **./BSP_MA_Code_BibTeX.tex
 (BSP_MA_Code_BibTeX.tex
@@ -1215,7 +1215,7 @@ Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
 
 (outline.tex) (BSP_MA_Code_BibTeX.aux (chapter/conflicting_paradigms.aux)
 (chapter/motivation.aux) (chapter/compiler_as_mediator.aux)
-(quotes/hennessy.aux) (quotes/drepper.aux))
+(quotes/hennessy.aux) (quotes/drepper.aux) (quotes/compilers.aux))
 \openout1 = `BSP_MA_Code_BibTeX.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 83.
@@ -1353,19 +1353,19 @@ LaTeX Font Info:    Font shape `T1/phv/m/it' in size <10.95> not available
 
 ] [-6
 
-] (BSP_MA_Code_BibTeX.toc)
+] (BSP_MA_Code_BibTeX.toc [-5
+
+])
 \tf@toc=\write5
 \openout5 = `BSP_MA_Code_BibTeX.toc'.
 
- [-5
-
-] [-4]
+ [-4]
 \openout2 = `chapter/conflicting_paradigms.aux'.
 
 
 (chapter/conflicting_paradigms.tex
 chapter 1.
-<PICs/lang_ratings.png, id=105, 685.05937pt x 290.58563pt>
+<PICs/lang_ratings.png, id=125, 685.05937pt x 290.58563pt>
 File: PICs/lang_ratings.png Graphic file (type png)
 <use PICs/lang_ratings.png>
 Package pdftex.def Info: PICs/lang_ratings.png  used on input line 14.
@@ -1389,7 +1389,7 @@ File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 LaTeX Font Info:    Font shape `T1/pcr/bx/n' in size <9> not available
 (Font)              Font shape `T1/pcr/b/n' tried instead on input line 21.
 [2 <./PICs/lang_ratings.png>]
-<PICs/npcs_in_memory.png, id=144, 1454.43375pt x 188.705pt>
+<PICs/npcs_in_memory.png, id=164, 1454.43375pt x 188.705pt>
 File: PICs/npcs_in_memory.png Graphic file (type png)
 <use PICs/npcs_in_memory.png>
 Package pdftex.def Info: PICs/npcs_in_memory.png  used on input line 31.
@@ -1404,7 +1404,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 40--41
  []
 
 [3 <./PICs/npcs_in_memory.png>]
-<PICs/cpu_memory_gap.png, id=166, 551.81157pt x 298.11375pt>
+<PICs/cpu_memory_gap.png, id=186, 551.81157pt x 298.11375pt>
 File: PICs/cpu_memory_gap.png Graphic file (type png)
 <use PICs/cpu_memory_gap.png>
 Package pdftex.def Info: PICs/cpu_memory_gap.png  used on input line 75.
@@ -1414,7 +1414,7 @@ LaTeX Font Info:    Font shape `T1/phv/bx/it' in size <10> not available
 LaTeX Font Info:    Font shape `T1/phv/b/it' in size <10> not available
 (Font)              Font shape `T1/phv/b/sl' tried instead on input line 83.
  [4]
-<PICs/cachelayout.png, id=182, 255.95625pt x 224.33812pt>
+<PICs/cachelayout.png, id=202, 255.95625pt x 224.33812pt>
 File: PICs/cachelayout.png Graphic file (type png)
 <use PICs/cachelayout.png>
 Package pdftex.def Info: PICs/cachelayout.png  used on input line 93.
@@ -1449,13 +1449,13 @@ Overfull \hbox (2.3214pt too wide) in paragraph at lines 239--255
 [11] [12]
 LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <9> not available
 (Font)              Font shape `T1/pcr/m/sl' tried instead on input line 275.
-<PICs/CacheUtilizationNPC.png, id=303, 1117.17375pt x 261.97874pt>
+<PICs/CacheUtilizationNPC.png, id=323, 1117.17375pt x 261.97874pt>
 File: PICs/CacheUtilizationNPC.png Graphic file (type png)
 <use PICs/CacheUtilizationNPC.png>
 Package pdftex.def Info: PICs/CacheUtilizationNPC.png  used on input line 290.
 (pdftex.def)             Requested size: 456.2543pt x 136.88132pt.
  [13]
-<PICs/CacheUtilizationNPCSOA.png, id=329, 1067.48813pt x 218.31563pt>
+<PICs/CacheUtilizationNPCSOA.png, id=349, 1067.48813pt x 218.31563pt>
 File: PICs/CacheUtilizationNPCSOA.png Graphic file (type png)
 <use PICs/CacheUtilizationNPCSOA.png>
 Package pdftex.def Info: PICs/CacheUtilizationNPCSOA.png  used on input line 32
@@ -1477,11 +1477,11 @@ Overfull \hbox (3.7021pt too wide) in paragraph at lines 339--340
  []
 
 [15 <./PICs/CacheUtilizationNPCSOA.png>]
-<PICs/CacheUtilizationNPCComp.png, id=371, 660.96938pt x 253.69781pt>
+<PICs/CacheUtilizationNPCComp.png, id=392, 660.96938pt x 253.69781pt>
 File: PICs/CacheUtilizationNPCComp.png Graphic file (type png)
 <use PICs/CacheUtilizationNPCComp.png>
 Package pdftex.def Info: PICs/CacheUtilizationNPCComp.png  used on input line 3
-45.
+47.
 (pdftex.def)             Requested size: 273.76263pt x 73.00142pt.
  [16 <./PICs/CacheUtilizationNPCComp.png>] [17]) [18] [19]
 \openout2 = `chapter/motivation.aux'.
@@ -1496,83 +1496,124 @@ chapter 2.
 
  (chapter/compiler_as_mediator.tex
 chapter 3.
-) [23
+<PICs/parse_tree.png, id=504, 943.27406pt x 321.45094pt>
+File: PICs/parse_tree.png Graphic file (type png)
+<use PICs/parse_tree.png>
+Package pdftex.def Info: PICs/parse_tree.png  used on input line 16.
+(pdftex.def)             Requested size: 146.00446pt x 79.6513pt.
+
+Underfull \hbox (badness 1253) in paragraph at lines 18--18
+[][]|\T1/phv/m/n/10 Parse tree for the if-
+ []
+
+LaTeX Font Info:    Font shape `T1/phv/bx/it' in size <10.95> not available
+(Font)              Font shape `T1/phv/b/it' tried instead on input line 20.
+LaTeX Font Info:    Font shape `T1/phv/b/it' in size <10.95> not available
+(Font)              Font shape `T1/phv/b/sl' tried instead on input line 20.
+[23
 
 
-]
+ <./PICs/parse_tree.png>]
+<PICs/compiler_phases.png, id=521, 271.76532pt x 648.92438pt>
+File: PICs/compiler_phases.png Graphic file (type png)
+<use PICs/compiler_phases.png>
+Package pdftex.def Info: PICs/compiler_phases.png  used on input line 25.
+(pdftex.def)             Requested size: 136.8817pt x 298.70686pt.
+
+Overfull \hbox (45.63199pt too wide) in paragraph at lines 25--26
+ [] 
+ []
+
+
+Underfull \hbox (badness 1275) in paragraph at lines 27--27
+[][]|\T1/phv/m/n/10 Phases of
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 27--27
+\T1/phv/m/n/10 (Source:
+ []
+
+[24 <./PICs/compiler_phases.png>]) [25]
 chapter 4.
-[24
+[26
 
 ]
 \openout2 = `quotes/hennessy.aux'.
 
- (quotes/hennessy.tex) [25
+ (quotes/hennessy.tex) [27
 
 ]
 \openout2 = `quotes/drepper.aux'.
 
- (quotes/drepper.tex) [26
+ (quotes/drepper.tex) [28
 
 
 ]
-(BSP_MA_Code_BibTeX.bbl
+\openout2 = `quotes/compilers.aux'.
+
+ (quotes/compilers.tex
+<PICs/compiler_front_end.png, id=560, 780.66656pt x 243.91125pt>
+File: PICs/compiler_front_end.png Graphic file (type png)
+<use PICs/compiler_front_end.png>
+Package pdftex.def Info: PICs/compiler_front_end.png  used on input line 20.
+(pdftex.def)             Requested size: 456.25555pt x 142.55165pt.
+) [29
+
+
+ <./PICs/compiler_front_end.png>] [30] (BSP_MA_Code_BibTeX.bbl
 chapter without number
 LaTeX Font Info:    Font shape `OMS/phv/m/it' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 16.
-[27
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 4.
+[31
 
 
-]) [28] (BSP_MA_Code_BibTeX.lof
-LaTeX Font Info:    Font shape `T1/phv/bx/it' in size <10.95> not available
-(Font)              Font shape `T1/phv/b/it' tried instead on input line 5.
-LaTeX Font Info:    Font shape `T1/phv/b/it' in size <10.95> not available
-(Font)              Font shape `T1/phv/b/sl' tried instead on input line 5.
-)
+]) [32] (BSP_MA_Code_BibTeX.lof)
 \tf@lof=\write6
 \openout6 = `BSP_MA_Code_BibTeX.lof'.
 
- [29
+ [33
 
 ] (BSP_MA_Code_BibTeX.lot)
 \tf@lot=\write7
 \openout7 = `BSP_MA_Code_BibTeX.lot'.
 
- [30
+ [34
 
 ]
 (BSP_MA_Code_BibTeX.lol)
 \tf@lol=\write8
 \openout8 = `BSP_MA_Code_BibTeX.lol'.
 
- [31
+ [35
 
-] [32
+] [36
 
 ]
 chapter A.
-[33
+[37
 
 ]
 chapter B.
-[34
+[38
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 177.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 177.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 178.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 178.
  (BSP_MA_Code_BibTeX.aux (chapter/conflicting_paradigms.aux)
 (chapter/motivation.aux) (chapter/compiler_as_mediator.aux)
-(quotes/hennessy.aux) (quotes/drepper.aux))
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 177.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 177.
+(quotes/hennessy.aux) (quotes/drepper.aux) (quotes/compilers.aux))
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 178.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 178.
 Package rerunfilecheck Info: File `BSP_MA_Code_BibTeX.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 34803 strings out of 492946
- 651372 string characters out of 3125822
+ 34912 strings out of 492946
+ 653052 string characters out of 3125822
  1025524 words of memory out of 3000000
- 37862 multiletter control sequences out of 15000+200000
- 596528 words of font info for 87 fonts, out of 3000000 for 9000
+ 37928 multiletter control sequences out of 15000+200000
+ 602110 words of font info for 98 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  71i,12n,80p,9151b,1950s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Users/julian/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/base/8r.en
@@ -1583,17 +1624,18 @@ public/amsfonts/cm/cmmi8.pfb><C:/Users/julian/AppData/Local/Programs/MiKTeX 2.9
 ms/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/julian/AppData/
 Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/j
 ulian/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pf
-b><C:/Users/julian/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/courier/uc
-rb8a.pfb><C:/Users/julian/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/cou
-rier/ucrr8a.pfb><C:/Users/julian/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/
-urw/courier/ucrro8a.pfb><C:/Users/julian/AppData/Local/Programs/MiKTeX 2.9/font
-s/type1/urw/helvetic/uhvb8a.pfb><C:/Users/julian/AppData/Local/Programs/MiKTeX 
-2.9/fonts/type1/urw/helvetic/uhvbo8a.pfb><C:/Users/julian/AppData/Local/Program
-s/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvr8a.pfb><C:/Users/julian/AppData/Local
-/Programs/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on BSP_MA_Code_BibTeX.pdf (40 pages, 1403752 bytes).
+b><C:/Users/julian/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfont
+s/cm/cmsy9.pfb><C:/Users/julian/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/u
+rw/courier/ucrb8a.pfb><C:/Users/julian/AppData/Local/Programs/MiKTeX 2.9/fonts/
+type1/urw/courier/ucrr8a.pfb><C:/Users/julian/AppData/Local/Programs/MiKTeX 2.9
+/fonts/type1/urw/courier/ucrro8a.pfb><C:/Users/julian/AppData/Local/Programs/Mi
+KTeX 2.9/fonts/type1/urw/helvetic/uhvb8a.pfb><C:/Users/julian/AppData/Local/Pro
+grams/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvbo8a.pfb><C:/Users/julian/AppData/
+Local/Programs/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvr8a.pfb><C:/Users/julian/
+AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvro8a.pfb>
+Output written on BSP_MA_Code_BibTeX.pdf (44 pages, 1500583 bytes).
 PDF statistics:
- 754 PDF objects out of 1000 (max. 8388607)
- 250 named destinations out of 1000 (max. 500000)
- 285 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 877 PDF objects out of 1000 (max. 8388607)
+ 277 named destinations out of 1000 (max. 500000)
+ 380 words of extra memory for PDF output out of 10000 (max. 10000000)
 

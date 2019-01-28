@@ -1,7 +1,15 @@
 \begin{thebibliography}{10}
 
+\bibitem{ispc}
+{\em Intel® SPMD Program Compiler User's Guide\/}.
+
 \bibitem{lang_ratings}
 {\em TIOBE Programming Community Index\/}.
+
+\bibitem{aho}
+{\sc Aho, A.~V.}: {\em Compilers: principles, techniques and tools (for Anna
+  University), 2/e\/}.
+\newblock Pearson Education India, 2003.
 
 \bibitem{cohesion}
 {\sc Al~Dallal, J.}: {\em A design-based cohesion metric for object-oriented
@@ -11,9 +19,6 @@
 
 \bibitem{jonblow}
 {\sc Blow, J.}: {\em Data-Oriented Demo: SOA, composition\/}.
-
-\bibitem{ispc}
-{\sc Blow, J.}: {\em Intel® SPMD Program Compiler User's Guide\/}.
 
 \bibitem{chen}
 {\sc Chen, T.-F.} \btxandshort{.}\ {\sc J.-L. Baer}: {\em Effective

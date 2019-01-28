@@ -12,8 +12,8 @@
 \contentsline {subsection}{\numberline {1.3.2}Normalization of Data}{11}{subsection.1.3.2}% 
 \contentsline {subsection}{\numberline {1.3.3}Structure of Arrays}{13}{subsection.1.3.3}% 
 \contentsline {subsection}{\numberline {1.3.4}Regarding temporal- and spatial locality / Components / AOSOA}{16}{subsection.1.3.4}% 
-\contentsline {subsubsection}{\nonumberline Hot/Cold Splitting}{16}{section*.17}% 
-\contentsline {subsubsection}{\nonumberline Components}{17}{section*.19}% 
+\contentsline {subsubsection}{\nonumberline Hot/Cold Splitting}{17}{section*.17}% 
+\contentsline {subsubsection}{\nonumberline Components}{18}{section*.19}% 
 \contentsline {subsubsection}{\nonumberline Array Of Structure Of Arrays (AOSOA)}{18}{section*.20}% 
 \contentsline {chapter}{\numberline {2}Motivation}{20}{chapter.2}% 
 \contentsline {subsubsection}{\nonumberline The best out of both worlds}{20}{section*.22}% 
@@ -22,16 +22,31 @@
 \contentsline {subsubsection}{\nonumberline Jonathan Blow and JAI}{21}{section*.25}% 
 \contentsline {subsection}{\numberline {2.0.2}High level abstraction hiding DoD}{22}{subsection.2.0.2}% 
 \contentsline {chapter}{\numberline {3}Compiler technology as a mediator between OOP and DoD}{23}{chapter.3}% 
-\contentsline {chapter}{\numberline {4}Quotes}{24}{chapter.4}% 
-\contentsline {section}{\numberline {4.1}hennessy}{25}{section.4.1}% 
-\contentsline {subsection}{\numberline {4.1.1}principle of locality}{25}{subsection.4.1.1}% 
-\contentsline {section}{\numberline {4.2}drepper}{26}{section.4.2}% 
-\contentsline {subsection}{\numberline {4.2.1}cache layout}{26}{subsection.4.2.1}% 
-\contentsline {subsection}{\numberline {4.2.2}Lc Ld}{26}{subsection.4.2.2}% 
-\contentsline {chapter}{\nonumberline Bibliography}{27}{chapter*.27}% 
-\contentsline {chapter}{\nonumberline List of Figures}{29}{chapter*.28}% 
-\contentsline {chapter}{\nonumberline List of Tables}{30}{chapter*.29}% 
-\contentsline {chapter}{\nonumberline List of Code}{31}{chapter*.31}% 
-\contentsline {chapter}{List of Abbreviations}{32}{section*.32}% 
-\contentsline {chapter}{\numberline {A}Anhang A}{33}{appendix.A}% 
-\contentsline {chapter}{\numberline {B}Anhang B}{34}{appendix.B}% 
+\contentsline {section}{\numberline {3.1}A compiler's understanding of the program}{23}{section.3.1}% 
+\contentsline {subsubsection}{\nonumberline Syntax definition}{23}{section*.28}% 
+\contentsline {subsubsection}{\nonumberline Lexical analysis}{24}{section*.30}% 
+\contentsline {subsubsection}{\nonumberline Syntax analysis}{24}{section*.32}% 
+\contentsline {subsubsection}{\nonumberline Semantic analysis}{24}{section*.33}% 
+\contentsline {section}{\numberline {3.2}A useful interface}{24}{section.3.2}% 
+\contentsline {subsubsection}{\nonumberline LLVM/Clang}{25}{section*.34}% 
+\contentsline {chapter}{\numberline {4}Quotes}{26}{chapter.4}% 
+\contentsline {section}{\numberline {4.1}hennessy}{27}{section.4.1}% 
+\contentsline {subsection}{\numberline {4.1.1}principle of locality}{27}{subsection.4.1.1}% 
+\contentsline {section}{\numberline {4.2}drepper}{28}{section.4.2}% 
+\contentsline {subsection}{\numberline {4.2.1}cache layout}{28}{subsection.4.2.1}% 
+\contentsline {subsection}{\numberline {4.2.2}Lc Ld}{28}{subsection.4.2.2}% 
+\contentsline {section}{\numberline {4.3}compilers}{29}{section.4.3}% 
+\contentsline {subsection}{\numberline {4.3.1}what is a compiler}{29}{subsection.4.3.1}% 
+\contentsline {subsection}{\numberline {4.3.2}evolution of programming languages}{29}{subsection.4.3.2}% 
+\contentsline {subsection}{\numberline {4.3.3}requirements to optimizations}{29}{subsection.4.3.3}% 
+\contentsline {subsection}{\numberline {4.3.4}optimizing compilers}{29}{subsection.4.3.4}% 
+\contentsline {subsection}{\numberline {4.3.5}compiler phases}{29}{subsection.4.3.5}% 
+\contentsline {subsection}{\numberline {4.3.6}compiler front end}{29}{subsection.4.3.6}% 
+\contentsline {subsection}{\numberline {4.3.7}AST}{30}{subsection.4.3.7}% 
+\contentsline {chapter}{\nonumberline Bibliography}{31}{chapter*.36}% 
+\contentsline {chapter}{\nonumberline List of Figures}{33}{chapter*.37}% 
+\contentsline {chapter}{\nonumberline List of Tables}{34}{chapter*.38}% 
+\contentsline {chapter}{\nonumberline List of Code}{35}{chapter*.40}% 
+\contentsline {chapter}{List of Abbreviations}{36}{section*.41}% 
+\contentsline {chapter}{\numberline {A}Anhang A}{37}{appendix.A}% 
+\contentsline {chapter}{\numberline {B}Anhang B}{38}{appendix.B}% 

@@ -7,3 +7,6 @@
 \contentsline {figure}{\numberline {\small 5\normalsize }{\ignorespaces NPCs inside cache-lines, where blue is relevant data and red blocks represent unused data\relax }}{14}{figure.caption.13}% 
 \contentsline {figure}{\numberline {\small 6\normalsize }{\ignorespaces xyz and vel blocks inside cache-lines, where blue is joint float[3] blocks of xyz data, green is joint blocks of float[3] vel data and red is unused but intentional padding.\relax }}{15}{figure.caption.14}% 
 \contentsline {figure}{\numberline {\small 7\normalsize }{\ignorespaces unified relevant data in a cache-line.\relax }}{16}{figure.caption.16}% 
+\contentsline {figure}{\numberline {\small 8\normalsize }{\ignorespaces Parse tree for the if-stmt node.\relax }}{23}{figure.caption.29}% 
+\contentsline {figure}{\numberline {\small 9\normalsize }{\ignorespaces Phases of a compiler (Source: \cite [p. 5]{aho}).\relax }}{24}{figure.caption.31}% 
+\contentsline {figure}{\numberline {\small 10\normalsize }{\ignorespaces Model of compiler front end (Source: \cite [p. 41]{aho}).\relax }}{29}{figure.caption.35}% 
