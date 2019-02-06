@@ -1,17 +1,17 @@
 \chapter{Compiler technology as a mediator between OOP and DoD}
-The inherent purpose of a compiler is to read a program defined in a \textit{source language} and translate it to an equivalent pendant for a \textit{target language} \mcp{aho}{1}. They are yet another form of abstraction, that enable us to work more efficiently. Low-level languages interact 'less indirectly' with the hardware (more control) thus enable one to write better performing code. But they are usually harder to write as well as less portable, more prone to errors, and harder to maintain \mcp{aho}{17}.\\
-Compilers provide some of the most important features a programmer needs, like syntactic and semantic analysis steps, which can automate the process of finding errors and even just smelly code. To do that they need some sort of 'understand' for the program.
+The inherent purpose of a compiler is to read a program defined in a \textit{source language} and translate it to an equivalent pendant for a \textit{target language} \mcp{aho}{1}.\\
+Compilers provide some of the most important features a programmer needs, like syntactic and semantic analysis steps, which can automate the process of finding errors and even just smelly code. To do that they need some sort of 'understanding' for the program.
 
 \section{A compiler's understanding of the program}\label{compilers_understanding}
 \begin{wrapfigure}[8]{r}{0.4\textwidth}
 	\begin{lstlisting}[numbers=none, name={Exerpt of example context free grammar defining a (if)statement. Bold = terminal; italic = nonterminal}, emph={stmt, optexpr}, emphstyle=\itshape, morekeywords={expr, if}, mathescape=true, literate={->}{$\rightarrow{}$}{1}, label={bnf}]
 	stmt -> expr ;
-	| if ( expr ) stmt
+		| if ( expr ) stmt
 	\end{lstlisting}
 \end{wrapfigure}
 Modern compilers implement several \textit{phases} bundled in \textit{passes} to provide an abstraction rich routine from reading mere character sequences until generating char sequences in the target language \reffigp{compiler_phases}. Of course compilers are not thinking entities, but there are mechanisms to formally define a language as well as steps to generate semantic statements with it, ordering them in a way so that a computer can process them in a meaningful way.
 \subsubsection{Syntax definition}
-\begin{wrapfigure}[8]{l}{0.32\textwidth}
+\begin{wrapfigure}[10]{l}{0.32\textwidth}
 	\begin{center}
 		\includegraphics[width=.32\textwidth, height=0.12\textheight]{PICs/parse_tree}
 	\end{center}
@@ -32,14 +32,51 @@ The syntax analyzer creates the first \textit{Intermediate Representation} of th
 \subsubsection{Semantic analysis}
 Analyzing the AST from the previous phase is the \textit{Semantic Analyzer}'s duty. It traverses the AST and constantly compares its nodes with the formal language definition and gathers information like type traits. Consequently \textit{type checking} - which is important for statically typed languages - will take place in this phase \mcp{aho}{5-9}.
 
-\section{A useful interface}
+\section{A useful interface / LibTooling}\label{a_usfl_int}
 As can be seen in \reffig{compiler_phases} there are several more phases left to describe, however \refsec{compilers_understanding} already provides information that we can utilize towards implementing a tool, that automatically translates OOP code into a cache friendly pendant.\\
 Assuming we have access to our programs AST, we could start analyzing the code in an environment, that allows us to traverse the code in a tree like fashion. This means easy access to the defined data layout, as well as the access patterns in use.\\
-Luckily modern compilers are designed in a modular fashion and usually define \textit{front ends} and \textit{back ends} to facilitate a multiple language to machine mapping. The front end consists of the analysis phases as well as the intermediate code generation phases for a source language. After generating an immediate representation (IR) it is forwarded to the back end which \textit{synthesizes} the end product in the desired target language \mcp{aho}{4}.\\
-The front end is especially interesting to us since it provides us with the appropriate representations to thoroughly investigate a program. 
+Luckily modern compilers are designed in a modular fashion and usually define \textit{front ends} and \textit{back ends} to facilitate a multiple language to machine mapping. The front end consists of the analysis phases as well as the intermediate code generation phases for a source language. After generating an intermediate representation (IR) it is forwarded to the back end which \textit{synthesizes} the end product in the desired target language \mcp{aho}{4}.\\
+The front end is especially interesting to us since it provides us with the appropriate representations to thoroughly investigate a program.
 
 \subsubsection{LLVM/Clang}
-A rather prominent representative of such an assembler/compiler/debugger tool-chain is the open source LLVM project. The front end functionality for C++ is here implemented in the Clang compiler. All the functionality is accessible and furthermore served through diverse libraries and interfaces - for example the \textit{LibTooling} library that brings functionality for parsing code, creating ASTs and running \textit{FrontEndActions} over it. There are already mechanisms for recursive AST traversal like \textit{Recursive AST Visitors} and AST matching functionality with the \textit{AST Matchers}. Also tools like \textit{clang-query} provide a \textit{REPL} (Read-Eval-Print Loop) environment for quick testing.
+\begin{wrapfigure}[9]{r}{0.4\textwidth}
+	\vspace{-20pt}
+	\begin{lstlisting}[language=C++,name={Example code in a Foo.cpp file},label={foo_code}]
+	struct Foo {
+		int bar;
+	};
+	
+	int main(){
+		Foo f;
+		f.bar = 10;
+	}
+	\end{lstlisting}
+\end{wrapfigure}
+A rather prominent representative of such an assembler/compiler/debugger tool-chain is the open source LLVM project. The front end functionality for C++ is here implemented in the Clang compiler. All the functionality is accessible and furthermore served through diverse production-grade reusable libraries and interfaces \mc{lattner} - for example the \textit{LibTooling} library that brings functionality for parsing code, creating ASTs and running \textit{FrontEndActions} over it. There are already mechanisms for recursive AST traversal like \textit{Recursive AST Visitors} and AST matching functionality with the \textit{AST Matchers}. Also tools like \textit{clang-query} provide a \textit{REPL} (Read-Eval-Print Loop) environment for quick testing.\\
+In \refsec{nat_lan_sup} we saw, that languages supporting DoD natively rely on particular keywords to tag a record as SOA layouts for the compiler. We will try to carefully select the right ones using appropriate metrics (Not each record will qualify for our optimization). In case of finding any records at all it is easy enough, thanks to the functionality coming with Clang.
+\begin{figure}[!htbp]
+	\centering
+	\includegraphics[width=\linewidth, height=0.5\textwidth]{PICs/foo_code_ast_dump}
+	\caption{AST dump of \refcode{foo_code} generated with \textit{clang -Xclang -ast-dump Foo.cpp}.}\label{foo_code_ast_dump}
+\end{figure}
+The \textit{AST Matchers} and the online \textit{AST Matcher Reference} offer an excellent modular way of matching AST nodes against predefined patterns. Working with an AST is of course a lot more comfortable than working on plain text, but it also entails a new domain that one needs to familiarize with. Clang also provides proper functionality to do so. For example seeing what kind of AST nodes there are in a certain source code. When using \textit{'clang -Xclang -ast-dump Foo.cpp'} on \refcode{foo_code} among additional meta information we will see something like \reffig{foo_code_ast_dump}. 
+\subsubsection{}
+\begin{wrapfigure}[23]{l}{0.5\linewidth}
+	\centering
+	\vspace{-20pt}
+	\includegraphics[width=\linewidth, height=0.7\textwidth]{PICs/clang_query_foo_code}
+	\caption{AST dump of \refcode{foo_code} generated with some simple AST matchers in the easy to use \textit{clang-query} environment.}\label{foo_code_clang_query}
+\end{wrapfigure}In this textual representation of the AST we can see what AST nodes make up our record (\textit{CXXRecordDecl, FieldDecl,} implicit \textit{CXXConstructorDecl}s) and how it is used (\textit{CXXConstructExpr, DeclRefExpr}). The \textit{clang-query} tool \refsecp{a_usfl_int} offers a platform for immediate testing, without setting up the rather complex structure a clang tool requires.\\
+In \reffig{foo_code_clang_query} we explore some simple AST matchers like \textit{cxxRecordDecl} and \textit{functionDecl()}. Even though \refcode{foo_code} only defines one function (main) with the matcher \textit{functionDecl()} we have 4 matches. Also we don't even just match the main function but also our record's definition! This is due to implicit statements being handled the same way for matchers with low complexity. When looking up the AST matcher in the online AST Matcher Reference we will find the following documentation:\newline
+\begin{lstlisting}[numbers=none, frame=none, name={AST Matcher Reference documentation for the matcher functionDecl()}]
+Matcher<Decl>	functionDecl	Matcher<FunctionDecl>...
+
+Matches function declarations.
+
+Example matches f
+void f();
+\end{lstlisting}
+In this case, when one is confronted with a problem the documentation won't explain, the '\textit{cfe-dev -- Clang Front End for LLVM Developers' Mailing List}' is the platform to receive help from active developers. The AST dumping mechanisms, the AST Matcher Reference, the clang-query environment and the clang mailing list as a last resort will be our sharpest swords in development.
 
 
 

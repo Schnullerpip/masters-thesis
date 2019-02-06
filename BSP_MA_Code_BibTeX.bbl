@@ -1,10 +1,16 @@
 \begin{thebibliography}{10}
 
+\bibitem{clang_tools}
+{\em Choosing the Right Interface for Your Application\/}.
+
 \bibitem{ispc}
 {\em Intel® SPMD Program Compiler User's Guide\/}.
 
 \bibitem{lang_ratings}
 {\em TIOBE Programming Community Index\/}.
+
+\bibitem{llvm_passes}
+{\em Writing an LLVM Pass\/}.
 
 \bibitem{aho}
 {\sc Aho, A.~V.}: {\em Compilers: principles, techniques and tools (for Anna
@@ -70,6 +76,12 @@
   architecture: a quantitative approach\/}.
 \newblock Elsevier, 2011.
 
+\bibitem{hill}
+{\sc Hill, M.~D.}: {\em Aspects of cache memory and instruction buffer
+  performance\/}.
+\newblock \Btxtechrepshort{.}, CALIFORNIA UNIV BERKELEY DEPT OF ELECTRICAL
+  ENGINEERING AND COMPUTER SCIENCES, 1987.
+
 \bibitem{about_oop}
 {\sc Huang, P.~J.}: {\em A Brief History of Object-Oriented Programming\/}.
 
@@ -81,6 +93,11 @@
 {\sc Laplante, P.~A.}: {\em What every engineer should know about software
   engineering\/}.
 \newblock CRC Press, 2007.
+
+\bibitem{lattner}
+{\sc Lattner, C.}: {\em LLVM and Clang: Next generation compiler technology\/}.
+\newblock \Btxinshort{.}\ {\em The BSD conference\/}, \btxpagesshort{.}\ 1--2,
+  2008.
 
 \bibitem{levinthal}
 {\sc Levinthal, D.}: {\em Performance analysis guide for intel core i7

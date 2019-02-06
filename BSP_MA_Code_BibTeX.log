@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6930 64-bit) (preloaded format=pdflatex 2019.1.14)  28 JAN 2019 18:29
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6930 64-bit) (preloaded format=pdflatex 2019.1.14)  6 FEB 2019 12:42
 entering extended mode
 **./BSP_MA_Code_BibTeX.tex
 (BSP_MA_Code_BibTeX.tex
@@ -1161,7 +1161,7 @@ File: lstmisc.sty 2018/09/02 1.7 (Carsten Heinz)
 .cfg"
 File: listings.cfg 2018/09/02 1.7 listings configuration
 ))
-Package scrhack Info: loading listings hack on input line 34.
+Package scrhack Info: loading listings hack on input line 35.
 
 ("C:\Users\julian\AppData\Local\Programs\MiKTeX 2.9\tex/latex/koma-script\listi
 ngs.hak"
@@ -1214,24 +1214,23 @@ Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
 \openout2 = `outline.aux'.
 
 (outline.tex) (BSP_MA_Code_BibTeX.aux (chapter/conflicting_paradigms.aux)
-(chapter/motivation.aux) (chapter/compiler_as_mediator.aux)
-(quotes/hennessy.aux) (quotes/drepper.aux) (quotes/compilers.aux))
+(chapter/motivation.aux) (chapter/compiler_as_mediator.aux) (chapter/coop.aux))
 \openout1 = `BSP_MA_Code_BibTeX.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 83.
-LaTeX Font Info:    ... okay on input line 83.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 83.
-LaTeX Font Info:    ... okay on input line 83.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 83.
-LaTeX Font Info:    ... okay on input line 83.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 83.
-LaTeX Font Info:    ... okay on input line 83.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 83.
-LaTeX Font Info:    ... okay on input line 83.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 83.
-LaTeX Font Info:    ... okay on input line 83.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 83.
-LaTeX Font Info:    ... okay on input line 83.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 84.
+LaTeX Font Info:    ... okay on input line 84.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 84.
+LaTeX Font Info:    ... okay on input line 84.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 84.
+LaTeX Font Info:    ... okay on input line 84.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 84.
+LaTeX Font Info:    ... okay on input line 84.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 84.
+LaTeX Font Info:    ... okay on input line 84.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 84.
+LaTeX Font Info:    ... okay on input line 84.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 84.
+LaTeX Font Info:    ... okay on input line 84.
 
 ("C:\Users\julian\AppData\Local\Programs\MiKTeX 2.9\tex/context/base\supp-pdf.m
 kii"
@@ -1270,7 +1269,7 @@ Package caption Info: hyperref package is loaded.
 Package caption Info: listings package is loaded.
 Package caption Info: wrapfig package is loaded.
 Package caption Info: End \AtBeginDocument code.
-Package hyperref Info: Link coloring ON on input line 83.
+Package hyperref Info: Link coloring ON on input line 84.
 
 ("C:\Users\julian\AppData\Local\Programs\MiKTeX 2.9\tex/latex/hyperref\nameref.
 sty"
@@ -1282,9 +1281,9 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 \c@section@level=\count336
 )
-LaTeX Info: Redefining \ref on input line 83.
-LaTeX Info: Redefining \pageref on input line 83.
-LaTeX Info: Redefining \nameref on input line 83.
+LaTeX Info: Redefining \ref on input line 84.
+LaTeX Info: Redefining \pageref on input line 84.
+LaTeX Info: Redefining \nameref on input line 84.
  (BSP_MA_Code_BibTeX.out) (BSP_MA_Code_BibTeX.out)
 \@outlinefile=\write4
 \openout4 = `BSP_MA_Code_BibTeX.out'.
@@ -1295,7 +1294,7 @@ Class scrbook Info: loading recommended package `bookmark'.
 (scrbook)           You can avoid loading `bookmark' with KOMA-Script option
 (scrbook)           `bookmarkpackage=false' before \begin{document} and
 (scrbook)           you can avoid this message with `\usepackage{bookmark}'
-(scrbook)           before \begin{document} on input line 83.
+(scrbook)           before \begin{document} on input line 84.
 
 ("C:\Users\julian\AppData\Local\Programs\MiKTeX 2.9\tex/latex/oberdiek\bookmark
 .sty"
@@ -1313,29 +1312,29 @@ e 164.
 bibgerm.sty: babel.sty detected
 
 \c@lstlisting=\count338
-Package scrhack Info: undefining \float@addtolists on input line 83.
+Package scrhack Info: undefining \float@addtolists on input line 84.
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <10.95> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 127.
-LaTeX Font Info:    Try loading font information for U+msa on input line 127.
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 133.
+LaTeX Font Info:    Try loading font information for U+msa on input line 133.
 ("C:\Users\julian\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 127.
+LaTeX Font Info:    Try loading font information for U+msb on input line 133.
  ("C:\Users\julian\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsfonts\umsb.fd
 "
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <20.74> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 127.
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 133.
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <12> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 127.
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 133.
 \TWLength=\skip83
 \TWLengthA=\skip84
 \TWLengthB=\skip85
 <PICs/Arbeiten.jpg, id=6, 845.0772pt x 1195.1049pt>
 File: PICs/Arbeiten.jpg Graphic file (type jpg)
 <use PICs/Arbeiten.jpg>
-Package pdftex.def Info: PICs/Arbeiten.jpg  used on input line 127.
+Package pdftex.def Info: PICs/Arbeiten.jpg  used on input line 133.
 (pdftex.def)             Requested size: 597.50742pt x 845.06563pt.
  [-9
 
@@ -1348,30 +1347,30 @@ eiten.jpg>] [-8
 
 ]
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <10.95> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 127.
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 133.
  [-7
 
 ] [-6
 
-] (BSP_MA_Code_BibTeX.toc [-5
-
-])
+] (BSP_MA_Code_BibTeX.toc)
 \tf@toc=\write5
 \openout5 = `BSP_MA_Code_BibTeX.toc'.
 
- [-4]
+ [-5
+
+] [-4]
 \openout2 = `chapter/conflicting_paradigms.aux'.
 
 
 (chapter/conflicting_paradigms.tex
 chapter 1.
-<PICs/lang_ratings.png, id=125, 685.05937pt x 290.58563pt>
+<PICs/lang_ratings.png, id=104, 685.05937pt x 290.58563pt>
 File: PICs/lang_ratings.png Graphic file (type png)
 <use PICs/lang_ratings.png>
 Package pdftex.def Info: PICs/lang_ratings.png  used on input line 14.
 (pdftex.def)             Requested size: 456.25555pt x 193.53851pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 8--20
+Underfull \hbox (badness 10000) in paragraph at lines 8--19
 
  []
 
@@ -1380,22 +1379,22 @@ Underfull \hbox (badness 10000) in paragraph at lines 8--20
 
 ]
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 20.
-LaTeX Font Info:    Try loading font information for T1+pcr on input line 20.
+nput line 19.
+LaTeX Font Info:    Try loading font information for T1+pcr on input line 19.
 
 ("C:\Users\julian\AppData\Local\Programs\MiKTeX 2.9\tex/latex/psnfss\t1pcr.fd"
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 )
 LaTeX Font Info:    Font shape `T1/pcr/bx/n' in size <9> not available
-(Font)              Font shape `T1/pcr/b/n' tried instead on input line 21.
-[2 <./PICs/lang_ratings.png>]
-<PICs/npcs_in_memory.png, id=164, 1454.43375pt x 188.705pt>
+(Font)              Font shape `T1/pcr/b/n' tried instead on input line 20.
+<PICs/npcs_in_memory.png, id=123, 1454.43375pt x 188.705pt>
 File: PICs/npcs_in_memory.png Graphic file (type png)
 <use PICs/npcs_in_memory.png>
 Package pdftex.def Info: PICs/npcs_in_memory.png  used on input line 31.
 (pdftex.def)             Requested size: 456.25555pt x 59.19763pt.
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <10> not available
 (Font)              Font shape `T1/phv/m/sl' tried instead on input line 32.
+[2 <./PICs/lang_ratings.png>]
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <17.28> not available
 (Font)              Font shape `T1/phv/m/sl' tried instead on input line 39.
 
@@ -1404,7 +1403,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 40--41
  []
 
 [3 <./PICs/npcs_in_memory.png>]
-<PICs/cpu_memory_gap.png, id=186, 551.81157pt x 298.11375pt>
+<PICs/cpu_memory_gap.png, id=165, 551.81157pt x 298.11375pt>
 File: PICs/cpu_memory_gap.png Graphic file (type png)
 <use PICs/cpu_memory_gap.png>
 Package pdftex.def Info: PICs/cpu_memory_gap.png  used on input line 75.
@@ -1414,89 +1413,117 @@ LaTeX Font Info:    Font shape `T1/phv/bx/it' in size <10> not available
 LaTeX Font Info:    Font shape `T1/phv/b/it' in size <10> not available
 (Font)              Font shape `T1/phv/b/sl' tried instead on input line 83.
  [4]
-<PICs/cachelayout.png, id=202, 255.95625pt x 224.33812pt>
+<PICs/cachelayout.png, id=181, 255.95625pt x 224.33812pt>
 File: PICs/cachelayout.png Graphic file (type png)
 <use PICs/cachelayout.png>
 Package pdftex.def Info: PICs/cachelayout.png  used on input line 93.
 (pdftex.def)             Requested size: 182.49944pt x 159.95552pt.
-LaTeX Font Info:    Try loading font information for OMS+phv on input line 96.
+ [5 <./PICs/cpu_memory_gap.png>]
+LaTeX Font Info:    Try loading font information for OMS+phv on input line 101.
+
 
 ("C:\Users\julian\AppData\Local\Programs\MiKTeX 2.9\tex/latex/psnfss\omsphv.fd"
 File: omsphv.fd 
 )
 LaTeX Font Info:    Font shape `OMS/phv/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 96.
- [5 <./PICs/cpu_memory_gap.png>] [6 <./PICs/cachelayout.png>] [7] [8] [9]
-Underfull \hbox (badness 10000) in paragraph at lines 178--180
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 101.
+ [6 <./PICs/cachelayout.png>] [7] [8] [9]
+Underfull \hbox (badness 10000) in paragraph at lines 179--181
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 200--205
+Underfull \hbox (badness 10000) in paragraph at lines 197--202
 
  []
 
-[10]
+[10] [11]
 
 LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 229.
+               Default added (so using `tbp') on input line 227.
 
 
-Overfull \hbox (2.3214pt too wide) in paragraph at lines 239--255
+Overfull \hbox (2.3214pt too wide) in paragraph at lines 237--253
 []$[]$ $[]$ 
  []
 
-[11] [12]
+[12]
 LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <9> not available
 (Font)              Font shape `T1/pcr/m/sl' tried instead on input line 275.
-<PICs/CacheUtilizationNPC.png, id=323, 1117.17375pt x 261.97874pt>
+<PICs/CacheUtilizationNPC.png, id=305, 1117.17375pt x 261.97874pt>
 File: PICs/CacheUtilizationNPC.png Graphic file (type png)
 <use PICs/CacheUtilizationNPC.png>
-Package pdftex.def Info: PICs/CacheUtilizationNPC.png  used on input line 290.
+Package pdftex.def Info: PICs/CacheUtilizationNPC.png  used on input line 291.
 (pdftex.def)             Requested size: 456.2543pt x 136.88132pt.
  [13]
-<PICs/CacheUtilizationNPCSOA.png, id=349, 1067.48813pt x 218.31563pt>
+<PICs/soa_aos_cl_usage.png, id=332, 602.25pt x 372.39125pt>
+File: PICs/soa_aos_cl_usage.png Graphic file (type png)
+<use PICs/soa_aos_cl_usage.png>
+Package pdftex.def Info: PICs/soa_aos_cl_usage.png  used on input line 313.
+(pdftex.def)             Requested size: 273.76686pt x 191.63306pt.
+ [14 <./PICs/CacheUtilizationNPC.png>]
+<PICs/CacheUtilizationNPCSOA.png, id=355, 1067.48813pt x 218.31563pt>
 File: PICs/CacheUtilizationNPCSOA.png Graphic file (type png)
 <use PICs/CacheUtilizationNPCSOA.png>
 Package pdftex.def Info: PICs/CacheUtilizationNPCSOA.png  used on input line 32
-2.
+1.
 (pdftex.def)             Requested size: 456.2582pt x 77.56087pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 316--328
-
+Underfull \hbox (badness 1253) in paragraph at lines 316--325
+\T1/phv/m/n/10.95 Byte), so while a cache-line fits
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 316--328
-
- []
-
-[14 <./PICs/CacheUtilizationNPC.png>]
-Overfull \hbox (3.7021pt too wide) in paragraph at lines 339--340
+[15 <./PICs/soa_aos_cl_usage.png (PNG copy)> <./PICs/CacheUtilizationNPCSOA.png
+>]
+Overfull \hbox (3.7021pt too wide) in paragraph at lines 336--337
 [][][][][]  
  []
 
-[15 <./PICs/CacheUtilizationNPCSOA.png>]
-<PICs/CacheUtilizationNPCComp.png, id=392, 660.96938pt x 253.69781pt>
+<PICs/CacheUtilizationNPCComp.png, id=366, 660.96938pt x 253.69781pt>
 File: PICs/CacheUtilizationNPCComp.png Graphic file (type png)
 <use PICs/CacheUtilizationNPCComp.png>
 Package pdftex.def Info: PICs/CacheUtilizationNPCComp.png  used on input line 3
-47.
-(pdftex.def)             Requested size: 273.76263pt x 73.00142pt.
- [16 <./PICs/CacheUtilizationNPCComp.png>] [17]) [18] [19]
+43.
+(pdftex.def)             Requested size: 168.81223pt x 77.56158pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 344--344
+[][]|\T1/phv/m/n/10 Uni-fied/-Grouped rel-e-vant
+ []
+
+[16 <./PICs/CacheUtilizationNPCComp.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 364--372
+
+ []
+
+[17]
+LaTeX Font Info:    Font shape `T1/phv/bx/it' in size <10.95> not available
+(Font)              Font shape `T1/phv/b/it' tried instead on input line 396.
+LaTeX Font Info:    Font shape `T1/phv/b/it' in size <10.95> not available
+(Font)              Font shape `T1/phv/b/sl' tried instead on input line 396.
+
+Underfull \hbox (badness 10000) in paragraph at lines 392--403
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 392--403
+
+ []
+
+[18] [19]) [20]
 \openout2 = `chapter/motivation.aux'.
 
  (chapter/motivation.tex
 chapter 2.
-[20
+[21
 
 
-] [21]) [22]
+] [22]) [23]
 \openout2 = `chapter/compiler_as_mediator.aux'.
 
  (chapter/compiler_as_mediator.tex
 chapter 3.
-<PICs/parse_tree.png, id=504, 943.27406pt x 321.45094pt>
+<PICs/parse_tree.png, id=489, 943.27406pt x 321.45094pt>
 File: PICs/parse_tree.png Graphic file (type png)
 <use PICs/parse_tree.png>
 Package pdftex.def Info: PICs/parse_tree.png  used on input line 16.
@@ -1506,15 +1533,11 @@ Underfull \hbox (badness 1253) in paragraph at lines 18--18
 [][]|\T1/phv/m/n/10 Parse tree for the if-
  []
 
-LaTeX Font Info:    Font shape `T1/phv/bx/it' in size <10.95> not available
-(Font)              Font shape `T1/phv/b/it' tried instead on input line 20.
-LaTeX Font Info:    Font shape `T1/phv/b/it' in size <10.95> not available
-(Font)              Font shape `T1/phv/b/sl' tried instead on input line 20.
-[23
+[24
 
 
  <./PICs/parse_tree.png>]
-<PICs/compiler_phases.png, id=521, 271.76532pt x 648.92438pt>
+<PICs/compiler_phases.png, id=506, 271.76532pt x 648.92438pt>
 File: PICs/compiler_phases.png Graphic file (type png)
 <use PICs/compiler_phases.png>
 Package pdftex.def Info: PICs/compiler_phases.png  used on input line 25.
@@ -1525,8 +1548,18 @@ Overfull \hbox (45.63199pt too wide) in paragraph at lines 25--26
  []
 
 
-Underfull \hbox (badness 1275) in paragraph at lines 27--27
-[][]|\T1/phv/m/n/10 Phases of
+Underfull \hbox (badness 10000) in paragraph at lines 27--27
+[][]|\T1/phv/m/n/10 Phases
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 27--27
+\T1/phv/m/n/10 of a
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 27--27
+\T1/phv/m/n/10 com-piler
  []
 
 
@@ -1534,108 +1567,184 @@ Underfull \hbox (badness 10000) in paragraph at lines 27--27
 \T1/phv/m/n/10 (Source:
  []
 
-[24 <./PICs/compiler_phases.png>]) [25]
+[25 <./PICs/compiler_phases.png>]
+<PICs/foo_code_ast_dump.png, id=524, 874.01532pt x 283.0575pt>
+File: PICs/foo_code_ast_dump.png Graphic file (type png)
+<use PICs/foo_code_ast_dump.png>
+Package pdftex.def Info: PICs/foo_code_ast_dump.png  used on input line 59.
+(pdftex.def)             Requested size: 456.25099pt x 228.13506pt.
+ [26 <./PICs/foo_code_ast_dump.png (PNG copy)>]
+<PICs/clang_query_foo_code.png, id=546, 283.0575pt x 494.59781pt>
+File: PICs/clang_query_foo_code.png Graphic file (type png)
+<use PICs/clang_query_foo_code.png>
+Package pdftex.def Info: PICs/clang_query_foo_code.png  used on input line 67.
+(pdftex.def)             Requested size: 228.13506pt x 319.37917pt.
+
+Underfull \hbox (badness 1371) in paragraph at lines 69--71
+[]\T1/phv/m/n/10.95 In this tex-tual rep-re-sen-ta-tion of the AST
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 69--71
+\T1/phv/m/n/10.95 we can see what AST nodes make
+ []
+
+
+Underfull \hbox (badness 7888) in paragraph at lines 69--71
+\T1/phv/m/n/10.95 up our record (\T1/phv/m/sl/10.95 CXXRecord-Decl, Field-
+ []
+
+
+Underfull \hbox (badness 4556) in paragraph at lines 69--71
+\T1/phv/m/sl/10.95 Decl, \T1/phv/m/n/10.95 im-plicit \T1/phv/m/sl/10.95 CXXCon-
+struc-torDecl\T1/phv/m/n/10.95 s) and
+ []
+
+
+Underfull \hbox (badness 3118) in paragraph at lines 69--71
+\T1/phv/m/n/10.95 how it is used (\T1/phv/m/sl/10.95 CXXCon-struc-t-Expr, De-
+ []
+
+
+Underfull \hbox (badness 2865) in paragraph at lines 69--71
+\T1/phv/m/sl/10.95 clRef-Expr\T1/phv/m/n/10.95 ). The \T1/phv/m/sl/10.95 clang-
+query \T1/phv/m/n/10.95 tool (see
+ []
+
+
+Underfull \hbox (badness 6641) in paragraph at lines 69--71
+\T1/phv/m/n/10.95 Sec-tion [][]3.2[][]) of-fers a plat-form for im-
+ []
+
+
+Underfull \hbox (badness 4634) in paragraph at lines 69--71
+\T1/phv/m/n/10.95 me-di-ate test-ing, with-out set-ting up the
+ []
+
+
+Underfull \hbox (badness 1184) in paragraph at lines 69--71
+\T1/phv/m/n/10.95 rather com-plex struc-ture a clang tool re-
+ []
+
+
+Underfull \hbox (badness 1845) in paragraph at lines 69--71
+\T1/phv/m/n/10.95 don't even just match the main func-tion
+ []
+
+
+Underfull \hbox (badness 1320) in paragraph at lines 69--71
+\T1/phv/m/n/10.95 but also our record's def-i-ni-tion! This is
+ []
+
+
+Underfull \hbox (badness 1565) in paragraph at lines 69--71
+\T1/phv/m/n/10.95 due to im-plicit state-ments be-ing han-dled
+ []
+
+
+Underfull \hbox (badness 7851) in paragraph at lines 69--71
+\T1/phv/m/n/10.95 in the on-line AST Matcher Ref-er-ence
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 69--71
+\T1/phv/m/n/10.95 we will find the fol-low-ing doc-u-men-ta-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 69--71
+
+ []
+
+[27 <./PICs/clang_query_foo_code.png (PNG copy)>]) [28]
+\openout2 = `chapter/coop.aux'.
+
+ (chapter/coop.tex
 chapter 4.
-[26
-
-]
-\openout2 = `quotes/hennessy.aux'.
-
- (quotes/hennessy.tex) [27
-
-]
-\openout2 = `quotes/drepper.aux'.
-
- (quotes/drepper.tex) [28
+[29
 
 
 ]
-\openout2 = `quotes/compilers.aux'.
+Underfull \hbox (badness 10000) in paragraph at lines 56--64
 
- (quotes/compilers.tex
-<PICs/compiler_front_end.png, id=560, 780.66656pt x 243.91125pt>
-File: PICs/compiler_front_end.png Graphic file (type png)
-<use PICs/compiler_front_end.png>
-Package pdftex.def Info: PICs/compiler_front_end.png  used on input line 20.
-(pdftex.def)             Requested size: 456.25555pt x 142.55165pt.
-) [29
+ []
 
-
- <./PICs/compiler_front_end.png>] [30] (BSP_MA_Code_BibTeX.bbl
+[30]) [31] (BSP_MA_Code_BibTeX.bbl
 chapter without number
 LaTeX Font Info:    Font shape `OMS/phv/m/it' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 4.
-[31
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 7.
+[32
 
 
-]) [32] (BSP_MA_Code_BibTeX.lof)
+]) [33] (BSP_MA_Code_BibTeX.lof)
 \tf@lof=\write6
 \openout6 = `BSP_MA_Code_BibTeX.lof'.
 
- [33
+ [34
 
 ] (BSP_MA_Code_BibTeX.lot)
 \tf@lot=\write7
 \openout7 = `BSP_MA_Code_BibTeX.lot'.
 
- [34
+ [35
 
 ]
 (BSP_MA_Code_BibTeX.lol)
 \tf@lol=\write8
 \openout8 = `BSP_MA_Code_BibTeX.lol'.
 
- [35
+ [36
 
-] [36
+] [37
 
 ]
 chapter A.
-[37
-
-]
-chapter B.
 [38
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 178.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 178.
+chapter B.
+[39
+
+]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 185.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 185.
  (BSP_MA_Code_BibTeX.aux (chapter/conflicting_paradigms.aux)
-(chapter/motivation.aux) (chapter/compiler_as_mediator.aux)
-(quotes/hennessy.aux) (quotes/drepper.aux) (quotes/compilers.aux))
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 178.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 178.
+(chapter/motivation.aux) (chapter/compiler_as_mediator.aux) (chapter/coop.aux))
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 185.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 185.
 Package rerunfilecheck Info: File `BSP_MA_Code_BibTeX.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 34912 strings out of 492946
- 653052 string characters out of 3125822
- 1025524 words of memory out of 3000000
- 37928 multiletter control sequences out of 15000+200000
+ 34938 strings out of 492946
+ 653304 string characters out of 3125822
+ 1024524 words of memory out of 3000000
+ 37965 multiletter control sequences out of 15000+200000
  602110 words of font info for 98 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  71i,12n,80p,9151b,1950s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Users/julian/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/base/8r.en
 c}<C:/Users/julian/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfont
-s/cm/cmmi10.pfb><C:/Users/julian/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/
-public/amsfonts/cm/cmmi8.pfb><C:/Users/julian/AppData/Local/Programs/MiKTeX 2.9
-/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/julian/AppData/Local/Progra
-ms/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/julian/AppData/
-Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/j
-ulian/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pf
-b><C:/Users/julian/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfont
-s/cm/cmsy9.pfb><C:/Users/julian/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/u
-rw/courier/ucrb8a.pfb><C:/Users/julian/AppData/Local/Programs/MiKTeX 2.9/fonts/
-type1/urw/courier/ucrr8a.pfb><C:/Users/julian/AppData/Local/Programs/MiKTeX 2.9
-/fonts/type1/urw/courier/ucrro8a.pfb><C:/Users/julian/AppData/Local/Programs/Mi
-KTeX 2.9/fonts/type1/urw/helvetic/uhvb8a.pfb><C:/Users/julian/AppData/Local/Pro
-grams/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvbo8a.pfb><C:/Users/julian/AppData/
-Local/Programs/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvr8a.pfb><C:/Users/julian/
-AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on BSP_MA_Code_BibTeX.pdf (44 pages, 1500583 bytes).
+s/cm/cmex10.pfb><C:/Users/julian/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/
+public/amsfonts/cm/cmmi10.pfb><C:/Users/julian/AppData/Local/Programs/MiKTeX 2.
+9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/julian/AppData/Local/Progr
+ams/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/julian/AppDat
+a/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/j
+ulian/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.p
+fb><C:/Users/julian/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfon
+ts/cm/cmsy8.pfb><C:/Users/julian/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/
+public/amsfonts/cm/cmsy9.pfb><C:/Users/julian/AppData/Local/Programs/MiKTeX 2.9
+/fonts/type1/urw/courier/ucrb8a.pfb><C:/Users/julian/AppData/Local/Programs/MiK
+TeX 2.9/fonts/type1/urw/courier/ucrr8a.pfb><C:/Users/julian/AppData/Local/Progr
+ams/MiKTeX 2.9/fonts/type1/urw/courier/ucrro8a.pfb><C:/Users/julian/AppData/Loc
+al/Programs/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvb8a.pfb><C:/Users/julian/App
+Data/Local/Programs/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvbo8a.pfb><C:/Users/j
+ulian/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvr8a.pfb><C:
+/Users/julian/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvro8
+a.pfb>
+Output written on BSP_MA_Code_BibTeX.pdf (45 pages, 2057017 bytes).
 PDF statistics:
- 877 PDF objects out of 1000 (max. 8388607)
- 277 named destinations out of 1000 (max. 500000)
- 380 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 871 PDF objects out of 1000 (max. 8388607)
+ 280 named destinations out of 1000 (max. 500000)
+ 302 words of extra memory for PDF output out of 10000 (max. 10000000)
 

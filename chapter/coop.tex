@@ -1,0 +1,71 @@
+\lstdefinestyle{ast}{
+	morekeywords={CXXRecordDecl, DefinitionData, DefaultConstructor, CopyConstructor, MoveConstructor, CopyAssignment, MoveAssignment, Destructor, FieldDecl, CompoundStmt, ParmVarDecl, FunctionDecl, DeclStmt, VarDecl, CXXConstructorExpr, BinaryOperator, MemberExpr, DeclRefExpr, IntegerLiteral},
+	morestring=[b]",
+	morestring=[b]""",
+	%backgroundcolor=\color{lbcolor},
+	%tabsize=4,
+	%rulecolor=,
+	%language=scala,
+	%basicstyle=\scriptsize,
+	%upquote=true,
+	aboveskip={1.5\baselineskip},
+	%columns=fixed,
+	%showstringspaces=false,
+	extendedchars=true,
+	breaklines=true, %sorgt dafür, dass Text, der die Formattierung sprengt in die nächste Zeile rückt
+	%prebreak = \raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}}, %sorgt dafür, dass eingerückte Zeilen über ein 'return' zeichen angekündigt werden
+	frame=single, % sorgt dafür dass ein Rand eingezeichnet wird
+	showtabs=false,
+	captionpos=b,
+	showspaces=false,
+	showstringspaces=false,
+	identifierstyle=\ttfamily,
+	keywordstyle=\color[rgb]{0,0,1},
+	commentstyle=\color[rgb]{0.133,0.545,0.133},
+	stringstyle=\color{stringcolor},
+	literate=%
+	{Ö}{{\"O}}1
+	{Ä}{{\"A}}1
+	{Ü}{{\"U}}1
+	{ß}{{\ss}}2
+	{ü}{{\"u}}1
+	{ä}{{\"a}}1
+	{ö}{{\"o}}1
+	{~} {$\sim$}{1}
+}
+
+\chapter{A prototypical implementation for a source-to-source transformation tool generating cache friendly code / COOP}
+We have the tools, to programmatically strip down a program's records and reassemble it in a fashion that suits our needs (Clang). So it is time to consolidate our goals for a prototype. First of all, it should be fairly easy to integrate the tool into a working environment/existing tool-chains. For reasons mentioned in \refsec{motivation} we can't ever expect our tool to be used otherwise. As simple as that sounds this leads to interesting design choices, we will briefly discuss in \refsec{stand_alone_tool}.\\
+Even though the tool's scope will be limited due to being a one-man project it should demonstrate, that automated OOP to DoD data layout transformations are possible. To do so we will try to implement a Hot/Cold Split \refsecp{hot_cold_splitting}. Instead of completely changing the program's data layout this way we can implement a data driven optimization, that seems to be relatively easy to perform automatically. We will prove ourselves wrong later on in (TODO REF SEC) however.\\
+Ideally we desire that the target program should provide zero additional information to our tool, so the process of transforming the target program into a cache friendly pendant won't interfere with the process of solving the problem. We will later see (TODO REF SEC) why this entails massive additional responsibility for our tool.\\
+The tool needs to maintain the semantic integrity of the original source code. Even though changing the programs data layout will definitely affect the data access patterns (thus will actually change the programs data flow) the result must not be distinguishable from the original in other terms than performance. (TODO REF SEC) will show why this prerequisite will yet rely on additional effort.\\
+We want the resulting program to be faster, measuring frame-times as well as cache-misses. While it is difficult to guarantee performance boosts for every possible source program we should rather aim for: Improves most programs. It definitely must not make the program slower though! 
+\newpage
+\subsubsection{Summarized Goals}
+\begin{itemize}
+	\item Easily integrable in existing working environment
+	\item Automated OOP to DoD data layout/access transformation
+	\item Zero additional programming overhead for the user
+	\item Improve most programs; mustn't worsen them.
+	\item Maintain semantic integrity
+
+\end{itemize}
+From this point on we will talk about the specifics of the prototypical implementation called COOP (\textbf{C}ache friendly \textbf{O}bject \textbf{O}riented \textbf{P}rogramming) and will refer to the tool by this name.
+
+\section{Stand Alone Tool}\label{stand_alone_tool}
+Even though COOP is not aimed to be a commercially used tool, thinking of how such a technology could reach the industry it becomes clear, that nothing that requires major structural changes to the build setup or an engine's tool-chain could ever succeed. Hence even though we use the Clang front end infrastructure to implement our solution, we don't want potential users of COOP to depend on LLVM/Clang. So to start we first need to find a way to implement our solution utilizing LLVM/Clang in the right way.\\ 
+There are various ways to use the framework LLVM/Clang provides. Since we are trying to improve a target programs performance by alternating parts of it, the classification of our tool fits is a \textit{Code Optimization} \mcp{aho}{583}. Compilers usually carry out optimization-passes either on the IR they provide or on the generated code in a machine specific way \reffigp{compiler_phases}. While LLVM already comes with numerous optimization passes that are either \textit{Analysis Passes}, \textit{Transform Passes} or \textit{Utility Passes}, it provides a framework to implement and register custom passes as well. However implementing an LLVM pass binds the user to the LLVM/Clang tool-chain \mc{llvm_passes}. Optimization passes are not interchangeable between independent compilers and we can't expect a working environment to change their build setup because of us.\\
+The Clang front end functionality also provides infrastructure to access syntactic and semantic information about programs. A so called \textit{Clang tool} can be created in three different ways.
+\textit{LibClang} is a high level interface to clang. It already provides AST traversal yet won't give us full control over it. \textit{Clang Plugins} provide full control over the AST as part of compilation. They are dynamically loaded by the compiler and can make or brake a build. However this again ties us to the LLVM tool-chain. Finally \textit{LibTooling} is a C++ interface aimed at writing stand alone tools. It also provides full control over the AST is however subject to change and maintaining a tool based on it means continuous adaptation to new versions. \mc{clang_tools}\\
+When providing a stand alone tool, any build setup can adapt easily to it by invoking it manually. For example a \textit{Makefile} could easily use COOP either before compilation or for a target of its own (e.g. make coop).\\
+The Clang front end functionality alone will limit us to source-to-source transformations, meaning in terms of compilers our target language equals our source language. This feels rather weird, since an optimization is usually realized as a pass and won't ever affect the source code we see in our IDEs. However an advantage of this approach is, that when the result of our tool is C++ source code, the whole bandwidth of optimizations provided by the compiler already can still be applied in a manner the compiler expects to do. We can't rely on the compiler to optimize our custom optimization pass. Also this way the optimized code remains relocatable.\\\\
+But there is one major disadvantage in this approach. A pre-compile or 'source-to-source optimization pass' implies sudden structural changes to the code base. So the issue of 'losing the desired abstraction level' would just be postponed. This is irrelevant as long as the optimization is applied only before a shipping build is generated, but integrating COOP into an agile development process would only work with the help of version control systems, so it's changes can be undone easily and abstraction is only ever lost, when intended and reversible.\\
+Speaking of agile development or any development model relying on short iterations a tool like COOP would only make sense when it's fast. As we will see later on, traversing numerous ASTs for a complete code base gets slow really (really) fast.
+
+TODO talk about how files get into the tool - compilation database etc.
+
+\section{Automated OOP to DoD data layout/access transformation}
+Splitting a record's hot-/cold fields is in essence a trivial transformation, when done manually and when given the set of hot/cold fields. Create a struct; move cold fields in it; create a pointer to a cold-struct instance in original record; Change all accesses to cold fields to accesses on cold-struct field pendants, respectively. This is why the Hot/Cold Split was deemed a fitting exemplary for a prototypical proof-of-concept implementation. Comfortable access on the appropriate records and their fields is granted by appropriate AST matchers.\\
+To create the needed ASTs we
+After creating a source file's AST we can easily match against any record declaration in it and the moment we have a \textit{CXXRecordDeclaration} node we have access to numerous helpful methods, that give us it's fields, constructors, methods etc. COOP defines a handful of matchers and callback-routines that filter wanted data, one of them is 
+However the requirement for zero additional programming effort challenges COOP to endeavor in static analysis.

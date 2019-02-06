@@ -22,6 +22,7 @@
 \usepackage[numbers]{natbib}
 \usepackage{booktabs}
 \usepackage{wrapfig}
+\usepackage{graphicx}
 
 %
 % Bitte in der folgenden Zeile den Zitierstandard festlegen
@@ -64,8 +65,8 @@
 % Einträge für Deckblatt, Kurzfassung, etc.
 %
 \title{%
-	Using LLVM/Clang to to maintain the abstraction level of Object Oriented Programming, yet abide SOA rules\\
-	\large How compiler technology could possibly make a link between conflicting programming paradigms}
+	Using LLVM/Clang to to abide cache conscious data layout principles, yet maintain the abstraction level of Object Oriented Programming\\
+	\large How compiler technology could possibly build a bridge between conflicting programming paradigms}
 \author{Julian Müller, BSc.}
 \studentnumber{1610585015}
 %\author{Titel Vorname Name, Titel\and{}Titel Vorname Name, Titel}
@@ -78,7 +79,7 @@
 \include{outline}
 \keywords{Object Oriented Programming, OOP, Structure Of Arrays, SOA, Data Oriented Design, Compiler, LLVM, Clang}
 
-\acknowledgements{TODO dankschee}
+\acknowledgements{TODO dankscheeee}
 
 \begin{document}
 
@@ -123,6 +124,11 @@
 \newcommand{\reftable}[1]{Table \ref{#1}}
 \newcommand{\reftablep}[1]{(see \reftable{#1})}
 
+
+%MATH CUSTOM
+\providecommand{\myceil}[1]{\left \lceil #1 \right \rceil }
+\providecommand{\myfloor}[1]{\left \lfloor #1 \right \rfloor }
+
 \maketitle
 
 %
@@ -131,11 +137,12 @@
 \include{chapter/conflicting_paradigms}
 \include{chapter/motivation}
 \include{chapter/compiler_as_mediator}
+\include{chapter/coop}
 
-\chapter{Quotes}
-\include{quotes/hennessy}
-\include{quotes/drepper}
-\include{quotes/compilers}
+%\chapter{Quotes}
+%\include{quotes/hennessy}
+%\include{quotes/drepper}
+%\include{quotes/compilers}
 
 
 %

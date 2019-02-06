@@ -1,5 +1,5 @@
 \chapter{Conflicting Paradigms}
-Numerous programming paradigms exist for even more general programming languages. Each of them come with different perks and offer different perspectives for a problem. Different programming paradigms, however don't necessarily exclude each other. Languages like \textit{Lisp} or \textit{Scala} for example both combine functional and object oriented programming.\\
+Numerous programming paradigms exist for even more general programming languages. Each of them come with different perks and offer different perspectives for a problem. Different programming paradigms, however don't necessarily exclude each other. Languages like \textit{Scala} for example combine functional and object oriented programming.\\
 This thesis will specifically concentrate on \textit{Object Oriented Programming} (OOP) and \textit{Data Oriented Design} (DoD). Whether or not data oriented design is even to be considered a programming paradigm is debatable \mcp{fabian}{1}, however its fundamental ideas (specifically concerning data layout) conflict with those of existing paradigms like OOP, so for the sake of consistency in this manner of comparison, we will call it that way.\\ 
 Depending on the domain, certain programmers will have different answers to the question which of both should be preferred. Each party will make compelling arguments to why their choice is mandatory. This is because those paradigms (partially) solve different problems and therefore offer dissenting perspectives on problems and their respective solutions for them.
 To understand why \textit{Object Oriented Programming} and \textit{Data Oriented Design} are rather cannibalistic to each other, we need to first have a look to what they are trying to solve, independently.
@@ -14,9 +14,8 @@ OOP quickly established and rooted itself in the industry without solely being u
 	\includegraphics[width=1.0\linewidth]{PICs/lang_ratings}
 	\caption{Most popular programming languages throughout the years \mcpic{lang_ratings}.}\label{lang_ratings}
 \end{figure}
- This is however where OOP and modern computer architectures don't get along, so to say. OOP ovvers an elegant way to intuitively model an issue into code, but doing so it encourages us to implement our data in an inefficient way. Inefficient because creating monolithic models of our data usually lack cohesion, which means, that the classes' members tend to not be related/dependent \mc{cohesion} - at least in terms of computational order.\\
+ This is however where OOP and modern computer architectures don't get along, so to say. OOP offers an elegant way to intuitively model an issue into code, but doing so it encourages us to implement our data in an inefficient way. Inefficient because creating monolithic models of our data usually lack cohesion, which means, that the classes' members tend to not be related/dependent \mc{cohesion} - at least in terms of computational order.\\
  In a home office application, juggling a few dozens of entities every other minute, this will not appear as a problem. And in this case it might be preferable to program such application in a strict object oriented way, since the development can be done fast and reliably even by a novice. On the other hand and especially in the game development industry OOP has proven to result in poorly performing software, due to inefficient data layouts. Because especially for games: data is performance \mcp{nystrom}{272}.\\
- The abbreviation \textit{AOS} stands for \textit{Array Of Structures}\mc{intel} and it describes, what usually happens with Object Oriented Programming.\\
  \begin{lstlisting}[language=C++,numbers=none,name={Example of some hierarchical POD class definitions},label={pods}]
 struct Obj {				struct Human : Obj {			struct NPC : Human {
 	float xyz[3];				char *name;						int mood;
@@ -25,6 +24,7 @@ struct Obj {				struct Human : Obj {			struct NPC : Human {
 
 NPC npc_arr[3];
  \end{lstlisting}
+The abbreviation \textit{AOS} stands for \textit{Array Of Structures}\mc{intel} and it describes, what usually happens with Object Oriented Programming.\\
 Considering the rather arbitrary C++ class definitions in \refcode{pods} the \textit{npc\_arr} will occupy memory according to \reffig{npcs_in_memory} (disregarding any \textit{padding}).
 \begin{figure}[!htbp]
 	\centering
@@ -37,7 +37,7 @@ This is quite literally an array of structures - hence the notation \textit{AOS}
 
 
 \section{CPU Caches and why they don't \textit{fit} objects}\label{cpu_caches}
-The data layouts typically found when programming with objects and classes, are not inefficient because they lack logic. "\textit{Each human - including students - will have positional traits}", is semantically correct. In fact it seems rather unfortunate, that modern computer architectures can't deal well with an abstraction that fits our perception of the world. But the hardware is certainly not to blame here. The problem with a monolithic class definition is much more that of common coding- or data access patterns.\\
+The data layouts typically found when programming with objects and classes, are not inefficient because they lack logic. "\textit{Each human - including NPCs - will have positional traits}", is semantically correct. In fact it seems rather unfortunate, that modern computer architectures can't deal well with an abstraction that fits our perception of the world. But the hardware is certainly not to blame here. The problem with a monolithic class definition is much more that of common coding- or data access patterns.\\
 \subsection{Common data access patterns vs. Monolithic class definitions}\label{cdap}
 
 Numerous coding best practices teach us to write simple, modular code.
@@ -58,15 +58,15 @@ The Object Oriented Programming paradigm is exactly doing what it promises - pro
 So whats our hardware's deal? Why do objects don't get along with it. Why can't we have super high speed machinery, that makes hardware concerns obsolete? Why can't we have anything nice?
 
 \subsection{A brief history of memory}
-To answer \refsec{cdap}'s concluding question: We do have high speed memory units at hand we just can't afford them. Modern computer systems rely on a variety of different memory units each differing in access latency and other properties. The intention behind this complex hierarchy of memory layers is obviously speed and is the result of an evolving cost-benefit calculation.
+To answer \refsec{cdap}'s concluding question: We do have high speed memory units at hand we just can't afford them. Modern computer systems rely on a variety of different memory units each differing in access latency, capacity and numerous technical properties. The intention behind this complex hierarchy of memory layers is of course speed and is the result of an evolving cost-benefit calculation.
 \begin{quote}
 	\textit{The task the computer designer faces is [...] design a computer to maximize
-		performance while staying within cost[...].}\mcp{hennessy}{8}
+		performance while staying within cost[...].} \mcp{hennessy}{8}
 \end{quote}
 
 Originally
 \begin{quote}
-	\textit{memory access latency and instruction execution latency were on roughly equal footing. [...] register-based instructions could execute in two to four cycles, and a main memory access also took roughly four cycles.}\mcp{gregory}{189}
+	\textit{memory access latency and instruction execution latency were on roughly equal footing. [...] register-based instructions could execute in two to four cycles, and a main memory access also took roughly four cycles.} \mcp{gregory}{189}
 \end{quote}
 This proportion changed significantly. While it is relatively cheap to produce high speed CPUs the same is not true for memory units. So whats happening, is that today's PCs/consoles are equipped with CPUs that are way faster than the greater parts of their available memory units. Due to increasing tick rates and \textit{Instruction Pipelining} what used to be ~four cycle RAM reads are now several hundred cycles. Not Because RAM became slower - the opposite is the case - but because CPUs became that much faster in relation.
 This trend was thoroughly observed and documented by John L. Hennessy and David A. Patterson \reffigp{cpu_memory_gap}.\\
@@ -93,9 +93,9 @@ In today's PCs/consoles typically each CPU core has its own hierarchy of cache m
 	\includegraphics[width=0.4\linewidth]{PICs/cachelayout}
 	\caption{Exemplary, simplified model of a CPU core and its several cache modules \mcppic{Drepper}{15}}\label{cache_layout}
 \end{figure}
-Closest to the core (on-chip) is the \textit{L1} (Level 1) cache. Accessing an AU in the  Intel® Core™ i7 Processor's L1 cache for example is almost as fast as accessing it in the very CPU's register - ~4 cycles (2.1 to 1.2 ns) \mc{levinthal}. For reference access to main RAM "\textit{can take on the order of 500 cycles[...]"} \mcp{gregory}{189}.
+Closest to the core (on-chip) is the \textit{L1} (Level 1) cache. Accessing an AU in the  Intel i7 Processor's L1 cache for example is almost as fast as accessing it in the very CPU's register - ~4 cycles (2.1 to 1.2 ns) \mc{levinthal}. For reference access to main RAM "\textit{can take on the order of 500 cycles[...]"} \mcp{gregory}{189}.
 Another cost unrelated reason, why we don't have lots of \textit{L1 D} cache is that more memory means literally more physical space is occupied. Having more cache memory equals more \textit{cache hits} \refsecp{cpucu} but as soon as the cache won't fit on-chip anymore, there is yet again additional latency. Thats why the L1 and sometimes L2 cache modules are kept comparably small but on-chip. Other L3 and L4 caches are each bigger and slower than their preceding counterparts respectively, but for the most part share the same ideas slowly converging latency times to the common main memory RAM.\\
-CPU cores can share one or more cache modules (usually starting with L2 or L3), effectively accessing the same local copies of data. This entails synchronization issues, that will be mentioned in the context of this work later on (TODO).\\
+CPU cores can share one or more cache modules (usually starting with L2 or L3), effectively accessing the same local copies of data. This entails synchronization issues, that will be mentioned in the context of this work later on (TODO REF SEC).\\
 Modern cache hierarchies include data caches as well as instruction caches, usually both in an L1 cache. However there are different takes on how to implement this. Harvey G. Cragon lists \mcp{cragon}{17}:
 \begin{itemize}
 	\item instruction cache - holds only instructions
@@ -112,10 +112,10 @@ The scope of this masters thesis will omit instruction-cache related subjects, b
 %remote L3 CACHE (Ref: Fig.1 [Pg. 5])        ~100-300 cycles ( 160.7 - 30.0 ns )
 
 \subsection{The CPUs cache utilization}\label{cpucu}
-A programmer will rarely ever directly interact with a cache module (though there are mechanisms for manual prefetching/clearing). The underlying idea for it was to be transparent to the programmer. However understanding the CPUs cache utilization enables one to tailor the data layout to it, resulting in faster access, less waiting and consequently higher throughput. Among other things, this is what \textit{Data oriented Design} aims to do - developing against hardware concerns.\\
+A programmer will rarely ever directly interact with a cache module (though there are mechanisms for manual prefetching/clearing). The underlying idea for it was to be transparent to the programmer. However understanding the CPUs cache utilization enables one to tailor the data layout to it, resulting in faster access, less waiting and consequently higher throughput. Among other things, this is what \textit{Data oriented Design} aims to do - developing against hardware concerns. \mcp{fabian}{268}\\
 As mentioned before the basic idea of the cache is to provide local copies of data at a faster rate and prefetch data segments, that are likely to be used soon. This works by directing each main memory access to go through the cache. Main memory access means also going through virtual address translation, address and data buses and depending on the main memory, crossbar switching logic \mcp{gregory}{190}.  
-Whenever the CPU requests access to a certain AU before saddling the horses and going on a journey to main memory, the cache will check whether or not the requested AU is currently present inside its buffer. If so it is referred to as a \textit{cache hit}, otherwise a \textit{cache miss}. For a modern L1 D cache this buffer, to be more specific, consists of several cache lines usually each of 64 bytes. Overall cache- and line sizes vary between different architectures but are standardized mostly due to Intel's designs.\\
-Cache misses result in higher access latency and should be avoided if possible. It is however not always possible. \textit{Mark Donald Hill} describes three classifications for cache misses:
+Whenever the CPU requests access to a certain AU before saddling the horses and going on a journey to main memory, the cache will check whether or not the requested AU is currently present inside its buffer. If so it is referred to as a \textit{cache hit}, otherwise a \textit{cache miss}. For a modern L1 D cache this buffer, to be more specific, consists of several cache lines usually each of 64 bytes. Overall cache- and line sizes vary between different architectures and levels but are standardized mostly due to Intel's designs.\\
+Cache misses result in higher access latency and should be avoided if possible. It is however not always possible. \textit{Mark Donald Hill} describes three classifications for cache misses \mcp{hill}{50}:
 \begin{itemize}
 	\item Compulsory Miss - Access to previously unreferenced data blocks. The very first data access will inevitably result in a main memory access.
 	\item Conflict Miss - Due to data blocks mapping to the same cache-lines.
@@ -128,14 +128,14 @@ The simplest and least efficient implementation to determine a cache \textit{hit
 	\item Tag - Which cache sized block in main memory holds the original data.
 \end{itemize}
 In the case that each physical main memory address, has exactly one counterpart it is called a \textit{direct-mapped} cache \mcp{gregory}{194}. In this case since the cache can by far not encompass the whole extend of the main memory, a lot of physical addresses will be mapped to the very same cache line, effectively extruding each other out of the cache when accessed. This is called \textit{eviction} and in unlucky cases will behave like all references are cache misses \mcp{cragon}{97}. To prevent this modern caches map a physical address to \textit{n} cache lines. This is called \textit{n-way associativity} - typically implemented as \textit{8-way} or \textit{16-way} caches depending on the level.\\
-There is a lot more to cover about caching technologies and policies like: Replacement-/Write-/Coherency(MESI; MOESI; MESIF) policies and for further reading Harvey G. Cragon's \textit{Memory Systems and Pipelined Processors}\mc{cragon} as well as Jason Gregory's \textit{Game Engine Architecture}\mc{gregory} are highly recommended reads. However for the purpose of this work a few specifics are most interesting for us.\\
+There is a lot more to cover about caching technologies and policies like: Replacement-/Write-/Coherency(MESI; MOESI; MESIF) policies and for further reading Harvey G. Cragon's \textit{Memory Systems and Pipelined Processors}\mc{cragon} as well as Jason Gregory's \textit{Game Engine Architecture}\mc{gregory} are highly recommended. However for the purpose of this work a few specifics are most interesting for us.\\
 How can a data layout affect \textit{hit ratios} and reduce calls to main memory? As mentioned before there are common data access patterns in software and the caches actually accommodate us by adapting their builtin prefetching mechanisms to it, following a set of \textit{locality concepts}. Harvey G. Cragon counts three of those concepts: \mcp{cragon}{16}
 \begin{itemize}
 	\item \textit{Temporal locality} - Information recently referenced by a program is likely to be used again soon.
 	\item \textit{Spatial locality} - Portions of the address space near the current locus of reference are likely to be referenced in the near future.
-	\item \textit{Sequential locality} - A special case of spatial locality in which the address of the next will be the immediate successor of the present one.
+	\item \textit{Sequential locality} - A special case of spatial locality in which the address of the next AU will be the immediate successor of the present one.
 \end{itemize}
-At first glance these concepts are very straight forward, but their respective implementations for automatic hardware prefetching can be more complex than one would think. Prefetching basically means:
+At first glance these concepts are very straight forward, but their respective implementations for automatic hardware prefetching can be more complex than one would think. Prefetching data basically means:
 \begin{quote}
 "\textit{[...] bringing data in the data (or mixed instruction-data) cache before it is directly accessed by a memory instruction [...].}" \mcp{chen}{610}
 \end{quote}
@@ -149,18 +149,19 @@ Compilers already make use of software prefetching (manual cache interaction ins
 \begin{quote}
 	\textit{For array-based applications, the compiler can use locality analysis to predict which dynamic references to prefetch, and loop splitting and software pipelining to schedule prefetches.} \mcp{luk}{223}
 \end{quote}
-So we can already deduce that for an efficient data layout it would be beneficial to rely on arrays, or more generally, concepts compilers can 'comprehend' and optimize. Also even though the concept of \textit{sequential locality} is only a special case, it is the one we can utilize best to derive adaptations for our data layout, since hardware prefetching has adapted best to it. How exactly can we convert this information into a generic set of rules/best practices, a methodology for efficiency? We don't it already exists.
+So we can already deduce that for an efficient data layout it would be beneficial to rely on arrays, or more generally, concepts compilers can 'comprehend' and optimize. Also even though the concept of \textit{sequential locality} is only a special case, it is the one we can utilize best to derive adaptations for our data layout, since hardware prefetching has adapted best to it. DoD converts this information into a generic set of rules/best practices, a methodology for efficiency.
 
-\section{Data Oriented Design / SOA}\label{dod}
-The whole purpose of adding abstraction layers is moving further away from the hardware mentally. This helps us to focus on constructing appropriate models for a problem \mcp{kramer}{5}. However disregarding intrinsic detail is predestined to result in poor resource utilization at that level. \textit{Data oriented Design} wants us to be fully aware of what is beneath the source code and tailor the essential resources to it. Essential resources here being our data. 
+\section{Data Oriented Design}\label{dod}
+The whole purpose of adding abstraction layers is moving further away from the hardware mentally. This helps us to focus on constructing appropriate models for a problem \mcp{kramer}{5}. However disregarding intrinsic detail is predestined to result in poor resource utilization at that level. \textit{Data oriented Design} wants us to be aware of what is beneath the source code and tailor the essential resources to it. Essential resources here being our data. 
 \begin{quote}
-	\textit{The data-oriented design approach doesn't build the real-world problem into the code. This could be seen as a failing [...] by veteran object-oriented developers [...]. [It] gives up some of the human readability [...], but stops the machine from having to handle human concepts [...].}\mcp{fabian}{7}
+	\textit{The data-oriented design approach doesn't build the real-world problem into the code. This could be seen as a failing [...] by veteran object-oriented developers [...]. [It] gives up some of the human readability [...], but stops the machine from having to handle human concepts [...].} \mcp{fabian}{7}
 \end{quote}
 \subsection{OOP and bad abstraction}\label{oop_bad_abstraction}
 DoD however deserves more credit than only being a performance optimization. (Wrong) abstraction not only moves us away further from the hardware, but also from the actual problem domain.\\
 Even though \textit{coupling} and its avoidance are a big deal in OOP it somehow seems natural to couple the data and the problem domain. This coupling has proven to lead to the exact same problems as coupling of unrelated classes. Its hard to make changes, especially when the reason for change is modification of fundamental design choices. But not only is contextual linkage rigid to conceptual change but its also hard to operate on it only in ways that haven't been thought of initially.\\
 Imagine for example a simple particle system implemented in a typically OOP manner \refcodep{particle_system}.
- \begin{lstlisting}[language=C++,numbers=none,name={OOP typical particle system implementation},label={particle_system}]
+
+ \begin{lstlisting}[language=C++,name={ OOP typical, simplified particle system implementation},label={particle_system}]
 struct particle
 {
 	float ms_alive, lifetime_in_ms;
@@ -175,7 +176,7 @@ struct particle_system
 	...
 };
 \end{lstlisting}
-At first glance it appears to be a perfectly valid approach to make a particle system linked directly to the very particles it is supposed to manage. Each method will now operate on the particles array and just like that we can make numerous particle systems, each implicitly operating only on its own data. This is an easy to grasp concept that in terms of a particle system we could easily match with a real-world fireworks battery. While there are a few things, that can be nagged about, concerning only maintainability there is already a huge issue.\\
+At first glance it appears to be a perfectly valid approach to make a particle system linked directly to the very particles it is supposed to manage (\refcode{particle_system} line 10). Each method will now operate on the particles array and just like that we can make numerous particle systems, each implicitly operating only on its own data. This is an easy to grasp concept that in terms of a particle system we could easily match with a real-world fireworks battery. While there are a few things, that can be nagged about, concerning only maintainability there is already a huge issue.\\
 What about operations, that need to be applied to ALL particles? ... Why should we? When in the real world do two physically different particle systems ever interact with each other? Collision might come to mind. While it would be a lot easier to just iterate a big list of particles, we don't really care. It is still relatively easy to just check each particle system's particles against another particle system \refcodep{collision}. And we will just do this for all the particle systems we have! They probably should exist somewhere in the same context anyway.\\
  \begin{lstlisting}[language=C++,name={Example code how OOP could handle collision between different particle systems' particles},label={collision}]
 void particle_system::particle_system_collision(
@@ -184,31 +185,28 @@ void particle_system::particle_system_collision(
 {
 	for(unsigned i = 0; i < ps1->particles_alive; ++i)
 	{
-		particle *p1 = ps1->particles[i];
+		particle *p1 = &ps1->particles[i];
 		for(unsigned o = (ps1 == ps2 ? i+1 : 0); o < ps2->particles_alive; ++o)
 		{
-			particle *p2 = ps2->particles[o];
-			auto collision_data = sphere_collision(p1->m_xyz, p1->m_radius, p2->m_xyz, p2->m_radius);
-			if(collision_data.colliding)
-			{
-				collide(*p1, *p2, collision_data);
-			}
+			particle *p2 = &ps2->particles[o];
+			[collision code]
 		}
 	}
 }
 \end{lstlisting}
-Even though \refcode{collision} has some uncomfortable specifics (especially line 8), it is still doable. The moment we start to render this particle system however we might notice that our particles look weird. Our particles' sprites make use of transparency and even though we enabled transparency in our render back-end it doesn't look right. Well the particles need to be rendered in a certain order. We have not thought of that while designing our data model. Its easy enough to sort one particle system's particles according to their distance to camera respectively, but bringing EACH particle system's particles in order?\\
+Even though \refcode{collision} has some uncomfortable specifics (especially line 8), it is still doable. The moment we start to render this particle system however we might notice that our particles look weird. Our particles' sprites make use of transparency and even though we enabled transparency in our render back-end it doesn't look right. Well the particles need to be rendered in a certain order. We have not thought of that while designing our data model. It is easy enough to sort one particle system's particles according to their distance to camera respectively, but bringing EACH particle system's particles in order?\\
 Well we could write an algorithm, that has a list of particle arrays; takes each particle system's particle array; unifies them to a big dynamically allocated array; then sorts it; then returns that array so it can be rendered. Each frame. While we are at it, we will need to change our render pass, since now we don't render each particle system, but one big array of particles.\\
-This is starting to get ugly really fast. We never do this stuff for a real-world fireworks battery and we feel betrayed by the abstraction we made. Ultimately we come to a point where we understand, that a real-world projection of a problem domain into source code might not be the best choice. Its definitely possible, but just doesn't \textit{fit} right. So instead of realizing overly complex solutions to make our code fit our abstraction we realize that our abstraction is obsolete and we should focus on a solution that fits our tasks. In the end data is not generic in the way it is used \mcp{fabian}{15}. Different jobs might require different solutions and OOP might be optimal for a subset of problems, but has evolved into a pattern, that is forced on domains as a go to.\\
+These changes are starting to proliferate really fast. We never do this stuff for a real-world fireworks battery and we feel betrayed by the abstraction we made. Ultimately we come to a point where we understand, that a real-world projection of a problem domain into source code might not be the best choice. Its definitely possible, but just doesn't \textit{fit} right. So instead of realizing overly complex solutions to make our code fit our abstraction we realize that our abstraction is obsolete and we should focus on a solution that fits our tasks. In the end data is not generic in the way it is used\mcp{fabian}{15}. Different jobs might require different solutions and OOP might be optimal for a subset of problems, but has evolved into a pattern, that is forced on domains as a go to.\\
 Besides additional layers of abstraction do not equal superior usability/readability either. When using a third party library we hope the API designer provides functions that operate on data types we are already familiar with, like char pointers, instead of forcing us to learn how to use that developers self-made string class (KISS).\\\\
-So arguably Object Oriented Programming is not automatically superior, neither in terms of maintainability nor performance. Actually it appears to be inferior to DoD. What does DoD do to be harder/better/faster/stronger?
+So arguably Object Oriented Programming is not automatically superior, neither in terms of maintainability nor performance. Actually it appears to be inferior to DoD. What does DoD do to be \textit{better}?
 
 \subsection{Normalization of Data}
-When thinking in terms of the problem and designing against the data \textit{Richard Fabian} references relational database models as a worthy category to look up to, in his book \textit{Data-Oriented-Design: Software engineering for limited resources and short schedules}. After all a database should handle data correctly. Fabian says:
+When thinking in terms of the problem and designing against the data \textit{Richard Fabian} references relational database models as a worthy category to look up to in his book \textit{Data-Oriented-Design: Software engineering for limited resources and short schedules} \mcp{fabian}{25}. After all a database should handle data correctly.\\
+We have already seen, that the object typical data-layout makes sense in terms of readability, but fails to be maintainable and in terms of cache utilization behaves poorly. In order to peel off of the OOP abstraction pattern we want our model to be a minimal, precise representation, that abides a format, that has proven to behave well. Fabian says:
 \begin{quote}
-\textit{The structure of any data is a trade-off between performance, readability, maintenance, future proofing, extendibility, and reuse.} \mcp{fabian}{28}
+	\textit{The structure of any data is a trade-off between performance, readability, maintenance, future proofing, extendibility, and reuse.} \mcp{fabian}{28}
 \end{quote}
-We have already seen, that the object typical data-layout makes sense in terms of readability, but fails to be maintainable and in terms of cache utilization behaves poorly. In order to peel off of the OOP abstraction pattern we want our model to be a minimal, precise representation, that abides a format, that has proven to behave well. Therefore we attempt to treat our data modeling process the way we would, when setting up a relational database. We normalize our data, according to the existing normalization stages developed by Edgar F. Codd and Raymond F. Boyce \mc{codd}. This is certainly not done because relational databases are famous for their excellent performance (they are not), but because it has proven to give advantageous insights to the data, its domain and the relations between its subsets. Dealing with the problem's domain and the underlying data eventually led to technologies like JPEG and MP3 \mcp{fabian}{47}. Understanding the data will lead to an understanding of the solution.\\
+Therefore we could attempt to treat our data modeling process the way we would, when setting up a relational database. We normalize our data, according to the existing normalization stages developed by Edgar F. Codd and Raymond F. Boyce \mc{codd}. This is done because laying out your data in a linear fashion goes away from embedding meaning to its structure (Class/Struct) \mcp{fabian}{25} and has proven to give advantageous insights to the data, its domain and the relations between its subsets. Dealing with the problem's domain and the underlying data eventually led to technologies like JPEG and MP3 \mcp{fabian}{47}. Understanding the data will lead to an understanding of the solution.\\
 For our minimal example of a particle system, even just the first stages of normalization teaches us, that there should be no arrays of data in one element \mcp{fabian}{37} it also forces us to reconsider which data is accessed through which instance (key) and therefore whether or not there is a \textit{relation} to find \reftablep{normalized_ps}.\\
 \begin{table}
 	\centering
@@ -253,25 +251,27 @@ For our minimal example of a particle system, even just the first stages of norm
 		\end{tabular}}
 	}
 
-	\caption{Example excerpt of how the simple particle system could be normalized}
+	\caption{Example excerpt of a possible first normalization step for the particle system and how it indicates bad design}
 	\label{normalized_ps}
 \end{table}
 \\
-We will not implement a relational database for our application but generating this model can help us realizing some things.
+We will not implement a relational database for our application but generating this model can help us realize some things.
 \begin{enumerate}
-	\item particles are no longer represented block-wise inside a particle system, but are held in ONE unified table to begin with.
+	\item particles are no longer represented block-wise, but are held in ONE unified table to begin with.
+	\item Instead of holding an array of particles we can just as well take its data subsets and link them against a unique key, which basically translates to each member is a column/array and each instance of a particle or particle system is now a mere index.
 	\item There is tons of redundancy. Not logical but contextual. Seeing the same \textit{shader\_id} and \textit{lifetime\_in\_ms} over and over for each particle that will share a particle system certainly \textit{smells} funny. It is very important to be able to link each particle to a specific shader, but contextually this is redundant. We can see, that some things might have been coupled due to our abstraction.
-	\item Instead of holding an array of particles we can just as well take its data subsets and link them against a unique key, which basically translates to each column is an array and each key is an index.
-	\item Rethinking which data belongs to which entity hints at \textit{when} specific subsets are accessed and in which context (which key is used to get it).
+	\item Especially after resolving redundancy, rethinking which data belongs to which entity hints at \textit{when} specific subsets are accessed and in which context (which key is used to get it).
 \end{enumerate}
+After \textit{laying out our data} in a linear fashion, we can now implement a \textit{data layout} that implements our new ideas.
 
-\subsection{Structure of Arrays}
-In contrast to the previously mentioned AOS \refsecp{OOP} a \textit{Structure of Arrays} is the \textit{column-oriented database} pendant to a data layout that results in higher throughput by providing a cache friendly structure \mcp{fabian}{163}. We already know, that the hardware, specifically the cache uses certain strategies to prefetch data out of main memory \refsecp{cpucu}. Now when implementing the column-oriented approach that comes with data normalization we automatically almost perfectly conform to those hardware prefetching mechanisms. We do so by implementing columns as arrays. The original concept of an \textit{object} can now be simplified to an index, that retrieves the respective values in each column/array.
-Remembering \refcode{pods}, when examining the NPC class we know that after derivation (done by the compiler) it looks like \refcode{post_deriv_npc}.
-\begin{wrapfigure}[14]{l}{.35\textwidth}
-\begin{lstlisting}[language=C++,name={NPC pod after derivation is done},label={post_deriv_npc}]
-struct NPC 
-{
+\subsection{Structure of Arrays / SOA}
+In contrast to the previously mentioned AOS \refsecp{OOP} a \textit{Structure of Arrays} is the \textit{column-oriented database} pendant to a data layout that results in higher throughput by providing a cache friendly structure \mcp{fabian}{163}. We already know now, that the hardware, specifically the cache uses certain strategies to provide data out of main memory, that is likely to be used soon. This happens both when loading data in cache-line sized blocks and through prefetching mechanisms \refsecp{cpucu}. Now when implementing the column-oriented approach that comes with data normalization we automatically almost perfectly conform to those auxiliary means by implementing columns as arrays. The original concept of an \textit{object} can now be simplified to an index, that retrieves the respective values in each column/array.
+
+\subsubsection{AOS in the cache}
+\begin{wrapfigure}[14]{r}{.35\textwidth}
+	\begin{lstlisting}[language=C++,numbers=none,name={NPC pod after derivation is done},label={post_deriv_npc}]
+	struct NPC 
+	{
 	//inherited from Obj 
 	float xyz[3];
 	float vel[3];
@@ -280,53 +280,50 @@ struct NPC
 	int age;
 	//NPC
 	int mood;
-};
-\end{lstlisting}
+	};
+	\end{lstlisting}
 \end{wrapfigure}
-Accessing subsets of an instance of NPC will always result in loading at least a whole cache line. Lets assume, that the game code will iterate over the NPCs to update their positions by adding their velocity and some delta-time to their current xyz. Modern architectures mostly rely on cache lines of 64 Byte and assuming that \textit{sizeof(NPC)} is 40 Byte we can make the following assumptions. Considering the subset of data we actually want to work with on our update routine per NPC is (2 * 3 * \textit{sizeof(float)}) 24 Byte, we waste 40 - 24 = 16Byte of our cache-line per NPC. 
-If we had 1000 NPCs instead of only 3 to actually compute each NPCs updated position we would load 40.000 Byte. 16.000 Byte of that would be ignored in total. The smallest common multiple of our 40 Byte NPC and our 64 Byte cache-line is 320, so over eight NPCs worth of cache-line we can count the amount of cache misses produced and extrapolate to greater numbers of NPCs \reffigp{cache_utilization_npc}.
+Remembering \refcode{pods}, when examining the NPC class we know that after derivation (done by the compiler) it looks like \refcode{post_deriv_npc}. Accessing subsets of an instance of NPC will always result in loading at least a whole cache line. Lets assume, that the game code will iterate over the NPCs to update their positions by adding their velocity multiplied with a delta-time to their current xyz. With a typical L1 D cache-line of 64 Byte and assuming that an NPC is 40 Byte (float = 4 Byte, pointer = 8 Byte) we can make the following assumptions. Considering the subset of data we actually want to work with on our update routine per NPC is $2\times 3\times \textit{sizeof(float)} = $ 24 Byte, we waste $40 - 24 =$ 16 Byte of our cache per NPC. This waste scales linearly with our data.\\
+As a quick approximation onto a damage report we could do the following:
+The smallest common multiple of our 40 Byte NPC and our 64 Byte cache-line is 320, so with eight NPCs we load five cache-lines \reffigp{cache_utilization_npc}. This equals five compulsory misses. After 320 Byte this layout repeats so we could extrapolate to greater numbers of NPCs \reffig{soa_aos_cl_usage}. 
 \begin{figure}[!htbp]
 	\centering
 	\includegraphics[width=1.0\linewidth, height=0.3\linewidth]{PICs/CacheUtilizationNPC}
 	\caption{NPCs inside cache-lines, where blue is relevant data and red blocks represent unused data}\label{cache_utilization_npc}
 \end{figure}
-For the purpose of simplicity and demonstration we will assume that the cache will only ever prefetch to the extend of loading the complete cache-line. In reality depending on the strategy any number of lines could be prefetched asynchronously. A cache miss occurs whenever we do not find an AU inside a cache line in terms of our visual representation in \reffig{cache_utilization_npc} this means, for each cache line we can count the first occurrence of a blue block that is at least intersecting the cache-line. While \textit{NPC0} completely fits inside the first cache-line, \textit{NPC1} does not. However \textit{NPC1}'s relevant data also completely fits in the first cache-line, so accessing it's relevant data will not result in a cache miss! While accessing \textit{NPC2}'s relevant data will partly load \textit{NPC3}'s relevant data, we will only prefetch the first eight Byte of it.
-\begin{lstlisting}[language=C++,name={SOA variant of the NPC},label={soa_npc}]
-struct NPCs{
+A cache miss occurs whenever we do not find an AU inside a cache line. While \textit{NPC0} completely fits inside the first cache-line, \textit{NPC1} does not. However \textit{NPC1}'s relevant data also completely fits in the first cache-line, so accessing it's relevant data will not result in a cache miss! While accessing \textit{NPC2}'s relevant data will partly load \textit{NPC3}'s relevant data, we will only get the first eight Byte of it. The remnant will be loaded separately, yet this will result in completely loading \textit{NPC4}'s relevant data.\\
+Continuing this we will count five cache misses and foregoing from 320 loaded Bytes this process will repeat. The statement that 1000 NPCs will count $1000 npc = \frac{5 * 1000}{8} cms = 625 cms
+$ cache misses for the position update routines (where \textit{cms} are cache misses), is only a narrow assumption, since our cache-lines are defined in fixed quantums \reffigp{soa_aos_cl_usage}.
+\subsubsection{SOA in the cache}
+\begin{wrapfigure}[9]{r}{0.4\textwidth}
+	\begin{lstlisting}[language=C++,numbers=none,name={SOA variant of the NPC},label={soa_npc}]
+	struct NPCs{
 	float xyz[3 * NUM_ENTITIES];
 	float vel[3 * NUM_ENTITIES];
 	char *name[NUM_ENTITIES];
 	int age[NUM_ENTITIES];
 	int mood[NUM_ENTITIES];
-};
-
-NPCs npcs;
-
-void update_npc_position(unsigned npc_id){
-	float local_xyz[3];
-	float local_vel[3];
-	memcpy(local_xyz, npcs.xyz + npc_id * 3, sizeof(float[3]));
-	memcpy(local_vel, npcs.vel + npc_id * 3, sizeof(float[3]));
-	local_xyz[0] += local_vel[0] * delta_t;
-	local_xyz[1] += local_vel[1] * delta_t;
-	local_xyz[2] += local_vel[2] * delta_t;
-	memcpy(npcs.xyz + npc_id * 3, local_xyz, sizeof(float[3]));
-}
-\end{lstlisting}
-The remnant will be loaded separately from main memory, yet this will result in completely loading \textit{NPC4}'s relevant data.\\
-Continuing this we will count five cache misses and foregoing from 320 loaded Bytes this process will repeat. When eight NPCs result in five cache-misses for 1000 NPCs we will count $1000 npc = \frac{5 * 1000}{8} cms = 625 cms
-$ for the position update routines (where \textit{cms} are cache misses).\\\\
-After normalizing the \textit{Obj}; \textit{Human}; \textit{NPC} thematic and implementing it in a SOA manner it could look like \refcode{soa_npc}. What used to be individual class members are now columns/arrays, accessed by a key - the \textit{npc\_id}. From now on both reads to \textit{xyz} and \textit{vel} will fill a cacheline worth of relevant data, respectively. A single cache-line now holds up to five positions or velocities. This doesn't prevent our data from overlapping in terms of cache-lines. This can be solved by adjusting the data's \textit{alignment}. Since this will be used in the prototypical implementation it will be explained in TODO REF-SECTION, for now we could assume, that we align and pad our \textit{float[3]} blocks of data to our cache-lines in a way that each cache-line holds exactly five of those relevant entities \reffigp{cache_utilization_soa}.
+	} npcs;
+	\end{lstlisting}
+\end{wrapfigure}
+Implementing the \textit{NPC} in a SOA manner it could look like \refcode{soa_npc}. What used to be individual class members are now columns/arrays, accessed by a key - the \textit{npc\_id}. From now on both reads to \textit{xyz} and \textit{vel} will fill a cacheline worth of relevant data, respectively. A single cache-line now holds up to five ($5\frac{1}{3}$) positions or velocities. This doesn't prevent our data from overlapping in terms of cache-lines. The smallest common multiple of 12 and 64 is 192, so over $\frac{192}{64}=3$ cache-lines we will fit $\frac{192}{12}=16$ units. As can be seen in \reffig{soa_aos_cl_usage} the SOA attempt will develop better cache utilization for contiguous AU access on rising data sizes, disregarding any external eviction. This does not automatically equal the amount of cache misses, since repeated data access will find the data in the cache. But a SOA data model will reduce compulsory misses.
+\subsubsection{}
+\begin{wrapfigure}[16]{l}{.6\textwidth}
+	\centering
+	\includegraphics[width=.6\textwidth, height=0.42\textwidth]{PICs/soa_aos_cl_usage}
+	\caption{Cache-line efficiency comparing NPCs represented as SOA and AOS.}\label{soa_aos_cl_usage}
+\end{wrapfigure}
+The unit we use for computations here is the size of three floats (12 Byte), so while a cache-line fits $\myfloor{\frac{64}{12}}=5$ complete units, the remnant of $64-12\times5 = 4$ Byte will belong to a unit, we will need another cache-line for. This overlap happens exactly $\frac{12}{64-60} = 3$ times until in the fourth cache-line this process repeats. Distributing logically dependent data over multiple cache-lines should be avoided, since access to it will result in more cache misses and is prone to eviction \mcp{intel}{12-19}.\\
+It can be solved by adjusting the data's \textit{alignment}. Since this will be used in the prototypical implementation it will be explained in TODO REF SEC, for now we could assume, that we align and pad our \textit{float[3]} blocks of data to our cache-lines in a way that each cache-line holds exactly five of those entities \reffigp{cache_utilization_soa}.\\
+This leads to consistent throughput. In numbers we now have exactly two cache misses per five \textit{NPCs} (We don't really have an NPC object anymore, but we are still allowed to \textit{think} in objects). One for the positional data, one for the velocity data. Again for 1000 NPCs this would now result in 400 cache misses what translates to $225\times\sim300$ clock cycles less latency than the AOS version, for position updates alone! Each frame!
 \begin{figure}[!htbp]
 	\centering
 	\includegraphics[width=1.0\linewidth, height=0.17\linewidth]{PICs/CacheUtilizationNPCSOA}
-	\caption{xyz and vel blocks inside cache-lines, where blue is joint float[3] blocks of xyz data, green is joint blocks of float[3] vel data and red is unused but intentional padding.}\label{cache_utilization_soa}
+	\caption{xyz and vel blocks inside cache-lines, where blue represents joint float[3] blocks of xyz data, green joint blocks of float[3] vel data and red is unused but intentional padding.}\label{cache_utilization_soa}
 \end{figure}
-\\This leads to consistent throughput. In numbers we now have exactly two cache misses per five \textit{NPCs} (We don't really have an NPC object anymore, but we are still allowed to \textit{think} in objects). One for the positional data, one for the velocity data. Again for 1000 NPCs this would now result in 400 cache misses what translates to $225\times\sim300$ clock cycles less latency than the AOS version, for position updates alone! Each frame!\\\\
-This is starting to behave \textit{optimal}. By not loading unneeded data into the cache we can store more relevant data. By Aligning and padding our data blocks correctly we attenuate the chance of \textit{conflict misses} since we reduces the number of cache-lines related data depends on. We do however still have leftover space. The four Byte paddings we append to each $5\times float[3]$ block has purpose, yet could theoretically hold information. Imagine our now theoretical NPC and thus our positional computation would involve a per NPC factor for maybe damping, as well as a mass. Still assuming that $sizeof(float) = 4$ this would be an additional eight Byte per NPC on each computation. Following our SOA approach we would define yet two new arrays for the damping factor and mass respectively. Accessing them would result in the utilization of another two cache-lines. Even though those cache-lines now suffice 16 NPCs each ($\frac{64}{sizeof(float)} = 16$) we now are dependent on four individual cache-lines to compute the \textit{update\_npc\_position} for one NPC, so the amount of cache-lines scales linearly with the amount of parameters the function depends on (for SOA). In terms of eviction and consequently of conflict misses, this could yet again cultivate sub-optimal cache utilization. For the same reasons Intel's article on \textit{Memory Layout Transformations}\mc{aosoa} also mentions increased pressure on the \textit{TLB} (Translation Look-aside Buffer).\\
-Even though we reduced the overall NPC per cache-line ratio, there is still unused information and scaling prone to eviction, all due to the individually related data blocks being physically separated. This doesn't countermand that SOA is arguably better than AOS, but it indicates, that there is still room for improvement.
+This is starting to behave \textit{optimal}. By not loading unneeded data into the cache we can store more relevant data. By Aligning and padding our data blocks correctly we attenuate the chance of \textit{conflict misses} since we reduce the number of cache-lines the related data depends on. We do however still have leftover space. The four Byte paddings we append to each $5\times float[3]$ block has purpose, yet could theoretically hold information. Imagine our now theoretical NPC and thus our positional computation would involve a per NPC factor for maybe damping, as well as a mass. Still assuming that $sizeof(float) = 4$ this would be an additional eight Byte per NPC on each computation. Following our SOA approach we would define yet two new arrays for the damping factor and mass respectively. Accessing them would result in the utilization of another two cache-lines. Even though those cache-lines now suffice 16 NPCs each ($\frac{64}{sizeof(float)} = 16$) we now are dependent on four individual cache-lines to compute the \textit{update\_npc\_position} for one NPC, so the amount of cache-lines scales linearly with the amount of parameters the computation depends on (for SOA). In terms of eviction and consequently of conflict misses, this could yet again cultivate sub-optimal cache utilization (for the same reasons Intel's article on \textit{Memory Layout Transformations} \mc{aosoa} also mentions increased pressure on the \textit{TLB} (Translation Look-aside Buffer)). Even though we reduced the overall NPC per cache-line ratio, there is still unused information and scaling prone to eviction, all due to the individually related data blocks being physically separated. This doesn't countermand that SOA performs better than AOS, but it indicates, that there is still room for improvement.
 
-\subsection{Regarding temporal- and spatial locality / Components / AOSOA}\label{rtasl}
+\subsection{Regarding temporal- and spatial locality}\label{rtasl}
 The motivation behind our AOS to SOA conversion, was to maximize cache utilization when processing an NPC's position. We figured, that loading an object entails lots of unwanted data that does not share temporal locality with the information that is relevant to us. So we made sure, that instead of objects we loaded only wanted data.
 \begin{wrapfigure}[10]{r}{0.4\textwidth}
 	\begin{lstlisting}[language=C++,numbers=none,name={Consolidating related data},label={component_npc}]
@@ -339,18 +336,17 @@ The motivation behind our AOS to SOA conversion, was to maximize cache utilizati
 	npc_group npc_groups[NUM_ENTITIES];
 	\end{lstlisting}
 \end{wrapfigure}
-In order to do so we gave up something very important. When data is logically related it means, that it collaborates. Whenever we see, that certain subsets of data are frequently used together it is advisable not to separate them. So instead of rigorously converting each member into an array pendant, we group logically related data and create arrays of those groups instead \refcodep{component_npc}.This way the relevant data concerning one NPC will not spread over different incoherent cache-lines, that could map to completely different segments in main memory.\\
-This technique bundles related data and makes sure it is successive in memory as well as in cache-lines, consequently we won't peril those cache-lines to extrude each other from the cache. The book \textit{Compilers, Principles, Techniques and Tool} also describes a mechanism like this and refers to those groups as \textit{blocks} \mcp{aho}{786}.
-Also we get the chance to fully exploit our hardware's boundaries, as in now we can get rid of manually inserted padding Bytes \reffigp{cache_utilization_comp} - provided we have related data that fits the gap.
-\begin{figure}[!htbp]
+In order to do so we gave up something very important. When data is logically related it means, that it collaborates. Whenever we see, that certain subsets of data are frequently used together it is advisable not to separate them. So instead of rigorously converting each member into an array pendant, we group logically related data and create arrays of those groups instead \refcodep{component_npc}.This way the relevant data concerning one NPC will not spread over different incoherent cache-lines, that could map to completely different segments in main memory.
+\subsubsection{}
+\begin{wrapfigure}[7]{l}{0.37\textwidth}
 	\centering
-	\includegraphics[width=.6\linewidth, height=0.16\linewidth]{PICs/CacheUtilizationNPCComp}
-	\caption{unified relevant data in a cache-line.}\label{cache_utilization_comp}
-\end{figure}
-It is however only possible to gain a performance boost out of this, when the unified data is actually logically related. Whenever data is unified we basically have the same problem, we tried to get rid of in the first place - possibly loading unwanted data into the cache, increasing access latency. The moment we decide, that for example our game should provide the player with an indicator to which NPC is nearest to the player's avatar, we again would be doomed to load adherent information about the NPC's velocity, mass and stuff that was grouped to make position updates faster. Because for this we actually only want the NPCs' positions.
-\newpage
-\subsubsection{Hot/Cold Splitting}
-\begin{wrapfigure}[14]{l}{0.34\textwidth}
+	\includegraphics[width=.37\textwidth, height=0.17\textwidth]{PICs/CacheUtilizationNPCComp}
+	\caption{Unified/Grouped relevant data in a cache-line.}\label{cache_utilization_comp}
+\end{wrapfigure}
+This technique bundles related data and makes sure it is successive in memory as well as in cache-lines, consequently we won't peril those cache-lines to extrude each other from the cache. The book \textit{Compilers, Principles, Techniques and Tool} also describes a mechanism like this and refers to those groups as \textit{blocks} \mcp{aho}{786}.
+Also we get the chance to fully exploit our hardware's boundaries, as in now we can get rid of manually inserted padding Bytes \reffigp{cache_utilization_comp} - provided we have related data that fits the gap. It is however only possible to gain a performance boost out of this, when the unified data is actually logically related.
+\subsubsection{Hot/Cold Splitting}\label{hot_cold_splitting}
+\begin{wrapfigure}[15]{r}{0.3\textwidth}
 \begin{lstlisting}[language=C++,numbers=none,name={The NPC class splitted into hot/cold data},label={hcsplit_npc}]
 struct npc_cold_data{
 	char *name;
@@ -372,16 +368,15 @@ Especially for monolithic class definitions, there can be numerous logical subse
 First of all it is not always apparent whether a field is hot/cold. An experienced programmer might feel confident enough for a reasonably small class definition to eyeball it. A better approach might be to wrap our fields with access mechanisms that let us count how often they are accessed at run time, yet again we could rely on static analysis. Since this work will specifically implement a hot/cold split in the prototype we will get back to this in TODO REF SEC.\\
 Also we might end up picking individual fields of contextually differing data subsets. We could for example identify \textit{velocity, vertice data, gold} as our hot fields, because they are frequently accessed. However they are utilized at different times of the game and individually they have no common logical relation that is relevant to our computations!\\
 Even a split that divides contextual relation might result in a performance boost, if only the cold data is 'cold enough', but just as well a bad split might result in even worse cache utilization.
-In order to make a decision, that regards temporal- and spatial locality in a complex situation, we might need to find a way to evaluate, compare and eventually prioritize individual fields. An attempt to solve this will be made in the prototypical implementation, so more on that later on.
+In order to make a decision, that regards temporal- and spatial locality in a complex situation, we might need to find a way to evaluate, compare and eventually prioritize individual fields. An attempt to solve this will be made in the prototypical implementation, so more on that later on.\\
 
 \subsubsection{Components}
-After a grouping procedure the remnant members of the original NPC class could also be grouped by the same method we talked about before: take related members unify them in a struct and store those structs in an array so they are beyond equals. If the original class hierarchy was designed well the grouping of related data bits will start to resemble it, which might look like a step backwards at first, but remember, the related data groups are packed in seperate single purpose arrays and what counts is the access patterns to retrieve them. When we are done grouping all related data bits of the original NPC object, we will have recreated a so called \textit{component pattern} \mcp{nystrom}{213}.\\
-In the classical component pattern we will keep a container object that holds instances of each component \mcp{nystrom}{214}. In favor of performance the container object should only hold pointers to the instances lying in their respective array. But actually and if we were able to group all domains of the original class, the object might be nothing else but an index, that can be used to retrieve a group out of its array.\\
-Components are one widely used mechanism to decouple parts of a formerly shared entity. This is applied to classes and is therefore a statement to how OOP and DoD can work hand in hand. Not only is the component pattern useful for decoupling and performance interests, it also solves issues, that would normally be solved by applying multiple inheritance \mcp{nystrom}{215}, which is a practice even despised by OOP enthusiasts.\\
-Components can be stored domain wise, while still being contextually linked individually on an object instance level. Their decoupling mechanism have proven great maintainability and even provide a comparably light weight interface for game designers. Accessing them can be done domain wise as well -> optimal cache utilization. This elegant arrangement between OOP and DoD makes it a favored pattern for modern game engines \mcp{fabian}{83}.
-
+After a grouping procedure the remnant members of the original NPC class could also be grouped by the same method we talked about before: take related members unify them in a struct and store those structs in an array so they are beyond equals (domain wise). If the original class hierarchy was designed well in terms of cohesion metrics, the grouping of related data bits will start to resemble it, which might look like a step backwards at first, but remember, the related data groups are packed in seperate single purpose arrays and what counts is the access patterns to retrieve them. When we are done grouping all related data bits of the original NPC object, we will have recreated a so called \textit{component pattern} \mcp{nystrom}{213}.\\
+In the classical component pattern we will keep a container object that holds instances of each component \mcp{nystrom}{214}. In favor of performance the container object should only hold pointers to the instances lying in their respective array. But actually and if we were able to group all members of the original class, the object might be nothing else but an index, that can be used to retrieve a group out of its array.\\
+Components are one widely used mechanism to decouple parts of a formerly shared entity. This is applied to classes and is therefore a statement to how OOP and DoD can work hand in hand. Not only is the component pattern useful for decoupling and performance interests, it also solves issues, that would normally be solved by applying multiple inheritance \mcp{nystrom}{215}, which is a practice often despised even by OOP enthusiasts.\\
+Components can be stored domain wise, while still being contextually linked individually on an object instance level. Their decoupling mechanism has proven great maintainability and even provides a comparably light weight interface for game designers. Accessing them can be done domain wise as well -> optimal cache utilization. This elegant arrangement between OOP and DoD makes it a favored pattern for modern game engines \mcp{fabian}{83}.
 \subsubsection{Array Of Structure Of Arrays (AOSOA)}
-\begin{wrapfigure}[12]{r}{0.4\textwidth}
+\begin{wrapfigure}[10]{r}{0.4\textwidth}
 \begin{lstlisting}[language=C++,numbers=none,name={AOSOA variant of grouped NPC traits},label={aosoa_npc}]
 struct npc_bucket{
 	float
@@ -394,7 +389,16 @@ struct npc_bucket{
 npc_bucket npc_buckets[NUM_BUCKETS];
 \end{lstlisting}
 \end{wrapfigure}
-At first glance the idea of reintroducing the AOS concept seems confusing. In some cases depending on the original access patterns it might however be a good idea to separate the total amount of data into chunks that are often referred to as \textit{Buckets}. We already went a step back before, when we decided to unify logically related bits and make arrays of groups. We figured, that this might be an optimal solution for a very specific computation, but might behave poorly in other situations. An attempt is to again separate the relevant members, however to a certain extend gain back the advantage of spatial locality. \textit{The idea here is to get the benefit of locality at the outer-level and also unit-stride at the innermost-level}\mc{aosoa}. Applied to our NPC it might look like \refcode{aosoa_npc}. We merely define our former \textit{columns}/arrays to hold only a subset of the total data respectively. The structure, that holds our member-arrays (the SOA) will however now be emplaced inside an array itself (the AO)! In Other words: We keep the data that will be used to transform each other close to prevent eviction. We enable the user to access specific members individually, to prevent loading unnecessary information.\\
-This attempt is compossible with grouping certain members, too. After all we are still able to access only specific sub arrays of buckets. To retain the benefit of \textit{page-locality} for the grouped member-arrays we need to find a fitting \textit{bucket-size : number-buckets} ratio. In case of our \refcode{aosoa_npc} example, taken to the extreme $\textit{NUM\_BUCKETS}=1$ would practically result in the classic SOA model, coming with all its advantages and disadvantages. On the other hand $\textit{SUB\_SET\_SIZE}=1$ would pretty much just be an object definition again (only needlessly more confusing and incomplete since we grouped the members).\\
-If we want to optimize against our L1D cache, that performs an 8-way associativity mapping on 64 Byte cache-lines, we could argue that $\frac{8\times 64}{(8\times sizeof(float)} = 16$ might be a fitting \textit{SUB\_SET\_SIZE}, because all the elements in a bucket would then be guaranteed to map to different cache-lines. So no conflict misses when performing transformations on related data groups. Note that this statement is only 100\% valid as long as our buckets are aligned correctly.\\
-Finding the NPC next to the player would now mean iterating the \textit{xyz} subsets of each bucket. Depending on the data bundled in a bucket (especially concerning alignment and padding) we still need to expect to load unwanted data subsequently to \textit{xyz} but this will now happen on a \textit{per-bucket} basis rather than on a \textit{per-NPC} basis.
+At first glance the idea of reintroducing the AOS concept seems confusing. In some cases depending on the original access patterns it might however be a good idea to separate the total amount of data into chunks that are often referred to as \textit{Buckets} or \textit{Tiles}. We already went a step back before, when we decided to unify logically related bits and make arrays of groups. We figured, that this might be an optimal solution for a very specific computation, but might behave poorly in other situations.\\
+Whenever data is grouped we might have the same problem, we tried to get rid of in the first place - possibly loading unwanted data into the cache, increasing access latency. The moment we decide, that for example our game should play a scary sound when the players distance to an NPC falls below a certain threshold, we again would be doomed to load adherent information about the NPC's velocity, mass and stuff that was grouped to make position updates faster. Because for this we actually only want the NPCs' positions.\\
+An attempt to solve this, is to yet again separate the relevant members, however to a certain extend gain back the advantage of spatial locality. Applied to our NPC it might look like \refcode{aosoa_npc}. We merely define our former \textit{columns}/arrays to hold only a subset of the total data respectively. The structures, that hold our member-arrays (the SOA) will however now be emplaced inside an array itself (the AO)! In Other words: We keep the data that will be used to transform each other close to prevent eviction. We enable the user to access specific subsets individually, to prevent loading unnecessary information. \textit{The idea here is to get the benefit of locality at the outer-level and also unit-stride at the innermost-level} \mc{aosoa}. This attempt is compossible with grouping certain members, too. After all we are still able to access only specific sub arrays of buckets. A bucket should consist of logically related data, so we know that for a bucket's member array $a_{n}$ and an element index $npc_{e}$ each member array $a_{0\dotsc n-1}$ of a bucket contains data that is relevant to a distinct set of computations at position $npc_{e}$. For example $npc\_buckets[0].xyz[1]$ and $npc\_buckets[0].vel[1]$ will contribute to a distinct computation since they are used to describe a single abstract entity's state.\\
+Finding the NPC nearest to the player would now mean iterating the \textit{xyz} subsets of each bucket. Depending on the data bundled in a bucket (especially concerning alignment and padding) we still need to expect to load unwanted data subsequently to \textit{xyz} but this will now happen on a \textit{per-bucket} basis rather than on a \textit{per-NPC} basis.\\\\
+A crucial factor to the performance of an AOSOA data layout is it's subset size and the resulting \textit{bucket-size\textbf{:}number-buckets} ratio. In case of our \refcode{aosoa_npc} example, taken to the extreme $\textit{NUM\_BUCKETS}=1$ would practically result in the classic SOA model, coming with all its advantages and disadvantages. On the other hand $\textit{SUB\_SET\_SIZE}=1$ would pretty much just be an object definition again (so AOS only needlessly more confusing and incomplete since we grouped the members).\\
+Concerning our \textit{SUB\_SET\_SIZE}, independent of a cache's associativity, the \textit{eviction} of elements inside contiguous blocks of memory  will only ever occur when the data's size exceeds the cache's capacity. One first conclusion could be, that our bucket's size should not exceed our L1 D cache capacity (e.g. 32KiB), to guarantee, that the adressable unit at $a_n + npc_e$ will not be evicted by access on $a_{n+1}+npc_e$ nor by any access on $a_t+npc_e$ where $t > n$.\\
+Additionally \mcp{intel}{61} advises us to "\textit{Optimize data structures [...] to fit in one-half of the first-level cache [...]}" (e.g. 16KiB) because the cache is hardware and therefore shared by all processes currently running. We usually can't expect exclusive access and full cache capacity exploitation. Demanding all resources might perform well in a situation where no other processes demand frequent main memory access. It might also be prone to eviction when the systems workload is increased. Multi way associativity techniques accommodate us to great amounts in this case, but the moment we are trying to utilize a cache in its entirety we foster concurrency between processes, that will eventually affect the entire system.\\
+Going even further \mcp{intel}{3;66} warns about it's L2 hardware prefetching mechanisms to only work within page boundaries (e.g. 4KiB), so making sure a bucket fits this criteria we could further advance optimal prefetching behavior, because we ensure, that no $a_n+npc_e$ and $a_n+npc_{e+1}$ will exceed a page boundary. This complies to the principle of page locality \mc{aosoa}.\\
+We're not even done yet. AOSOA  perfectly suffices parallelization. Dependent, on which cache level is shared among the CPUs/Cores we could further optimize against it by adapting our bucket's size to for example an L2 128 Byte cache-line, resulting in a \textit{SUB\_SET\_SIZE} of $\frac{128}{8\times sizeof(float)} = 4$, guaranteeing minimal cache-level synchronization overhead.\\
+Another approach could be to determine the ratio between \textit{single-entity-access-patterns} to \textit{domain-related-access-patterns} in the source program. The more our application relies on entity-access patterns, meaning we want all or most of an entity's members (classic OOP access) the smaller our subsets could be. On the other hand, the more our application relies on domain-related access patterns, meaning we want all or many of our entities' specific members, the greater our subsets should be.\\\\
+The AOSOA pattern is highly flexible making it a fit for a lot of use cases. Its limitations are defined by the minimal bucket size and the optimization goals. The Buckets' sizes can be modified at compile time or at run time. This way even when one can't reason about subset sizes, there is still the possibility to just try out different iterations and document changes in performance/cache utilization. 
+
+
