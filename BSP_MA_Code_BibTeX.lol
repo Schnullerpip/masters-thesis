@@ -13,3 +13,5 @@
 \contentsline {lstlisting}{\numberline {11}Exerpt of example context free grammar defining a (if)statement. Bold = terminal; italic = nonterminal}{24}{lstlisting.11}% 
 \contentsline {lstlisting}{\numberline {12}Example code in a Foo.cpp file}{26}{lstlisting.12}% 
 \contentsline {lstlisting}{\numberline {13}AST Matcher Reference documentation for the matcher functionDecl()}{27}{lstlisting.13}% 
+\contentsline {lstlisting}{\numberline {14}Some matchers used by COOP to filter relevant AST nodes and their utilization}{32}{lstlisting.14}% 
+\contentsline {lstlisting}{\numberline {15}Callback definition to register the records' members}{32}{lstlisting.15}% 

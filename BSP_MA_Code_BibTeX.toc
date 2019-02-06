@@ -34,11 +34,12 @@
 \contentsline {chapter}{\numberline {4}A prototypical implementation for a source-to-source transformation tool generating cache friendly code / COOP}{29}{chapter.4}% 
 \contentsline {subsubsection}{\nonumberline Summarized Goals}{30}{section*.45}% 
 \contentsline {section}{\numberline {4.1}Stand Alone Tool}{30}{section.4.1}% 
-\contentsline {section}{\numberline {4.2}Automated OOP to DoD data layout/access transformation}{31}{section.4.2}% 
-\contentsline {chapter}{\nonumberline Bibliography}{32}{chapter*.46}% 
-\contentsline {chapter}{\nonumberline List of Figures}{34}{chapter*.47}% 
-\contentsline {chapter}{\nonumberline List of Tables}{35}{chapter*.48}% 
-\contentsline {chapter}{\nonumberline List of Code}{36}{chapter*.50}% 
-\contentsline {chapter}{List of Abbreviations}{37}{section*.51}% 
-\contentsline {chapter}{\numberline {A}Anhang A}{38}{appendix.A}% 
-\contentsline {chapter}{\numberline {B}Anhang B}{39}{appendix.B}% 
+\contentsline {section}{\numberline {4.2}Automated OOP to DoD data layout/access transformation}{32}{section.4.2}% 
+\contentsline {subsection}{\numberline {4.2.1}Data aggregation and Hot/Cold heuristic}{33}{subsection.4.2.1}% 
+\contentsline {chapter}{\nonumberline Bibliography}{34}{chapter*.46}% 
+\contentsline {chapter}{\nonumberline List of Figures}{36}{chapter*.47}% 
+\contentsline {chapter}{\nonumberline List of Tables}{37}{chapter*.48}% 
+\contentsline {chapter}{\nonumberline List of Code}{38}{chapter*.50}% 
+\contentsline {chapter}{List of Abbreviations}{39}{section*.51}% 
+\contentsline {chapter}{\numberline {A}Anhang A}{40}{appendix.A}% 
+\contentsline {chapter}{\numberline {B}Anhang B}{41}{appendix.B}% 

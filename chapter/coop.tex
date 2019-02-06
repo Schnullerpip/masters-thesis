@@ -34,7 +34,7 @@
 	{~} {$\sim$}{1}
 }
 
-\chapter{A prototypical implementation for a source-to-source transformation tool generating cache friendly code / COOP}
+\chapter{A prototypical implementation for a source-to-source transformation tool generating cache friendly code / COOP}\label{prototype}
 We have the tools, to programmatically strip down a program's records and reassemble it in a fashion that suits our needs (Clang). So it is time to consolidate our goals for a prototype. First of all, it should be fairly easy to integrate the tool into a working environment/existing tool-chains. For reasons mentioned in \refsec{motivation} we can't ever expect our tool to be used otherwise. As simple as that sounds this leads to interesting design choices, we will briefly discuss in \refsec{stand_alone_tool}.\\
 Even though the tool's scope will be limited due to being a one-man project it should demonstrate, that automated OOP to DoD data layout transformations are possible. To do so we will try to implement a Hot/Cold Split \refsecp{hot_cold_splitting}. Instead of completely changing the program's data layout this way we can implement a data driven optimization, that seems to be relatively easy to perform automatically. We will prove ourselves wrong later on in (TODO REF SEC) however.\\
 Ideally we desire that the target program should provide zero additional information to our tool, so the process of transforming the target program into a cache friendly pendant won't interfere with the process of solving the problem. We will later see (TODO REF SEC) why this entails massive additional responsibility for our tool.\\
@@ -60,12 +60,44 @@ The Clang front end functionality also provides infrastructure to access syntact
 When providing a stand alone tool, any build setup can adapt easily to it by invoking it manually. For example a \textit{Makefile} could easily use COOP either before compilation or for a target of its own (e.g. make coop).\\
 The Clang front end functionality alone will limit us to source-to-source transformations, meaning in terms of compilers our target language equals our source language. This feels rather weird, since an optimization is usually realized as a pass and won't ever affect the source code we see in our IDEs. However an advantage of this approach is, that when the result of our tool is C++ source code, the whole bandwidth of optimizations provided by the compiler already can still be applied in a manner the compiler expects to do. We can't rely on the compiler to optimize our custom optimization pass. Also this way the optimized code remains relocatable.\\\\
 But there is one major disadvantage in this approach. A pre-compile or 'source-to-source optimization pass' implies sudden structural changes to the code base. So the issue of 'losing the desired abstraction level' would just be postponed. This is irrelevant as long as the optimization is applied only before a shipping build is generated, but integrating COOP into an agile development process would only work with the help of version control systems, so it's changes can be undone easily and abstraction is only ever lost, when intended and reversible.\\
-Speaking of agile development or any development model relying on short iterations a tool like COOP would only make sense when it's fast. As we will see later on, traversing numerous ASTs for a complete code base gets slow really (really) fast.
+Speaking of agile development or any development model relying on short iterations a tool like COOP would only make sense when it's fast. As we will see later on, traversing numerous ASTs for a complete code base gets slow really (really) fast.\\\\
+Since COOP will work on source files rather than on binaries we will need to present to it the files, that it is supposed to work on. There is of course always the option of manual forwarding per command line, but in favor of simplicity for example a compilation database can be generated automatically by some build tools and is therefore a convenient bearer of this information. For example when using CMAKE one can simply add '\textit{set(CMAKE\_EXPORT\_COMPILE\_COMMANDS ON)}' to the \textit{CMakeLists.txt} file to create a \textit{compile\_commands.json} compilation database.\\
+Another advantage of a compilation database is less manual overhead on COOPs integration. Files that include certain other files (like H/HPP-files) will not be processable if no information is given on where to find the included files. The tool instance, that is worked with to access Clang's functionality is in the end a proper compiler front-end that will go through each of the aforementioned steps of Lexing and Parsing and a complete set of symbols is imperative for a compiler to work.\\
+In the end providing files manually will work, but will come with significantly more effort, so offering the option of providing a compilation database can accommodate the user to great amounts.
 
-TODO talk about how files get into the tool - compilation database etc.
+\section{Automated OOP to DoD data layout/access transformation}\label{auto_oop_to_dod}
+Splitting a record's hot-/cold fields is in essence a trivial transformation when done manually and when given the set of hot/cold fields. Create a struct; move cold fields in it; create a pointer to a cold-struct instance in original record; Change all accesses to cold fields to accesses on cold-struct field pendants, respectively. This is why the Hot/Cold Split was deemed a fitting exemplary for a prototypical proof-of-concept implementation. To do this first of all we need the right AST nodes.\\
+Comfortable access on the records and their fields is granted by appropriate AST matchers. After creating a source file's AST we can easily match against any record declaration in it and the moment we have a \textit{CXXRecordDeclaration} node we have access to numerous helpful methods, that give us it's fields, constructors, methods etc. COOP defines a handful of matchers and callback-routines that filter wanted data (see Code \ref{matchers} line 1 to 6).
+\begin{lstlisting}[language=C++,name={Some matchers used by COOP to filter relevant AST nodes and their utilization },label={matchers}]
+auto file_match =
+	isExpansionInFileMatching(coop::match::get_file_regex());
+DeclarationMatcher records =
+	cxxRecordDecl(file_match, unless(anyOf(isUnion(), isImplicit())).bind("record_binding");
+StatementMatcher members_used_in_functions =
+	memberExpr(file_match, hasAncestor(functionDecl(isDefinition())));
 
-\section{Automated OOP to DoD data layout/access transformation}
-Splitting a record's hot-/cold fields is in essence a trivial transformation, when done manually and when given the set of hot/cold fields. Create a struct; move cold fields in it; create a pointer to a cold-struct instance in original record; Change all accesses to cold fields to accesses on cold-struct field pendants, respectively. This is why the Hot/Cold Split was deemed a fitting exemplary for a prototypical proof-of-concept implementation. Comfortable access on the appropriate records and their fields is granted by appropriate AST matchers.\\
-To create the needed ASTs we
-After creating a source file's AST we can easily match against any record declaration in it and the moment we have a \textit{CXXRecordDeclaration} node we have access to numerous helpful methods, that give us it's fields, constructors, methods etc. COOP defines a handful of matchers and callback-routines that filter wanted data, one of them is 
-However the requirement for zero additional programming effort challenges COOP to endeavor in static analysis.
+MatchFinder::MatchCallback *callback = new MemberRegistrationCallback();
+
+MatchFinder data_aggregation;
+data_aggregation.addMatcher(records, callback);
+
+data_aggregation.matchAST(ASTs[0]->getASTContext());
+\end{lstlisting}
+The \textit{file\_match} matcher for example makes sure, we are not operating on - let alone transforming - files, that don't originally belong to our project, like system headers. The \textit{records} matcher will give us all the records found in the compilation unit \textit{unless} it is a union or an implicit match \refsecp{a_usfl_int}. By binding a matcher to a string we can retrieve the matcher's result in a callback routine. The callback needs to be implemented as a class definition extending Clang's own \textit{MatchCallback} \refcodep{member_registration_callback}. Callbacks can then be added to a \textit{MatchFinder} instance and finally be applied to an AST (see Code \ref{matchers} line 8 to 13). The \textit{MemberRegistrationCallback}'s overridden run method accesses the result's nodes through the string association we gave it earlier. COOP now registers the record's fields by remembering the pointers to their AST nodes. This way we will have access to the nodes' contexts at any time.\\\\
+\begin{lstlisting}[language=C++,name={Callback definition to register the records' members}, label={member_registration_callback}]
+class MemberRegistrationCallback : public MatchFinder::MatchCallback {
+public:
+	std::map<const CXXRecordDecl*, std::set<const FieldDecl*>> class_fields_map;
+private:
+	void run(const MatchFinder::MatchResult &result)override{
+		const CXXRecordDecl *rd = result.Nodes.getNodeAs<CXXRecordDecl>("record_binding");
+		for(auto f : rd->fields()){		
+			class_fields_map[rd].insert(f);
+		}
+	}
+};
+\end{lstlisting}
+Unfortunately even though collecting the relevant parts of our target program is fairly simple, the semantic understanding of the compiler about our fields is very limited. Even though Clang offers a vast set of methods to gather information about a record/field there is no such thing as a '\textit{bool isFieldHot(const clang::FieldDecl* fd)}' function. The requirement for zero additional programming effort challenges COOP to endeavor in static analysis.
+
+\subsection{Data aggregation and Hot/Cold heuristic}\label{data_aggregation}
+One of - if not - the most challenging tasks for COOP is to identify a record's fields as hot or cold. Since we don't want to rely on the programmer to tell us that information (or even for him/her to find out) we need to check whether or not a field is used frequently. We need to know where, how often and together with which other fields of the same record it is used. 
