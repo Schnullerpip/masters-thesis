@@ -35,11 +35,19 @@
 \contentsline {subsubsection}{\nonumberline Summarized Goals}{30}{section*.45}% 
 \contentsline {section}{\numberline {4.1}Stand Alone Tool}{30}{section.4.1}% 
 \contentsline {section}{\numberline {4.2}Automated OOP to DoD data layout/access transformation}{32}{section.4.2}% 
-\contentsline {subsection}{\numberline {4.2.1}Data aggregation and Hot/Cold heuristic}{33}{subsection.4.2.1}% 
-\contentsline {chapter}{\nonumberline Bibliography}{34}{chapter*.46}% 
-\contentsline {chapter}{\nonumberline List of Figures}{36}{chapter*.47}% 
-\contentsline {chapter}{\nonumberline List of Tables}{37}{chapter*.48}% 
-\contentsline {chapter}{\nonumberline List of Code}{38}{chapter*.50}% 
-\contentsline {chapter}{List of Abbreviations}{39}{section*.51}% 
-\contentsline {chapter}{\numberline {A}Anhang A}{40}{appendix.A}% 
-\contentsline {chapter}{\numberline {B}Anhang B}{41}{appendix.B}% 
+\contentsline {subsection}{\numberline {4.2.1}Data aggregation}{33}{subsection.4.2.1}% 
+\contentsline {subsection}{\numberline {4.2.2}Metric for evaluation of field usages}{34}{subsection.4.2.2}% 
+\contentsline {subsubsection}{\nonumberline Cohesion metrics}{35}{section*.47}% 
+\contentsline {subsubsection}{\nonumberline Asymptotic Notations}{36}{section*.48}% 
+\contentsline {subsubsection}{\nonumberline Quantitative cohesion alternation}{37}{section*.49}% 
+\contentsline {subsection}{\numberline {4.2.3}Field weight heuristic}{40}{subsection.4.2.3}% 
+\contentsline {subsubsection}{\nonumberline Scaling delimiters}{40}{section*.52}% 
+\contentsline {subsubsection}{\nonumberline Combined scaling delimiters}{42}{section*.55}% 
+\contentsline {subsubsection}{\nonumberline Order of significance / Significance groups}{44}{section*.58}% 
+\contentsline {chapter}{\nonumberline Bibliography}{49}{chapter*.62}% 
+\contentsline {chapter}{\nonumberline List of Figures}{52}{chapter*.63}% 
+\contentsline {chapter}{\nonumberline List of Tables}{54}{chapter*.64}% 
+\contentsline {chapter}{\nonumberline List of Code}{55}{chapter*.66}% 
+\contentsline {chapter}{List of Abbreviations}{56}{section*.67}% 
+\contentsline {chapter}{\numberline {A}Anhang A}{57}{appendix.A}% 
+\contentsline {chapter}{\numberline {B}Anhang B}{58}{appendix.B}% 

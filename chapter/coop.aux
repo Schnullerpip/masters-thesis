@@ -14,11 +14,59 @@
 \@writefile{lol}{\contentsline {lstlisting}{\numberline {14}Some matchers used by COOP to filter relevant AST nodes and their utilization}{32}{lstlisting.14}\protected@file@percent }
 \newlabel{member_registration_callback}{{15}{32}{\lstname }{lstlisting.15}{}}
 \@writefile{lol}{\contentsline {lstlisting}{\numberline {15}Callback definition to register the records' members}{32}{lstlisting.15}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.1}Data aggregation and Hot/Cold heuristic}{33}{subsection.4.2.1}\protected@file@percent }
-\newlabel{data_aggregation}{{4.2.1}{33}{Data aggregation and Hot/Cold heuristic}{subsection.4.2.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.1}Data aggregation}{33}{subsection.4.2.1}\protected@file@percent }
+\newlabel{data_aggregation}{{4.2.1}{33}{Data aggregation}{subsection.4.2.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {\small 13\normalsize }{\ignorespaces Excerpt of coops output on exemplary NPC and some arbitrary functions/loops\relax }}{34}{figure.caption.46}\protected@file@percent }
+\newlabel{npc_crosscheck_matrix}{{\small 13\normalsize }{34}{Excerpt of coops output on exemplary NPC and some arbitrary functions/loops\relax }{figure.caption.46}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.2}Metric for evaluation of field usages}{34}{subsection.4.2.2}\protected@file@percent }
+\citation{ingeno_cohesion}
+\citation{ingeno_cohesion}
+\citation{ingeno_cohesion}
+\citation{tcclcc}
+\citation{cohesion}
+\citation{lcom}
+\@writefile{toc}{\contentsline {subsubsection}{\nonumberline Cohesion metrics}{35}{section*.47}\protected@file@percent }
+\citation{onotation}
+\citation{onotation}
+\@writefile{toc}{\contentsline {subsubsection}{\nonumberline Asymptotic Notations}{36}{section*.48}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\nonumberline Quantitative cohesion alternation}{37}{section*.49}\protected@file@percent }
+\newlabel{exem_code}{{16}{38}{\lstname }{lstlisting.16}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {16}Exemplary pseudo\textendash ish code}{38}{lstlisting.16}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {\small 14\normalsize }{\ignorespaces Relations depicted in function/member matrices\relax }}{39}{figure.caption.51}\protected@file@percent }
+\newlabel{npc_crosscheck_matrix_relations}{{\small 14\normalsize }{39}{Relations depicted in function/member matrices\relax }{figure.caption.51}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.3}Field weight heuristic}{40}{subsection.4.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\nonumberline Scaling delimiters}{40}{section*.52}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {\small 15\normalsize }{\ignorespaces Good avg scaling.\relax }}{41}{figure.caption.53}\protected@file@percent }
+\newlabel{avg_delimiter}{{\small 15\normalsize }{41}{Good avg scaling.\relax }{figure.caption.53}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {\small 16\normalsize }{\ignorespaces Difficult evaluation for avg scaling.\relax }}{41}{figure.caption.53}\protected@file@percent }
+\newlabel{avg_delimiter_bad}{{\small 16\normalsize }{41}{Difficult evaluation for avg scaling.\relax }{figure.caption.53}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {\small 17\normalsize }{\ignorespaces Bad avg scaling with more fields.\relax }}{41}{figure.caption.53}\protected@file@percent }
+\newlabel{avg_delimiter_bad_2}{{\small 17\normalsize }{41}{Bad avg scaling with more fields.\relax }{figure.caption.53}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {\small 18\normalsize }{\ignorespaces Problem of even distribution.\relax }}{41}{figure.caption.53}\protected@file@percent }
+\newlabel{avg_delimiter_bad_3}{{\small 18\normalsize }{41}{Problem of even distribution.\relax }{figure.caption.53}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {\small 19\normalsize }{\ignorespaces Bad avg homogeneous field weights.\relax }}{42}{figure.caption.54}\protected@file@percent }
+\newlabel{avg_delimiter_bad_4}{{\small 19\normalsize }{42}{Bad avg homogeneous field weights.\relax }{figure.caption.54}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {\small 20\normalsize }{\ignorespaces \textit  {1-avg} prone to false positives as well.\relax }}{42}{figure.caption.54}\protected@file@percent }
+\newlabel{avg_delimiter_bad_5}{{\small 20\normalsize }{42}{\textit {1-avg} prone to false positives as well.\relax }{figure.caption.54}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\nonumberline Combined scaling delimiters}{42}{section*.55}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {\small 21\normalsize }{\ignorespaces Improved \textit  {top/2} heuristic as it is able to rule out \textit  {1-avg} errors but still not well.\relax }}{43}{figure.caption.56}\protected@file@percent }
+\newlabel{top_2}{{\small 21\normalsize }{43}{Improved \textit {top/2} heuristic as it is able to rule out \textit {1-avg} errors but still not well.\relax }{figure.caption.56}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {\small 22\normalsize }{\ignorespaces Field weight categorization by combined scaling delimiters. Top hatched space is of high significance.\relax }}{43}{figure.caption.57}\protected@file@percent }
+\newlabel{delimiter_tiers}{{\small 22\normalsize }{43}{Field weight categorization by combined scaling delimiters. Top hatched space is of high significance.\relax }{figure.caption.57}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\nonumberline Order of significance / Significance groups}{44}{section*.58}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {\small 23\normalsize }{\ignorespaces Scaling delimiters' errors can hardly be reasoned about and provide equally much punishment as benefit depending on the distribution.\relax }}{45}{figure.caption.59}\protected@file@percent }
+\newlabel{delimiter_bad}{{\small 23\normalsize }{45}{Scaling delimiters' errors can hardly be reasoned about and provide equally much punishment as benefit depending on the distribution.\relax }{figure.caption.59}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {\small 24\normalsize }{\ignorespaces Determination of significance groups with field weight deltas. Normalized differences are projected on the field weights' scale for visualization.\relax }}{45}{figure.caption.59}\protected@file@percent }
+\newlabel{sig_order}{{\small 24\normalsize }{45}{Determination of significance groups with field weight deltas. Normalized differences are projected on the field weights' scale for visualization.\relax }{figure.caption.59}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {\small 25\normalsize }{\ignorespaces Aligned entities will be packed inside cache-lines. Reduced stride will be effective, as soon as it increases the amount of entities inside a cache-line.\relax }}{47}{figure.caption.60}\protected@file@percent }
+\newlabel{opt_p_1}{{\small 25\normalsize }{47}{Aligned entities will be packed inside cache-lines. Reduced stride will be effective, as soon as it increases the amount of entities inside a cache-line.\relax }{figure.caption.60}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {\small 26\normalsize }{\ignorespaces Reduced stride will be effective as soon as it reduces the number of cache-lines needed to encompass an entity. Entities are split upon minimum amount of lines.\relax }}{47}{figure.caption.60}\protected@file@percent }
+\newlabel{opt_p_2}{{\small 26\normalsize }{47}{Reduced stride will be effective as soon as it reduces the number of cache-lines needed to encompass an entity. Entities are split upon minimum amount of lines.\relax }{figure.caption.60}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {\small 27\normalsize }{\ignorespaces Exemplary field weights evaluated by our heuristic with the result, that its worth to make the split [\textit  {field\_a}, ...\textit  {field\_e}], [\textit  {field\_d}, ...\textit  {field\_h}]. \textit  {H} = 8. the fields' type sizes are all 8 and the \textit  {CLS} is 64.\relax }}{48}{figure.caption.61}\protected@file@percent }
+\newlabel{sig_order_final}{{\small 27\normalsize }{48}{Exemplary field weights evaluated by our heuristic with the result, that its worth to make the split [\textit {field\_a}, ...\textit {field\_e}], [\textit {field\_d}, ...\textit {field\_h}]. \textit {H} = 8. the fields' type sizes are all 8 and the \textit {CLS} is 64.\relax }{figure.caption.61}{}}
 \@setckpt{chapter/coop}{
-\setcounter{page}{34}
-\setcounter{equation}{0}
+\setcounter{page}{49}
+\setcounter{equation}{3}
 \setcounter{enumi}{4}
 \setcounter{enumii}{0}
 \setcounter{enumiii}{0}
@@ -28,11 +76,11 @@
 \setcounter{part}{0}
 \setcounter{chapter}{4}
 \setcounter{section}{2}
-\setcounter{subsection}{1}
+\setcounter{subsection}{3}
 \setcounter{subsubsection}{0}
 \setcounter{paragraph}{0}
 \setcounter{subparagraph}{0}
-\setcounter{figure}{12}
+\setcounter{figure}{27}
 \setcounter{table}{1}
 \setcounter{parentequation}{0}
 \setcounter{caption@flags}{0}
@@ -41,7 +89,7 @@
 \setcounter{Hfootnote}{0}
 \setcounter{bookmark@seq@number}{0}
 \setcounter{NAT@ctr}{0}
-\setcounter{lstnumber}{12}
+\setcounter{lstnumber}{24}
 \setcounter{blindtext}{1}
 \setcounter{Blindtext}{5}
 \setcounter{blind@countparstart}{0}
@@ -54,6 +102,6 @@
 \setcounter{blind@randommax}{0}
 \setcounter{blind@pangramcount}{0}
 \setcounter{blind@pangrammax}{0}
-\setcounter{section@level}{2}
-\setcounter{lstlisting}{15}
+\setcounter{section@level}{3}
+\setcounter{lstlisting}{16}
 }

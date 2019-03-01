@@ -12,3 +12,18 @@
 \contentsline {figure}{\numberline {\small 10\normalsize }{\ignorespaces Phases of a compiler (Source: \cite [p. 5]{aho}).\relax }}{25}{figure.caption.37}% 
 \contentsline {figure}{\numberline {\small 11\normalsize }{\ignorespaces AST dump of Code \ref {foo_code} generated with \textit {clang -Xclang -ast-dump Foo.cpp}.\relax }}{26}{figure.caption.42}% 
 \contentsline {figure}{\numberline {\small 12\normalsize }{\ignorespaces AST dump of Code \ref {foo_code} generated with some simple AST matchers in the easy to use \textit {clang-query} environment.\relax }}{27}{figure.caption.44}% 
+\contentsline {figure}{\numberline {\small 13\normalsize }{\ignorespaces Excerpt of coops output on exemplary NPC and some arbitrary functions/loops\relax }}{34}{figure.caption.46}% 
+\contentsline {figure}{\numberline {\small 14\normalsize }{\ignorespaces Relations depicted in function/member matrices\relax }}{39}{figure.caption.51}% 
+\contentsline {figure}{\numberline {\small 15\normalsize }{\ignorespaces Good avg scaling.\relax }}{41}{figure.caption.53}% 
+\contentsline {figure}{\numberline {\small 16\normalsize }{\ignorespaces Difficult evaluation for avg scaling.\relax }}{41}{figure.caption.53}% 
+\contentsline {figure}{\numberline {\small 17\normalsize }{\ignorespaces Bad avg scaling with more fields.\relax }}{41}{figure.caption.53}% 
+\contentsline {figure}{\numberline {\small 18\normalsize }{\ignorespaces Problem of even distribution.\relax }}{41}{figure.caption.53}% 
+\contentsline {figure}{\numberline {\small 19\normalsize }{\ignorespaces Bad avg homogeneous field weights.\relax }}{42}{figure.caption.54}% 
+\contentsline {figure}{\numberline {\small 20\normalsize }{\ignorespaces \textit {1-avg} prone to false positives as well.\relax }}{42}{figure.caption.54}% 
+\contentsline {figure}{\numberline {\small 21\normalsize }{\ignorespaces Improved \textit {top/2} heuristic as it is able to rule out \textit {1-avg} errors but still not well.\relax }}{43}{figure.caption.56}% 
+\contentsline {figure}{\numberline {\small 22\normalsize }{\ignorespaces Field weight categorization by combined scaling delimiters. Top hatched space is of high significance.\relax }}{43}{figure.caption.57}% 
+\contentsline {figure}{\numberline {\small 23\normalsize }{\ignorespaces Scaling delimiters' errors can hardly be reasoned about and provide equally much punishment as benefit depending on the distribution.\relax }}{45}{figure.caption.59}% 
+\contentsline {figure}{\numberline {\small 24\normalsize }{\ignorespaces Determination of significance groups with field weight deltas. Normalized differences are projected on the field weights' scale for visualization.\relax }}{45}{figure.caption.59}% 
+\contentsline {figure}{\numberline {\small 25\normalsize }{\ignorespaces Aligned entities will be packed inside cache-lines. Reduced stride will be effective, as soon as it increases the amount of entities inside a cache-line.\relax }}{47}{figure.caption.60}% 
+\contentsline {figure}{\numberline {\small 26\normalsize }{\ignorespaces Reduced stride will be effective as soon as it reduces the number of cache-lines needed to encompass an entity. Entities are split upon minimum amount of lines.\relax }}{47}{figure.caption.60}% 
+\contentsline {figure}{\numberline {\small 27\normalsize }{\ignorespaces Exemplary field weights evaluated by our heuristic with the result, that its worth to make the split [\textit {field\_a}, ...\textit {field\_e}], [\textit {field\_d}, ...\textit {field\_h}]. \textit {H} = 8. the fields' type sizes are all 8 and the \textit {CLS} is 64.\relax }}{48}{figure.caption.61}% 

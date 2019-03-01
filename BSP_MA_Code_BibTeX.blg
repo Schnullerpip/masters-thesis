@@ -23,10 +23,15 @@ Warning--entry type for "llvm_passes" isn't style-file defined
 --line 327 of file Literatur.bib
 Warning--entry type for "clang_tools" isn't style-file defined
 --line 335 of file Literatur.bib
+Repeated entry---line 351 of file Literatur.bib
+ : @article{cohesion
+ :                  ,
+I'm skipping whatever remains of this entry
 Warning--to sort, need author or key in lang_ratings
 Warning--to sort, need author or key in ispc
 Warning--to sort, need author or key in llvm_passes
 Warning--to sort, need author or key in clang_tools
 Warning--empty journal in fabian
+Warning--empty journal in lcom
 Warning--can't use both volume and number fields in luk
-(There were 15 warnings)
+(There was 1 error message)

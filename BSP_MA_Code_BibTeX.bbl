@@ -23,6 +23,11 @@
 \newblock International Journal of Computer Science and Engineering,
   1(3):195--200, 2007.
 
+\bibitem{tcclcc}
+{\sc Bieman, J.~M.} \btxandshort{.}\ {\sc B.-K. Kang}: {\em Cohesion and reuse
+  in an object-oriented system\/}.
+\newblock ACM SIGSOFT Software Engineering Notes, 20(SI):259--262, 1995.
+
 \bibitem{jonblow}
 {\sc Blow, J.}: {\em Data-Oriented Demo: SOA, composition\/}.
 
@@ -48,6 +53,11 @@
 \bibitem{intel}
 {\sc Coorporation, I.}: {\em Intel 64 and IA-32 architectures optimization
   reference manual\/}, 2009.
+
+\bibitem{onotation}
+{\sc Cormen, T.~H.}, {\sc C.~E. Leiserson}, {\sc R.~L. Rivest} \btxandshort{.}\
+  {\sc C.~Stein}: {\em Introduction to algorithms\/}.
+\newblock MIT press, 2009.
 
 \bibitem{cragon}
 {\sc Cragon, H.~G.}: {\em Memory systems and pipelined processors\/}.
@@ -82,8 +92,18 @@
 \newblock \Btxtechrepshort{.}, CALIFORNIA UNIV BERKELEY DEPT OF ELECTRICAL
   ENGINEERING AND COMPUTER SCIENCES, 1987.
 
+\bibitem{lcom}
+{\sc Hitz, M.} \btxandshort{.}\ {\sc B.~Montazeri}: {\em Measuring coupling and
+  cohesion in object-oriented systems\/}.
+\newblock 1995.
+
 \bibitem{about_oop}
 {\sc Huang, P.~J.}: {\em A Brief History of Object-Oriented Programming\/}.
+
+\bibitem{ingeno_cohesion}
+{\sc Ingeno, J.}: {\em Software Architect’s Handbook: Become a successful
+  software architect by implementing effective architecture concepts\/}.
+\newblock Packt Publishing Ltd, 2018.
 
 \bibitem{kramer}
 {\sc Kramer, J.}: {\em Is abstraction the key to computing?\/}.

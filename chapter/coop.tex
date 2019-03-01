@@ -67,7 +67,7 @@ In the end providing files manually will work, but will come with significantly 
 
 \section{Automated OOP to DoD data layout/access transformation}\label{auto_oop_to_dod}
 Splitting a record's hot-/cold fields is in essence a trivial transformation when done manually and when given the set of hot/cold fields. Create a struct; move cold fields in it; create a pointer to a cold-struct instance in original record; Change all accesses to cold fields to accesses on cold-struct field pendants, respectively. This is why the Hot/Cold Split was deemed a fitting exemplary for a prototypical proof-of-concept implementation. To do this first of all we need the right AST nodes.\\
-Comfortable access on the records and their fields is granted by appropriate AST matchers. After creating a source file's AST we can easily match against any record declaration in it and the moment we have a \textit{CXXRecordDeclaration} node we have access to numerous helpful methods, that give us it's fields, constructors, methods etc. COOP defines a handful of matchers and callback-routines that filter wanted data (see Code \ref{matchers} line 1 to 6).
+Comfortable access on the records and their fields is granted by appropriate AST matchers. After creating a source file's AST we can easily match against any record declaration in it and the moment we have a \textit{CXXRecordDeclaration} node we have access to numerous helpful methods, that give us it's fields, constructors, methods, base classes etc. COOP defines a handful of matchers and callback-routines that filter wanted data (see Code \ref{matchers} line 1 to 6).
 \begin{lstlisting}[language=C++,name={Some matchers used by COOP to filter relevant AST nodes and their utilization },label={matchers}]
 auto file_match =
 	isExpansionInFileMatching(coop::match::get_file_regex());
@@ -99,5 +99,256 @@ private:
 \end{lstlisting}
 Unfortunately even though collecting the relevant parts of our target program is fairly simple, the semantic understanding of the compiler about our fields is very limited. Even though Clang offers a vast set of methods to gather information about a record/field there is no such thing as a '\textit{bool isFieldHot(const clang::FieldDecl* fd)}' function. The requirement for zero additional programming effort challenges COOP to endeavor in static analysis.
 
-\subsection{Data aggregation and Hot/Cold heuristic}\label{data_aggregation}
-One of - if not - the most challenging tasks for COOP is to identify a record's fields as hot or cold. Since we don't want to rely on the programmer to tell us that information (or even for him/her to find out) we need to check whether or not a field is used frequently. We need to know where, how often and together with which other fields of the same record it is used. 
+\subsection{Data aggregation}\label{data_aggregation}
+One of the most challenging tasks for COOP is to identify a record's fields as hot or cold. Since we don't want to rely on the programmer to give that information to us (or even for him/her to figure it out) we need to check whether or not a field is used frequently. We need to know where, how often and together with which other fields of the same record it is used.\\
+As a centralized point of reference COOP will construct a \textit{record\_info} instance for each record, that will hold references to all the AST nodes that are relevant to us. Besides a record's fields, the record\_info instance will know about all the functions that use it's fields and all the loops that use it's fields. It is not enough to rely on the CXXRecordDecl AST node, since it will not be able to tell us where it's instances are used. For now it will function as a mere cache to our ASTs to quickly access a record's important nodes, that can be distributed all over our code base and thus be distributed among different ASTs.\\
+To collect the data about how/where our records are utilized, we define a bunch of AST Matchers and callback routines, for example:
+\begin{itemize}
+	\item MemberRegistrationCallback $\rightarrow$ registers records and their fields
+	\item FunctionRegistrationCallback $\rightarrow$ registers functions and their member expressions
+	\item LoopMemberUsageCallback $\rightarrow$ registers loops and their member expressions
+\end{itemize}
+After all the compilation units have been transformed into ASTs, the functions and loops need to crosscheck all the records, to see if they are relevant to any of them. If they work with a records fields, they are remembered by the respective record\_info. This way we can generate a matrix that encodes field-function/field-loop information in numerical values, an important step towards being able to evaluate and prioritize those relationships in a generic way.
+\begin{figure}[!htbp]
+	\centering
+	\includegraphics[width=.7\linewidth, height=0.3\linewidth]{PICs/npc_crosscheck_matrix}
+	\caption{Excerpt of coops output on exemplary NPC and some arbitrary functions/loops}\label{npc_crosscheck_matrix}
+\end{figure}
+Ultimately our evaluation faces a problem, that scales with our implementation details. Similarly to how we evaluated cache-line utilization in \refsec{soa} for each function we could determine (estimate) its behavior for a certain Hot/Cold split in a brute force kind of way. So we can make statements about which split would be the best.\\
+Through a function/member matrix we can determine cache utilization for each function individually. The number associated with a member expression can be interpreted as 'how much punishment would it mean to externalize me for this function'. For a simple case like \reffig{npc_crosscheck_matrix} we could easily determine, that the function \textit{calc} would like to have the \textit{name, age, mood} field subset externalized. But externalizing either \textit{pos} or \textit{vel} would mean loading the respective cold struct instance as many times, as it's associated value. The \textit{punishment} specifically would depend on how big the cold struct instance is, which also varies depending on whether or not each other field is hot or cold.\\
+More formally there are $\sum_{k=0}^{n} \frac{n!}{k!(n-k)!}$ different combinations of how a record can be split, where $n$ is the number of fields in the record and $k$ is the number of fields to hive off. As an example we could imagine a record with 10 fields. Conclusively there are 1023 different combinations of possible splits. Checking each function lets say 50 would result in $> 50.000$ computations. Since we specifically regard the loops as well this number will become even higher - per record - and eventually with actual big code bases shoot through the roof.\\
+So instead of cross checking each split scenario with each function/loop we would like to consolidate each fields 'importance' or it's 'weight' in a centralized spot, that will be checked against $n-1$ other fields instead.
+
+\subsection{Metric for evaluation of field usages}
+We described fields to have relations to loops/functions. Expressing these relations numerically might get us into regarding existing metrics, hoping they provide information we can process. The values assigned to a relation could be based on a lot of things, so at this point we should contemplate on what would be the most useful piece of information. Even though we will see, that the chosen metrics do not suffice our needs perfectly, they have aspects and methodology we can utilize for our purpose.
+\subsubsection{Cohesion metrics}
+An automated Hot/Cold Split will eventually externalize a subset of fields into another record. We do so by finding the hot data and conversely the cold data \refsecp{hot_cold_splitting}. When thinking about why the cold data was put together with the hot data in the first place we remember, that it might be due to our unfortunate abstraction \refsecp{oop_bad_abstraction}. Talking about splitting records on account of their fields' relations sounds like what \textit{cohesion metrics} try to solve.\\
+Cohesion in a module describes to what extend, that module serves a single logical task \mcp{ingeno_cohesion}{172}. Its purpose is to indicate on how well a software architecture is defined. Modules with good cohesion have proven to be reusable and easy to maintain, whereas low cohesion indicates, that changes in the code will affect other parts of the code resulting in increased effort in development as well as in testing \mcp{ingeno_cohesion}{172}.\\
+There are several types of cohesion, that are used to classify a module, like \textit{Coincidental Cohesion}, where elements are grouped with no logic concept for example in a utility or helper collection. This is considered to be low cohesion and should be avoided.\\
+\textit{Logical Cohesion} describes what we have found to be bad abstraction patterns coming with OOP. We group logically related elements, because they share a context. Consequently we will collect lots of fields, that belong to different domains. Cohesion metrics also recommend to avoid this kind of design.\\
+\textit{Temporal/Procedural Cohesion} both describe a grouping of fields, because they are processed at the same time/in a certain order. So basically when they share temporal locality. Even though we discussed earlier \refsecp{cpucu} that trying to design around principles of locality is one of our main goals in DoD, thinking in an OOP way this is rather bad, because it might promote monolithic class- and method definitions. Again cohesion metrics want our record definitions to follow a single task. This level of cohesion is considered to be acceptable but not ideal \mcp{ingeno_cohesion}{174}. But DoD doesn't argue here actually. Temporal/Procedural cohesion think in a bigger scale than what we meant earlier with temporal locality. For example grouping independent elements because they all are related to system startup/cleanup even though they don't interact.\\
+This is another example of where we find a big gap between OOP and DoD at first glance but they actually conform with each other for the most part, only differing in motivation.\\
+Working our way up to the notion of an \textit{ideally} cohesive model, we pass a few other levels until we reach \textit{Functional Cohesion}. This level describes a module to group elements sharing a domain. The module will therefore serve a single purpose and changes to it won't affect code of other domains. Note that OOP very well allows for good abstraction, but again the inherent problem we face is that our intuitive abstractions don't accommodate neither software design nor our hardware. More importantly this definition of 'desirable cohesion' fits our needs to implement a Hot/Cold split, so cohesion metrics might bear the right tools, to accommodate us.\\\\
+There are a bunch of metrics like \textit{LCC} (Loose Class Cohesion)  and  \textit{TCC}  (Tight  Class  Cohesion)\mcp{tcclcc}{3} or the famous \textit{LCOM} (Lack of Cohesion in Methods) \mcp{cohesion}{25}. Since cohesion metrics operate on object oriented code, they usually work with methods, as groups of field subsets. For example the LCOM defines a module's cohesiveness to be the "\textit{number of pairs of methods operating on disjoint sets of instance variables, reduced by the number of method pairs acting on at least one shared instance variable}"\mcp{lcom}{8}.\\
+While cohesion metrics have a striking similarity in their procedure (splitting records according to their field usages), unfortunately they do differ in their intention and result. As for our Hot/Cold split, we intend to be a performance optimization and are ready to group any fields, that share spatial/temporal locality. Ultimately our Hot/Cold Split will usually automatically divide a record into domain specific sub sets, its focus however is to minimize a record's stride for cache utilization. This means we could easily end up externalizing a domain related field for the sake of faster computation.\\\\
+But all is not lost, because cohesion metrics provide us with proven methodology to identify and evaluate relations in a module (record) in numbers we can compare. We also learned, that to better fit our purpose, a target metric should regard our code's performance and/or size (memory stride). 
+
+\subsubsection{Asymptotic Notations}
+An asymptotic notation or more famously O-notations describe an algorithm's complexity \mcp{onotation}{44}. It is not a measurement tool to actually evaluate the performance or memory size an algorithm uses since these depend on hardware/architecture/compilers. It describes how an algorithm scales depending on the problem size and defines upper-/lower borders for it's (asymptotic) growth depending on which notation is used. Hence the name because it deals with the \textit{order} of an algorithm.
+There is for example the $\Theta$-notation that expresses asymptotic upper- and lower bounds for a given procedure.
+Specifically the Big O-notation (or Landau's symbol) describes the worst-case for a procedure (asymptotic upper bound). Dealing with bounds makes sense because depending on the input (problem size), performance as well as needed memory space might vary drastically. Using the O-notation we can get estimations about a functions running time only by looking at its overall structure \mcp{onotation}{47}\\
+An actual static performance analysis of code would break down the instructions to those we can find in the hardware's instruction set (depends also on the compiler), to get a grasp of how many cycles they need and ultimately how a cycle translates to (probably) nanoseconds.\\
+The O-notation in its essence will also look at the instructions a procedure makes, when looking at the code. However it builds terms by evaluating control flow statements and eventually will omit constants and all but the highest order term. Expressed as a polynomial $g(n) = 5n^2+3n$ would translate to $g(n) = O(n^2)$. Since $g(n)$ is of order $n^2$ the equals notation is not perfectly correct but commonly used. Leaving out constants and low order terms is due to their insignificance considering large $n$. After all it describes asymptotic behavior.\\
+In the best case a procedure is of order $O(1)$, which means no matter how big the problem becomes it won't affect our performance further. This is the case for each procedure, that operates on a fixed amount of parameters (for example typical getters/setters). While even a setter can consist of several instructions, lets say for example 3, it would translate to $3\times O(1)$. After omitting the constant $3$ we are left with $O(1)$. It is referred to as \textit{constant} growth.\\
+Loops oftentimes iterate over dynamic ranges, so when a loop is operating instructions $n$ times it is denoted as $O(n)$ or has \textit{linear} growth.\\
+Nested loops are often denoted as $O(N*M)$, where N and M represent the iterations for the outer- and inner loop. In cases where N and M are equal we refer to it as \textit{exponential} growth or $O(n^2)$.\\\\
+For our use case classifying our functions like this could be useful. After identifying the relevant functions (those that use our records' fields), we could evaluate them by determining their order. We could see which functions are the 'slowest' and thus reduce memory stride on the records they utilize. This could work by simply defining each field, that is used in those functions as hot. Functions that are known, to be slow, could now operate on hot data exclusively.\\\\
+Unfortunately this bears some problems. A high ordered function might interact with our records very briefly (or not at all), yet would be considered a criteria for deciding which fields are hot/cold. This alone illustrates why we can't blindly apply asymptotic bounds as a criteria. We have to adapt it to our motivation, by only considering or prioritizing instructions, that are (or imply) field usages, yet again only considering our fields might falsify a denotation of the function.\\
+There often won't be the one slow function, the \textit{single point of bottleneck}. Identifying a functions members as hot, in order to speed up that function might work, but might just as well worsen each other remaining function. Whether or not a field is to be considered hot has to be determined individually with their groupings (uses in functions) as a relevant indicator rather than a decisive factor.\\
+Omitting constants and low order terms might provide fair estimations for large $n$, but not every program operates on huge amounts of data. Of course software, that doesn't depend on its data layout very much probably won't significantly benefit from a Hot/Cold split, but lower order parts of a procedure might affect the performance enough for them to deserve to have a say. Also they might be useful deciding factors in close calls.\\\\
+Again all is not lost. Asymptotic notations provide us with useful policies to determine a procedure's complexity. We can adapt the way it reflects on constant; linear; quadratic etc. growth, to derive an evaluation for the fields it uses. 
+
+\subsubsection{Quantitative cohesion alternation}
+\begin{wrapfigure}[19]{r}{0.4\textwidth}
+\vspace{-45pt}
+\begin{lstlisting}[language=C++, name={Exemplary pseudo-ish code}, label={exem_code}]
+	void inc(Foo &foo){
+		foo.age += 1;
+	}
+	...
+	void p2(Foo &foo){
+		foo.bar *= foo.bar;
+	}
+	...
+	bool gt(Foo &foo1,
+			  Foo &foo2)
+	{
+		return
+			foo1.bar > foo2.bar;
+	}
+	...
+	for(Foo *foo : all_foos){
+		inc(*foo);
+	}
+	...
+	for(int i = 0; i < N; ++i)
+	for(int o = i+1; o < N; ++o)
+	collision(foos[i], foos[o]);
+
+\end{lstlisting}
+\end{wrapfigure}
+Now that we have found procedures, solving our problem partially we might be able to derive a fitting methodology. A first approach could be to try to evaluate field usages (non method member expressions) similarly like we would evaluate statements for an asymptotic notation. As a simple start we could count the amount of member expressions per function. Considering something like \refcode{exem_code} the \textit{inc} function in line 1 could be evaluated easily. We have one member expression \textit{foo.age}.\\
+When looking at the \textit{p2} function in line five we notice that our scheme would now rate p2's relation to the field \textit{Foo::bar} as a 2, since it occurs two times. Hence the field \textit{Foo::bar} would be considered \textit{hotter} than the field \textit{Foo::age}.\\
+But do we want this behavior? Cohesion metrics like LCOM don't count all field usages of a specific field for one method, but group them in sets for each method instead. This way it is not about which field is the most prominent one, but which fields share related context. Even though it is a true observation, that bar is used more often than age (at this point), considering the cache there is only one \textit{Foo::bar} to work with. There is however an important difference to cohesion metrics we need to consider. Even though we are interested in domain relations (field groups) our cache utilization highly depends on which fields are loaded most frequently. The \textit{gt} function (line 9) on the other hand uses two distinct \textit{Foo::bar}s (assuming strict aliasing). \textit{gt} will actually be responsible for loading two addressable units into the cache. A reduced stride between relevant data could be more efficient here (this situation should be prioritized over \textit{inc/p2}). Depending on how big an actual Foo instance is and how many distinct \textit{Foo::bar} fields are accessed in one function counting \textit{distinct field usages} might be a more helpful evaluation of a relation. This is a cache conscious compromise between detecting domain relations, but prioritizing load frequency.\\\\
+The access patterns that start to make things spicy for the cache however are usually loops. When looking at line 16 to 18 of \refcode{exem_code} the for-loop iterating an arbitrary number of Foos might outclass any simple function, even if it is using dozens of distinct fields - hard coded. There is only one field usage to see, yet it could constitute numerous instances. That is why asymptotic notations evaluate loops like these with \textit{linear growth}.\\
+Even though a loop's amount of repetitions can sometimes be evaluated at compile time, in OOP where objects tend to be created on the heap and their containers are extended dynamically there is no real telling just how much distinct instances of field usages there will be. So we know, that loops might be game-changers for our evaluation, but as a matter of fact we can't ever predict a perfect number of recurrence. So either we rely on helper indices/iterators, make a few test runs to log and memorize their peaks, or we try to find a reasonable estimation. Like the O-notation we might remember loops and associate them with an arbitrary factor \textit{n} for now, but for an actual comparison of the fields, later we will need to decide how to rate them.\\
+This estimated value we are going to associate with a field usage inside a loop could be based on experience but the best we are ever going to get out of experience is "\textit{entirely depends on the use case}". A better way of evaluating a loops impact is in a way for it to not break our scale immediately, but allowing it to do so. Whats meant by that is the fact, that associating a field usage inside a loop with a number that is vastly higher than that of a function, will render our functions meaningless quickly. However the moment we start nesting loops inside each other (allowing for \textit{quadratic/polynomial growth}), calling single functions impact-less might actually be true. Besides opposed to asymptotic notations we won't rigorously drop lower order terms, we will just make sure, that an expression is allowed to be much more significant.\\
+Facing reality nested loops hold the greatest potential for bad cache utilization, since they can repeatedly load irrelevant data on several iterations. Our scale will definitely end up starting at a low level listing single function accesses on data then at some point rapidly going up where nested loops hang out together. Line 20 to 22 in \refcode{exem_code} will quickly outperform other control flow statements and while a nested for loop like this is no rarity the \textit{loop depth} of a statement, can be arbitrarily high, depending on the situation.\\\\
+In terms of implementation, COOP remembers each function and each loop individually, as well as the member expressions they contain respectively. After data aggregation with the matchers and their callback routines we can create function/member and loop/member matrices like in \reffig{npc_crosscheck_matrix} for each record.\\
+Just like cohesion metrics we can use field subsets used in functions to declare contextual relation, assuming temporal locality through AST node familiarity. Meaning each row (function) embodies a relation between the fields it uses \reffigp{npc_crosscheck_matrix_relations}. Each value inside such matrix stands for the computational \textit{weight} of that field for the function. A column represents a field's distribution among the functions. Totalizing a column determines the field's overall weight that will eventually be used to compare it to the others.
+\begin{figure}[!htbp]
+	\centering
+	\includegraphics[width=0.7\textwidth, height=0.2\textwidth]{PICs/npc_crosscheck_matrix_relations}
+	\caption{Relations depicted in function/member matrices}\label{npc_crosscheck_matrix_relations}
+\end{figure}
+Fields' relations to each other need to be valued, too. After all their correlation will work best, if they end up as hot data together. The aim is for their temporal locality to result in improved spatial locality. Each group of field usages (function) needs to somehow weight its collective field impact, to heighten their chance to stay together as hot data. We prioritize small groups, since externalizing more fields (with low usage frequency) will result in less stride. Functions will therefore compete against each other, by adding to their field weights the overall number of fields minus the amount of fields they utilize. This scales with the number of fields a record has. As mentioned before instead of brute forcing our way through each possible split combination we now encode each field subset relation numerically so eventually it will influence a field's overall weight. It is important to form a decision over an overall weight because unlike an optimization for a specific algorithm, changing the programs data layout has the potential to affect ALL of its functions.
+
+\subsection{Field weight heuristic}
+When we are able to define a field's overall weight on a program, whats left to do is finding a delimiter, that actually divides the field set in two subsets, depending on those weights. This again is not a trivial operation and first of all we need to define what we intend to separate.\\
+As can be seen in the Figures \ref{avg_delimiter} to \ref{avg_delimiter_bad_5} we will face numerous different situations that result of arbitrary access patterns. While sometimes it is easy to rule out certain fields for others it is not. A generic set of rules to handle this needs to be able to process special cases while not losing credibility for common ones. It can do so by scaling with the problem.
+\subsubsection{Scaling delimiters}
+Scaling delimiters will adjust automatically as the problem changes. In a lot of cases a very easy heuristic will work comparably well. For example a (we will call it) \textit{max/2} where we will just take the maximum field weight and divide it by two. Everything above the \textit{max/2} will be hot and vice versa. Given our 'scope' is the maximum field weight this will yield very good results for a lot of cases, however the more significant the spikes are, the worse will be the affects on the resulting data layout. While the \textit{max/2} regards quality it dismisses quantitative scaling.\\\\
+A surprisingly easy yet effective candidate is the average, because it scales up when certain fields tend to be a lot more important than others and naturally divides our values according to their relative weight \reffigp{avg_delimiter} unlike for example their median value.
+\begin{figure}[ht]
+	\begin{minipage}[b]{0.5\linewidth}
+		\centering
+		\includegraphics[width=\textwidth,height=.7\textwidth]{PICs/avg_as_delimiter_1}
+		\caption{Good avg scaling.}
+		\label{avg_delimiter}
+	\end{minipage}
+	\hspace{0.5cm}
+	\begin{minipage}[b]{0.5\linewidth}
+		\centering
+		\includegraphics[width=\textwidth,height=.7\textwidth]{PICs/avg_as_delimiter_2}
+		\caption{Difficult evaluation for avg scaling.}
+		\label{avg_delimiter_bad}
+	\end{minipage}
+	\hspace{0.5cm}
+	\begin{minipage}[b]{0.5\linewidth}
+		\centering\includegraphics[width=\textwidth,height=0.7\textwidth]{PICs/avg_as_delimiter_3}
+		\caption{Bad avg scaling with more fields.}
+		\label{avg_delimiter_bad_2}
+	\end{minipage}
+	\hspace{0.5cm}
+	\begin{minipage}[b]{0.5\linewidth}
+		\centering\includegraphics[width=\textwidth,height=0.7\textwidth]{PICs/avg_as_delimiter_4}
+		\caption{Problem of even distribution.}
+		\label{avg_delimiter_bad_3}
+	\end{minipage}
+\end{figure}
+Unfortunately \reffig{avg_delimiter_bad} shows, why sometimes a simple average determination might not be the best fit. If \textit{field\_a} or \textit{field\_c} were slightly less important, \textit{field\_b} would probably be considered hot, yet this way, even though it's rating is far from \textit{impactless} it is considered to be cold.\\
+On the other hand \reffig{avg_delimiter_bad_2} shows why an average will also not scale well with the amount of fields in a record. The average narrows as the divisor grows, so on a record with a hand full of members an average might end up introducing fields to the hot subset that barely pass the average weight.\\\\
+This leads to an interesting dilemma. Where to draw the line between hot and cold fields? Should there be constant \textit{magic numbers} defining the threshold of a hot field? Since different access patterns can produce arbitrary field weightings there is no good way of predicting a constant, that suffices our intention. But how can relative proportions work when they introduce false-positives? And can we get rid of them? \reffig{avg_delimiter_bad_3} illustrates a difficult case that will in practice rarely occur but embodies our problem perfectly. An even distribution of field weights allows for no logical grouping of significance, at least in terms of 'drawing the line'.
+\begin{figure}[ht]
+	\begin{minipage}[b]{0.5\linewidth}
+		\centering
+		\includegraphics[width=\textwidth,height=.7\textwidth]{PICs/avg_as_delimiter_5}
+		\caption{Bad avg homogeneous field weights.}
+		\label{avg_delimiter_bad_4}
+	\end{minipage}
+	\hspace{0.5cm}
+	\begin{minipage}[b]{0.5\linewidth}
+		\centering
+		\includegraphics[width=\textwidth,height=.7\textwidth]{PICs/avg_as_delimiter_6}
+		\caption{\textit{1-avg} prone to false positives as well.}
+		\label{avg_delimiter_bad_5}
+	\end{minipage}
+\end{figure}
+The average as a heuristic fails us in many situations. We referred to it because it provides a quick approximation of a good delimiter. The factors however that determine its scaling are contrary to the paradigms we follow. Number-of-fields as a divisor means decreasing averages with increasing amount of fields. This means the more fields our records have (consequently the more lack of cohesion), the higher the collective chance to be considered hot. Also the average behaves poorly towards well designed records. Consider \reffig{avg_delimiter_bad_4} where \textit{field\_a}'s weight is just slightly higher than the others'. It will deem all fields but \textit{field\_a} cold and probably ruin the data layout.\\\\
+The above diagrams propose another heuristic that we will call the \textit{1-avg}, represented by the yellow lines. It introduces the reciprocal counterpart for the averages bad scalings. By taking the greatest field height minus the average, our tolerance for fields grows linearly as the average rises while regarding the overall scope of our field weights. In other words: The more quality we find in a record (the more the average trends towards the maximum field weight) the more fields we allow to be hot.\\
+As can be seen in the above figures, this heuristic behaves much better for records that show great differences in their field weights. Of course it is very much possible for it to behave poorly in specific situations as well, again coming from spikes. \reffig{avg_delimiter_bad_5} shows, that the reciprocal average quickly becomes too tolerant. We have seen, that \textit{1-avg} is able to correct some mistakes the average makes but it introduces unwanted behavior on its own.\\
+
+\subsubsection{Combined scaling delimiters}
+An interesting take is on how to combine certain scaling delimiters. Depending on the case different heuristics will result in drastic deterioration of the data layout. We could try to get rid of errors by cherry-picking the strengths different heuristics provide.\\
+One possibility could be to adapt the \textit{max/2} heuristic. We can determine both the \textit{avg} and the \textit{1-avg} delimiters, take the greater one and divide it by 2 (we will call it \textit{top/2}). The upper delimiter will always separate the most significant fields for us. As the \textit{max/2} easily gave us a quick way of defining a tolerance towards lower significant fields, it did not in any way regard the fields' quantity as a defining factor. By possibly considering the \textit{1-avg} (when it is greater) we adapt it given the right situation. This already yields improved results, is however still prone to special cases \reffigp{top_2}. This is because we don't consider the possibility of the cold remnant to be relevant in its entirety.
+\begin{figure}[!ht]
+	\begin{minipage}[b]{0.5\linewidth}
+		\centering
+		\includegraphics[width=\textwidth,height=.8\textwidth]{PICs/top_2}	
+	\end{minipage}
+	\hspace{0.5cm}
+	\begin{minipage}[b]{0.5\linewidth}
+		\centering
+		\includegraphics[width=\textwidth,height=.8\textwidth]{PICs/top_2_bad}
+	\end{minipage}
+	\caption{Improved \textit{top/2} heuristic as it is able to rule out \textit{1-avg} errors but still not well.}\label{top_2}
+\end{figure}
+The problem with scaling delimiters is, that no matter how much we narrow down the error by applying a certain heuristic, in another distribution the same approach might behave badly in terms of handling another error source. We need to evaluate subsets of fields ordered by significance to reliably rule them out or keep them collectively.\\\\
+Regarding both the \textit{avg} and the \textit{1-avg} is interesting because combined they are able to categorize the field weights to a certain extend. As mentioned before, there are two major scaling factors the fields' weights and their number. As the \textit{1-avg} is the reciprocal of the \textit{avg} we can derive information about a programs access patterns by looking whether \textit{avg} or \textit{1-avg} is greater than the other.\\
+When the \textit{avg} is greater, the fields' weights is proportionally more significant than the record's number of fields. When the \textit{1-avg} is greater on the other hand, it means that proportionally there are more insignificant fields, than the subgroup of 'important/hot' fields. Well designed records will demonstrate $avg\approx f_{max}$. Anyhow we can interpret those two delimiters as an order of significance. They divide our scope into three spaces. One above the greater delimiter, one below the smaller delimiter and whatever is in between them \reffigp{delimiter_tiers}. Fields in the upper space are certainly to be considered hot. Fields below the lower line are in a less significant order. Whatever is in between is what we can not categorize immediately. 
+\begin{figure}[!ht]
+	\begin{minipage}[b]{0.5\linewidth}
+		\centering
+		\includegraphics[width=\textwidth,height=.7\textwidth]{PICs/delimiter_tiers}	
+	\end{minipage}
+	\hspace{0.5cm}
+	\begin{minipage}[b]{0.5\linewidth}
+		\centering
+		\includegraphics[width=\textwidth,height=.7\textwidth]{PICs/delimiter_tiers_2}
+	\end{minipage}
+	\caption{Field weight categorization by combined scaling delimiters. Top hatched space is of high significance.}\label{delimiter_tiers}
+\end{figure}
+The idea is to now recursively apply the ordering between the \textit{avg} and the \textit{1-avg} delimiters as long as we have fields, that we can neither classify as high- nor little significance. This approach will work fine with data sets, that exhibit high significance varieties. On uniformly distributed field weights it will tend to include the whole field set for the hot data, yet since we encoded logical relations in the field weight a distribution like in Figure \ref{avg_delimiter_bad_3} bespeaks of defective access patterns rather than only bad data layout.\\
+Regarding order of significance is a good approach to a generic solution, yet our recursive approach is not optimal since it is based on scaling delimiters, that are unaware of a field-group's collective impact. Also trying to break down a record's significance order into two (hot \& cold) subsets immediately mitigates precision.
+
+\subsubsection{Order of significance / Significance groups}
+The problem is that until now we tried to divide a record in two subsets. This is actually what we want, but the truth is there can be an arbitrary amount of related subsets in the record's data fields and the more significance groups we have and the greater the difference in significance, the blurrier the delimiter becomes. Delimiters based on either quantitative or qualitative scaling introduce an error of a size we can hardly reason about when compared to the entirety of field weights \reffigp{delimiter_bad}. Percental tolerance factors will also always just move the error resulting in better behavior in some situations and worse in others.\\
+Also one of the worst situations for us is to accidentally separate fields, that are logically related. With scaling delimiters it can easily happen, that two fields, that share an order of significance (due to our metric) are separated because the delimiter ever so slightly includes one of them but excludes the other. Whenever we split fields that are codependent we ensure worsened cache utilization, because the functions that use the hot field will most likely also use the cold field and will now have the additional overhead of the indirection to the cold struct instance. Our Recursive approach tried to solve this issue and will succeed in simple cases, yet ultimately it depends on the blurry scaling delimiters.\\\\
+Scaling delimiters try to evaluate field weights individually, yet their sub-/optimal utilization strongly depends on their significance group. Determining whether or not a field should be considered hot should depend on the benefit/punishment of it's extraction. Externalizing a field always means that the remaining hot fields load less unnecessary stride into a cache-line, yet it also means whenever the extracted field is used unrelated cold data might be loaded as well.\\
+Cache-lines have concrete sizes (e.g. 64 Byte) so at this point we might be tempted to just multiply a field's size in byte to it's weight. This way we could see the fields impact on the cache capacity and evaluate whether or not determining a certain field as cold would imply great punishment. But this way the least frequently used field could suddenly be considered hot if it is just big enough. We may not confuse capacity with usage frequency, which is the actual criteria of a Hot/Cold Split \refsec{hot_cold_splitting}. So it is actually enough to compare our field weights as a criteria for benefit and punishment. However in order to determine a significance group's impact on out program we are definitely interested in comparing its size to the cache-line size in order to deduce possible stride (which we want to reduce after all)\\\\
+But how can we determine significance groups? COOPs approach is to sort the fields according to their weights in a descending order and measure their weight differences. Normalized on the scope ($f_{max}$) we can compare them to the average deviation. Each value above the average will denote a new less significant group that spans until the next group is identified \reffigp{sig_order}.
+\begin{figure}[ht]
+	\begin{minipage}[b]{0.5\linewidth}
+		\centering
+		\includegraphics[width=0.8\textwidth,height=.7\textwidth]{PICs/delimiter_bad}
+		\caption{Scaling delimiters' errors can hardly be reasoned about and provide equally much punishment as benefit depending on the distribution.}
+		\label{delimiter_bad}
+	\end{minipage}
+	\hspace{0.5cm}
+	\begin{minipage}[b]{0.5\linewidth}
+		\centering
+		\includegraphics[width=\textwidth,height=.7\textwidth]{PICs/sig_order}
+		\caption{Determination of significance groups with field weight deltas. Normalized differences are projected on the field weights' scale for visualization.}
+		\label{sig_order}
+	\end{minipage}
+\end{figure}
+The important thing is for the fields to be evaluated in terms of groups rather than individually. How to evaluate a group though? First we need to determine the group's benefit/punishment in case of a split. Each significance group $g_i$ has a type size $s_i$ which is the summarized type sizes of it's fields, as well as a $max_i$ which is it's highest field weight. With the cache-line size $CLS$, the general cold struct indirection overhead $H$ and with $n$ as the amount of significance groups, when a group $g_i$ is extracted, it implies the following:\\
+Extracting $g_i$ means $s_i$ less stride for the remaining hot data. We already ordered the fields' weights in a descending order, so now we can compare their type sizes with the additional space and as soon, as one or more of the hot fields fit in the additional space (minus $H$) we will effectively have reduced the number of cache-lines to fit 1 hot data instance by the factor $\frac{s_i}{CLS}$ (without splitting an addressable unit over two cache-lines). So the benefit will express through the re-utilization of the hot fields which is capped to the highest field weight of the hot fields ($F_{max}$ or $max_0$). We can value it by multiplying the $F_{max}$ with the determined benefit. This practically tells us how many cache-lines we will spare our important procedures.\\
+But we can make our estimation a little better by interpreting each significance group as a representation for those procedures (loops/functions), that have contributed to it. So instead of capping our 'savings' estimation on the most significant value ($F_{max}$) we will take each significance groups maximal field weight, as this value represents the groups estimated loads. So our savings $s(g)$ are:
+\begin{align}
+	s(g_i) = \sum_{k=0}^{i-1}max_k\times\frac{-H+\sum_{k=i}^{n}s_k}{CLS}
+\end{align}
+At this point our procedure will cut off everything until the last group of highest significance, because we have not yet determined the 'costs' of externalizing a significance group as a counter weight. As the stride is reduced for the hot subset it is increased in the cold subset. The payoff for a hot set is the additional indirection over the pointer to the cold struct instance. When applied correctly this is however comparably little as we plan to externalize greater means.\\
+The cold data will always be accessed by going through the hot data (the pointer to the cold data is in the hot data). So whenever we are accessing cold data we automatically waste one cache-line per cold struct instance that is used to load and dereference the pointer to it. In terms of cache utilization this is really bad (not only in terms of capacity, but also because of possible thrashing since the hot and cold data lie at physically different locations \refsecp{cpucu}). Its only worth because we do it with data, that is accessed so rarely (relatively), that this cost is lower than the benefit we get by splitting it from the hot data. However, besides the additionally wasted cache-lines used solely for finding the actual data, we will increase the cold data's stride by $s_i$ Byte, resulting in an estimated iteration overhead $o(g)$ of
+\begin{align}
+	o(g_i) = \sum_{k=i}^{n}max_k\times(1+\frac{\sum_{k=i}^{n}s_k}{CLS})
+\end{align}
+cache-lines for processing the cold data in its entirety. Ultimately for each $g_i$ we say that a split is worth $w(g)$ when:
+\begin{align}
+	w(g_i) = s(g_i) > o(g_i)
+\end{align}
+Then we want to externalize it because the benefit is greater than the cost.\\\\
+Unfortunately this will only work for tightly packed arrays of data, since we assume, that reduced stride immediately results in improved cache utilization. If we implemented an automatic SOA transformation this would be the way to go \refsecp{soa}. Due to alignment issues (more on that in TODO REF SEC) COOP will allocate the hot and cold data in a way that is not exactly packed, but will consider alignments, so to a certain extend a reduced stride will have virtually no effect other than the additional indirection to the cold data - invalidating our progress so far.\\
+To be more specific COOP will regard the target systems L1 D (configurable depending on optimization preferences) cache-line size and will try to pack as many elements into a line, yet align each entity group to the cache-lines, to prevent unnecessarily much entity splits over too many cache-lines  (we briefly discussed this in \refsec{aosoa}). This means, that when our hot subset size is smaller than the target cache-line, reducing the stride will have effect, as soon as it frees enough space for the cache-line to encompass another instance \reffigp{opt_p_1}.\\
+On the other hand, if the hot subset size is greater than the cache-line, reduced stride will have effect, as soon as it results in reducing the number of cache-lines necessary to encompass an instance \reffigp{opt_p_2}. So actually since we will introduce padding due to our alignment we might even want to consider keeping poorly ranked fields, as long as they only replace space, that otherwise would be used for padding.
+\begin{figure}[ht]
+	\begin{minipage}[b]{0.5\linewidth}
+		\centering
+		\includegraphics[width=\textwidth,height=.6\textwidth]{PICs/opt_possibility_1}
+		\caption{Aligned entities will be packed inside cache-lines. Reduced stride will be effective, as soon as it increases the amount of entities inside a cache-line.}
+		\label{opt_p_1}
+	\end{minipage}
+	\hspace{0.5cm}
+	\begin{minipage}[b]{0.5\linewidth}
+		\centering
+		\includegraphics[width=\textwidth,height=.6\textwidth]{PICs/opt_possibility_2}
+		\caption{Reduced stride will be effective as soon as it reduces the number of cache-lines needed to encompass an entity. Entities are split upon minimum amount of lines.}
+		\label{opt_p_2}
+	\end{minipage}
+\end{figure}
+Again this needs proper evaluation, since at this point our procedure will blindly cut out fields because it can't reason about the splits impact to it's full extent. We again need to include our field weights into the equation, to be able to evaluate whether or not a split will result in more benefit, than punishment.
+More formally for a significance group $g_i$ out heuristic $W(g)$ will consider a split worth when:
+\begin{equation*}
+W(g_i) =
+\begin{cases}
+\scalemath{1.2}{\myceil{\frac{CLS}{\sum_{k=0}^{i-1}s_k}}} > \scalemath{1.2}{\myceil{\frac{CLS}{\sum_{k=0}^{i}s_k}}} \land w(g_i) & \text{for}\sum_{k=0}^{i-1}s_k < CLS\\\\
+\scalemath{1.2}{\myceil{\frac{\sum_{k=0}^{i-1}s_k}{CLS}}} < \scalemath{1.2}{\myceil{\frac{\sum_{k=0}^{i}s_k}{CLS}}} \land w(g_i) & \text{for}\sum_{k=0}^{i-1}s_k > CLS
+\end{cases}
+\end{equation*}
+It is worth to note here, that this consideration of the groups type sizes is another kind of scaling that we haven't had considered before. This heuristic will yield different results depending on the actual type sizes and will therefore be more precise in its evaluation.
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=\textwidth,height=0.8\textwidth]{PICs/sig_order_final}
+\caption{Exemplary field weights evaluated by our heuristic with the result, that its worth to make the split [\textit{field\_a}, ...\textit{field\_e}], [\textit{field\_d}, ...\textit{field\_h}]. \textit{H} = 8. the fields' type sizes are all 8 and the \textit{CLS} is 64.}
+\label{sig_order_final}
+\end{figure}

@@ -264,8 +264,8 @@ We will not implement a relational database for our application but generating t
 \end{enumerate}
 After \textit{laying out our data} in a linear fashion, we can now implement a \textit{data layout} that implements our new ideas.
 
-\subsection{Structure of Arrays / SOA}
-In contrast to the previously mentioned AOS \refsecp{OOP} a \textit{Structure of Arrays} is the \textit{column-oriented database} pendant to a data layout that results in higher throughput by providing a cache friendly structure \mcp{fabian}{163}. We already know now, that the hardware, specifically the cache uses certain strategies to provide data out of main memory, that is likely to be used soon. This happens both when loading data in cache-line sized blocks and through prefetching mechanisms \refsecp{cpucu}. Now when implementing the column-oriented approach that comes with data normalization we automatically almost perfectly conform to those auxiliary means by implementing columns as arrays. The original concept of an \textit{object} can now be simplified to an index, that retrieves the respective values in each column/array.
+\subsection{Structure of Arrays / SOA}\label{soa}
+In contrast to the previously mentioned AOS \refsecp{OOP} a \textit{Structure of Arrays} is the \textit{column-oriented database} pendant to a data layout that results in higher throughput by providing a cache friendlier structure \mcp{fabian}{163}. We already know now, that the hardware, specifically the cache uses certain strategies to provide data out of main memory, that is likely to be used soon. This happens both when loading data in cache-line sized blocks and through prefetching mechanisms \refsecp{cpucu}. Now when implementing the column-oriented approach that comes with data normalization we automatically almost perfectly conform to those auxiliary means by implementing columns as arrays. The original concept of an \textit{object} can now be simplified to an index, that retrieves the respective values in each column/array.
 
 \subsubsection{AOS in the cache}
 \begin{wrapfigure}[14]{r}{.35\textwidth}
@@ -344,7 +344,7 @@ In order to do so we gave up something very important. When data is logically re
 	\caption{Unified/Grouped relevant data in a cache-line.}\label{cache_utilization_comp}
 \end{wrapfigure}
 This technique bundles related data and makes sure it is successive in memory as well as in cache-lines, consequently we won't peril those cache-lines to extrude each other from the cache. The book \textit{Compilers, Principles, Techniques and Tool} also describes a mechanism like this and refers to those groups as \textit{blocks} \mcp{aho}{786}.
-Also we get the chance to fully exploit our hardware's boundaries, as in now we can get rid of manually inserted padding Bytes \reffigp{cache_utilization_comp} - provided we have related data that fits the gap. It is however only possible to gain a performance boost out of this, when the unified data is actually logically related.
+Also we get the chance to fully exploit our hardware's boundaries, as in now we can get rid of manually inserted padding Bytes \reffigp{cache_utilization_comp} - provided we have related data that fits the gap. It is however only possible to gain a performance boost out of this, when the unified data actually shares temporal locality.
 \subsubsection{Hot/Cold Splitting}\label{hot_cold_splitting}
 \begin{wrapfigure}[15]{r}{0.3\textwidth}
 \begin{lstlisting}[language=C++,numbers=none,name={The NPC class splitted into hot/cold data},label={hcsplit_npc}]
@@ -375,7 +375,7 @@ After a grouping procedure the remnant members of the original NPC class could a
 In the classical component pattern we will keep a container object that holds instances of each component \mcp{nystrom}{214}. In favor of performance the container object should only hold pointers to the instances lying in their respective array. But actually and if we were able to group all members of the original class, the object might be nothing else but an index, that can be used to retrieve a group out of its array.\\
 Components are one widely used mechanism to decouple parts of a formerly shared entity. This is applied to classes and is therefore a statement to how OOP and DoD can work hand in hand. Not only is the component pattern useful for decoupling and performance interests, it also solves issues, that would normally be solved by applying multiple inheritance \mcp{nystrom}{215}, which is a practice often despised even by OOP enthusiasts.\\
 Components can be stored domain wise, while still being contextually linked individually on an object instance level. Their decoupling mechanism has proven great maintainability and even provides a comparably light weight interface for game designers. Accessing them can be done domain wise as well -> optimal cache utilization. This elegant arrangement between OOP and DoD makes it a favored pattern for modern game engines \mcp{fabian}{83}.
-\subsubsection{Array Of Structure Of Arrays (AOSOA)}
+\subsubsection{Array Of Structure Of Arrays (AOSOA)}\label{aosoa}
 \begin{wrapfigure}[10]{r}{0.4\textwidth}
 \begin{lstlisting}[language=C++,numbers=none,name={AOSOA variant of grouped NPC traits},label={aosoa_npc}]
 struct npc_bucket{
