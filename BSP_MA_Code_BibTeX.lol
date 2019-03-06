@@ -7,12 +7,13 @@
 \contentsline {lstlisting}{\numberline {5}SOA variant of the NPC}{14}{lstlisting.5}% 
 \contentsline {lstlisting}{\numberline {6}Consolidating related data}{16}{lstlisting.6}% 
 \contentsline {lstlisting}{\numberline {7}The NPC class splitted into hot/cold data}{17}{lstlisting.7}% 
-\contentsline {lstlisting}{\numberline {8}AOSOA variant of grouped NPC traits}{18}{lstlisting.8}% 
-\contentsline {lstlisting}{\numberline {9}ISPC's native SOA support}{22}{lstlisting.9}% 
-\contentsline {lstlisting}{\numberline {10}JAI's native SOA support}{22}{lstlisting.10}% 
-\contentsline {lstlisting}{\numberline {11}Exerpt of example context free grammar defining a (if)statement. Bold = terminal; italic = nonterminal}{24}{lstlisting.11}% 
-\contentsline {lstlisting}{\numberline {12}Example code in a Foo.cpp file}{26}{lstlisting.12}% 
-\contentsline {lstlisting}{\numberline {13}AST Matcher Reference documentation for the matcher functionDecl()}{27}{lstlisting.13}% 
-\contentsline {lstlisting}{\numberline {14}Some matchers used by COOP to filter relevant AST nodes and their utilization}{32}{lstlisting.14}% 
-\contentsline {lstlisting}{\numberline {15}Callback definition to register the records' members}{32}{lstlisting.15}% 
-\contentsline {lstlisting}{\numberline {16}Exemplary pseudo\textendash ish code}{38}{lstlisting.16}% 
+\contentsline {lstlisting}{\numberline {8}AOSOA variant of grouped NPC traits}{19}{lstlisting.8}% 
+\contentsline {lstlisting}{\numberline {9}ISPC's native SOA support}{23}{lstlisting.9}% 
+\contentsline {lstlisting}{\numberline {10}JAI's native SOA support}{23}{lstlisting.10}% 
+\contentsline {lstlisting}{\numberline {11}Exerpt of example context free grammar defining a (if)statement. Bold = terminal; italic = nonterminal}{25}{lstlisting.11}% 
+\contentsline {lstlisting}{\numberline {12}Example code in a Foo.cpp file}{27}{lstlisting.12}% 
+\contentsline {lstlisting}{\numberline {13}AST Matcher Reference documentation for the matcher functionDecl()}{28}{lstlisting.13}% 
+\contentsline {lstlisting}{\numberline {14}Some matchers used by COOP to filter relevant AST nodes and their utilization}{33}{lstlisting.14}% 
+\contentsline {lstlisting}{\numberline {15}Callback definition to register the records' members}{33}{lstlisting.15}% 
+\contentsline {lstlisting}{\numberline {16}Exemplary pseudo\textendash ish code}{39}{lstlisting.16}% 
+\contentsline {lstlisting}{\numberline {17}Examples of how we can change allocations using placement new to emplace the data where it is among related data.}{53}{lstlisting.17}% 

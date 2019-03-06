@@ -1,45 +1,9 @@
-\lstdefinestyle{ast}{
-	morekeywords={CXXRecordDecl, DefinitionData, DefaultConstructor, CopyConstructor, MoveConstructor, CopyAssignment, MoveAssignment, Destructor, FieldDecl, CompoundStmt, ParmVarDecl, FunctionDecl, DeclStmt, VarDecl, CXXConstructorExpr, BinaryOperator, MemberExpr, DeclRefExpr, IntegerLiteral},
-	morestring=[b]",
-	morestring=[b]""",
-	%backgroundcolor=\color{lbcolor},
-	%tabsize=4,
-	%rulecolor=,
-	%language=scala,
-	%basicstyle=\scriptsize,
-	%upquote=true,
-	aboveskip={1.5\baselineskip},
-	%columns=fixed,
-	%showstringspaces=false,
-	extendedchars=true,
-	breaklines=true, %sorgt dafür, dass Text, der die Formattierung sprengt in die nächste Zeile rückt
-	%prebreak = \raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}}, %sorgt dafür, dass eingerückte Zeilen über ein 'return' zeichen angekündigt werden
-	frame=single, % sorgt dafür dass ein Rand eingezeichnet wird
-	showtabs=false,
-	captionpos=b,
-	showspaces=false,
-	showstringspaces=false,
-	identifierstyle=\ttfamily,
-	keywordstyle=\color[rgb]{0,0,1},
-	commentstyle=\color[rgb]{0.133,0.545,0.133},
-	stringstyle=\color{stringcolor},
-	literate=%
-	{Ö}{{\"O}}1
-	{Ä}{{\"A}}1
-	{Ü}{{\"U}}1
-	{ß}{{\ss}}2
-	{ü}{{\"u}}1
-	{ä}{{\"a}}1
-	{ö}{{\"o}}1
-	{~} {$\sim$}{1}
-}
-
 \chapter{A prototypical implementation for a source-to-source transformation tool generating cache friendly code / COOP}\label{prototype}
 We have the tools, to programmatically strip down a program's records and reassemble it in a fashion that suits our needs (Clang). So it is time to consolidate our goals for a prototype. First of all, it should be fairly easy to integrate the tool into a working environment/existing tool-chains. For reasons mentioned in \refsec{motivation} we can't ever expect our tool to be used otherwise. As simple as that sounds this leads to interesting design choices, we will briefly discuss in \refsec{stand_alone_tool}.\\
 Even though the tool's scope will be limited due to being a one-man project it should demonstrate, that automated OOP to DoD data layout transformations are possible. To do so we will try to implement a Hot/Cold Split \refsecp{hot_cold_splitting}. Instead of completely changing the program's data layout this way we can implement a data driven optimization, that seems to be relatively easy to perform automatically. We will prove ourselves wrong later on in (TODO REF SEC) however.\\
 Ideally we desire that the target program should provide zero additional information to our tool, so the process of transforming the target program into a cache friendly pendant won't interfere with the process of solving the problem. We will later see (TODO REF SEC) why this entails massive additional responsibility for our tool.\\
 The tool needs to maintain the semantic integrity of the original source code. Even though changing the programs data layout will definitely affect the data access patterns (thus will actually change the programs data flow) the result must not be distinguishable from the original in other terms than performance. (TODO REF SEC) will show why this prerequisite will yet rely on additional effort.\\
-We want the resulting program to be faster, measuring frame-times as well as cache-misses. While it is difficult to guarantee performance boosts for every possible source program we should rather aim for: Improves most programs. It definitely must not make the program slower though! 
+We want the resulting program to be faster, measuring frame-times as well as cache-misses. However optimizing the data layout of a program will only really affect software, that heavily relies on it. For example transformations on multidimensional arrays are perfect candidates for locality optimizations \mcp{bryant}{617}. While it is difficult to guarantee performance boosts for every possible source program we should rather aim for: Improves most programs. It definitely must not make the program slower though! 
 \newpage
 \subsubsection{Summarized Goals}
 \begin{itemize}
@@ -65,7 +29,7 @@ Since COOP will work on source files rather than on binaries we will need to pre
 Another advantage of a compilation database is less manual overhead on COOPs integration. Files that include certain other files (like H/HPP-files) will not be processable if no information is given on where to find the included files. The tool instance, that is worked with to access Clang's functionality is in the end a proper compiler front-end that will go through each of the aforementioned steps of Lexing and Parsing and a complete set of symbols is imperative for a compiler to work.\\
 In the end providing files manually will work, but will come with significantly more effort, so offering the option of providing a compilation database can accommodate the user to great amounts.
 
-\section{Automated OOP to DoD data layout/access transformation}\label{auto_oop_to_dod}
+\section{Automated split-candidate evaluation through static analysis}\label{auto_oop_to_dod}
 Splitting a record's hot-/cold fields is in essence a trivial transformation when done manually and when given the set of hot/cold fields. Create a struct; move cold fields in it; create a pointer to a cold-struct instance in original record; Change all accesses to cold fields to accesses on cold-struct field pendants, respectively. This is why the Hot/Cold Split was deemed a fitting exemplary for a prototypical proof-of-concept implementation. To do this first of all we need the right AST nodes.\\
 Comfortable access on the records and their fields is granted by appropriate AST matchers. After creating a source file's AST we can easily match against any record declaration in it and the moment we have a \textit{CXXRecordDeclaration} node we have access to numerous helpful methods, that give us it's fields, constructors, methods, base classes etc. COOP defines a handful of matchers and callback-routines that filter wanted data (see Code \ref{matchers} line 1 to 6).
 \begin{lstlisting}[language=C++,name={Some matchers used by COOP to filter relevant AST nodes and their utilization },label={matchers}]
@@ -139,18 +103,18 @@ There is for example the $\Theta$-notation that expresses asymptotic upper- and 
 Specifically the Big O-notation (or Landau's symbol) describes the worst-case for a procedure (asymptotic upper bound). Dealing with bounds makes sense because depending on the input (problem size), performance as well as needed memory space might vary drastically. Using the O-notation we can get estimations about a functions running time only by looking at its overall structure \mcp{onotation}{47}\\
 An actual static performance analysis of code would break down the instructions to those we can find in the hardware's instruction set (depends also on the compiler), to get a grasp of how many cycles they need and ultimately how a cycle translates to (probably) nanoseconds.\\
 The O-notation in its essence will also look at the instructions a procedure makes, when looking at the code. However it builds terms by evaluating control flow statements and eventually will omit constants and all but the highest order term. Expressed as a polynomial $g(n) = 5n^2+3n$ would translate to $g(n) = O(n^2)$. Since $g(n)$ is of order $n^2$ the equals notation is not perfectly correct but commonly used. Leaving out constants and low order terms is due to their insignificance considering large $n$. After all it describes asymptotic behavior.\\
-In the best case a procedure is of order $O(1)$, which means no matter how big the problem becomes it won't affect our performance further. This is the case for each procedure, that operates on a fixed amount of parameters (for example typical getters/setters). While even a setter can consist of several instructions, lets say for example 3, it would translate to $3\times O(1)$. After omitting the constant $3$ we are left with $O(1)$. It is referred to as \textit{constant} growth.\\
+In the best case a procedure is of order $O(1)$, which means no matter how big the problem becomes it won't affect our performance further. This is the case for each procedure, that operates on a fixed amount of parameters (for example typical getters/setters). While even a setter can consist of several instructions, lets say for example 3, it would translate to $3\cdot O(1)$. After omitting the constant $3$ we are left with $O(1)$. It is referred to as \textit{constant} growth.\\
 Loops oftentimes iterate over dynamic ranges, so when a loop is operating instructions $n$ times it is denoted as $O(n)$ or has \textit{linear} growth.\\
-Nested loops are often denoted as $O(N*M)$, where N and M represent the iterations for the outer- and inner loop. In cases where N and M are equal we refer to it as \textit{exponential} growth or $O(n^2)$.\\\\
+Nested loops are often denoted as $O(N\cdot M)$, where N and M represent the iterations for the outer- and inner loop. In cases where N and M are equal we refer to it as \textit{exponential} growth or $O(n^2)$.\\\\
 For our use case classifying our functions like this could be useful. After identifying the relevant functions (those that use our records' fields), we could evaluate them by determining their order. We could see which functions are the 'slowest' and thus reduce memory stride on the records they utilize. This could work by simply defining each field, that is used in those functions as hot. Functions that are known, to be slow, could now operate on hot data exclusively.\\\\
 Unfortunately this bears some problems. A high ordered function might interact with our records very briefly (or not at all), yet would be considered a criteria for deciding which fields are hot/cold. This alone illustrates why we can't blindly apply asymptotic bounds as a criteria. We have to adapt it to our motivation, by only considering or prioritizing instructions, that are (or imply) field usages, yet again only considering our fields might falsify a denotation of the function.\\
 There often won't be the one slow function, the \textit{single point of bottleneck}. Identifying a functions members as hot, in order to speed up that function might work, but might just as well worsen each other remaining function. Whether or not a field is to be considered hot has to be determined individually with their groupings (uses in functions) as a relevant indicator rather than a decisive factor.\\
 Omitting constants and low order terms might provide fair estimations for large $n$, but not every program operates on huge amounts of data. Of course software, that doesn't depend on its data layout very much probably won't significantly benefit from a Hot/Cold split, but lower order parts of a procedure might affect the performance enough for them to deserve to have a say. Also they might be useful deciding factors in close calls.\\\\
 Again all is not lost. Asymptotic notations provide us with useful policies to determine a procedure's complexity. We can adapt the way it reflects on constant; linear; quadratic etc. growth, to derive an evaluation for the fields it uses. 
-
+\newline
 \subsubsection{Quantitative cohesion alternation}
-\begin{wrapfigure}[19]{r}{0.4\textwidth}
-\vspace{-45pt}
+\begin{wrapfigure}[21]{r}{0.4\textwidth}
+%\vspace{-45pt}
 \begin{lstlisting}[language=C++, name={Exemplary pseudo-ish code}, label={exem_code}]
 	void inc(Foo &foo){
 		foo.age += 1;
@@ -180,7 +144,11 @@ Again all is not lost. Asymptotic notations provide us with useful policies to d
 Now that we have found procedures, solving our problem partially we might be able to derive a fitting methodology. A first approach could be to try to evaluate field usages (non method member expressions) similarly like we would evaluate statements for an asymptotic notation. As a simple start we could count the amount of member expressions per function. Considering something like \refcode{exem_code} the \textit{inc} function in line 1 could be evaluated easily. We have one member expression \textit{foo.age}.\\
 When looking at the \textit{p2} function in line five we notice that our scheme would now rate p2's relation to the field \textit{Foo::bar} as a 2, since it occurs two times. Hence the field \textit{Foo::bar} would be considered \textit{hotter} than the field \textit{Foo::age}.\\
 But do we want this behavior? Cohesion metrics like LCOM don't count all field usages of a specific field for one method, but group them in sets for each method instead. This way it is not about which field is the most prominent one, but which fields share related context. Even though it is a true observation, that bar is used more often than age (at this point), considering the cache there is only one \textit{Foo::bar} to work with. There is however an important difference to cohesion metrics we need to consider. Even though we are interested in domain relations (field groups) our cache utilization highly depends on which fields are loaded most frequently. The \textit{gt} function (line 9) on the other hand uses two distinct \textit{Foo::bar}s (assuming strict aliasing). \textit{gt} will actually be responsible for loading two addressable units into the cache. A reduced stride between relevant data could be more efficient here (this situation should be prioritized over \textit{inc/p2}). Depending on how big an actual Foo instance is and how many distinct \textit{Foo::bar} fields are accessed in one function counting \textit{distinct field usages} might be a more helpful evaluation of a relation. This is a cache conscious compromise between detecting domain relations, but prioritizing load frequency.\\\\
-The access patterns that start to make things spicy for the cache however are usually loops. When looking at line 16 to 18 of \refcode{exem_code} the for-loop iterating an arbitrary number of Foos might outclass any simple function, even if it is using dozens of distinct fields - hard coded. There is only one field usage to see, yet it could constitute numerous instances. That is why asymptotic notations evaluate loops like these with \textit{linear growth}.\\
+The access patterns that start to make things spicy for the cache however are usually loops.
+\begin{quote}
+	\textit{Loops have good temporal and spatial locality [...] the greater the number of loop iterations, the better the locality.} \mcp{bryant}{589}.
+\end{quote}
+When looking at line 16 to 18 of \refcode{exem_code} the for-loop iterating an arbitrary number of Foos might outclass any simple function, even if that function is using dozens of distinct fields - hard coded. There is only one field usage to see, yet it could constitute numerous instances. That is why asymptotic notations evaluate loops like these with \textit{linear growth}.\\
 Even though a loop's amount of repetitions can sometimes be evaluated at compile time, in OOP where objects tend to be created on the heap and their containers are extended dynamically there is no real telling just how much distinct instances of field usages there will be. So we know, that loops might be game-changers for our evaluation, but as a matter of fact we can't ever predict a perfect number of recurrence. So either we rely on helper indices/iterators, make a few test runs to log and memorize their peaks, or we try to find a reasonable estimation. Like the O-notation we might remember loops and associate them with an arbitrary factor \textit{n} for now, but for an actual comparison of the fields, later we will need to decide how to rate them.\\
 This estimated value we are going to associate with a field usage inside a loop could be based on experience but the best we are ever going to get out of experience is "\textit{entirely depends on the use case}". A better way of evaluating a loops impact is in a way for it to not break our scale immediately, but allowing it to do so. Whats meant by that is the fact, that associating a field usage inside a loop with a number that is vastly higher than that of a function, will render our functions meaningless quickly. However the moment we start nesting loops inside each other (allowing for \textit{quadratic/polynomial growth}), calling single functions impact-less might actually be true. Besides opposed to asymptotic notations we won't rigorously drop lower order terms, we will just make sure, that an expression is allowed to be much more significant.\\
 Facing reality nested loops hold the greatest potential for bad cache utilization, since they can repeatedly load irrelevant data on several iterations. Our scale will definitely end up starting at a low level listing single function accesses on data then at some point rapidly going up where nested loops hang out together. Line 20 to 22 in \refcode{exem_code} will quickly outperform other control flow statements and while a nested for loop like this is no rarity the \textit{loop depth} of a statement, can be arbitrarily high, depending on the situation.\\\\
@@ -193,7 +161,7 @@ Just like cohesion metrics we can use field subsets used in functions to declare
 \end{figure}
 Fields' relations to each other need to be valued, too. After all their correlation will work best, if they end up as hot data together. The aim is for their temporal locality to result in improved spatial locality. Each group of field usages (function) needs to somehow weight its collective field impact, to heighten their chance to stay together as hot data. We prioritize small groups, since externalizing more fields (with low usage frequency) will result in less stride. Functions will therefore compete against each other, by adding to their field weights the overall number of fields minus the amount of fields they utilize. This scales with the number of fields a record has. As mentioned before instead of brute forcing our way through each possible split combination we now encode each field subset relation numerically so eventually it will influence a field's overall weight. It is important to form a decision over an overall weight because unlike an optimization for a specific algorithm, changing the programs data layout has the potential to affect ALL of its functions.
 
-\subsection{Field weight heuristic}
+\subsection{Field weight heuristics}
 When we are able to define a field's overall weight on a program, whats left to do is finding a delimiter, that actually divides the field set in two subsets, depending on those weights. This again is not a trivial operation and first of all we need to define what we intend to separate.\\
 As can be seen in the Figures \ref{avg_delimiter} to \ref{avg_delimiter_bad_5} we will face numerous different situations that result of arbitrary access patterns. While sometimes it is easy to rule out certain fields for others it is not. A generic set of rules to handle this needs to be able to process special cases while not losing credibility for common ones. It can do so by scaling with the problem.
 \subsubsection{Scaling delimiters}
@@ -306,12 +274,12 @@ The important thing is for the fields to be evaluated in terms of groups rather 
 Extracting $g_i$ means $s_i$ less stride for the remaining hot data. We already ordered the fields' weights in a descending order, so now we can compare their type sizes with the additional space and as soon, as one or more of the hot fields fit in the additional space (minus $H$) we will effectively have reduced the number of cache-lines to fit 1 hot data instance by the factor $\frac{s_i}{CLS}$ (without splitting an addressable unit over two cache-lines). So the benefit will express through the re-utilization of the hot fields which is capped to the highest field weight of the hot fields ($F_{max}$ or $max_0$). We can value it by multiplying the $F_{max}$ with the determined benefit. This practically tells us how many cache-lines we will spare our important procedures.\\
 But we can make our estimation a little better by interpreting each significance group as a representation for those procedures (loops/functions), that have contributed to it. So instead of capping our 'savings' estimation on the most significant value ($F_{max}$) we will take each significance groups maximal field weight, as this value represents the groups estimated loads. So our savings $s(g)$ are:
 \begin{align}
-	s(g_i) = \sum_{k=0}^{i-1}max_k\times\frac{-H+\sum_{k=i}^{n}s_k}{CLS}
+	s(g_i) = \sum_{k=0}^{i-1}max_k\cdot\frac{-H+\sum_{k=i}^{n}s_k}{CLS}
 \end{align}
 At this point our procedure will cut off everything until the last group of highest significance, because we have not yet determined the 'costs' of externalizing a significance group as a counter weight. As the stride is reduced for the hot subset it is increased in the cold subset. The payoff for a hot set is the additional indirection over the pointer to the cold struct instance. When applied correctly this is however comparably little as we plan to externalize greater means.\\
 The cold data will always be accessed by going through the hot data (the pointer to the cold data is in the hot data). So whenever we are accessing cold data we automatically waste one cache-line per cold struct instance that is used to load and dereference the pointer to it. In terms of cache utilization this is really bad (not only in terms of capacity, but also because of possible thrashing since the hot and cold data lie at physically different locations \refsecp{cpucu}). Its only worth because we do it with data, that is accessed so rarely (relatively), that this cost is lower than the benefit we get by splitting it from the hot data. However, besides the additionally wasted cache-lines used solely for finding the actual data, we will increase the cold data's stride by $s_i$ Byte, resulting in an estimated iteration overhead $o(g)$ of
 \begin{align}
-	o(g_i) = \sum_{k=i}^{n}max_k\times(1+\frac{\sum_{k=i}^{n}s_k}{CLS})
+	o(g_i) = \sum_{k=i}^{n}max_k\cdot(1+\frac{\sum_{k=i}^{n}s_k}{CLS})
 \end{align}
 cache-lines for processing the cold data in its entirety. Ultimately for each $g_i$ we say that a split is worth $w(g)$ when:
 \begin{align}
@@ -337,18 +305,91 @@ On the other hand, if the hot subset size is greater than the cache-line, reduce
 	\end{minipage}
 \end{figure}
 Again this needs proper evaluation, since at this point our procedure will blindly cut out fields because it can't reason about the splits impact to it's full extent. We again need to include our field weights into the equation, to be able to evaluate whether or not a split will result in more benefit, than punishment.
-More formally for a significance group $g_i$ out heuristic $W(g)$ will consider a split worth when:
+More formally for a significance group $g_i$ our heuristic $W(g)$ will consider a split beneficial when:
 \begin{equation*}
 W(g_i) =
 \begin{cases}
-\scalemath{1.2}{\myceil{\frac{CLS}{\sum_{k=0}^{i-1}s_k}}} > \scalemath{1.2}{\myceil{\frac{CLS}{\sum_{k=0}^{i}s_k}}} \land w(g_i) & \text{for}\sum_{k=0}^{i-1}s_k < CLS\\\\
-\scalemath{1.2}{\myceil{\frac{\sum_{k=0}^{i-1}s_k}{CLS}}} < \scalemath{1.2}{\myceil{\frac{\sum_{k=0}^{i}s_k}{CLS}}} \land w(g_i) & \text{for}\sum_{k=0}^{i-1}s_k > CLS
+\scalemath{1.2}{\myceil{\frac{CLS}{\sum_{k=0}^{i-1}s_k}}} > \scalemath{1.2}{\myceil{\frac{CLS}{\sum_{k=0}^{i}s_k}}} \land w(g_i) & \text{for}\sum_{k=0}^{n}s_k < CLS\\\\
+\scalemath{1.2}{\myceil{\frac{\sum_{k=0}^{i-1}s_k}{CLS}}} < \scalemath{1.2}{\myceil{\frac{\sum_{k=0}^{i}s_k}{CLS}}} \land w(g_i) & \text{for}\sum_{k=0}^{n}s_k > CLS
 \end{cases}
 \end{equation*}
-It is worth to note here, that this consideration of the groups type sizes is another kind of scaling that we haven't had considered before. This heuristic will yield different results depending on the actual type sizes and will therefore be more precise in its evaluation.
-\begin{figure}[!htbp]
-\centering
-\includegraphics[width=\textwidth,height=0.8\textwidth]{PICs/sig_order_final}
-\caption{Exemplary field weights evaluated by our heuristic with the result, that its worth to make the split [\textit{field\_a}, ...\textit{field\_e}], [\textit{field\_d}, ...\textit{field\_h}]. \textit{H} = 8. the fields' type sizes are all 8 and the \textit{CLS} is 64.}
-\label{sig_order_final}
+It is worth to note here, that this consideration of the groups type sizes is another kind of scaling that we haven't had considered before. This heuristic will yield different results depending on the actual type sizes and will therefore be more precise in its evaluation. Scaling delimiters solely relying on comparing the field weights will tend to split over aggressively, because they don't consider that the benefit of a split depends also on how the resulted record's will interact with a specific target cache. In fact to actually accomplish an improvement a cut will now need to extend a certain threshold. So in many cases COOP will now rather do nothing, than trying to force a split, that will actually worsen the cache utilization.\\\\
+\begin{figure}[tbp]
+	\centering
+	\includegraphics[width=0.8\textwidth,height=0.5\textwidth]{PICs/sig_order_final}
+	\caption{Exemplary field weights evaluated by our heuristic with the result, that its worth to make the split hot:[\textit{field\_a}, ...\textit{field\_e}], cold:[\textit{field\_d}, ...\textit{field\_h}].}
+	\label{sig_order_final}
 \end{figure}
+Unfortunately this heuristic might be problematic, as soon as we deal with significant spikes. Imagine a field, that outweighs the others. Since we only consider significance groups as split candidates (opposed to fields individually) we will now compare $n-1$ fields to be split. This might actually make sense, because the highly rated single field might provide well enough cache utilization to outweigh the externalization of the rest, however we will strip ourselves from optimization potential as soon, as deviation significance leads to false positives on field to group assignment. When the significance group that field is assigned to, is not considered to be worthy of externalizing, but individually the falsely assigned field would be, we produced an error. Assigning a field to a significance group, that in reality should be in a lower order group, will prevent this field from being examined distinctively. So again we are limited by scaling delimiters, only this time when evaluating delta deviation instead of quality. Even though this is a special case, it is not unlikely enough to be disregarded.\\\\
+One possible solution is to again follow a recursive approach. Whenever significance groups are identified we can recursively apply the procedure inside the distinct groups to identify more groups, but without a fitting recursion break, this will eventually lead to creating $n$ groups for $n$ fields.\\
+It is hard to reason about when to stop the recursion, because forth going each group will have its own significance scope and therefore will evaluate its internal discrepancies differently - relatively more significant. To a certain extend this is exactly what we want, but at the same time it will eventually lead to over-grouping. What we need is an atomic unit that denotes a step of significance. This way instead of losing the scope in recursion, we will have a recursion-depth independent measure.
+
+\subsubsection{A brief discourse to data analysis in statistics}
+The methodology defined in statistics can yield very good results for our intention, however statistics are usually applied to large sets of data. A record with a number of fields that validates it to be examined statistically will rarely (if ever) be found in practice, however the methodology can be applied to our problem partially.\\\\
+We could improve the significance groups' granularity and their robustness by applying measurements, that are known to behave better with spikes in their \textit{population} or that can help us detect such spikes, so we can adapt our routines. Norbert Henze describes different \textit{measures of dispersion} \mcp{henze}{32}, that we can consider. Statistically significant spikes can for example be identified by determining the \textit{empiric standard deviation} for a population. The standard deviation (usually denoted as $\sigma$) is defined as:
+\begin{align}
+\scalemath{1.2}{\sigma} := +\sqrt{\frac{1}{n} \sum \limits_{i=1}^n\left(x_i-\overline x\right)^2}
+\end{align}
+It can be used to quantize the order of discrepancy to the norm. If a value for example is $2\sigma$ it is more likely to be significant, $3\sigma$ even more so. Consequently we could define that as soon as a field weight delta $f_i-f_{i-1}>T\sigma$ (where $f$ is a field weight and $T$ is an arbitrary constant) we would need a distinct significance grouping starting from $f_i$, since including  field weights prior to $i$ could compromise the significance group assignment for low ordered field weights.\\\\
+Another measure of classification is the \textit{interquartile range} (IQR). It describes the difference between the upper- and the lower most quartiles and is mostly resistent to spikes, because it operates on the median instead of the arithmetic mean. Significant discrepancies can be determined by orders of IQR units. For a set of elements $x = (x_1, x_2, ..., x_n)$ that is ordered, the IQR is defined by the difference of the upper and lower quartiles $x_{0.25}$ and $x_{0,75}$ which are the respective medians of the elements to the left and right of the median $\tilde{x}$.
+\begin{align}
+x_{0{,}25} = \begin{cases}
+\tfrac{1}{2}(x_{n \cdot 0{,}25} + x_{(n \cdot 0{,}25) + 1}),  & \text{if }n \text{ is even}\\
+x_{\lfloor n \cdot 0{,}25 +1\rfloor}, & \text{if }n \text{ is odd}
+\end{cases}\\
+x_{0{,}75} = \begin{cases}
+\tfrac{1}{2}(x_{n \cdot 0{,}75} + x_{(n \cdot 0{,}75) + 1}),  & \text{if }n \text{ is even}\\
+x_{\lfloor n \cdot 0{,}75 +1\rfloor}, & \text{if }n \text{ is odd}
+\end{cases}
+\end{align}
+The IQR which is then determined by subtracting $x_{0,75}-x_{0,25}$ describes for us the range of the 50\% of the elements around the median $\tilde{x}$. However this doesn't mean that each value above $\tilde{x}+\frac{1}{2}\cdot IQR$ is considered a significant spike.\\
+A famous practical application of the IQR are \textit{Box-Plot}s \mcp{boxplot}{916} which are a popular utensil for quickly describing data distributions and possible spikes. They define spikes to be $> T\cdot IQR$, where $T$ is a constant that is often between four and seven. However pin-pointing those 'spike thresholds' usually depends on the populations environment.\\
+We could apply this methodology to identify spikes in the field weight deltas so we could determine which ranges (expressed in quartiles) need their own significance grouping.\\\\
+The methods above rely on constants, that are determined by experience and plausibility. Our algorithm can not yet rely on statistically relevant data to define those constants, yet we are able to make a plausible assumption. The higher we define the threshold for a spike to be the more tolerant we are for inaccuracies on the other end respectively. The closer we define our thresholds to $x_{0,25}$ and $x_{0,74}$ the higher the chance, that we identify local maxima/minima as spikes, which will lead to similar problems as blurry scaling delimiters (separating fields, that belong together).\\
+Since the IQR defines the 50\% of elements around the median, this range also defines a bound of significance. In theory $0,5\cdot IQR+IQR+0,5\cdot IQR$ should define the whole range of elements if they share an order of significance. In order to prevent local maxima/minima to be identified as spikes we will tweak this assumption to $3\cdot IQR$. This will identify spikes relatively quickly and induce a more fine granular significance ordering.\\\\
+Different results for some of the heuristics we have discussed will be shown in section (TODO REF SEC).
+
+\section{COOP's affect on the data layout}
+Until now we have seen how COOP is able to make an educated guess about the logic relations (expressed in temporal locality) and the computational impact of a field. Even though static analysis will rarely be able to predict a programs data flow precisely (because of run-time dependent variables) we have developed a way, that combines traits coming from different metrics to hint at what fields might be the most relevant to us. The numbers (for example access frequencies) will in reality diverge from those we have assumed, however we have succeeded when our educated guess resembles the proportions of run-time data.\\\\
+Even though we have set up the basis for a successful split at this point COOP's results would be surprisingly bad/mediocre, depending on the tested target code. Until now we have identified fields to be hot or cold and are able to separate them accordingly. We are affecting the fields' layouts inside their record, but have not yet considered how the records are layed out in memory.\\
+The whole point of the AOS to SOA/HotColdSplit/Component/AOSOA transformations we discussed in \refsec{dod} is to improve spatial locality of our data. The actual benefit is the result of reduced stride and a better instance-size to cache-line-size ratio. By identifying temporal locality of our data, we can infer, that spatial locality on those data will result in better cache utilization, but at this point the instances of the record we are examining might be allocated on the heap completely scattered. With scattered heap segments like that, reduced stride in our records will have no effect, since subsequent segments of the memory (expected by the common access patterns we discussed in \refsec{cdap}) will most likely be unrelated to our 'hot' data. Cache prefetching mechanisms will not be able to accommodate us. We can never expect to find a successor instance inside an already loaded cache-line.\\ 
+In this scenario we will even have separated the 'cold' data and therefore taken what little correlation the hot and the cold data had. So depending on how the data is distributed in memory until now our optimization might behave good, but just as well might deteriorate the cache utilization.\\\\
+Another important part is the allocation of the cold data. By our definition fields are separated when the remaining hot data benefits from the split more, than the cold data suffers from it. By this definition it might very well happen that we extrude fields, that are used comparably little, but this does not mean, that those fields are used infrequently in their routines. Only because a \textit{field\_a} was assigned a field weight of e.g. $720,000$ the extracted cold field \textit{field\_d} with a field weight of $35,000$ can't be regarded impact-less. We deemed it beneficial to split \textit{field\_d}, but that doesn't mean we shall ignore it.\\
+Cold fields might just as well participate in routines that abide the access patterns, we can optimize around. For example a particles position and velocity might very likely be considered hot, the particle's field \textit{radius} will also be used frequently, but our heuristic recognized it to be little enough to warrant a split. The routines that use radius will most likely do so for a bunch of particles in a row. Making sure the cold data is packed in contiguous blocks of memory will improve those 'cold' routines.\\
+Consequently COOP will not only parse the target program for instance allocations, that tend to behave badly, but also care about the cold structs to be allocated in a cache friendly manner.
+
+\subsection{Hot data allocations we want to adapt}\label{hdawwta}
+There are different ways to obtain memory to hold data. Specifically when executing a C++ program the compiler will have made precautions to reserve memory for e.g. the actual code, variables known at compile time, a block of memory to hold local variables \mcp{stroustrup}{587}.\\
+We are especially interested in the data segments \textit{stack}, \textit{heap}, as well as \textit{.bss} \textit{.data}, because this is where the target program will reserve memory of the records we aim to split. Static and global variables exist in the \textit{.data} segment (when initialized) and the \textit{.bss} (if uninitialized). Local variables are placed on the stack. An instance that is allocated with e.g. \textit{malloc, calloc} or \textit{new} is placed on the \textit{heap}. Note for later: the \textit{.bss} won't actually affect the object file's size. The loader will merely zero initialize it (also depends on the OS) on program start \mcp{bryant}{659}.\\\\
+We want our data to be in contiguous memory blocks. With techniques like \textit{placement new} we can easily transform the target code to place data where we want it but we should also clarify what specific allocations we want and can change without hurting cache utilization or corrupting semantic integrity. So whenever we find a statement, that allocates memory for a record that we want to split, we can change it in a way that will hopefully leave the succeeding code unaffected \refcodep{alloc_changes}.
+\begin{lstlisting}[language=C++,name={Examples of how we can change allocations using placement new to emplace the data where it is among related data.},label={alloc_changes}]
+Foo all_foos[N];
+
+//Foo f_0;   becomes:
+all_foos[i] = Foo();
+Foo &f_0 = all_foos[i]; //NOT OK: semantic integrity corrupted
+...
+//Foo f_1[10];   becomes:
+Foo *f_1 = new (all_foos+i) Foo[10]; //NOT OK: semantic integrity corrupted
+...
+//Foo *f_2 = new Foo();   becomes:
+Foo *f_2 = new (all_foos+i) Foo();  //OK: conserved semantic integrity
+...
+//Foo *f_3 = new Foo[10];   becomes:
+Foo *f_3 = new (all_foos+i) Foo[10];  //OK: conserved semantic integrity
+\end{lstlisting}
+However these changes imply using some index \textit{i} that will determine the data's new location in the Foo collection \textit{all\_foos}. More importantly while a local variables lifetime is bound to it's scope, now it 'lives' in the \textit{all\_foos} and we will manually need to clean it up properly when we reached the variables original deadline, as well as maintaining the index \textit{i} so it will again provide \textit{all\_foos+i} as allocatable memory. For the placement new variant there should exist a respective \textit{delete} call that we will need to change as well. Instead of the delete call we will want to invoke that instance's destructor manually and manage the memory address on our own.\\
+However local variables are intended to live and work inside the scope they are defined in. In terms of cache utilization we should assume, that their creation implies temporal locality with all the other local variables of that same scope so at this point we probably should not try to force it to live among data, that it will not share contextual relation with.\\
+Also we can't maintain semantic integrity when changing local variables. We have effectively changed the data types of \textit{f\_0} and \textit{f\_1} which will break successive statements easily or just cause subtle bugs (consider how \textit{sizeof} will still work, but yield different results for \textit{f\_0} and \textit{f\_1}). Maintaining semantic integrity can only work, when working with pointer types.\\
+In case of \textit{f\_3} the target program already does handle its data in data structures, that suffice the intention of contiguous memory blocks. Without further static analysis we can't predict which data allocation might have been intended regarding principles of locality. If an array allocation like this happens more than once in a program, these distinct blocks of memory might still correlate, but they might just as well be 'bundled' because they constitute one logic unit of computation. Forcing them to exist among other instances of their kind will most likely not provide additional benefit and as stated before without further static analysis we can't properly reason about them. To avoid breaking the code unnecessarily or to disturb a data flow that we deem optimal anyway, we only want to 'correct' the instance allocations, that lead to scattered related data. In other words: single instance heap allocations of hot data.\\
+There is a specific initialization pattern, we target and that is high frequent heap accesses. Whenever we want to set up an array of pointers for a record we will probably engage a loop that iterates the pointers, calling new a lot. For each time the new operator is invoked we will undergo a context switch into kernel mode search a memory block of appropriate size in the heap context switch back into user mode \mcp{gregory}{427}. Depending on the heaps fragmentation this will scatter the instances all over our free memory. What we want instead is for those instances to be emplaced in some predefined contiguous block of memory.
+
+\subsection{Customized memory management for splitted records}
+A contiguous block of memory for our hot data instances will prevent them from laying across the programs free memory. This way minimized stride will result in improved cache utilization. However the moment we initialize instances in our own predefined scope of memory we need to manage that space on our own. This is what custom allocators are used for.
+However assuming that block-wise initialization of data in the target source code is done intentionally, we do not want to interfere with it. Instead we will focus on providing management utensils to prevent high frequent heap access, as discussed in the previous section \refsecp{hdawwta}. There are many different implementations of custom allocators, but usually they are used to either allocate fixed sized blocks of memory or provide a demanded capacity dynamically. Since we will only handle single instance allocation COOP's custom memory management system will somewhat be a special case of a fixed block allocator where the block size is the records size.\\
+COOP will inject a data structure into the target project, that is able to find and free available space without adding significant run-time overhead. A rather simple candidate is a \textit{Free List}.
+\subsubsection{COOP's Free List}
+
+
+
+

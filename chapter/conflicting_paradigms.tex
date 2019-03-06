@@ -345,6 +345,7 @@ In order to do so we gave up something very important. When data is logically re
 \end{wrapfigure}
 This technique bundles related data and makes sure it is successive in memory as well as in cache-lines, consequently we won't peril those cache-lines to extrude each other from the cache. The book \textit{Compilers, Principles, Techniques and Tool} also describes a mechanism like this and refers to those groups as \textit{blocks} \mcp{aho}{786}.
 Also we get the chance to fully exploit our hardware's boundaries, as in now we can get rid of manually inserted padding Bytes \reffigp{cache_utilization_comp} - provided we have related data that fits the gap. It is however only possible to gain a performance boost out of this, when the unified data actually shares temporal locality.
+
 \subsubsection{Hot/Cold Splitting}\label{hot_cold_splitting}
 \begin{wrapfigure}[15]{r}{0.3\textwidth}
 \begin{lstlisting}[language=C++,numbers=none,name={The NPC class splitted into hot/cold data},label={hcsplit_npc}]
@@ -367,6 +368,12 @@ The cold data is externalized into a struct of its own. The original struct now 
 Especially for monolithic class definitions, there can be numerous logical subsets of data fields. For example one data subset of a classic OOP gameobject will mainly be used for physics calculations (velocity, acceleration, mass, colliders), another for rendering (vertice data, shaders, textures) and yet another that embeds the game object in the game's environment (health, strength, gold, stamina, etc.).\\
 First of all it is not always apparent whether a field is hot/cold. An experienced programmer might feel confident enough for a reasonably small class definition to eyeball it. A better approach might be to wrap our fields with access mechanisms that let us count how often they are accessed at run time, yet again we could rely on static analysis. Since this work will specifically implement a hot/cold split in the prototype we will get back to this in TODO REF SEC.\\
 Also we might end up picking individual fields of contextually differing data subsets. We could for example identify \textit{velocity, vertice data, gold} as our hot fields, because they are frequently accessed. However they are utilized at different times of the game and individually they have no common logical relation that is relevant to our computations!\\
+Whenever we split a record we reduce both the size of the hot data and the stride to get to subsequent instances resulting in better cache utilization \reffigp{memory_mountain}. So in terms of a heuristic (that we will later describe) we want to cutoff as much fields as possible.
+\begin{figure}[!htbp]
+	\centering
+	\includegraphics[width=\textwidth, height=0.5\textwidth]{PICs/memory_mountain}
+	\caption{Relation of a record's stride and size to the read throughput, characterized as the memory mountain. \mcppic{bryant}{623}}\label{memory_mountain}
+\end{figure}
 Even a split that divides contextual relation might result in a performance boost, if only the cold data is 'cold enough', but just as well a bad split might result in even worse cache utilization.
 In order to make a decision, that regards temporal- and spatial locality in a complex situation, we might need to find a way to evaluate, compare and eventually prioritize individual fields. An attempt to solve this will be made in the prototypical implementation, so more on that later on.\\
 
@@ -376,7 +383,7 @@ In the classical component pattern we will keep a container object that holds in
 Components are one widely used mechanism to decouple parts of a formerly shared entity. This is applied to classes and is therefore a statement to how OOP and DoD can work hand in hand. Not only is the component pattern useful for decoupling and performance interests, it also solves issues, that would normally be solved by applying multiple inheritance \mcp{nystrom}{215}, which is a practice often despised even by OOP enthusiasts.\\
 Components can be stored domain wise, while still being contextually linked individually on an object instance level. Their decoupling mechanism has proven great maintainability and even provides a comparably light weight interface for game designers. Accessing them can be done domain wise as well -> optimal cache utilization. This elegant arrangement between OOP and DoD makes it a favored pattern for modern game engines \mcp{fabian}{83}.
 \subsubsection{Array Of Structure Of Arrays (AOSOA)}\label{aosoa}
-\begin{wrapfigure}[10]{r}{0.4\textwidth}
+\begin{wrapfigure}[12]{r}{0.4\textwidth}
 \begin{lstlisting}[language=C++,numbers=none,name={AOSOA variant of grouped NPC traits},label={aosoa_npc}]
 struct npc_bucket{
 	float
@@ -399,6 +406,6 @@ Additionally \mcp{intel}{61} advises us to "\textit{Optimize data structures [..
 Going even further \mcp{intel}{3;66} warns about it's L2 hardware prefetching mechanisms to only work within page boundaries (e.g. 4KiB), so making sure a bucket fits this criteria we could further advance optimal prefetching behavior, because we ensure, that no $a_n+npc_e$ and $a_n+npc_{e+1}$ will exceed a page boundary. This complies to the principle of page locality \mc{aosoa}.\\
 We're not even done yet. AOSOA  perfectly suffices parallelization. Dependent, on which cache level is shared among the CPUs/Cores we could further optimize against it by adapting our bucket's size to for example an L2 128 Byte cache-line, resulting in a \textit{SUB\_SET\_SIZE} of $\frac{128}{8\times sizeof(float)} = 4$, guaranteeing minimal cache-level synchronization overhead.\\
 Another approach could be to determine the ratio between \textit{single-entity-access-patterns} to \textit{domain-related-access-patterns} in the source program. The more our application relies on entity-access patterns, meaning we want all or most of an entity's members (classic OOP access) the smaller our subsets could be. On the other hand, the more our application relies on domain-related access patterns, meaning we want all or many of our entities' specific members, the greater our subsets should be.\\\\
-The AOSOA pattern is highly flexible making it a fit for a lot of use cases. Its limitations are defined by the minimal bucket size and the optimization goals. The Buckets' sizes can be modified at compile time or at run time. This way even when one can't reason about subset sizes, there is still the possibility to just try out different iterations and document changes in performance/cache utilization. 
+The AOSOA pattern is highly flexible making it a fit for a lot of use cases. Its limitations are defined by the minimal bucket size and the optimization goals. The Buckets' sizes can be modified at compile time or at run time. This way even when one can't reason about subset sizes, there is still the possibility to just try out different iterations and document changes in performance/cache utilization.
 
 

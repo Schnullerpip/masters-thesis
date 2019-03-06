@@ -31,6 +31,12 @@
 \bibitem{jonblow}
 {\sc Blow, J.}: {\em Data-Oriented Demo: SOA, composition\/}.
 
+\bibitem{bryant}
+{\sc Bryant, R.~E.}, {\sc O.~David~Richard} \btxandshort{.}\ {\sc
+  O.~David~Richard}: {\em Computer systems: a programmer's perspective\/},
+  \btxvolumeshort{.}\ 281.
+\newblock Prentice Hall Upper Saddle River, 2003.
+
 \bibitem{chen}
 {\sc Chen, T.-F.} \btxandshort{.}\ {\sc J.-L. Baer}: {\em Effective
   hardware-based data prefetching for high-performance processors\/}.
@@ -85,6 +91,11 @@
 {\sc Hennessy, J.~L.} \btxandshort{.}\ {\sc D.~A. Patterson}: {\em Computer
   architecture: a quantitative approach\/}.
 \newblock Elsevier, 2011.
+
+\bibitem{henze}
+{\sc Henze, N.}: {\em Stochastik f{\"u}r Einsteiger: eine Einf{\"u}hrung in die
+  faszinierende Welt des Zufalls\/}.
+\newblock Springer-Verlag, 2011.
 
 \bibitem{hill}
 {\sc Hill, M.~D.}: {\em Aspects of cache memory and instruction buffer
@@ -167,5 +178,14 @@
 \bibitem{reinalter}
 {\sc Stefan~Reinalter, D.}: {\em Implementing a semi-automatic
   structure-of-arrays data container\/}, 2013.
+
+\bibitem{stroustrup}
+{\sc Stroustrup, B.}: {\em Einf{\"u}hrung in die Programmierung mit C++\/}.
+\newblock Pearson Deutschland GmbH, 2010.
+
+\bibitem{boxplot}
+{\sc Williamson, D.~F.}, {\sc R.~A. Parker} \btxandshort{.}\ {\sc J.~S.
+  Kendrick}: {\em The box plot: a simple visual method to interpret data\/}.
+\newblock Annals of internal medicine, 110(11):916--921, 1989.
 
 \end{thebibliography}

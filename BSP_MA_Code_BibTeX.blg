@@ -23,7 +23,7 @@ Warning--entry type for "llvm_passes" isn't style-file defined
 --line 327 of file Literatur.bib
 Warning--entry type for "clang_tools" isn't style-file defined
 --line 335 of file Literatur.bib
-Repeated entry---line 351 of file Literatur.bib
+Repeated entry---line 363 of file Literatur.bib
  : @article{cohesion
  :                  ,
 I'm skipping whatever remains of this entry
