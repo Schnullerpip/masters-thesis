@@ -37,6 +37,7 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {\small 15\normalsize }{\ignorespaces Relations depicted in function/member matrices\relax }}{41}{figure.caption.52}\protected@file@percent }
 \newlabel{npc_crosscheck_matrix_relations}{{\small 15\normalsize }{41}{Relations depicted in function/member matrices\relax }{figure.caption.52}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.2.3}Field weight heuristics}{41}{subsection.4.2.3}\protected@file@percent }
+\newlabel{field_weight_heuristics}{{4.2.3}{41}{Field weight heuristics}{subsection.4.2.3}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\nonumberline Scaling delimiters}{41}{section*.53}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {\small 16\normalsize }{\ignorespaces Good avg scaling.\relax }}{42}{figure.caption.54}\protected@file@percent }
 \newlabel{avg_delimiter}{{\small 16\normalsize }{42}{Good avg scaling.\relax }{figure.caption.54}{}}
@@ -67,21 +68,33 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {\small 28\normalsize }{\ignorespaces Exemplary field weights evaluated by our heuristic with the result, that its worth to make the split hot:[\textit  {field\_a}, ...\textit  {field\_e}], cold:[\textit  {field\_d}, ...\textit  {field\_h}].\relax }}{49}{figure.caption.62}\protected@file@percent }
 \newlabel{sig_order_final}{{\small 28\normalsize }{49}{Exemplary field weights evaluated by our heuristic with the result, that its worth to make the split hot:[\textit {field\_a}, ...\textit {field\_e}], cold:[\textit {field\_d}, ...\textit {field\_h}].\relax }{figure.caption.62}{}}
 \citation{henze}
-\citation{boxplot}
 \@writefile{toc}{\contentsline {subsubsection}{\nonumberline A brief discourse to data analysis in statistics}{50}{section*.63}\protected@file@percent }
+\citation{boxplot}
 \@writefile{toc}{\contentsline {section}{\numberline {4.3}COOP's affect on the data layout}{51}{section.4.3}\protected@file@percent }
 \citation{stroustrup}
 \citation{bryant}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.1}Hot data allocations we want to adapt}{52}{subsection.4.3.1}\protected@file@percent }
-\newlabel{hdawwta}{{4.3.1}{52}{Hot data allocations we want to adapt}{subsection.4.3.1}{}}
 \citation{gregory}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.1}Hot data allocations we want to adapt}{53}{subsection.4.3.1}\protected@file@percent }
+\newlabel{hdawwta}{{4.3.1}{53}{Hot data allocations we want to adapt}{subsection.4.3.1}{}}
 \newlabel{alloc_changes}{{17}{53}{\lstname }{lstlisting.17}{}}
 \@writefile{lol}{\contentsline {lstlisting}{\numberline {17}Examples of how we can change allocations using placement new to emplace the data where it is among related data.}{53}{lstlisting.17}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.2}Customized memory management for splitted records}{54}{subsection.4.3.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\nonumberline COOP's Free List}{54}{section*.64}\protected@file@percent }
+\citation{gregory}
+\citation{bryant}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.2}Customized memory management for splitted records / COOP's free list}{54}{subsection.4.3.2}\protected@file@percent }
+\newlabel{memory_management}{{4.3.2}{54}{Customized memory management for splitted records / COOP's free list}{subsection.4.3.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {\small 29\normalsize }{\ignorespaces Comparison of .bss and .data sizes for different initializations.\relax }}{55}{figure.caption.64}\protected@file@percent }
+\newlabel{seg_sizes}{{\small 29\normalsize }{55}{Comparison of .bss and .data sizes for different initializations.\relax }{figure.caption.64}{}}
+\newlabel{cont_mem_foo}{{18}{55}{\lstname }{lstlisting.18}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {18}Code injection to generate contiguous block of memory for a record Foo's instances.}{55}{lstlisting.18}\protected@file@percent }
+\newlabel{free_list}{{19}{57}{\lstname }{lstlisting.19}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {19}Shortened excerpt of COOP's freelist without asserts and some initialization code.}{57}{lstlisting.19}\protected@file@percent }
+\citation{gregory}
+\@writefile{lof}{\contentsline {figure}{\numberline {\small 30\normalsize }{\ignorespaces The free list's layout in memory. Starting with a (possible) initial padding, the instances here represented by nodes will be grouped in a way, that a maximum amount of nodes fits a cache-line. Each group is again aligned to the cache-lines (here 64 Byte) to guarantee minimal loads.\relax }}{59}{figure.caption.65}\protected@file@percent }
+\newlabel{free_list_in_memory}{{\small 30\normalsize }{59}{The free list's layout in memory. Starting with a (possible) initial padding, the instances here represented by nodes will be grouped in a way, that a maximum amount of nodes fits a cache-line. Each group is again aligned to the cache-lines (here 64 Byte) to guarantee minimal loads.\relax }{figure.caption.65}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\nonumberline Problematic fragmentation}{59}{section*.66}\protected@file@percent }
 \@setckpt{chapter/coop}{
-\setcounter{page}{55}
-\setcounter{equation}{6}
+\setcounter{page}{61}
+\setcounter{equation}{8}
 \setcounter{enumi}{4}
 \setcounter{enumii}{0}
 \setcounter{enumiii}{0}
@@ -95,7 +108,7 @@
 \setcounter{subsubsection}{0}
 \setcounter{paragraph}{0}
 \setcounter{subparagraph}{0}
-\setcounter{figure}{28}
+\setcounter{figure}{30}
 \setcounter{table}{1}
 \setcounter{parentequation}{0}
 \setcounter{caption@flags}{0}
@@ -104,7 +117,7 @@
 \setcounter{Hfootnote}{0}
 \setcounter{bookmark@seq@number}{0}
 \setcounter{NAT@ctr}{0}
-\setcounter{lstnumber}{15}
+\setcounter{lstnumber}{39}
 \setcounter{blindtext}{1}
 \setcounter{Blindtext}{5}
 \setcounter{blind@countparstart}{0}
@@ -118,5 +131,5 @@
 \setcounter{blind@pangramcount}{0}
 \setcounter{blind@pangrammax}{0}
 \setcounter{section@level}{3}
-\setcounter{lstlisting}{17}
+\setcounter{lstlisting}{19}
 }

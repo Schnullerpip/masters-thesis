@@ -269,9 +269,9 @@ In contrast to the previously mentioned AOS \refsecp{OOP} a \textit{Structure of
 
 \subsubsection{AOS in the cache}
 \begin{wrapfigure}[14]{r}{.35\textwidth}
-	\begin{lstlisting}[language=C++,numbers=none,name={NPC pod after derivation is done},label={post_deriv_npc}]
-	struct NPC 
-	{
+\begin{lstlisting}[language=C++,numbers=none,name={NPC pod after derivation is done},label={post_deriv_npc}]
+struct NPC 
+{
 	//inherited from Obj 
 	float xyz[3];
 	float vel[3];
@@ -280,8 +280,8 @@ In contrast to the previously mentioned AOS \refsecp{OOP} a \textit{Structure of
 	int age;
 	//NPC
 	int mood;
-	};
-	\end{lstlisting}
+};
+\end{lstlisting}
 \end{wrapfigure}
 Remembering \refcode{pods}, when examining the NPC class we know that after derivation (done by the compiler) it looks like \refcode{post_deriv_npc}. Accessing subsets of an instance of NPC will always result in loading at least a whole cache line. Lets assume, that the game code will iterate over the NPCs to update their positions by adding their velocity multiplied with a delta-time to their current xyz. With a typical L1 D cache-line of 64 Byte and assuming that an NPC is 40 Byte (float = 4 Byte, pointer = 8 Byte) we can make the following assumptions. Considering the subset of data we actually want to work with on our update routine per NPC is $2\times 3\times \textit{sizeof(float)} = $ 24 Byte, we waste $40 - 24 =$ 16 Byte of our cache per NPC. This waste scales linearly with our data.\\
 As a quick approximation onto a damage report we could do the following:
@@ -296,15 +296,15 @@ Continuing this we will count five cache misses and foregoing from 320 loaded By
 $ cache misses for the position update routines (where \textit{cms} are cache misses), is only a narrow assumption, since our cache-lines are defined in fixed quantums \reffigp{soa_aos_cl_usage}.
 \subsubsection{SOA in the cache}
 \begin{wrapfigure}[9]{r}{0.4\textwidth}
-	\begin{lstlisting}[language=C++,numbers=none,name={SOA variant of the NPC},label={soa_npc}]
-	struct NPCs{
+\begin{lstlisting}[language=C++,numbers=none,name={SOA variant of the NPC},label={soa_npc}]
+struct NPCs{
 	float xyz[3 * NUM_ENTITIES];
 	float vel[3 * NUM_ENTITIES];
 	char *name[NUM_ENTITIES];
 	int age[NUM_ENTITIES];
 	int mood[NUM_ENTITIES];
-	} npcs;
-	\end{lstlisting}
+} npcs;
+\end{lstlisting}
 \end{wrapfigure}
 Implementing the \textit{NPC} in a SOA manner it could look like \refcode{soa_npc}. What used to be individual class members are now columns/arrays, accessed by a key - the \textit{npc\_id}. From now on both reads to \textit{xyz} and \textit{vel} will fill a cacheline worth of relevant data, respectively. A single cache-line now holds up to five ($5\frac{1}{3}$) positions or velocities. This doesn't prevent our data from overlapping in terms of cache-lines. The smallest common multiple of 12 and 64 is 192, so over $\frac{192}{64}=3$ cache-lines we will fit $\frac{192}{12}=16$ units. As can be seen in \reffig{soa_aos_cl_usage} the SOA attempt will develop better cache utilization for contiguous AU access on rising data sizes, disregarding any external eviction. This does not automatically equal the amount of cache misses, since repeated data access will find the data in the cache. But a SOA data model will reduce compulsory misses.
 \subsubsection{}
@@ -314,7 +314,7 @@ Implementing the \textit{NPC} in a SOA manner it could look like \refcode{soa_np
 	\caption{Cache-line efficiency comparing NPCs represented as SOA and AOS.}\label{soa_aos_cl_usage}
 \end{wrapfigure}
 The unit we use for computations here is the size of three floats (12 Byte), so while a cache-line fits $\myfloor{\frac{64}{12}}=5$ complete units, the remnant of $64-12\times5 = 4$ Byte will belong to a unit, we will need another cache-line for. This overlap happens exactly $\frac{12}{64-60} = 3$ times until in the fourth cache-line this process repeats. Distributing logically dependent data over multiple cache-lines should be avoided, since access to it will result in more cache misses and is prone to eviction \mcp{intel}{12-19}.\\
-It can be solved by adjusting the data's \textit{alignment}. Since this will be used in the prototypical implementation it will be explained in TODO REF SEC, for now we could assume, that we align and pad our \textit{float[3]} blocks of data to our cache-lines in a way that each cache-line holds exactly five of those entities \reffigp{cache_utilization_soa}.\\
+It can be solved by adjusting the data's \textit{alignment}. Since this will be used in the prototypical implementation it will be explained in section \ref{memory_management}, for now we could assume, that we align and pad our \textit{float[3]} blocks of data to our cache-lines in a way that each cache-line holds exactly five of those entities \reffigp{cache_utilization_soa}.\\
 This leads to consistent throughput. In numbers we now have exactly two cache misses per five \textit{NPCs} (We don't really have an NPC object anymore, but we are still allowed to \textit{think} in objects). One for the positional data, one for the velocity data. Again for 1000 NPCs this would now result in 400 cache misses what translates to $225\times\sim300$ clock cycles less latency than the AOS version, for position updates alone! Each frame!
 \begin{figure}[!htbp]
 	\centering
@@ -326,15 +326,15 @@ This is starting to behave \textit{optimal}. By not loading unneeded data into t
 \subsection{Regarding temporal- and spatial locality}\label{rtasl}
 The motivation behind our AOS to SOA conversion, was to maximize cache utilization when processing an NPC's position. We figured, that loading an object entails lots of unwanted data that does not share temporal locality with the information that is relevant to us. So we made sure, that instead of objects we loaded only wanted data.
 \begin{wrapfigure}[10]{r}{0.4\textwidth}
-	\begin{lstlisting}[language=C++,numbers=none,name={Consolidating related data},label={component_npc}]
-	struct npc_group{
-		float xyz[3];
-		float vel[3];
-		float mass, damping;
-	};
-	
-	npc_group npc_groups[NUM_ENTITIES];
-	\end{lstlisting}
+\begin{lstlisting}[language=C++,numbers=none,name={Consolidating related data},label={component_npc}]
+struct npc_group{
+	float xyz[3];
+	float vel[3];
+	float mass, damping;
+};
+
+npc_group npc_groups[NUM_ENTITIES];
+\end{lstlisting}
 \end{wrapfigure}
 In order to do so we gave up something very important. When data is logically related it means, that it collaborates. Whenever we see, that certain subsets of data are frequently used together it is advisable not to separate them. So instead of rigorously converting each member into an array pendant, we group logically related data and create arrays of those groups instead \refcodep{component_npc}.This way the relevant data concerning one NPC will not spread over different incoherent cache-lines, that could map to completely different segments in main memory.
 \subsubsection{}

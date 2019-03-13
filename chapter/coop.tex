@@ -1,8 +1,8 @@
 \chapter{A prototypical implementation for a source-to-source transformation tool generating cache friendly code / COOP}\label{prototype}
 We have the tools, to programmatically strip down a program's records and reassemble it in a fashion that suits our needs (Clang). So it is time to consolidate our goals for a prototype. First of all, it should be fairly easy to integrate the tool into a working environment/existing tool-chains. For reasons mentioned in \refsec{motivation} we can't ever expect our tool to be used otherwise. As simple as that sounds this leads to interesting design choices, we will briefly discuss in \refsec{stand_alone_tool}.\\
 Even though the tool's scope will be limited due to being a one-man project it should demonstrate, that automated OOP to DoD data layout transformations are possible. To do so we will try to implement a Hot/Cold Split \refsecp{hot_cold_splitting}. Instead of completely changing the program's data layout this way we can implement a data driven optimization, that seems to be relatively easy to perform automatically. We will prove ourselves wrong later on in (TODO REF SEC) however.\\
-Ideally we desire that the target program should provide zero additional information to our tool, so the process of transforming the target program into a cache friendly pendant won't interfere with the process of solving the problem. We will later see (TODO REF SEC) why this entails massive additional responsibility for our tool.\\
-The tool needs to maintain the semantic integrity of the original source code. Even though changing the programs data layout will definitely affect the data access patterns (thus will actually change the programs data flow) the result must not be distinguishable from the original in other terms than performance. (TODO REF SEC) will show why this prerequisite will yet rely on additional effort.\\
+Ideally we desire that the target program should provide zero additional programming overhead to our tool, so the process of transforming the target program into a cache friendly pendant won't interfere with the process of solving the problem. We will later see why this entails massive additional responsibility for our tool \refsecp{auto_oop_to_dod}.\\
+The tool needs to maintain the semantic integrity of the original source code. Even though changing the programs data layout will definitely affect the data access patterns (thus will actually change the programs data flow) the result must not be distinguishable from the original in other terms than performance. (TODO REF SEC emulating deep copy etc.) will show why this prerequisite will yet rely on additional effort.\\
 We want the resulting program to be faster, measuring frame-times as well as cache-misses. However optimizing the data layout of a program will only really affect software, that heavily relies on it. For example transformations on multidimensional arrays are perfect candidates for locality optimizations \mcp{bryant}{617}. While it is difficult to guarantee performance boosts for every possible source program we should rather aim for: Improves most programs. It definitely must not make the program slower though! 
 \newpage
 \subsubsection{Summarized Goals}
@@ -116,29 +116,28 @@ Again all is not lost. Asymptotic notations provide us with useful policies to d
 \begin{wrapfigure}[21]{r}{0.4\textwidth}
 %\vspace{-45pt}
 \begin{lstlisting}[language=C++, name={Exemplary pseudo-ish code}, label={exem_code}]
-	void inc(Foo &foo){
-		foo.age += 1;
-	}
-	...
-	void p2(Foo &foo){
-		foo.bar *= foo.bar;
-	}
-	...
-	bool gt(Foo &foo1,
-			  Foo &foo2)
-	{
-		return
-			foo1.bar > foo2.bar;
-	}
-	...
-	for(Foo *foo : all_foos){
-		inc(*foo);
-	}
-	...
-	for(int i = 0; i < N; ++i)
-	for(int o = i+1; o < N; ++o)
-	collision(foos[i], foos[o]);
-
+void inc(Foo &foo){
+	foo.age += 1;
+}
+...
+void p2(Foo &foo){
+	foo.bar *= foo.bar;
+}
+...
+bool gt(Foo &foo1,
+  Foo &foo2)
+{
+	return
+		foo1.bar > foo2.bar;
+}
+...
+for(Foo *foo : all_foos){
+	inc(*foo);
+}
+...
+for(int i = 0; i < N; ++i)
+for(int o = i+1; o < N; ++o)
+collision(foos[i], foos[o]);
 \end{lstlisting}
 \end{wrapfigure}
 Now that we have found procedures, solving our problem partially we might be able to derive a fitting methodology. A first approach could be to try to evaluate field usages (non method member expressions) similarly like we would evaluate statements for an asymptotic notation. As a simple start we could count the amount of member expressions per function. Considering something like \refcode{exem_code} the \textit{inc} function in line 1 could be evaluated easily. We have one member expression \textit{foo.age}.\\
@@ -151,7 +150,8 @@ The access patterns that start to make things spicy for the cache however are us
 When looking at line 16 to 18 of \refcode{exem_code} the for-loop iterating an arbitrary number of Foos might outclass any simple function, even if that function is using dozens of distinct fields - hard coded. There is only one field usage to see, yet it could constitute numerous instances. That is why asymptotic notations evaluate loops like these with \textit{linear growth}.\\
 Even though a loop's amount of repetitions can sometimes be evaluated at compile time, in OOP where objects tend to be created on the heap and their containers are extended dynamically there is no real telling just how much distinct instances of field usages there will be. So we know, that loops might be game-changers for our evaluation, but as a matter of fact we can't ever predict a perfect number of recurrence. So either we rely on helper indices/iterators, make a few test runs to log and memorize their peaks, or we try to find a reasonable estimation. Like the O-notation we might remember loops and associate them with an arbitrary factor \textit{n} for now, but for an actual comparison of the fields, later we will need to decide how to rate them.\\
 This estimated value we are going to associate with a field usage inside a loop could be based on experience but the best we are ever going to get out of experience is "\textit{entirely depends on the use case}". A better way of evaluating a loops impact is in a way for it to not break our scale immediately, but allowing it to do so. Whats meant by that is the fact, that associating a field usage inside a loop with a number that is vastly higher than that of a function, will render our functions meaningless quickly. However the moment we start nesting loops inside each other (allowing for \textit{quadratic/polynomial growth}), calling single functions impact-less might actually be true. Besides opposed to asymptotic notations we won't rigorously drop lower order terms, we will just make sure, that an expression is allowed to be much more significant.\\
-Facing reality nested loops hold the greatest potential for bad cache utilization, since they can repeatedly load irrelevant data on several iterations. Our scale will definitely end up starting at a low level listing single function accesses on data then at some point rapidly going up where nested loops hang out together. Line 20 to 22 in \refcode{exem_code} will quickly outperform other control flow statements and while a nested for loop like this is no rarity the \textit{loop depth} of a statement, can be arbitrarily high, depending on the situation.\\\\
+Facing reality nested loops hold the greatest potential for bad cache utilization, since they can repeatedly load irrelevant data on several iterations. Our scale will definitely end up starting at a low level listing single function accesses on data then at some point rapidly going up where nested loops reside together. Line 20 to 22 in \refcode{exem_code} will quickly outperform other control flow statements and while a nested for loop like this is no rarity the \textit{loop depth} of a statement, can be arbitrarily high/deep, depending on the situation.\\
+In order to actually account for an expression's loop depth we will need measures that will be discussed in \refsec{project_scope_transformations}. For now we imagine having instant access on them.\\\\
 In terms of implementation, COOP remembers each function and each loop individually, as well as the member expressions they contain respectively. After data aggregation with the matchers and their callback routines we can create function/member and loop/member matrices like in \reffig{npc_crosscheck_matrix} for each record.\\
 Just like cohesion metrics we can use field subsets used in functions to declare contextual relation, assuming temporal locality through AST node familiarity. Meaning each row (function) embodies a relation between the fields it uses \reffigp{npc_crosscheck_matrix_relations}. Each value inside such matrix stands for the computational \textit{weight} of that field for the function. A column represents a field's distribution among the functions. Totalizing a column determines the field's overall weight that will eventually be used to compare it to the others.
 \begin{figure}[!htbp]
@@ -161,7 +161,7 @@ Just like cohesion metrics we can use field subsets used in functions to declare
 \end{figure}
 Fields' relations to each other need to be valued, too. After all their correlation will work best, if they end up as hot data together. The aim is for their temporal locality to result in improved spatial locality. Each group of field usages (function) needs to somehow weight its collective field impact, to heighten their chance to stay together as hot data. We prioritize small groups, since externalizing more fields (with low usage frequency) will result in less stride. Functions will therefore compete against each other, by adding to their field weights the overall number of fields minus the amount of fields they utilize. This scales with the number of fields a record has. As mentioned before instead of brute forcing our way through each possible split combination we now encode each field subset relation numerically so eventually it will influence a field's overall weight. It is important to form a decision over an overall weight because unlike an optimization for a specific algorithm, changing the programs data layout has the potential to affect ALL of its functions.
 
-\subsection{Field weight heuristics}
+\subsection{Field weight heuristics}\label{field_weight_heuristics}
 When we are able to define a field's overall weight on a program, whats left to do is finding a delimiter, that actually divides the field set in two subsets, depending on those weights. This again is not a trivial operation and first of all we need to define what we intend to separate.\\
 As can be seen in the Figures \ref{avg_delimiter} to \ref{avg_delimiter_bad_5} we will face numerous different situations that result of arbitrary access patterns. While sometimes it is easy to rule out certain fields for others it is not. A generic set of rules to handle this needs to be able to process special cases while not losing credibility for common ones. It can do so by scaling with the problem.
 \subsubsection{Scaling delimiters}
@@ -384,11 +384,117 @@ Also we can't maintain semantic integrity when changing local variables. We have
 In case of \textit{f\_3} the target program already does handle its data in data structures, that suffice the intention of contiguous memory blocks. Without further static analysis we can't predict which data allocation might have been intended regarding principles of locality. If an array allocation like this happens more than once in a program, these distinct blocks of memory might still correlate, but they might just as well be 'bundled' because they constitute one logic unit of computation. Forcing them to exist among other instances of their kind will most likely not provide additional benefit and as stated before without further static analysis we can't properly reason about them. To avoid breaking the code unnecessarily or to disturb a data flow that we deem optimal anyway, we only want to 'correct' the instance allocations, that lead to scattered related data. In other words: single instance heap allocations of hot data.\\
 There is a specific initialization pattern, we target and that is high frequent heap accesses. Whenever we want to set up an array of pointers for a record we will probably engage a loop that iterates the pointers, calling new a lot. For each time the new operator is invoked we will undergo a context switch into kernel mode search a memory block of appropriate size in the heap context switch back into user mode \mcp{gregory}{427}. Depending on the heaps fragmentation this will scatter the instances all over our free memory. What we want instead is for those instances to be emplaced in some predefined contiguous block of memory.
 
-\subsection{Customized memory management for splitted records}
+\subsection{Customized memory management for splitted records / COOP's free list}\label{memory_management}
 A contiguous block of memory for our hot data instances will prevent them from laying across the programs free memory. This way minimized stride will result in improved cache utilization. However the moment we initialize instances in our own predefined scope of memory we need to manage that space on our own. This is what custom allocators are used for.
-However assuming that block-wise initialization of data in the target source code is done intentionally, we do not want to interfere with it. Instead we will focus on providing management utensils to prevent high frequent heap access, as discussed in the previous section \refsecp{hdawwta}. There are many different implementations of custom allocators, but usually they are used to either allocate fixed sized blocks of memory or provide a demanded capacity dynamically. Since we will only handle single instance allocation COOP's custom memory management system will somewhat be a special case of a fixed block allocator where the block size is the records size.\\
-COOP will inject a data structure into the target project, that is able to find and free available space without adding significant run-time overhead. A rather simple candidate is a \textit{Free List}.
-\subsubsection{COOP's Free List}
+However assuming that block-wise initialization of data in the target source code is done intentionally, we do not want to interfere with it. Instead we will focus on providing management utensils to prevent high frequent heap access, as discussed in the previous section \refsecp{hdawwta}. There are many different implementations of custom allocators, but usually they are used to either allocate fixed sized blocks of memory or provide a demanded capacity dynamically. Since we will only handle single instance allocation COOP's custom memory management system will somewhat be a special case of a \textit{fixed block allocator} where the block size is the records size. In other words what we want is a so called \textit{pool allocator} \mcp{gregory}{430}.\\
+COOP will inject a data structure into the target project, that is able to find and free available space without adding significant run-time overhead. A rather simple implementation for our pool allocator is a \textit{Free List}.\\\\
+But first of all we need to inject code into the target source code, that will reserve us some memory. The data we will want to manage with our free list would have originally lived in the free memory. The heap can make use of the entire addressable space which exceeds the stack. So we don't want to move all those data to the stack, because this would potentially overflow quickly, depending on how extensively the target source code allocates heap memory. We could also rely on dynamic allocations, however in order to minimize manual memory management obligations we will instead target a static data segment. COOP will ultimately inject a bunch of (templated!) code into the target project, so in order to keep the resulting object files' sizes minimal we will use the \textit{.bss} segment. The \textit{.bss} section occupies no actual space, the object file merely needs to remember how much space it will have to demand on program load \mcp{bryant}{659}. On Unix systems the \textit{size} command line tool is a handy utensil for investigating this. For example when creating a simple \textit{bss.cpp} file with an uninitialized global array of 3 \textit{int}s and another \textit{data.cpp} file with an initialized array of 3 \textit{int}s we can investigate their object files' segment sizes, as well as their file sizes like this: \reffigp{seg_sizes}
+\begin{figure}[!htbp]
+	\centering
+	\includegraphics[width=0.5\textwidth, height=0.2\textwidth]{PICs/bss_data_comparison}
+	\caption{Comparison of .bss and .data sizes for different initializations.}
+	\label{seg_sizes}
+\end{figure}
+\linebreak
+So for a splitted record \textit{Foo}, COOP will generate the following code injection in order to reserve the appropriate amount of contiguous memory space:
+\begin{lstlisting}[language=C++,name={Code injection to generate contiguous block of memory for a record Foo's instances.},morekeywords={constexpr, size_t, coop_free_list},label={cont_mem_foo}]
+constexpr size_t hot_size_plus_ali_NPC =
+	coop::size_plus_alignments(N, alignment, element_size);
+
+constexpr size_t cold_size_plus_ali_NPC =
+	coop::size_plus_alignments(M, alignment, element_size);
+
+char byte_data_Foo[hot_size_plus_ali_Foo + cold_size_plus_ali_Foo];
+
+coop_free_list hot_free_list_instance_Foo(
+	byte_data_Foo,
+	byte_data_Foo+hot_size_plus_ali_Foo,
+	alignment, sizeof(Foo));
+
+coop_free_list cold_free_list_instance_Foo(
+	byte_data_Foo+hot_size_plus_ali_Foo,
+	byte_data_Foo+hot_size_plus_ali_Foo+cold_size_plus_ali_Foo,
+	alignment, sizeof(coop_cold_fields_Foo));
+\end{lstlisting}
+Line 1 to 5 in \refcode{cont_mem_foo} determine how much memory in Byte we need to encompass all instances. In line seven we reserve the actual memory (uninitialized \textit{.bss}) which will be the combined sizes of the hot and the cold data for the record Foo. In line 9 to 17 we create the free list instances. \refcode{cont_mem_foo} also shows that we rely on some additional variables and computations here. The sizes of the memory block, that our free lists will manage, need to be adjusted to the way the free list will operate. As mentioned before in \refsec{field_weight_heuristics} to maximize access efficiency we will align our data. On the one hand we will pack as much instances together in a cache-line, on the other hand we will align those instance groups to the cache-lines alignment. This way we will possibly generate some padding between those instance groups, but we also guarantee, that the minimum amount of cache-lines is needed to load an instance. Disadvantageous strides will not lead to instances being separated among more cache-lines than necessary.\\
+But now whenever this results in additional bytes for padding, we also effectively increased the necessary memory space to encompass all our entities. This is what the \textit{size\_plus\_alignments(size\_t number\_elements, size\_t alignment, size\_t element\_size)} function does. It takes the number of entities \textit{N} we expect during runtime (line 2), the \textit{alignment} that we will need to adjust on, and the \textit{element\_size} which will for example be the size of our record Foo.\\
+The padding per instance group is dependent on whether or not the record's size is equal to, greater than or smaller than the cache-line size and defined like this (where \textit{S} is the record's size in Byte and \textit{CLS} the cache-line size):
+\begin{align}
+pad\_per\_group = \begin{cases}
+	 0\text{ for } S == CLS\\
+	(\myfloor{\frac{S}{CLS}} +1)\cdot CLS - S \text{ for } S > CLS\\
+	CLS - (\myfloor{\frac{CLS}{S}}\cdot S) \text{ for } S < CLS
+\end{cases}
+\end{align} \\\\
+The element size is also not just \textit{sizeof(Foo)}, because we need to consider the possibility for a very small record to be split. For example if record Foo consisted of only an int (4 Byte) and a long int (8 Byte) and we wanted to split the long int away, leaving us with a single 4 Byte. As we will see when we explore the free list, it depends on its entities to be at least the size of a pointer, so it can properly resemble a linked list. That's why the \textit{element\_size} will be the maximum of the size in Byte of Foo and a Foo pointer type, to guarantee the free list to work as intended.\\
+When we have the padding per instance group we can calculate how much capacity we need to encompass all our elements including their groups' padding respectively (where \textit{m} is the number of instances per group, \textit{n} is the total amount of instances):
+\begin{align}
+	capacity = (m\cdot S + pad\_per\_group)\cdot \myceil{\frac{n}{m}}+CLS
+\end{align}
+The alignment is the target cache's alignment, which COOP will retrieve from the system on program start. On Unix systems information on the caches can be found in \textit{sys/devices/system/cpu/cpu}<CPU ID>\textit{/cache/index}<cache ID>. For example the file \textit{sys/devices/.../type} contains whether or not this cache is a data cache or not. The file \textit{coherency\_line\_size} will contain the cache-line size in Byte.\\
+The same is done for the record Foo's new cold field struct. But the number of elements ratio between the record and its cold struct pendant will (shuold) not be 1:1 for reasons we will discuss in (TODO REF SEC emulating deep copies). For now its left to say, that \textit{N} and \textit{M} will be determined by the user, as we can not predict how many instances will actually be made.\\\\
+Finally the free list instances are created (\refcode{cont_mem_foo} line 9 to 14) which will be given the byte range they will administer, as well as the target cache's line size and the 'chunk' size (which is just our record's size).
+\begin{lstlisting}[language=C++,name={Shortened excerpt of COOP's freelist without asserts and some initialization code.},morekeywords={constexpr, size_t},label={free_list}]
+	class coop_free_list	{
+	...
+	coop_fre_list(char *data_start, char *data_end, size_t alignment, size_t block_size){
+		...
+		for(size_t Ts = 0; free_ptr < end; free_ptr = *next)
+		{
+			if(++Ts > Ts_per_chunk)
+			Ts = 1;
+			
+			*next =
+				free_ptr+block_size+(Ts == Ts_per_chunk ? padding_to_next : 0);
+			
+			if(*next >= end){*next = nullptr; break;}
+		}
+		free_ptr = begin;
+	}
+	
+	template<typename T> T * get()
+	{
+		T *ret = union_cast<T*>(free_ptr);
+		free_ptr = *next;
+		return ret;
+	}
+	
+	void free(void *p)
+	{
+		char *tmp_ptr = free_ptr;
+		free_ptr = union_cast<char*>(p);
+		*next = tmp_ptr;
+	}
+private:
+	union {
+		char *free_ptr;
+		char **next;
+	};
+	char * begin = nullptr;
+	char * end = nullptr;
+	};
+\end{lstlisting}
+The \textit{coop\_free\_list} itself will only have three fields. Two char pointers (\textit{begin} and \textit{end}) which will mainly be used for bounds checking and a union containing a char pointer \textit{free\_ptr} that can also be used as a pointer to a char pointer.\\
+In their essence free lists are only linked lists. Linked lists usually contain several nodes, that are linked to their successors, sometimes their predecessors and depending on specific implementations even more pointers to relevant nodes like the list head and end. I classic introductions to linked lists, nodes are allocated dynamically and a linked list can therefore grow (and spread) over the free memory. A linked list's nodes usually contain a data element, that in our case would hold the concrete instance and one or more pointers to other nodes,so the list can be iterated by following the trail the pointers constitute. In the case of a free list we want to work with contiguous memory blocks instead. Also to further work towards beneficial cache behavior it utilizes the data's memory space to also contain the pointer information to other 'nodes'. Each respective memory range, that will encompass an instance, will actually contain the pointer to the next element, whenever it does not at the moment represent an existing instance \reffigp{free_list_in_memory}.\\
+Since we especially want to handle single instance allocations and pack those into cache-line groups we will need further effort to ensure, that those groups are aligned optimally. \refcode{free_list}'s lines 3 to 15 contain an important part of the free lists constructor. Here we initially iterate over our entire range to set up the adjacency relations of our 'nodes'. Until this point we already determined the number of instances per cache-line group (or chunk). The free list instance will work with any data type, but will almost entirely work with char pointers to avoid unnecessary much templated code. However since 'generic' data types are often represented as \textit{T}, the number of instances per chunk will here be \textit{Ts\_per\_chunk}.\\
+Starting at an address, that will initially be aligned to a cache-line we will treat it as a pointer to a char pointer instead of a char pointer, so we can emplace the information of where to find the next node in it (line 7 to 13). This is a simple operation, because we know the size of an instance (our \textit{block\_size}). Since the block size encodes Byte units we can just add it to the address of this iteration to get the address of the upcoming element. Doing so we will count towards the \textit{Ts\_per\_chunk}. When we exceed the number of elements in a cache-line group, instead of only adding the block\_size to the current address we will also add the necessary padding we determined earlier to jump towards the next aligned adress and start a new cache-line group \reffigp{free_list_in_memory}.\\
+Treating the current address as a pointer to a char pointer is possible by accessing it through the union's \textit{char **next}. 
+\begin{figure}[!htbp]
+	\centering
+	\includegraphics[width=0.86\textwidth, height=0.3\textwidth]{PICs/free_list_in_memory}
+	\caption{The free list's layout in memory. Starting with a (possible) initial padding, the instances here represented by nodes will be grouped in a way, that a maximum amount of nodes fits a cache-line. Each group is again aligned to the cache-lines (here 64 Byte) to guarantee minimal loads.}
+	\label{free_list_in_memory}
+\end{figure}
+To obtain a pointer to an element the free list provides the \textit{get} method which will simply return the actual free pointer and declare the 'next' node to be the currently free element (\refcode{free_list} line 18 to 23). It is equally easy to declare an instance's node as free space again, by caching the current free pointer in a temporary variable, setting the actual free pointer to the newly free address and declaring it's 'next' element as the cached variable (\refcode{free_list} line 25 to 30).
+
+\subsubsection{Problematic fragmentation}
+Just like the free memory ultimately our free list is prone to fragmentation, as soon, as the target program's instances 'die' more frequently as well as randomly. On the one hand we do not have to worry about a for loop trying to iterate over all the elements in the free list, by merely iterating an index variable over the original array, because our free list is injected into the code and therefore the target code will have no interaction with our free list other than the ones we intend to. But fragmentation still hurts us, as it will deteriorate the number of instances to cache-lines ratio. For example when we have three instances in a cache-line group and 'destroy' every first and second element our instance : cache-line ratio will effectively have gone from 3:1 to 1:1.\\\\
+However as new elements are created the 'holes' in between the actual data blocks will refill. Pool allocators are inherently robust when it comes to fragmentation. So In certain situations, where our target program requires a bunch of instances, deletes a random subset of them regressing our instance : cache-line ratio to 1:1, we might encounter non optimal cache utilization.\\\\
+This is a special case and might be neglected but a possible solution would be for our free list's to shift blocks of memory together. More specifically whenever an address is freed, we could take the last element and place it there. This way no matter how the \textit{get}/\textit{free} ratio of the target program would be, our data instances would be contiguous in memory. But its not that easy. Since we actually shifted the data a pointer to that data is now invalid.\\
+To sustain the pointer it could either be a smart pointer, that observes the free list, reacting to changes, or our pool allocator could provide a second array solely consisting of pointers, to the original data array. The \textit{get} method would now return an index to the pointer array and the corresponding pointer would lead to the actual data. Whenever data is shifted the pointer array is traversed and updated accordingly. Whoever is holding an index to the pointer array, will now access the actual data through an additional indirection \mcp{gregory}{440}.\\
+This could solve the fragmentation for special data lifetime patterns, but as mentioned above pool allocators are themselves quite robust to fragmentation so at this point its worth mentioning in case the pool allocator proves to be unqualified provide improved cache-utilization on its own.
+
+
 
 
 

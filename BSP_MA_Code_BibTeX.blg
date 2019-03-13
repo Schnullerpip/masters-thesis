@@ -3,6 +3,7 @@ A level-1 auxiliary file: chapter/conflicting_paradigms.aux
 A level-1 auxiliary file: chapter/motivation.aux
 A level-1 auxiliary file: chapter/compiler_as_mediator.aux
 A level-1 auxiliary file: chapter/coop.aux
+A level-1 auxiliary file: chapter/source_transformations.aux
 The style file: gerabbrv.bst
 Database file #1: Literatur.bib
 Warning--entry type for "about_oop" isn't style-file defined
@@ -34,4 +35,5 @@ Warning--to sort, need author or key in clang_tools
 Warning--empty journal in fabian
 Warning--empty journal in lcom
 Warning--can't use both volume and number fields in luk
+Warning--empty journal in bjarne_move
 (There was 1 error message)

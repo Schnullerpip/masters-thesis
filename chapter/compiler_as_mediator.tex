@@ -39,18 +39,18 @@ Luckily modern compilers are designed in a modular fashion and usually define \t
 The front end is especially interesting to us since it provides us with the appropriate representations to thoroughly investigate a program.
 
 \subsubsection{LLVM/Clang}
-\begin{wrapfigure}[9]{r}{0.4\textwidth}
-	\vspace{-20pt}
-	\begin{lstlisting}[language=C++,name={Example code in a Foo.cpp file},label={foo_code}]
-	struct Foo {
-		int bar;
-	};
-	
-	int main(){
-		Foo f;
-		f.bar = 10;
-	}
-	\end{lstlisting}
+\begin{wrapfigure}[9]{r}{0.3\textwidth}
+\vspace{-20pt}
+\begin{lstlisting}[language=C++,name={Example code in a Foo.cpp file},label={foo_code}]
+struct Foo {
+	int bar;
+};
+
+int main(){
+	Foo f;
+	f.bar = 10;
+}
+\end{lstlisting}
 \end{wrapfigure}
 A rather prominent representative of such an assembler/compiler/debugger tool-chain is the open source LLVM project. The front end functionality for C++ is here implemented in the Clang compiler. All the functionality is accessible and furthermore served through diverse production-grade reusable libraries and interfaces \mc{lattner} - for example the \textit{LibTooling} library that brings functionality for parsing code, creating ASTs and running \textit{FrontEndActions} over it. There are already mechanisms for recursive AST traversal like \textit{Recursive AST Visitors} and AST matching functionality with the \textit{AST Matchers}. Also tools like \textit{clang-query} provide a \textit{REPL} (Read-Eval-Print Loop) environment for quick testing.\\
 In \refsec{nat_lan_sup} we saw, that languages supporting DoD natively rely on particular keywords to tag a record as SOA layouts for the compiler. We will try to carefully select the right ones using appropriate metrics (Not each record will qualify for our optimization). In case of finding any records at all it is easy enough, thanks to the functionality coming with Clang.

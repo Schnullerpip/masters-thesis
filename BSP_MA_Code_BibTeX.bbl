@@ -183,6 +183,10 @@
 {\sc Stroustrup, B.}: {\em Einf{\"u}hrung in die Programmierung mit C++\/}.
 \newblock Pearson Deutschland GmbH, 2010.
 
+\bibitem{bjarne_move}
+{\sc Stroustrup, B.}: {\em Moving right along\/}.
+\newblock 2010.
+
 \bibitem{boxplot}
 {\sc Williamson, D.~F.}, {\sc R.~A. Parker} \btxandshort{.}\ {\sc J.~S.
   Kendrick}: {\em The box plot: a simple visual method to interpret data\/}.
