@@ -32,3 +32,4 @@
 \contentsline {lstlisting}{\numberline {30}Simple test code in order to make first tests. It will heavily use an NPC's positional properties (pos, vel) and basically disregard the fields name, age and mood, as they would be accessed based on user generated events.}{78}{lstlisting.30}% 
 \contentsline {lstlisting}{\numberline {31}Simple example of how to hide a field usage from the LibTooling API}{85}{lstlisting.31}% 
 \contentsline {lstlisting}{\numberline {32}Function/Member matrices for classes related by inheritance.}{87}{lstlisting.32}% 
+\contentsline {lstlisting}{\numberline {33}Simple example of why automated field rearrangements can't be considered legal.}{90}{lstlisting.33}% 

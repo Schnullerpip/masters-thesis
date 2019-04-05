@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6930 64-bit) (preloaded format=pdflatex 2019.1.14)  5 APR 2019 12:54
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6930 64-bit) (preloaded format=pdflatex 2019.1.14)  5 APR 2019 15:02
 entering extended mode
 **./BSP_MA_Code_BibTeX.tex
 (BSP_MA_Code_BibTeX.tex
@@ -1358,17 +1358,17 @@ LaTeX Font Info:    Font shape `T1/phv/m/it' in size <10.95> not available
 
 ]
 Overfull \hbox (1.29184pt too wide) detected at line 79
- []\T1/phv/b/n/10.95 100
- []
-
-
-Overfull \hbox (1.29184pt too wide) detected at line 80
  []\T1/phv/b/n/10.95 101
  []
 
 
-Overfull \hbox (1.29184pt too wide) detected at line 81
+Overfull \hbox (1.29184pt too wide) detected at line 80
  []\T1/phv/b/n/10.95 102
+ []
+
+
+Overfull \hbox (1.29184pt too wide) detected at line 81
+ []\T1/phv/b/n/10.95 103
  []
 
 )
@@ -2361,40 +2361,45 @@ Underfull \hbox (badness 10000) in paragraph at lines 65--70
 
  []
 
-[88 <./PICs/inheritance_split_2.png>] [89]) [90] (BSP_MA_Code_BibTeX.bbl
+[88 <./PICs/inheritance_split_2.png>] [89]
+Underfull \hbox (badness 10000) in paragraph at lines 91--95
+
+ []
+
+[90]) [91] (BSP_MA_Code_BibTeX.bbl
 chapter without number
 LaTeX Font Info:    Font shape `OMS/phv/m/it' in size <10.95> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 7.
-[91
+[92
 
 
-] [92]) [93] (BSP_MA_Code_BibTeX.lof [94
+] [93]) [94] (BSP_MA_Code_BibTeX.lof [95
 
-] [95])
+] [96])
 \tf@lof=\write6
 \openout6 = `BSP_MA_Code_BibTeX.lof'.
 
- [96] (BSP_MA_Code_BibTeX.lot)
+ [97] (BSP_MA_Code_BibTeX.lot)
 \tf@lot=\write7
 \openout7 = `BSP_MA_Code_BibTeX.lot'.
 
- [97
+ [98
 
-] (BSP_MA_Code_BibTeX.lol [98
+] (BSP_MA_Code_BibTeX.lol [99
 
 ])
 \tf@lol=\write8
 \openout8 = `BSP_MA_Code_BibTeX.lol'.
 
- [99] [100
+ [100] [101
 
 ]
 chapter A.
-[101
+[102
 
 ]
 chapter B.
-[102
+[103
 
 ]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 193.
@@ -2413,10 +2418,10 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 36315 strings out of 492946
- 677081 string characters out of 3125822
+ 36332 strings out of 492946
+ 677427 string characters out of 3125822
  1026524 words of memory out of 3000000
- 38853 multiletter control sequences out of 15000+200000
+ 38863 multiletter control sequences out of 15000+200000
  602110 words of font info for 98 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  71i,16n,80p,9151b,1956s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -2440,9 +2445,9 @@ rs/julian/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvbo8a.pf
 b><C:/Users/julian/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/helvetic/u
 hvr8a.pfb><C:/Users/julian/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/he
 lvetic/uhvro8a.pfb>
-Output written on BSP_MA_Code_BibTeX.pdf (108 pages, 3343703 bytes).
+Output written on BSP_MA_Code_BibTeX.pdf (109 pages, 3349550 bytes).
 PDF statistics:
- 1966 PDF objects out of 2073 (max. 8388607)
- 707 named destinations out of 1000 (max. 500000)
+ 1985 PDF objects out of 2073 (max. 8388607)
+ 714 named destinations out of 1000 (max. 500000)
  704 words of extra memory for PDF output out of 10000 (max. 10000000)
 

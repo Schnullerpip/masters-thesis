@@ -495,7 +495,7 @@ This could solve the fragmentation for special data lifetime patterns, but as me
 
 Beneficial alignments of quasi continuous entity groups in memory can strongly affect a target programs cache utilization. With our heuristic considering the field's type sizes in Byte and the target cache's line-size we are moving away from making an educated guess towards calculating actual relations between a split and it's cache utilization. Measurements will show, that this approach is improving decision making on splits, however we will notice, that sometimes but not always our formulas are off a bit. Not meaning there is some sort of race condition going on. It rather depends on the project we are testing. To be more specific, it depends on the record declarations we are examining and the record sizes of the resulting split records. It might happen, that a target programs hot-record size is different from what we calculated when we tried to make a decision whether or not a split at a certain point is beneficial or not. How so?
 
-\subsection{Structure Padding and field reordering}
+\subsection{Structure Padding and field reordering}\label{structure_padding_and_field_reordering}
 \begin{wrapfigure}[10]{r}{0.35\textwidth}
 \vspace{-1cm}
 \begin{lstlisting}[language=C++,numbers=none,name={Example field declarations to elaborate on structure padding},label={padding}]

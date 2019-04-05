@@ -3,7 +3,7 @@ This chapter will conclude the thesis, recapitulate the most important implicati
 
 \section{Future Work}
 There are numerous problems coming with a performance optimization approach like COOP. Some of them were already discussed in the previous sections as we solved them or found approximations that suffice a solution. In this section we will introduce some complications, that will dismiss COOP as a viable option as it is but can conceptually be solved in future work.
-\subsection{Hidden field usages}
+\subsection{Hidden field usages}\label{hidden_field_usages}
 \begin{wrapfigure}[5]{r}{0.4\textwidth}
 \vspace{-20pt}
 \begin{lstlisting}[language=C++,name={Simple example of how to hide a field usage from the LibTooling API},label={hidden_field_usage}]
@@ -69,14 +69,28 @@ As different versions of a templated record are determined at compile time we ca
 While our source file changes limit us to consider all versions of a record an optimization performing on machine code or intermediate representations would actually have more optimization potential, as it could treat different versions differently.
 
 \subsection{Data layout VS access patterns}
-With the measurements we have proven, that an improved data layout can result in better cache utilization and also performance. The reasons for this we discussed in \refsec{dod}. Its all about data locality effective cache-line utilization and ultimately data throughput. Data is performance \mcp{nystrom}{272}. In \refsec{affect_on_data_layout} we elaborated on how our automated hot-cold split might be null and void the moment the target program allocates it's instances scattered on the heap and how COOP would therefore allocate contiguous blocks of memory to then redefine the allocations in the target code so our theoretically reduced stride would actually translate to real optimization.\\
-That was one example of how theoretical improvement on the data layout might have been ineffective and luckily in this case there was a solution. However there is another dependency to our optimization, that can prevent COOP from actually accomplish improvement. If the access patterns of the target program don't abide the best practices we talked about in \refsec{cdap} or if the program's task just does not depend on processing (iterating) its instances at once we again can't make use of reduced stride.\\
-An improved data layout is a mighty tool only as long as the respective access patterns to it's instances allows for a minimized stride to result in improved cache-line utilization. It is therefore fairly easy to write a program, that will not profit from an improved data layout and not profit from COOP.
+With the measurements we have seen, that an automatically improved data layout can result in better cache utilization and also performance, however it is bound to certain factors and conditions. The reasons for this we discussed in \refsec{dod}. Its all about data locality effective cache-line utilization and ultimately data throughput. Data is performance \mcp{nystrom}{272}. In \refsec{affect_on_data_layout} we elaborated on how our automated hot-cold split might be null and void the moment the target program allocates it's instances scattered on the heap and how COOP would therefore allocate contiguous blocks of memory to then redefine the allocations in the target code so our theoretically reduced stride would actually translate to real optimization.\\
+That was one example of how theoretical improvement on the data layout might have been ineffective and luckily in this case there was a solution. However there is another dependency to our optimization, that can prevent COOP from actually accomplishing improvement. If the access patterns of the target program don't abide the best practices we talked about in \refsec{cdap} or if the program's task just does not depend on processing (iterating) its instances at once we again can't make use of reduced stride.\\
+An improved data layout is a mighty tool only as long as the respective access patterns to it's instances allows for a minimized stride to result in improved cache-line utilization. It is therefore fairly easy to write a program, that will not profit from an 'improved' data layout and consequently not profit from COOP.
 
-\subsection{Structural changes in record layouts}
-structure padding and why compilers dont do it
-
-
-After all its compiled with clang so unknown makros/directives/pragmas are gonna be a problem
+\subsection{Structural changes in record layouts}\label{scirl}
+In \refsec{structure_padding_and_field_reordering} we explained why calculating a record's size in memory is not as easy as accumulating it's fields type sizes. Structure padding is done by the compiler to ensure optimal data loads. In order to determine, whether or not a split is beneficial we would calculate the original record's size including padding, to further reduce stride we would minimize padding by reordering the record's fields in a descending order.\\
+This is a relatively trivial optimization, that depending on the original definition can have huge impacts on cache utilization for great amounts of data. In fact it is trivial enough to wonder why existing compilers don't do it.\\
+Eric S. Raymond explains, that
+\begin{quote}
+	"\textit{Automatic reordering would interfere with a systems programmer’s ability to lay out structures that exactly match the byte and bit-level layout of memory-mapped device control blocks}" \mc{padding}.
+\end{quote}
+Other than that since we are altering an existing code base reordering fields has another implication. In \refsec{hidden_field_usages} we explained how field usages can stay undetected due to C/C++'s ability to manually create pointers. When given a source code there is always the possibility that for whatever reasons fields are accessed through pointers or even pointer arithmetic.
+\begin{lstlisting}[language=C++, name={Simple example of why automated field rearrangements can't be considered legal.}, label={pointer_arithmetic_access}]
+struct A{
+	int a = 1;
+	int b = 2;
+} a;
+printf("%d\n", *(reinterpret_cast<int*>(&a)+1)); //out: 2
+\end{lstlisting}
+\refcode{pointer_arithmetic_access} shows a simple example of how a record's field can be accessed without ever actually using it's identifier. Reordering fields inside a record would not break the target code, but induce bugs that are very hard to find and ultimately corrupt the semantic integrity of our 'optimized version'.\\
+The follow up question is now: Why does COOP grant itself the liberty of reordering fields? The reason for this is that it already breaks code like \refcode{pointer_arithmetic_access} anyways, even without field rearrangements. COOP not only reorders fields it extracts them completely. Any pointer gymnastics, that would originally lead to a certain field can now no longer trust their record's data layout anyway. This is a conceptual contradiction to an optimization like ours and consequently invalidates COOP in its entirety! At least in terms of language compliance.\\\\
+In conclusion an optimization process like COOP can only ever be done when the user (or again further static analysis) can guarantee, that at no point in the target code base fields are accessed without invoking their identifiers.\\
+Comparably harmless pointers hiding a field will corrupt the results of our metrics/heuristics and might lead to hazardous splits and deteriorated performance but pointer arithmetic and type punning might actually result in corrupted semantics.
 
 \section{Conclusion}
