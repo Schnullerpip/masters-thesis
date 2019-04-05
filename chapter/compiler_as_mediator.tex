@@ -17,6 +17,7 @@ Modern compilers implement several \textit{phases} bundled in \textit{passes} to
 	\end{center}
 	\caption{Parse tree for the if-stmt node.}\label{parse_tree}
 \end{wrapfigure}
+\vspace{-0.5cm}
 A syntactical language definition can be done using the \textit{context free grammar} notation or \textit{BNF} (Backus-Naur Form) \mcp{aho}{40}. Those grammars define a hierarchy of rules on how to form statements/expressions in the language. By defining a set of elementary symbols (\textit{terminals}) for example keywords we can then define more complex \textit{nonterminals}, like defining how a statement is formed. Ultimately we can make \textit{production} rules that describe for example our control flow statements \refcodep{bnf}. Just like this set of grammar rules basically constitutes a hierarchy we can deduce a \textit{parse tree} for it as a concrete implementation, where beginning from the start symbol we can derive valid successors for each symbol by iterating its child nodes. Given a statement like: "$\textit{\textbf{if} \textbf{true}) i++;}$". After reading the first token \textit{if} we can iterate our parse tree's production node for that statement and easily see, that the rule demands an opening bracket immediately following the if terminal, rendering the input as syntactically ill-formed \reffigp{parse_tree}. To be able to analyze a program like this we initially need to pass through a few \textit{phases} transforming and collecting data until we have a representation, we can work with.
 
 \subsubsection{Lexical analysis}
@@ -59,7 +60,8 @@ In \refsec{nat_lan_sup} we saw, that languages supporting DoD natively rely on p
 	\includegraphics[width=\linewidth, height=0.5\textwidth]{PICs/foo_code_ast_dump}
 	\caption{AST dump of \refcode{foo_code} generated with \textit{clang -Xclang -ast-dump Foo.cpp}.}\label{foo_code_ast_dump}
 \end{figure}
-The \textit{AST Matchers} and the online \textit{AST Matcher Reference} offer an excellent modular way of matching AST nodes against predefined patterns. Working with an AST is of course a lot more comfortable than working on plain text, but it also entails a new domain that one needs to familiarize with. Clang also provides proper functionality to do so. For example seeing what kind of AST nodes there are in a certain source code. When using \textit{'clang -Xclang -ast-dump Foo.cpp'} on \refcode{foo_code} among additional meta information we will see something like \reffig{foo_code_ast_dump}. 
+The \textit{AST Matchers} and the online \textit{AST Matcher Reference} offer an excellent modular way of matching AST nodes against predefined patterns. Working with an AST is of course a lot more comfortable than working on plain text, but it also entails a new domain that one needs to familiarize with. Clang also provides proper functionality to do so. For example seeing what kind of AST nodes there are in a certain source code. When using \textit{'clang -Xclang -ast-dump Foo.cpp'} on \refcode{foo_code} among additional meta information we will see something like \reffig{foo_code_ast_dump}.
+\vspace{-0.9cm}
 \subsubsection{}
 \begin{wrapfigure}[23]{l}{0.5\linewidth}
 	\centering

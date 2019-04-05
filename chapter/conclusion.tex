@@ -1,0 +1,82 @@
+\chapter{Conclusions, major problems and future work}
+This chapter will conclude the thesis, recapitulate the most important implications coming with a tool like COOP, discuss it's greatest weaknesses and shortcomings and will evaluate whether or not the author thinks that automated OOP to DoD transformation tools are a viable approach in general.
+
+\section{Future Work}
+There are numerous problems coming with a performance optimization approach like COOP. Some of them were already discussed in the previous sections as we solved them or found approximations that suffice a solution. In this section we will introduce some complications, that will dismiss COOP as a viable option as it is but can conceptually be solved in future work.
+\subsection{Hidden field usages}
+\begin{wrapfigure}[5]{r}{0.4\textwidth}
+\vspace{-20pt}
+\begin{lstlisting}[language=C++,name={Simple example of how to hide a field usage from the LibTooling API},label={hidden_field_usage}]
+MyRecord mr;
+some_function(&mr.int_field);
+\end{lstlisting}
+\end{wrapfigure}
+The foundation of our static analysis was on the one hand to identify the records in a project as well as their respective fields. On the other hand the most important information considering our Hot/Cold split were the field usages. The LibTooling environment and especially the AST matchers provide excellent methods to filter those \textit{clang::MemberExpr} member expressions. This way we can assemble detailed charts on what is used where and by what. When given this information we can pass it to our metrics and heuristics to reason about a fields weighting. This whole process is corrupted when there are field usages, that we can't recognize as such.\\
+In \refcode{hidden_field_usage} we invoke \textit{some\_function} that takes an int pointer as an argument with the address of our custom record's \textit{int\_field} field. At first glance this might be harmless, as the \textit{mr.int\_field} member usage is correctly registered by our AST matchers, however that function could invoke numerous other functions running an arbitrary amount of loops and recursion. Each consecutive use of that particular int would by our means represent a field usage however Clang won't recognize it as one.\\\\
+To fix this we could rely on further static analysis to trace member usages of this kind. Whenever we find a function, that is invoked with a field for a parameter we would need to treat this function similarly to how we treat functions, that directly use instances of our records and more specifically treat that variable as a field usage for the functions scope, as well as for all functions, that are in turn invoked as well.
+
+\subsection{False Positives}
+COOP analyzes all records that are found in the given source files and provide a definition. While some records are utilized with access patterns, that allow for optimization potential using a Hot/Cold split, others are not. As of now COOP is not smart enough to recognize for example a singleton pattern or really any kind of factory pattern. So while the single instance of such a record might appear on several loops it won't have the effect on the cache COOP anticipates.\\
+Right now COOP would ask the user before attempting an automated split including a user provided estimation of how many instances should be anticipated so externalizing the singleton's cold fields will not harm the instance or the systems performance, however it is an indicator, that false positives exist.\\
+As long as our heuristic provides true statements about a record's 'splitability' we don't need to fear splitting it. The obtained improvements will just be so insignificant that it won't really matter. What we do need to be careful about are further changes and implementations, as those would need to consider the possibility that we are handling false positives.\\
+Right now the final decision and thus partially the responsibility are passed to the user that is however far from optimal. One of our initial goals for COOP was for the user to provide zero additional programming overhead. There is indeed no additional programming required however we demand information about a records anticipated instances.
+
+\subsection{Inheritance}
+Inheritance is one of the core features that comes with an object oriented programming language. It also is one of those core features that enable the programmer for those intuitive abstraction concepts we talked about in \refsec{motivation}.\\
+Unfortunately it is also very complex in terms of making an automated split. On the one hand "\textit{Software engineer culture is drifting away from heavy use of inheritance anyway}" \mcp{nystrom}{285} but as OOP in general it is still used and may not be ignored.\\
+In \refcode{post_deriv_npc} we have seen, that the compiler will inject certain traits to a class so that it constitutes a \textit{is a} relation to its base classes. Since that injection is done at compile time, in terms of static analysis those inherited traits are only found in the base classes.\\
+Member expressions retrieved with the Clang API correctly associate inherited members to the respective base classes. Accordingly the process of analyzing and optimizing a record can not be done only for a subclass, as gathered data and transformations might actually happen in the base class. This does however greatly affect how we need to analyze fields. Since COOP assembles function/member and loop/member matrices per record inherited state will never appear among the inherent state of a sub class.\\
+If the new state variables heavily interact with inherited fields those correlations would not be considered as a split factor right now. For example imagine a struct \textit{Base} with a field \textit{a} and a struct \textit{Sub} with field \textit{b} that extends \textit{Base}. \textit{Sub} also defines a method \textit{Foo} that returns the accumulated values of \textit{a} and \textit{b}. The two funciton/member matrices for both \textit{Base} and \textit{Sub} would show no correlation between \textit{a} and \textit{b}.
+\begin{lstlisting}[language=C++, name={Function/Member matrices for classes related by inheritance.}, label={inheritance_fmm}]
+struct Base {						struct Sub : public A {
+	int a;								int b;
+	int Bar(){return a;}				int Foo(){return a + b;}
+};										};
+Base fnc/mem matrix:				Sub fnc/memmatrix:
+a										b
+[x]Bar								[y]Foo
+\end{lstlisting}
+It might very well be, that splitting either of the fields \textit{a} or \textit{b} might result in great deteriorated performance (if a correlation exists). In terms of correct split decisions COOP needs to temporarily attribute base class state to its subclasses resembling the behavior the compiler would normally do for us.\\\\
+Hot/Cold splits inside a class hierarchy affect the subclasses of a splitted base class. As long as class individual traits are considered (in terms of possible correlation) are subclasses affected negatively by a split in its upper hierarchy? In most cases the opposite is the case. A split in a base class will effectively reduce the sub-class' size as well but it does not imply an automatic performance boost for the sub class.
+\begin{figure}[!htbp]
+	\centering
+	\includegraphics[width=0.83\textwidth,height=0.25\textwidth]{PICs/inheritance_split}
+	\caption{Example of how a Base class and a Sub class could exist in the cache. In this case externalizing the Base's fields will effectively not reduce the Sub class' size enough to reduce the necessary amount of cache-lines to encompass it.}
+	\label{inheritance_split}
+\end{figure}
+On the other hand, the split envisioned in \reffig{inheritance_split} would even separate the Sub class' fields over two cache-lines.\\\\
+Not only there is the possibility to worsen the data layout for a sub-class by splitting its base, we might also end up splitting a sub-class yet after injecting the base classes' fields to it the changes are irrelevant as those new fields completely change the data layout once more \reffigp{inheritance_split_2}!
+\begin{figure}[!htbp]
+	\centering
+	\includegraphics[width=0.83\textwidth,height=0.25\textwidth]{PICs/inheritance_split_2}
+	\caption{Example of how a split in a sub class might be ineffective as soon, as its base's fields are brought into the picture.}
+	\label{inheritance_split_2}
+\end{figure}
+Attributing members to sub-classes solves those issues relatively easily but splitting a record that is involved in inheritance becomes complex quite fast considering that a hierarchy might be arbitrarily large and especially when the language allows for multiple inheritance. When fields are attributed correctly we can reason about why certain fields should not be split (they have correlation). The next step would be for a Sub class to deem a base class' fields cold. This is a bold step, as the base class might actually rely on it quite frequently. Again this could be expressed by a cost-benefit estimation as we did before for the individual fields, when deciding whether to split it or not.\\\\
+In case of a large inheritance hierarchy, instead of creating \textit{N} cold structs, we could instead merge them to one cold struct. This way when a record \textit{Sub} extends \textit{C}, which extends \textit{B}, which extends \textit{A}, The \textit{Sub} class would not end up having three cold struct pointers but one. Otherwise it would inherit it's bases' cold struct pointers as well\\\\
+It is possible for automated Hot/Cold splits to comply with inheritance, however several factors need to be considered. A record's layout changes, as its bases change also structure padding and alignments will change as soon as a base changes. In order to correctly anticipate the data layout the inheritance hierarchy needs to be extracted and splits need to be executed in the correct order starting with the base classes so no changes to a record could result in consequent reevaluation of one of its sub classes.
+
+\section{Conceptual limitations}
+Until now we discussed issues, that for the most part can be solved applying further static analysis of the target source code. Unfortunately there are problems, that either partially invalidate our progress until now or plainly disallow COOP completely. This section will list several reasons to why COOP and this kind of optimization attempt is at least to be considered quite limited and actually to be precise not completely possible.
+%\subsection{Static analysis on field usages using statistical means is dangerous}
+%\subsection{Stand alone tool; Seamless integration into existing workspaces}
+%In \refsec{motivation} we described easy integration into existing environments as an important presupposition for %its theoretical success. We decided against LLVM's optimization pass API so potential users would not depend on the %LLVM/Clang toolchain. COOP however still uses Clang as its interface to the target source code's AST and therefore %compiles the code using the Clang frontend. Accordingly COOP will not understand anything the Clang compiler doesn't %understand. While language specific keywords are defined in a standard, pragmas and attributes are not and differ %from compiler to compiler. 
+\subsection{Templates}
+A major drawback in source-to-source transformations is its inability (or limitation) to reason about and also change records, that include templated code. Templates are a useful feature, that allow for a program to interact with the compiler, that will transform it to machine code. Whenever a record contains a field of a templated/generic type our heuristic can't work as intended as it considers a fields type size to be relevant. A generic type does not have a defined type size in our static analysis.\\
+This does not dismiss templated types altogether. As templates are resolved at compile time we could again do some of the compiler's job ourselves. While the Clang API will only find the generic templated version of a class definition for us, we could search for invocations of that class and retrieve template parameters to then construct the resulting class layout ourselves.\\
+Our static analysis would then analyze all of the versions we can assemble for our templated record definition. However even though there will be different versions of that class definition in the end, source file transformations would affect all of the resulting versions. While our heuristics could find a good split in one version of it, another version might not benefit from that split.\\
+As different versions of a templated record are determined at compile time we can retrieve all of the versions. There won't be unexpected 'new' versions of it being assembled at run-time. Only if each version of our templated definition profit from a split we could actually apply the respective changes.\\\\
+While our source file changes limit us to consider all versions of a record an optimization performing on machine code or intermediate representations would actually have more optimization potential, as it could treat different versions differently.
+
+\subsection{Data layout VS access patterns}
+With the measurements we have proven, that an improved data layout can result in better cache utilization and also performance. The reasons for this we discussed in \refsec{dod}. Its all about data locality effective cache-line utilization and ultimately data throughput. Data is performance \mcp{nystrom}{272}. In \refsec{affect_on_data_layout} we elaborated on how our automated hot-cold split might be null and void the moment the target program allocates it's instances scattered on the heap and how COOP would therefore allocate contiguous blocks of memory to then redefine the allocations in the target code so our theoretically reduced stride would actually translate to real optimization.\\
+That was one example of how theoretical improvement on the data layout might have been ineffective and luckily in this case there was a solution. However there is another dependency to our optimization, that can prevent COOP from actually accomplish improvement. If the access patterns of the target program don't abide the best practices we talked about in \refsec{cdap} or if the program's task just does not depend on processing (iterating) its instances at once we again can't make use of reduced stride.\\
+An improved data layout is a mighty tool only as long as the respective access patterns to it's instances allows for a minimized stride to result in improved cache-line utilization. It is therefore fairly easy to write a program, that will not profit from an improved data layout and not profit from COOP.
+
+\subsection{Structural changes in record layouts}
+structure padding and why compilers dont do it
+
+
+After all its compiled with clang so unknown makros/directives/pragmas are gonna be a problem
+
+\section{Conclusion}

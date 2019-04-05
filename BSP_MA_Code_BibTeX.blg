@@ -4,6 +4,9 @@ A level-1 auxiliary file: chapter/motivation.aux
 A level-1 auxiliary file: chapter/compiler_as_mediator.aux
 A level-1 auxiliary file: chapter/coop.aux
 A level-1 auxiliary file: chapter/source_transformations.aux
+A level-1 auxiliary file: chapter/project_scope_transformations.aux
+A level-1 auxiliary file: chapter/measurements.aux
+A level-1 auxiliary file: chapter/conclusion.aux
 The style file: gerabbrv.bst
 Database file #1: Literatur.bib
 Warning--entry type for "about_oop" isn't style-file defined
@@ -28,6 +31,8 @@ Repeated entry---line 363 of file Literatur.bib
  : @article{cohesion
  :                  ,
 I'm skipping whatever remains of this entry
+Warning--entry type for "padding" isn't style-file defined
+--line 445 of file Literatur.bib
 Warning--to sort, need author or key in lang_ratings
 Warning--to sort, need author or key in ispc
 Warning--to sort, need author or key in llvm_passes

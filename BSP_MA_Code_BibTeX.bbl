@@ -169,6 +169,9 @@
 {\sc Nystrom, R.}: {\em Game programming patterns\/}.
 \newblock Genever Benning, 2014.
 
+\bibitem{padding}
+{\sc Raymond, E.~S.}: {\em The Lost Art of Structure Packing\/}.
+
 \bibitem{hopl}
 {\sc Rebelsky, S.~A.}: {\em A Brief History of Programming Languages\/}, 1999.
 

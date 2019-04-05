@@ -31,34 +31,51 @@
 \contentsline {subsubsection}{\nonumberline Semantic analysis}{26}{section*.40}% 
 \contentsline {section}{\numberline {3.2}A useful interface / LibTooling}{26}{section.3.2}% 
 \contentsline {subsubsection}{\nonumberline LLVM/Clang}{27}{section*.41}% 
-\contentsline {chapter}{\numberline {4}A prototypical implementation for a source-to-source transformation tool generating cache friendly code / COOP}{30}{chapter.4}% 
-\contentsline {subsubsection}{\nonumberline Summarized Goals}{31}{section*.46}% 
-\contentsline {section}{\numberline {4.1}Stand Alone Tool}{31}{section.4.1}% 
-\contentsline {section}{\numberline {4.2}Automated split-candidate evaluation through static analysis}{33}{section.4.2}% 
-\contentsline {subsection}{\numberline {4.2.1}Data aggregation}{34}{subsection.4.2.1}% 
-\contentsline {subsection}{\numberline {4.2.2}Metric for evaluation of field usages}{35}{subsection.4.2.2}% 
-\contentsline {subsubsection}{\nonumberline Cohesion metrics}{36}{section*.48}% 
-\contentsline {subsubsection}{\nonumberline Asymptotic Notations}{37}{section*.49}% 
-\contentsline {subsubsection}{\nonumberline Quantitative cohesion alternation}{39}{section*.50}% 
-\contentsline {subsection}{\numberline {4.2.3}Field weight heuristics}{41}{subsection.4.2.3}% 
-\contentsline {subsubsection}{\nonumberline Scaling delimiters}{41}{section*.53}% 
-\contentsline {subsubsection}{\nonumberline Combined scaling delimiters}{43}{section*.56}% 
-\contentsline {subsubsection}{\nonumberline Order of significance / Significance groups}{45}{section*.59}% 
-\contentsline {subsubsection}{\nonumberline A brief discourse to data analysis in statistics}{50}{section*.63}% 
-\contentsline {section}{\numberline {4.3}COOP's affect on the data layout}{51}{section.4.3}% 
-\contentsline {subsection}{\numberline {4.3.1}Hot data allocations we want to adapt}{53}{subsection.4.3.1}% 
-\contentsline {subsection}{\numberline {4.3.2}Customized memory management for splitted records / COOP's free list}{54}{subsection.4.3.2}% 
-\contentsline {subsubsection}{\nonumberline Problematic fragmentation}{59}{section*.66}% 
-\contentsline {chapter}{\numberline {5}Source transformations and pitfalls of semantic integrity}{61}{chapter.5}% 
-\contentsline {subsection}{\numberline {5.0.1}Redirecting cold field access to the externalized subset}{63}{subsection.5.0.1}% 
-\contentsline {subsection}{\numberline {5.0.2}Guaranteed existence of cold fields}{63}{subsection.5.0.2}% 
-\contentsline {subsection}{\numberline {5.0.3}Semantic integrity and deep copy emulation}{65}{subsection.5.0.3}% 
-\contentsline {subsection}{\numberline {5.0.4}Constructor initializers associating externalized fields and const qualified cold fields}{69}{subsection.5.0.4}% 
-\contentsline {chapter}{\numberline {6}Project Scope Transformations}{71}{chapter.6}% 
-\contentsline {chapter}{\nonumberline Bibliography}{73}{chapter*.68}% 
-\contentsline {chapter}{\nonumberline List of Figures}{76}{chapter*.69}% 
-\contentsline {chapter}{\nonumberline List of Tables}{78}{chapter*.70}% 
-\contentsline {chapter}{\nonumberline List of Code}{79}{chapter*.72}% 
-\contentsline {chapter}{List of Abbreviations}{81}{section*.73}% 
-\contentsline {chapter}{\numberline {A}Anhang A}{82}{appendix.A}% 
-\contentsline {chapter}{\numberline {B}Anhang B}{83}{appendix.B}% 
+\contentsline {chapter}{\numberline {4}A prototypical implementation for a source-to-source transformation tool generating cache friendly code / COOP}{29}{chapter.4}% 
+\contentsline {subsubsection}{\nonumberline Summarized Goals}{30}{section*.46}% 
+\contentsline {section}{\numberline {4.1}Stand Alone Tool}{30}{section.4.1}% 
+\contentsline {section}{\numberline {4.2}Automated split-candidate evaluation through static analysis}{32}{section.4.2}% 
+\contentsline {subsection}{\numberline {4.2.1}Data aggregation}{33}{subsection.4.2.1}% 
+\contentsline {subsection}{\numberline {4.2.2}Metric for evaluation of field usages}{34}{subsection.4.2.2}% 
+\contentsline {subsubsection}{\nonumberline Cohesion metrics}{35}{section*.48}% 
+\contentsline {subsubsection}{\nonumberline Asymptotic Notations}{36}{section*.49}% 
+\contentsline {subsubsection}{\nonumberline Quantitative cohesion alternation}{38}{section*.50}% 
+\contentsline {subsection}{\numberline {4.2.3}Field weight heuristics}{40}{subsection.4.2.3}% 
+\contentsline {subsubsection}{\nonumberline Scaling delimiters}{40}{section*.53}% 
+\contentsline {subsubsection}{\nonumberline Combined scaling delimiters}{42}{section*.56}% 
+\contentsline {subsubsection}{\nonumberline Order of significance / Significance groups}{44}{section*.59}% 
+\contentsline {subsubsection}{\nonumberline A brief discourse to data analysis in statistics}{49}{section*.63}% 
+\contentsline {section}{\numberline {4.3}COOP's affect on the data layout}{50}{section.4.3}% 
+\contentsline {subsection}{\numberline {4.3.1}Hot data allocations we want to adapt}{52}{subsection.4.3.1}% 
+\contentsline {subsection}{\numberline {4.3.2}Customized memory management for splitted records / COOP's free list}{53}{subsection.4.3.2}% 
+\contentsline {subsubsection}{\nonumberline Problematic fragmentation}{58}{section*.66}% 
+\contentsline {subsection}{\numberline {4.3.3}Structure Padding and field reordering}{59}{subsection.4.3.3}% 
+\contentsline {chapter}{\numberline {5}Source transformations and pitfalls of semantic integrity}{62}{chapter.5}% 
+\contentsline {subsection}{\numberline {5.0.1}Redirecting cold field access to the externalized subset}{64}{subsection.5.0.1}% 
+\contentsline {subsection}{\numberline {5.0.2}Guaranteed existence of cold fields}{64}{subsection.5.0.2}% 
+\contentsline {subsection}{\numberline {5.0.3}Semantic integrity and deep copy emulation}{66}{subsection.5.0.3}% 
+\contentsline {subsection}{\numberline {5.0.4}Constructor initializers associating externalized fields and const qualified cold fields}{70}{subsection.5.0.4}% 
+\contentsline {chapter}{\numberline {6}The Project Context}{72}{chapter.6}% 
+\contentsline {subsection}{\numberline {6.0.1}Global AST Node Representations}{73}{subsection.6.0.1}% 
+\contentsline {subsection}{\numberline {6.0.2}Project contextual AST abbreviation}{76}{subsection.6.0.2}% 
+\contentsline {chapter}{\numberline {7}Measurements}{78}{chapter.7}% 
+\contentsline {section}{\numberline {7.1}COOP's impact on performance}{78}{section.7.1}% 
+\contentsline {subsection}{\numberline {7.1.1}Low complexity test scenario}{78}{subsection.7.1.1}% 
+\contentsline {subsection}{\numberline {7.1.2}Testing an OOP particle system}{81}{subsection.7.1.2}% 
+\contentsline {chapter}{\numberline {8}Conclusions, major problems and future work}{85}{chapter.8}% 
+\contentsline {section}{\numberline {8.1}Future Work}{85}{section.8.1}% 
+\contentsline {subsection}{\numberline {8.1.1}Hidden field usages}{85}{subsection.8.1.1}% 
+\contentsline {subsection}{\numberline {8.1.2}False Positives}{86}{subsection.8.1.2}% 
+\contentsline {subsection}{\numberline {8.1.3}Inheritance}{86}{subsection.8.1.3}% 
+\contentsline {section}{\numberline {8.2}Conceptual limitations}{88}{section.8.2}% 
+\contentsline {subsection}{\numberline {8.2.1}Templates}{89}{subsection.8.2.1}% 
+\contentsline {subsection}{\numberline {8.2.2}Data layout VS access patterns}{89}{subsection.8.2.2}% 
+\contentsline {subsection}{\numberline {8.2.3}Structural changes in record layouts}{90}{subsection.8.2.3}% 
+\contentsline {section}{\numberline {8.3}Conclusion}{90}{section.8.3}% 
+\contentsline {chapter}{\nonumberline Bibliography}{91}{chapter*.80}% 
+\contentsline {chapter}{\nonumberline List of Figures}{94}{chapter*.81}% 
+\contentsline {chapter}{\nonumberline List of Tables}{97}{chapter*.82}% 
+\contentsline {chapter}{\nonumberline List of Code}{98}{chapter*.84}% 
+\contentsline {chapter}{List of Abbreviations}{100}{section*.85}% 
+\contentsline {chapter}{\numberline {A}Anhang A}{101}{appendix.A}% 
+\contentsline {chapter}{\numberline {B}Anhang B}{102}{appendix.B}% 
