@@ -33,6 +33,10 @@ Repeated entry---line 363 of file Literatur.bib
 I'm skipping whatever remains of this entry
 Warning--entry type for "padding" isn't style-file defined
 --line 445 of file Literatur.bib
+Warning--entry type for "denis" isn't style-file defined
+--line 469 of file Literatur.bib
+Warning--entry type for "bolt" isn't style-file defined
+--line 478 of file Literatur.bib
 Warning--to sort, need author or key in lang_ratings
 Warning--to sort, need author or key in ispc
 Warning--to sort, need author or key in llvm_passes

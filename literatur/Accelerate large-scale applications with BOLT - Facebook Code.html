@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns#" lang="en-US"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><script src="Accelerate%20large-scale%20applications%20with%20BOLT%20-%20Facebook%20Code_files/nr-1118.js"></script><script src="Accelerate%20large-scale%20applications%20with%20BOLT%20-%20Facebook%20Code_files/sdk_002.js" async="" crossorigin="anonymous"></script><script id="facebook-jssdk" src="Accelerate%20large-scale%20applications%20with%20BOLT%20-%20Facebook%20Code_files/sdk.js"></script><script type="text/javascript">window.NREUM||(NREUM={}),__nr_require=function(e,n,t){function r(t){if(!n[t]){var o=n[t]={exports:{}};e[t][0].call(o.exports,function(n){var o=e[t][1][n];return r(o||n)},o,o.exports)}return n[t].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<t.length;o++)r(t[o]);return r}({1:[function(e,n,t){function r(){}function o(e,n,t){return function(){return i(e,[c.now()].concat(u(arguments)),n?null:this,t),n?void 0:this}}var i=e("handle"),a=e(3),u=e(4),f=e("ee").get("tracer"),c=e("loader"),s=NREUM;"undefined"==typeof window.newrelic&&(newrelic=s);var p=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],d="api-",l=d+"ixn-";a(p,function(e,n){s[n]=o(d+n,!0,"api")}),s.addPageAction=o(d+"addPageAction",!0),s.setCurrentRouteName=o(d+"routeName",!0),n.exports=newrelic,s.interaction=function(){return(new r).get()};var m=r.prototype={createTracer:function(e,n){var t={},r=this,o="function"==typeof n;return i(l+"tracer",[c.now(),e,t],r),function(){if(f.emit((o?"":"no-")+"fn-start",[c.now(),r,o],t),o)try{return n.apply(this,arguments)}catch(e){throw f.emit("fn-err",[arguments,this,e],t),e}finally{f.emit("fn-end",[c.now()],t)}}}};a("actionText,setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(e,n){m[n]=o(l+n)}),newrelic.noticeError=function(e,n){"string"==typeof e&&(e=new Error(e)),i("err",[e,c.now(),!1,n])}},{}],2:[function(e,n,t){function r(e,n){if(!o)return!1;if(e!==o)return!1;if(!n)return!0;if(!i)return!1;for(var t=i.split("."),r=n.split("."),a=0;a<r.length;a++)if(r[a]!==t[a])return!1;return!0}var o=null,i=null,a=/Version\/(\S+)\s+Safari/;if(navigator.userAgent){var u=navigator.userAgent,f=u.match(a);f&&u.indexOf("Chrome")===-1&&u.indexOf("Chromium")===-1&&(o="Safari",i=f[1])}n.exports={agent:o,version:i,match:r}},{}],3:[function(e,n,t){function r(e,n){var t=[],r="",i=0;for(r in e)o.call(e,r)&&(t[i]=n(r,e[r]),i+=1);return t}var o=Object.prototype.hasOwnProperty;n.exports=r},{}],4:[function(e,n,t){function r(e,n,t){n||(n=0),"undefined"==typeof t&&(t=e?e.length:0);for(var r=-1,o=t-n||0,i=Array(o<0?0:o);++r<o;)i[r]=e[n+r];return i}n.exports=r},{}],5:[function(e,n,t){n.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(e,n,t){function r(){}function o(e){function n(e){return e&&e instanceof r?e:e?f(e,u,i):i()}function t(t,r,o,i){if(!d.aborted||i){e&&e(t,r,o);for(var a=n(o),u=v(t),f=u.length,c=0;c<f;c++)u[c].apply(a,r);var p=s[y[t]];return p&&p.push([b,t,r,a]),a}}function l(e,n){h[e]=v(e).concat(n)}function m(e,n){var t=h[e];if(t)for(var r=0;r<t.length;r++)t[r]===n&&t.splice(r,1)}function v(e){return h[e]||[]}function g(e){return p[e]=p[e]||o(t)}function w(e,n){c(e,function(e,t){n=n||"feature",y[t]=n,n in s||(s[n]=[])})}var h={},y={},b={on:l,addEventListener:l,removeEventListener:m,emit:t,get:g,listeners:v,context:n,buffer:w,abort:a,aborted:!1};return b}function i(){return new r}function a(){(s.api||s.feature)&&(d.aborted=!0,s=d.backlog={})}var u="nr@context",f=e("gos"),c=e(3),s={},p={},d=n.exports=o();d.backlog=s},{}],gos:[function(e,n,t){function r(e,n,t){if(o.call(e,n))return e[n];var r=t();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(e,n,{value:r,writable:!0,enumerable:!1}),r}catch(i){}return e[n]=r,r}var o=Object.prototype.hasOwnProperty;n.exports=r},{}],handle:[function(e,n,t){function r(e,n,t,r){o.buffer([e],r),o.emit(e,n,t)}var o=e("ee").get("handle");n.exports=r,r.ee=o},{}],id:[function(e,n,t){function r(e){var n=typeof e;return!e||"object"!==n&&"function"!==n?-1:e===window?0:a(e,i,function(){return o++})}var o=1,i="nr@id",a=e("gos");n.exports=r},{}],loader:[function(e,n,t){function r(){if(!E++){var e=x.info=NREUM.info,n=l.getElementsByTagName("script")[0];if(setTimeout(s.abort,3e4),!(e&&e.licenseKey&&e.applicationID&&n))return s.abort();c(y,function(n,t){e[n]||(e[n]=t)}),f("mark",["onload",a()+x.offset],null,"api");var t=l.createElement("script");t.src="https://"+e.agent,n.parentNode.insertBefore(t,n)}}function o(){"complete"===l.readyState&&i()}function i(){f("mark",["domContent",a()+x.offset],null,"api")}function a(){return O.exists&&performance.now?Math.round(performance.now()):(u=Math.max((new Date).getTime(),u))-x.offset}var u=(new Date).getTime(),f=e("handle"),c=e(3),s=e("ee"),p=e(2),d=window,l=d.document,m="addEventListener",v="attachEvent",g=d.XMLHttpRequest,w=g&&g.prototype;NREUM.o={ST:setTimeout,SI:d.setImmediate,CT:clearTimeout,XHR:g,REQ:d.Request,EV:d.Event,PR:d.Promise,MO:d.MutationObserver};var h=""+location,y={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1118.min.js"},b=g&&w&&w[m]&&!/CriOS/.test(navigator.userAgent),x=n.exports={offset:u,now:a,origin:h,features:{},xhrWrappable:b,userAgent:p};e(1),l[m]?(l[m]("DOMContentLoaded",i,!1),d[m]("load",r,!1)):(l[v]("onreadystatechange",o),d[v]("onload",r)),f("mark",["firstbyte",u],null,"api");var E=0,O=e(5)},{}]},{},["loader"]);</script>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-title" content="Facebook Code - Facebook Engineering Blog">
+	<meta property="fb:app_id" content="1425766027653270">
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+	<link rel="pingback" href="https://code.fb.com/xmlrpc.php">
+	<link href="Accelerate%20large-scale%20applications%20with%20BOLT%20-%20Facebook%20Code_files/ekko-lightbox.css" type="text/css" rel="stylesheet">
+	<title>Accelerate large-scale applications with BOLT - Facebook Code</title>
+
+<!-- This site is optimized with the Yoast SEO plugin v9.7 - https://yoast.com/wordpress/plugins/seo/ -->
+<link rel="canonical" href="https://code.fb.com/data-infrastructure/accelerate-large-scale-applications-with-bolt/">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Accelerate large-scale applications with BOLT - Facebook Code">
+<meta property="og:description" content="Highly complex services, such as those here at Facebook, have large source code bases in order to deliver a wide range of features and functionality. Even after the machine code for one of these services is compiled, it can range from 10s to 100s of megabytes in size, which is often too large to fit [...]Read More...">
+<meta property="og:url" content="https://code.fb.com/data-infrastructure/accelerate-large-scale-applications-with-bolt/">
+<meta property="og:site_name" content="Facebook Code">
+<meta property="article:section" content="Data Infrastructure">
+<meta property="article:published_time" content="2018-06-19T20:29:28+00:00">
+<meta property="article:modified_time" content="2018-07-02T17:40:37+00:00">
+<meta property="og:updated_time" content="2018-07-02T17:40:37+00:00">
+<meta property="og:image" content="https://code.fb.com/wp-content/uploads/2018/06/bolt_new_hero2.png">
+<meta property="og:image:secure_url" content="https://code.fb.com/wp-content/uploads/2018/06/bolt_new_hero2.png">
+<meta property="og:image:width" content="1988">
+<meta property="og:image:height" content="1118">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:description" content="Highly complex services, such as those here at Facebook, have large source code bases in order to deliver a wide range of features and functionality. Even after the machine code for one of these services is compiled, it can range from 10s to 100s of megabytes in size, which is often too large to fit [...]Read More...">
+<meta name="twitter:title" content="Accelerate large-scale applications with BOLT - Facebook Code">
+<meta name="twitter:image" content="https://code.fb.com/wp-content/uploads/2018/06/bolt_new_hero2.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","url":"https://code.fb.com/","sameAs":[],"@id":"https://code.fb.com/#organization","name":"Facebook","logo":""}</script>
+<!-- / Yoast SEO plugin. -->
+
+<link rel="dns-prefetch" href="https://s0.wp.com/">
+<link rel="dns-prefetch" href="https://secure.gravatar.com/">
+<link rel="dns-prefetch" href="https://use.typekit.net/">
+<link rel="dns-prefetch" href="https://s.w.org/">
+<link rel="alternate" type="application/rss+xml" title="Facebook Code » Feed" href="https://code.fb.com/feed/">
+<link rel="alternate" type="application/rss+xml" title="Facebook Code » Comments Feed" href="https://code.fb.com/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="Facebook Code » Accelerate large-scale applications with BOLT Comments Feed" href="https://code.fb.com/data-infrastructure/accelerate-large-scale-applications-with-bolt/feed/">
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11.2.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11.2.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/code.fb.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.1.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56760,9792,65039],[55358,56760,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script><script src="Accelerate%20large-scale%20applications%20with%20BOLT%20-%20Facebook%20Code_files/wp-emoji-release.js" type="text/javascript" defer="defer"></script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel="stylesheet" id="all-css-0" href="Accelerate%20large-scale%20applications%20with%20BOLT%20-%20Facebook%20Code_files/a.css" type="text/css" media="all">
+<link rel="stylesheet" id="typekit-freight-sans-css" href="Accelerate%20large-scale%20applications%20with%20BOLT%20-%20Facebook%20Code_files/tmo5rvf.css" type="text/css" media="all">
+<link rel="stylesheet" id="all-css-2" href="Accelerate%20large-scale%20applications%20with%20BOLT%20-%20Facebook%20Code_files/jetpack.css" type="text/css" media="all">
+<script type="text/javascript" src="Accelerate%20large-scale%20applications%20with%20BOLT%20-%20Facebook%20Code_files/a_002.js"></script>
+<link rel="https://api.w.org/" href="https://code.fb.com/wp-json/">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://code.fb.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://code.fb.com/wp-includes/wlwmanifest.xml"> 
+<meta name="generator" content="WordPress 5.1.1">
+<link rel="shortlink" href="https://wp.me/pa0Lhq-2fX">
+<link rel="alternate" type="application/json+oembed" href="https://code.fb.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcode.fb.com%2Fdata-infrastructure%2Faccelerate-large-scale-applications-with-bolt%2F">
+<link rel="alternate" type="text/xml+oembed" href="https://code.fb.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcode.fb.com%2Fdata-infrastructure%2Faccelerate-large-scale-applications-with-bolt%2F&amp;format=xml">
+
+<link rel="dns-prefetch" href="https://v0.wordpress.com/">
+<style type="text/css">img#wpstats{display:none}</style>
+	<link rel="shortcut icon" href="https://code.fb.com/wp-content/themes/code-fb-com/favicon.ico">
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async="" src="Accelerate%20large-scale%20applications%20with%20BOLT%20-%20Facebook%20Code_files/js"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		gtag('config', 'UA-44373548-1');
+	</script>
+<style type="text/css">.fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_reposition{overflow:hidden;position:relative}.fb_invisible{display:none}.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}@keyframes fb_transform{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}.fb_animate{animation:fb_transform .3s forwards}
+.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}.fb_dialog_advanced{border-radius:8px;padding:10px}.fb_dialog_content{background:#fff;color:#373737}.fb_dialog_close_icon{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px}.fb_dialog_mobile .fb_dialog_close_icon{left:5px;right:auto;top:5px}.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}.fb_dialog_close_icon:hover{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent}.fb_dialog_close_icon:active{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent}.fb_dialog_iframe{line-height:0}.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #365899;color:#fff;font-size:14px;font-weight:bold;margin:0}.fb_dialog_content .dialog_title>span{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yd/r/Cou7n-nqK52.gif) no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}body.fb_hidden{height:100%;left:0;margin:0;overflow:visible;position:absolute;top:-10000px;transform:none;width:100%}.fb_dialog.fb_dialog_mobile.loading{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ya/r/3rhSv5V8j3o.gif) white no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}.fb_dialog.fb_dialog_mobile.loading.centered{background:none;height:auto;min-height:initial;min-width:initial;width:auto}.fb_dialog.fb_dialog_mobile.loading.centered #fb_dialog_loader_spinner{width:100%}.fb_dialog.fb_dialog_mobile.loading.centered .fb_dialog_content{background:none}.loading.centered #fb_dialog_loader_close{clear:both;color:#fff;display:block;font-size:18px;padding-top:20px}#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .4);bottom:0;left:0;min-height:100%;position:absolute;right:0;top:0;width:100%;z-index:10000}#fb-root #fb_dialog_ipad_overlay.hidden{display:none}.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}.fb_dialog_mobile .fb_dialog_iframe{position:sticky;top:0}.fb_dialog_content .dialog_header{background:linear-gradient(from(#738aba), to(#2c4987));border-bottom:1px solid;border-color:#1d3c78;box-shadow:white 0 1px 1px -1px inset;color:#fff;font:bold 14px Helvetica, sans-serif;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}.fb_dialog_content .dialog_header table{height:43px;width:100%}.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px}.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px}.fb_dialog_content .touchable_button{background:linear-gradient(from(#4267B2), to(#2a4887));background-clip:padding-box;border:1px solid #29487d;border-radius:3px;display:inline-block;line-height:18px;margin-top:3px;max-width:85px;padding:4px 12px;position:relative}.fb_dialog_content .dialog_header .touchable_button input{background:none;border:none;color:#fff;font:bold 12px Helvetica, sans-serif;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}.fb_dialog_content .dialog_content{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #4a4a4a;border-bottom:0;border-top:0;height:150px}.fb_dialog_content .dialog_footer{background:#f5f6f7;border:1px solid #4a4a4a;border-top-color:#ccc;height:40px}#fb_dialog_loader_close{float:left}.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}#fb_dialog_loader_spinner{animation:rotateSpinner 1.2s linear infinite;background-color:transparent;background-image:url(https://static.xx.fbcdn.net/rsrc.php/v3/yD/r/t-wz8gw1xG1.png);background-position:50% 50%;background-repeat:no-repeat;height:24px;width:24px}@keyframes rotateSpinner{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.fb_iframe_widget{display:inline-block;position:relative}.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}.fb_iframe_widget iframe{position:absolute}.fb_iframe_widget_fluid_desktop,.fb_iframe_widget_fluid_desktop span,.fb_iframe_widget_fluid_desktop iframe{max-width:100%}.fb_iframe_widget_fluid_desktop iframe{min-width:220px;position:relative}.fb_iframe_widget_lift{z-index:1}.fb_iframe_widget_fluid{display:inline}.fb_iframe_widget_fluid span{width:100%}</style></head>
+
+<body class="post-template-default single single-post postid-8677 single-format-standard group-blog">
+
+<div class="hfeed site" id="page">
+
+<!-- ******************* The Navbar Area ******************* -->
+<div class="wrapper-fluid wrapper-navbar" id="wrapper-navbar">
+	<a class="skip-link screen-reader-text sr-only" href="#content">
+	Skip to content	</a>
+
+	<nav class="navbar navbar-expand-std">
+
+			<div class="nav-container">
+	
+
+				<!-- Your site title as branding in the menu -->
+
+	<div class="nav-top-row">
+	
+				<!-- The nav bar reflects this block -->
+			<a class="navbar-brand" rel="home" href="https://code.fb.com/" title="Facebook Code">
+				<svg class="facebook-code-logo" enable-background="new 0 0 32 32" height="32px" id="Layer_1" version="1.0" viewBox="0 0 32 32" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
+					<g>
+						<path d="M32,30c0,1.104-0.896,2-2,2H2c-1.104,0-2-0.896-2-2V2c0-1.104,0.896-2,2-2h28c1.104,0,2,0.896,2,2V30z" fill="#3B5998"></path>
+						<path d="M22,32V20h4l1-5h-5v-2c0-2,1.002-3,3-3h2V5c-1,0-2.24,0-4,0c-3.675,0-6,2.881-6,7v3h-4v5h4v12H22z" fill="#FFFFFF" id="f"></path>
+					</g>
+					<g></g>
+					<g></g>
+					<g></g>
+					<g></g>
+					<g></g>
+					<g></g>
+				</svg> Code
+			</a>
+
+	
+	<!-- end custom logo -->
+
+				<input type="text" name="search" class="form-control-lg navbar-search" autocomplete="off">
+
+				<button class="navbar-toggler navbar-searchbar-toggler" type="button" data-toggle="collapse" data-target="#searchbarDropdown" aria-controls="searchbarDropdown" aria-expanded="false" aria-label="Toggle navigation">
+					<img src="Accelerate%20large-scale%20applications%20with%20BOLT%20-%20Facebook%20Code_files/search-icon.png" class="navbar-mobile-search-icon">
+				</button>
+
+				<!-- desktop language menu (mobile language menu is implemented via jQuery)-->
+				<div class="notranslate nice-select navbar-language form-control" style="display: none;">
+				</div><div class="nice-select notranslate navbar-language form-control" tabindex="0"><span class="current"></span><ul class="list"></ul></div>
+
+				<button class="navbar-toggler collapsed navbar-menu-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+			</div>
+
+			<!-- The WordPress Menu goes here -->
+	<div id="navbarNavDropdown" class="collapse navbar-collapse"><ul id="main-menu" class="navbar-nav"><li id="menu-item-60" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children nav-item menu-item-60 dropdown"><a title="Open Source" href="#" data-toggle="dropdown" class="nav-link dropdown-toggle">Open Source <span class="caret"></span><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 129 129" enable-background="new 0 0 129 129" width="12px" height="15px">
+							<polyline points="40 50 80 90 120 50" stroke="#adb1b8" stroke-width="10" stroke-linecap="butt" fill="none" stroke-linejoin="miter"></polyline>
+						  </svg></a>
+<ul class=" dropdown-menu" role="menu">
+	<li id="menu-item-12330" class="menu-item menu-item-type-taxonomy menu-item-object-category nav-item menu-item-12330"><a title="Open Source" href="https://code.fb.com/category/open-source/" class="nav-link">Open Source</a></li>
+	<li id="menu-item-12331" class="menu-item menu-item-type-custom menu-item-object-custom nav-item menu-item-12331"><a title="Facebook Open Source" href="https://opensource.facebook.com/" class="nav-link">Facebook Open Source</a></li>
+</ul>
+</li>
+<li id="menu-item-2686" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children nav-item menu-item-2686 dropdown"><a title="Platforms" href="#" data-toggle="dropdown" class="nav-link dropdown-toggle">Platforms <span class="caret"></span><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 129 129" enable-background="new 0 0 129 129" width="12px" height="15px">
+							<polyline points="40 50 80 90 120 50" stroke="#adb1b8" stroke-width="10" stroke-linecap="butt" fill="none" stroke-linejoin="miter"></polyline>
+						  </svg></a>
+<ul class=" dropdown-menu" role="menu">
+	<li id="menu-item-65" class="menu-item menu-item-type-taxonomy menu-item-object-category nav-item menu-item-65"><a title="Android" href="https://code.fb.com/category/android/" class="nav-link">Android</a></li>
+	<li id="menu-item-66" class="menu-item menu-item-type-taxonomy menu-item-object-category nav-item menu-item-66"><a title="iOS" href="https://code.fb.com/category/ios/" class="nav-link">iOS</a></li>
+	<li id="menu-item-67" class="menu-item menu-item-type-taxonomy menu-item-object-category nav-item menu-item-67"><a title="Web" href="https://code.fb.com/category/web/" class="nav-link">Web</a></li>
+</ul>
+</li>
+<li id="menu-item-2682" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children nav-item menu-item-2682 dropdown"><a title="Infrastructure Systems" href="#" data-toggle="dropdown" class="nav-link dropdown-toggle">Infrastructure Systems <span class="caret"></span><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 129 129" enable-background="new 0 0 129 129" width="12px" height="15px">
+							<polyline points="40 50 80 90 120 50" stroke="#adb1b8" stroke-width="10" stroke-linecap="butt" fill="none" stroke-linejoin="miter"></polyline>
+						  </svg></a>
+<ul class=" dropdown-menu" role="menu">
+	<li id="menu-item-218" class="menu-item menu-item-type-taxonomy menu-item-object-category nav-item menu-item-218"><a title="Core Data" href="https://code.fb.com/category/core-data/" class="nav-link">Core Data</a></li>
+	<li id="menu-item-219" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent nav-item menu-item-219"><a title="Data Infrastructure" href="https://code.fb.com/category/data-infrastructure/" class="nav-link">Data Infrastructure</a></li>
+	<li id="menu-item-220" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent nav-item menu-item-220"><a title="Developer Tools" href="https://code.fb.com/category/developer-tools/" class="nav-link">Developer Tools</a></li>
+	<li id="menu-item-226" class="menu-item menu-item-type-taxonomy menu-item-object-category nav-item menu-item-226"><a title="Production Engineering" href="https://code.fb.com/category/production-engineering/" class="nav-link">Production Engineering</a></li>
+	<li id="menu-item-227" class="menu-item menu-item-type-taxonomy menu-item-object-category nav-item menu-item-227"><a title="Security" href="https://code.fb.com/category/security/" class="nav-link">Security</a></li>
+</ul>
+</li>
+<li id="menu-item-2683" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children nav-item menu-item-2683 dropdown"><a title="Physical Infrastructure" href="#" data-toggle="dropdown" class="nav-link dropdown-toggle">Physical Infrastructure <span class="caret"></span><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 129 129" enable-background="new 0 0 129 129" width="12px" height="15px">
+							<polyline points="40 50 80 90 120 50" stroke="#adb1b8" stroke-width="10" stroke-linecap="butt" fill="none" stroke-linejoin="miter"></polyline>
+						  </svg></a>
+<ul class=" dropdown-menu" role="menu">
+	<li id="menu-item-215" class="menu-item menu-item-type-taxonomy menu-item-object-category nav-item menu-item-215"><a title="Connectivity" href="https://code.fb.com/category/connectivity/" class="nav-link">Connectivity</a></li>
+	<li id="menu-item-216" class="menu-item menu-item-type-taxonomy menu-item-object-category nav-item menu-item-216"><a title="Data Center Engineering" href="https://code.fb.com/category/data-center-engineering/" class="nav-link">Data Center Engineering</a></li>
+	<li id="menu-item-217" class="menu-item menu-item-type-taxonomy menu-item-object-category nav-item menu-item-217"><a title="Networking &amp; Traffic" href="https://code.fb.com/category/networking-traffic/" class="nav-link">Networking &amp; Traffic</a></li>
+</ul>
+</li>
+<li id="menu-item-2684" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children nav-item menu-item-2684 dropdown"><a title="Video Engineering &amp; AR/VR" href="#" data-toggle="dropdown" class="nav-link dropdown-toggle">Video Engineering &amp; AR/VR <span class="caret"></span><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 129 129" enable-background="new 0 0 129 129" width="12px" height="15px">
+							<polyline points="40 50 80 90 120 50" stroke="#adb1b8" stroke-width="10" stroke-linecap="butt" fill="none" stroke-linejoin="miter"></polyline>
+						  </svg></a>
+<ul class=" dropdown-menu" role="menu">
+	<li id="menu-item-225" class="menu-item menu-item-type-taxonomy menu-item-object-category nav-item menu-item-225"><a title="Video Engineering" href="https://code.fb.com/category/video-engineering/" class="nav-link">Video Engineering</a></li>
+	<li id="menu-item-223" class="menu-item menu-item-type-taxonomy menu-item-object-category nav-item menu-item-223"><a title="Virtual Reality" href="https://code.fb.com/category/virtual-reality/" class="nav-link">Virtual Reality</a></li>
+</ul>
+</li>
+<li id="menu-item-2685" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children nav-item menu-item-2685 dropdown"><a title="Artificial Intelligence" href="#" data-toggle="dropdown" class="nav-link dropdown-toggle">Artificial Intelligence <span class="caret"></span><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 129 129" enable-background="new 0 0 129 129" width="12px" height="15px">
+							<polyline points="40 50 80 90 120 50" stroke="#adb1b8" stroke-width="10" stroke-linecap="butt" fill="none" stroke-linejoin="miter"></polyline>
+						  </svg></a>
+<ul class=" dropdown-menu" role="menu">
+	<li id="menu-item-222" class="menu-item menu-item-type-taxonomy menu-item-object-category nav-item menu-item-222"><a title="ML Applications" href="https://code.fb.com/category/ml-applications/" class="nav-link">ML Applications</a></li>
+	<li id="menu-item-221" class="menu-item menu-item-type-taxonomy menu-item-object-category nav-item menu-item-221"><a title="AI Research" href="https://code.fb.com/category/ai-research/" class="nav-link">AI Research</a></li>
+</ul>
+</li>
+<li id="menu-item-228" class="menu-item menu-item-type-custom menu-item-object-custom nav-item menu-item-228"><a title="Watch Videos" href="https://code.fb.com/videos" class="nav-link">Watch Videos</a></li>
+</ul></div>		</div><!-- .container -->
+	
+		<div class="search-container collapse" id="searchbarDropdown">
+			<div class="searchbar-search">
+				<div class="searchbar-container">
+
+					<div class="navbar-mobile-search-margin"></div>
+					<input type="text" name="search" placeholder="Search" class="form-control-lg navbar-mobile-search" autofocus="" autocomplete="off">
+					<button class="searchbar-clear">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</nav><!-- .site-navigation -->
+
+</div><!-- .wrapper-navbar end -->
+
+<div class="wrapper" id="single-wrapper">
+
+	<div class="single-container row" id="content" tabindex="-1">
+
+		<!-- Do the left sidebar check. -->
+		
+
+
+<div class="content-area col-lg-8_75" id="primary">
+		<main class="site-main" id="main">
+
+			
+				
+<article class="post-8677 post type-post status-publish format-standard has-post-thumbnail hentry category-data-infrastructure category-developer-tools fb_content_type-article" id="post-8677">
+
+	<header class="entry-header">
+		<div class="entry-meta">
+
+			POSTED ON
+
+	<span class="posted-on"><time class="entry-date published" datetime="JUN 19, 2018">JUN 19, 2018</time></span>
+			TO
+
+			<!-- category -->
+	<span class="cat-links"><a href="https://code.fb.com/category/data-infrastructure/" rel="category tag">Data Infrastructure</a>, <a href="https://code.fb.com/category/developer-tools/" rel="category tag">Developer Tools</a></span>
+	<h1 class="entry-title"><div>Accelerate large-scale applications with BOLT</div></h1>		</div><!-- .entry-meta -->
+
+	</header><!-- .entry-header -->
+
+			<div id="post-feat-image-container">
+			<img src="Accelerate%20large-scale%20applications%20with%20BOLT%20-%20Facebook%20Code_files/bolt_new_hero2.png" class="wp-post-image loading" data-was-processed="true">
+		</div>
+	
+	<div class="entry-authors-social">
+	  <div class="entry-authors">
+		<div class="entry-author">Maxim Panchenko</div>		</div>
+		<div class="entry-social">
+			<div class="entry-facebook">
+				<a href="#" onclick="return fbShare()">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path></svg>
+				</a>
+			</div>
+			<div class="entry-twitter">
+				<a href="#" onclick="return twitterSharePopup('https://code.fb.com/data-infrastructure/accelerate-large-scale-applications-with-bolt/')">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"></path></svg>
+				</a>
+			</div>
+		</div>
+	</div>
+
+	
+	<div class="entry-content">
+
+	<p>Highly complex services, such as those here at Facebook, have large 
+source code bases in order to deliver a wide range of features and 
+functionality. Even after the machine code for one of these services is 
+compiled, it can range from 10s to 100s of megabytes in size, which is 
+often too large to fit in any modern CPU instruction cache. As a result,
+ the hardware spends a considerable amount of processing time — nearly 
+30 percent, in many cases — getting an instruction stream from memory to
+ the CPU. To address this issue, which is commonly known as instruction 
+starvation, we have developed and deployed BOLT, a binary optimization 
+and layout tool. BOLT optimizes placement of instructions in memory, 
+thereby reducing CPU execution time by 2 percent to 15 percent. Unlike 
+previous tools to address instruction starvation, BOLT works with 
+applications built by any compiler, including GCC or Clang. Today, we 
+are&nbsp;<a href="https://l.facebook.com/l.php?u=https%3A%2F%2Fgithub.com%2Ffacebookincubator%2FBOLT&amp;h=AT2znu9ZVPFeCe9RRcZ7pBkkUhhceiaf-ZagHCMhnjdpHlqgiG07Xp6qSS54Tf5WILt24tKK50EV3lgs46n4g7wqlJXzc1kuMprmdNbFAozCsVzt-kyQibVS-PDsxnc14rV2W-HHL_Be3BnWfxJXz6bO" target="_blank" rel="noopener nofollow" data-lynx-mode="asynclazy">open-sourcing BOLT</a>&nbsp;so
+ that engineers everywhere can use it alongside complementary 
+technologies like AutoFDO to achieve performance gains for their apps.</p>
+<h2>Building a flexible tool to work with any compiler</h2>
+<p>Common techniques to fight instruction starvation include compiler 
+PGO (profile-guided optimizations), which makes it easier for hardware 
+to efficiently utilize its caching architecture, as well as manual 
+annotation by an engineer. For manually inserted annotations, the 
+application writer may know which code is most commonly executed, but 
+this approach is not scalable, and the behavior of the code may evolve 
+over time.</p>
+<p>It can also be difficult to identify and prioritize parts of the code
+ that are executed regularly, but not as frequently as other parts. In 
+these cases, a common solution is to use PGO to run the application 
+under typical load, gather its execution profile, and then feed that 
+profile into the compiler that recompiles the program.</p>
+<p>When this approach is combined with a whole-program mode, where the 
+compiler can see all source files at once, it improves the overall code 
+layout of the application and allows the compiler to make better 
+decisions when applying a number of optimizations, especially inlining.</p>
+<p>In practice, however, the PGO approach faces a number of limitations,
+ both intrinsic and implementation-specific. Without the source code, no
+ compiler has control over the code coming from assembly or from 
+third-party libraries. It is also difficult to obtain and then apply the
+ profile accurately during compilation.&nbsp;<a href="https://l.facebook.com/l.php?u=https%3A%2F%2Fgithub.com%2Fgoogle%2Fautofdo&amp;h=AT1eL6oIdoHx453JGS59pK3Dnte7kEbdXZgQXFFizl8sW1LHm6lRFQ_6_4NMXLvnIKyIr2895zDACDndPTIlp9ghBVtC9yqIvpAEy5TeZ8dLruaFwdbNZOE1ng0MtR0q39QMsVf5HKWvpnpanBCHPQxL" target="_blank" rel="noopener nofollow" data-lynx-mode="asynclazy">AutoFDO</a>,
+ a system to simplify real-world deployment of feedback-directed 
+optimization, attempts to address this issue, but we found it was not 
+the ideal tool to use with the C++ exception mechanism heavily used by 
+HHVM, one of our main services here at Facebook. HHVM was already 
+using&nbsp;<em>__builtin_expect</em>&nbsp;intrinsics throughout the source code to assist the compiler with the code layout, but we wanted a more scalable approach.</p>
+<p>In seeking a solution, we wanted a flexible tool that would perform 
+well on top of any state-of-the-art compiler, so we would have more 
+options for evolving our systems in the future. Therefore, instead of 
+modifying AutoFDO, we built a new system, BOLT, which works with 
+different compilers, and even with link-time optimizations (LTO) and 
+PGO/AutoFDO optimizations enabled.</p>
+<h2>Under the hood</h2>
+<p>We designed BOLT to satisfy three important requirements. It needed to be:</p>
+<ul>
+<li>Compatible with code generated by any compiler or a mixture of code from different compilers.</li>
+<li>Able to support any code that does not have source code available (such as vendor-supplied libraries).</li>
+<li>Able to support code manually written in assembly in order to optimize its layout.</li>
+</ul>
+<p class="fig" style="text-align: center;"><figure><img class="size-full wp-image-8681 aligncenter loaded" data-src="https://code.fb.com/wp-content/uploads/2018/06/bolt1_new.jpg" alt="" data-srcset="https://code.fb.com/wp-content/uploads/2018/06/bolt1_new.jpg 1109w, https://code.fb.com/wp-content/uploads/2018/06/bolt1_new.jpg?resize=916,368 916w, https://code.fb.com/wp-content/uploads/2018/06/bolt1_new.jpg?resize=768,308 768w, https://code.fb.com/wp-content/uploads/2018/06/bolt1_new.jpg?resize=1024,411 1024w" sizes="(max-width: 992px) 100vw, 62vw" srcset="https://code.fb.com/wp-content/uploads/2018/06/bolt1_new.jpg 1109w, https://code.fb.com/wp-content/uploads/2018/06/bolt1_new.jpg?resize=916,368 916w, https://code.fb.com/wp-content/uploads/2018/06/bolt1_new.jpg?resize=768,308 768w, https://code.fb.com/wp-content/uploads/2018/06/bolt1_new.jpg?resize=1024,411 1024w" src="Accelerate%20large-scale%20applications%20with%20BOLT%20-%20Facebook%20Code_files/bolt1_new.jpg" data-was-processed="true" width="640" height="257"></figure></p>
+<p>In order for BOLT to perform a new code layout for an application, it
+ has to reconstruct the control flow graph for the code. The task is 
+similar to de-compilation, except we only have to find high-level 
+constructs, such as branches with all possible source and destinations, 
+and loops. We don’t have to perform other de-compilation tasks, such as 
+local variables detection.</p>
+<p>Internally, the application is represented as a set of functions 
+operating on a set of data. We designed our own internal representation,
+ which uses LLVM’s MCInst format for instructions.</p>
+<p>We have very minimal requirements for the input. Our goal was to 
+support Linux binaries. We started with the x86-64 instruction set and 
+then added support for AArch64, and we expect to be able to extend BOLT 
+to other architectures in the future.</p>
+<p>For profile collection, we use sample-based profiling obtained by running the Linux&nbsp;<em>perf</em>&nbsp;tool. We can use either regular event samples or last branch records (LBR), which provide more context and precision.</p>
+<h2>Performance impact</h2>
+<p>When it was deployed to production, the first BOLT-accelerated 
+version of HHVM showed a 3 percent performance improvement over code 
+that was optimized coming from the compiler and had additional 
+optimizations from our link-time function layout tool (HFSort). Since 
+then, we have added more optimizations and improvements to BOLT, and, as
+ a result, in many cases, it now accelerates HHVM by 8 percent. Overall 
+results range from 2 percent to 15 percent for different services, 
+depending on the underlying CPU architecture.</p>
+<p class="fig" style="text-align: center;"><figure><img class="size-full wp-image-8682 aligncenter loaded" data-src="https://code.fb.com/wp-content/uploads/2018/06/bolt_2_new.jpg" alt="" data-srcset="https://code.fb.com/wp-content/uploads/2018/06/bolt_2_new.jpg 2078w, https://code.fb.com/wp-content/uploads/2018/06/bolt_2_new.jpg?resize=916,409 916w, https://code.fb.com/wp-content/uploads/2018/06/bolt_2_new.jpg?resize=768,343 768w, https://code.fb.com/wp-content/uploads/2018/06/bolt_2_new.jpg?resize=1024,457 1024w" sizes="(max-width: 992px) 100vw, 62vw" srcset="https://code.fb.com/wp-content/uploads/2018/06/bolt_2_new.jpg 2078w, https://code.fb.com/wp-content/uploads/2018/06/bolt_2_new.jpg?resize=916,409 916w, https://code.fb.com/wp-content/uploads/2018/06/bolt_2_new.jpg?resize=768,343 768w, https://code.fb.com/wp-content/uploads/2018/06/bolt_2_new.jpg?resize=1024,457 1024w" src="Accelerate%20large-scale%20applications%20with%20BOLT%20-%20Facebook%20Code_files/bolt_2_new.jpg" data-was-processed="true" width="640" height="286"></figure></p>
+<p>This heat map shows that the frequently executed code is isolated in a much smaller region than the original binary.</p>
+<h2>Finding opportunities for optimization</h2>
+<p>BOLT rearranges code inside functions based on their execution 
+profile. Then the body of the function can be split based on how 
+frequently the code is executed. Once this is done, the final step is to
+ perform an optimal layout of the hot chunks of code depending on the 
+call graph profile.</p>
+<p>Peculiarities of modern hardware create more opportunities to 
+optimize code layout beyond improvements with the instruction cache. One
+ such opportunity was discovered when we noticed a 5 percent regression 
+on an industry-standard&nbsp;<em>bzip2</em>&nbsp;compression library. 
+The regression was caused by a simple 1-byte shift in the instruction 
+stream. We found that a pair of instructions could be folded internally 
+by the CPU into a single micro-op for faster execution. This operation, 
+called macro-fusion, allows the CPU to execute additional macro 
+instructions per cycle. But it can’t happen if the second instruction is
+ aligned at a cache line boundary (64 bytes), as was the case with an 
+instruction from a pair inside the hottest loop of&nbsp;<em>bzip2</em>. We then modified the BOLT layout algorithm so that it can prevent such misshapenness and also detect and fix similar issues.</p>
+<p>Beyond improving the code layout, BOLT performs a number of 
+optimizations that utilize an application profile and exploit aspects of
+ the input’s machine code. The list of optimizations includes advanced 
+jump table placement, identical code folding, PLT optimization, and 
+constant load elimination. We can also perform a basic inlining, as the 
+compiler might have missed cases where the source code was not 
+available, such as with assembly code. In general, we’ve focused on 
+exploiting optimization opportunities that are not available to a 
+conventional compiler toolchain.</p>
+<p>The net effect of BOLT optimizations is best illustrated by the following figure indicating program stats after optimizations:</p>
+<p class="fig" style="text-align: center;"><figure><img class="_253 img aligncenter error" data-src="https://scontent.xx.fbcdn.net/v/t39.2365-6/35605645_1840007222754584_2924830710910943232_n.png?_nc_cat=0&amp;_nc_log=1&amp;oh=983d9e51c6fb187ddcc068bba2ae696a&amp;oe=5BB5BED8" alt="" src="Accelerate%20large-scale%20applications%20with%20BOLT%20-%20Facebook%20Code_files/35605645_1840007222754584_2924830710910943232_n.txt" data-was-processed="true"></figure></p>
+<p>We are open-sourcing BOLT and will be happy to work with the 
+community to help accelerate its applications. If you are running a 
+large application that is CPU front-end bound — i.e., it experiences a 
+significant amount of instruction cache and TLB misses — then BOLT will 
+help address these bottlenecks.</p>
+<p>We would like to express our gratitude to the LLVM community for 
+building an amazing foundation of libraries that facilitated quick BOLT 
+development.</p>
+<p><em>Special thanks to Rafael Auler for helping write this post.</em></p>
+
+<div id="jp-relatedposts" class="jp-relatedposts">
+	<h3 class="jp-relatedposts-headline"><em>Related</em></h3>
+</div>
+	
+	</div><!-- .entry-content -->
+
+
+</article><!-- #post-## -->
+
+<footer class="entry-footer">
+
+	
+</footer><!-- .entry-footer -->
+
+<iframe src="Accelerate%20large-scale%20applications%20with%20BOLT%20-%20Facebook%20Code_files/like.html" style="border:none;overflow:hidden" scrolling="no" allowtransparency="true" allow="encrypted-media" class="loading" data-was-processed="true" width="450" height="35" frameborder="0"></iframe>
+
+					
+	 <!-- include the carousel nav here. -->
+
+		
+				
+<div class="comments-area" id="comments">
+
+	
+	
+	
+		<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="https://code.fb.com/data-infrastructure/accelerate-large-scale-applications-with-bolt/#respond" style="display:none;">Cancel reply</a></small></h3><p class="must-log-in">You must be <a href="https://code.fb.com/wp-login.php?redirect_to=https%3A%2F%2Fcode.fb.com%2Fdata-infrastructure%2Faccelerate-large-scale-applications-with-bolt%2F">logged in</a> to post a comment.</p>	</div><!-- #respond -->
+	
+</div><!-- #comments -->
+
+			
+		</main><!-- #main -->
+
+	</div><!-- #primary -->
+
+		<!-- Do the right sidebar check. -->
+	
+
+
+  
+<div class="widget-area col-lg-3 offset-lg-0_25" id="right-sidebar" role="complementary">
+	<aside id="fb_related_post_widget-4" class="widget widget_fb_related_post_widget"><h3 class="widget-title">Related Posts</h3><hr>
+            <div class="aside-related-projects"><div class="article-grid-redesign">
+              <article class="post-10485 post type-post status-publish has-post-thumbnail hentry" id="post-10485">
+								<a href="https://code.fb.com/android/mobilelab/" rel="bookmark">
+									<img data-src="https://code.fb.com/wp-content/uploads/2018/10/MLimg1.png?w=580&amp;h=326&amp;crop=1" class="wp-post-image loaded" alt="" data-srcset="https://code.fb.com/wp-content/uploads/2018/10/MLimg1.png?w=580&amp;h=326&amp;crop=1 580w, https://code.fb.com/wp-content/uploads/2018/10/MLimg1.png?w=580&amp;h=326&amp;crop=1 326w" sizes="(max-width: 580px) 100vw, 580px" srcset="https://code.fb.com/wp-content/uploads/2018/10/MLimg1.png?w=580&amp;h=326&amp;crop=1 580w, https://code.fb.com/wp-content/uploads/2018/10/MLimg1.png?w=580&amp;h=326&amp;crop=1 326w" src="Accelerate%20large-scale%20applications%20with%20BOLT%20-%20Facebook%20Code_files/MLimg1.png" data-was-processed="true" width="580" height="326">
+									<header class="entry-header">
+										<span class="posted-on"><time class="entry-date published" datetime="Oct 19, 2018">Oct 19, 2018</time></span>
+										<h4 class="entry-title">MobileLab: Highly accurate testing to prevent mobile performance regressions</h4>
+									</header><!-- .entry-header -->
+								</a>
+              </article><!-- #post-## -->
+              </div><div class="article-grid-redesign">
+              <article class="post-10647 post type-post status-publish has-post-thumbnail hentry" id="post-10647">
+								<a href="https://code.fb.com/open-source/linux/" rel="bookmark">
+									<img data-src="https://code.fb.com/wp-content/uploads/2018/10/Linux.png?w=580&amp;h=326&amp;crop=1" class="wp-post-image loaded" alt="" data-srcset="https://code.fb.com/wp-content/uploads/2018/10/Linux.png?w=580&amp;h=326&amp;crop=1 580w, https://code.fb.com/wp-content/uploads/2018/10/Linux.png?w=580&amp;h=326&amp;crop=1 326w" sizes="(max-width: 580px) 100vw, 580px" srcset="https://code.fb.com/wp-content/uploads/2018/10/Linux.png?w=580&amp;h=326&amp;crop=1 580w, https://code.fb.com/wp-content/uploads/2018/10/Linux.png?w=580&amp;h=326&amp;crop=1 326w" src="Accelerate%20large-scale%20applications%20with%20BOLT%20-%20Facebook%20Code_files/Linux.png" data-was-processed="true" width="580" height="326">
+									<header class="entry-header">
+										<span class="posted-on"><time class="entry-date published" datetime="Oct 30, 2018">Oct 30, 2018</time></span>
+										<h4 class="entry-title">Facebook open-sources new suite of Linux kernel components and tools</h4>
+									</header><!-- .entry-header -->
+								</a>
+              </article><!-- #post-## -->
+              </div><div class="article-grid-redesign">
+              <article class="post-12578 post type-post status-publish has-post-thumbnail hentry" id="post-12578">
+								<a href="https://code.fb.com/data-center-engineering/accelerating-infrastructure/" rel="bookmark">
+									<img data-src="https://code.fb.com/wp-content/uploads/2019/03/animation_1920X581_1.gif?w=580&amp;h=326&amp;crop=1" class="wp-post-image loaded" alt="" data-srcset="https://code.fb.com/wp-content/uploads/2019/03/animation_1920X581_1.gif?w=580&amp;h=326&amp;crop=1 580w, https://code.fb.com/wp-content/uploads/2019/03/animation_1920X581_1.gif?w=580&amp;h=326&amp;crop=1 326w" sizes="(max-width: 580px) 100vw, 580px" srcset="https://code.fb.com/wp-content/uploads/2019/03/animation_1920X581_1.gif?w=580&amp;h=326&amp;crop=1 580w, https://code.fb.com/wp-content/uploads/2019/03/animation_1920X581_1.gif?w=580&amp;h=326&amp;crop=1 326w" src="Accelerate%20large-scale%20applications%20with%20BOLT%20-%20Facebook%20Code_files/animation_1920X581_1.gif" data-was-processed="true" width="580" height="326">
+									<header class="entry-header">
+										<span class="posted-on"><time class="entry-date published" datetime="Mar 14, 2019">Mar 14, 2019</time></span>
+										<h4 class="entry-title">Accelerating Facebook's infrastructure with application-specific hardware</h4>
+									</header><!-- .entry-header -->
+								</a>
+              </article><!-- #post-## -->
+              </div></div></aside><aside id="wpb_widget-3" class="widget widget_wpb_widget"><h3 class="widget-title">Related Positions</h3><hr><ul class="available-positions-list"><li class="available-positions-item">
+                          <a href="https://www.facebook.com/careers/department?req=a1K6A000001CtARUA0">
+                      		<div class="job-description">
+                      			Data Engineering Manager - Infra Strategy
+                      		</div>
+                      		<div class="job-location">
+                      			MENLO PARK, US
+                      		</div>
+                          </a>
+                      	</li><li class="available-positions-item">
+                          <a href="https://www.facebook.com/careers/department?req=a1K6A000001pvaXUAQ">
+                      		<div class="job-description">
+                      			Manager, Infrastructure Data Science
+                      		</div>
+                      		<div class="job-location">
+                      			BOSTON, US
+                      		</div>
+                          </a>
+                      	</li><li class="available-positions-item">
+                          <a href="https://www.facebook.com/careers/department?req=a1K2K000007AJI4UAO">
+                      		<div class="job-description">
+                      			Data Scientist, Infrastructure
+                      		</div>
+                      		<div class="job-location">
+                      			MENLO PARK, US
+                      		</div>
+                          </a>
+                      	</li><li class="available-positions-item">
+                          <a href="https://www.facebook.com/careers/department?req=a1K6A000001miyoUAA">
+                      		<div class="job-description">
+                      			Manager, Data Science, Infra Data Centers
+                      		</div>
+                      		<div class="job-location">
+                      			MENLO PARK, US
+                      		</div>
+                          </a>
+                      	</li><li class="available-positions-item">
+                          <a href="https://www.facebook.com/careers/department?req=a1K6A000001miz3UAA">
+                      		<div class="job-description">
+                      			Manager, Data Science, Infra Data Centers
+                      		</div>
+                      		<div class="job-location">
+                      			MENLO PARK, US
+                      		</div>
+                          </a>
+                      	</li></ul>
+		<a href="https://www.facebook.com/careers/">
+			<button class="btn available-positions-btn">
+				See All Jobs
+			</button>
+		</a></aside>
+</div><!-- #secondary -->
+
+
+
+	<!-- <php get_template_part('content-single-side-bar'); ?> -->
+
+	<!-- Do the right sidebar check. -->
+	
+</div><!-- Container end -->
+
+</div><!-- Wrapper end -->
+
+
+
+	<!-- ******************* The Footer Full-width Widget Area ******************* -->
+
+	<div class="wrapper wrapper-community">
+
+
+		<div class="community" tabindex="-1">
+
+			<h3 class="community-title">Join Our Engineering Community</h3>
+
+			<div class="row">
+				<!-- community section is generated through WordPress widget -->
+				<div id="wpb_widget-2" class="footer-widget widget_wpb_widget widget-count-3 col-md-4"><h3 class="widget-title">Available Positions</h3><hr><ul class="available-positions-list"><li class="available-positions-item">
+                          <a href="https://www.facebook.com/careers/department?req=a1K6A000001CtARUA0">
+                      		<div class="job-description">
+                      			Data Engineering Manager - Infra Strategy
+                      		</div>
+                      		<div class="job-location">
+                      			MENLO PARK, US
+                      		</div>
+                          </a>
+                      	</li><li class="available-positions-item">
+                          <a href="https://www.facebook.com/careers/department?req=a1K6A000001pvaXUAQ">
+                      		<div class="job-description">
+                      			Manager, Infrastructure Data Science
+                      		</div>
+                      		<div class="job-location">
+                      			BOSTON, US
+                      		</div>
+                          </a>
+                      	</li><li class="available-positions-item">
+                          <a href="https://www.facebook.com/careers/department?req=a1K2K000007AJI4UAO">
+                      		<div class="job-description">
+                      			Data Scientist, Infrastructure
+                      		</div>
+                      		<div class="job-location">
+                      			MENLO PARK, US
+                      		</div>
+                          </a>
+                      	</li><li class="available-positions-item">
+                          <a href="https://www.facebook.com/careers/department?req=a1K6A000001miyoUAA">
+                      		<div class="job-description">
+                      			Manager, Data Science, Infra Data Centers
+                      		</div>
+                      		<div class="job-location">
+                      			MENLO PARK, US
+                      		</div>
+                          </a>
+                      	</li><li class="available-positions-item">
+                          <a href="https://www.facebook.com/careers/department?req=a1K6A000001miz3UAA">
+                      		<div class="job-description">
+                      			Manager, Data Science, Infra Data Centers
+                      		</div>
+                      		<div class="job-location">
+                      			MENLO PARK, US
+                      		</div>
+                          </a>
+                      	</li></ul>
+		<a href="https://www.facebook.com/careers/">
+			<button class="btn available-positions-btn">
+				See All Jobs
+			</button>
+		</a></div><!-- .footer-widget --><div id="custom_html-2" class="widget_text footer-widget widget_custom_html widget-count-3 col-md-4"><h3 class="widget-title">Stay Connected</h3><div class="textwidget custom-html-widget"><ul class="stay-connected-lists">
+	<li class="stay-connected-item">
+		<img class="stay-connected-item-left" src="Accelerate%20large-scale%20applications%20with%20BOLT%20-%20Facebook%20Code_files/facebook-engineering.png" alt="footer-fb-engineering">
+		<div class="stay-connected-item-right">
+			<div class="stay-connected-label">
+				Facebook Engineering	
+			</div>
+			<a href="https://www.facebook.com/Engineering/">
+			<button class="btn stay-connected-btn">
+				Like
+			</button>
+			</a>
+		</div>
+	</li>
+	<li class="stay-connected-item">
+		<img class="stay-connected-item-left" src="Accelerate%20large-scale%20applications%20with%20BOLT%20-%20Facebook%20Code_files/fbopensource.png" alt="footer-fbopensource">
+		<div class="stay-connected-item-right">
+			<div class="stay-connected-label">
+				@fbOpenSource
+			</div>
+			<a onclick='return twitterFollow("fbOpenSource")'>
+			<button class="btn stay-connected-btn">
+				Follow
+				</button>
+			</a>
+		</div>
+	</li>
+	<li class="stay-connected-item">
+		<img class="stay-connected-item-left facebook-research" src="Accelerate%20large-scale%20applications%20with%20BOLT%20-%20Facebook%20Code_files/facebook-research.png" alt="footer-research">
+		<div class="stay-connected-item-right">
+			<div class="stay-connected-label">
+				Facebook Research
+			</div>
+			<a href="https://research.fb.com/">
+			<button class="btn stay-connected-btn">
+				Like
+			</button>
+			</a>
+		</div>
+	</li>
+	<li class="stay-connected-item">
+		<img class="stay-connected-item-left facebook-developers" src="Accelerate%20large-scale%20applications%20with%20BOLT%20-%20Facebook%20Code_files/facebook-developers.png" alt="footer-developers">
+		<div class="stay-connected-item-right">
+			<div class="stay-connected-label">
+				Facebook Developers
+			</div>
+			<a href="https://developers.facebook.com/">
+			<button class="btn stay-connected-btn">
+				Like
+			</button>
+			</a>
+		</div>
+	</li>
+	<li class="stay-connected-item">
+		<img class="stay-connected-item-left" src="Accelerate%20large-scale%20applications%20with%20BOLT%20-%20Facebook%20Code_files/rss.png" alt="footer-rss">
+		<div class="stay-connected-item-right">
+			<div class="stay-connected-label">
+				RSS
+			</div>
+			<a href="https://code.facebook.com/posts/rss/">
+			<button class="btn stay-connected-btn">
+				Subscribe
+			</button>
+			</a>
+		</div>
+	</li>
+</ul></div></div><!-- .footer-widget --><div id="custom_html-3" class="widget_text footer-widget widget_custom_html widget-count-3 col-md-4"><h3 class="widget-title">Open Source</h3><div class="textwidget custom-html-widget"><p class="opensource-desc">
+	Facebook believes in building community through open source technology.
+ Explore our latest projects in Artificial Intelligence, Data 
+Infrastructure, Development Tools, Front End, Languages, Platforms, 
+Security, Virtual Reality, and more.
+</p>
+<ul class="opensource-cats">
+	<li class="opensource-cat">
+		<img src="Accelerate%20large-scale%20applications%20with%20BOLT%20-%20Facebook%20Code_files/android.png" alt="android">
+		<div class="opensource-cap">
+			ANDROID
+		</div>
+	</li>
+	<li class="opensource-cat">
+		<img src="Accelerate%20large-scale%20applications%20with%20BOLT%20-%20Facebook%20Code_files/ios.png" alt="ios">
+		<div class="opensource-cap">
+			iOS
+		</div>
+	</li>
+	<li class="opensource-cat">
+		<img src="Accelerate%20large-scale%20applications%20with%20BOLT%20-%20Facebook%20Code_files/web.png" alt="web">
+		<div class="opensource-cap">		
+			WEB
+		</div>
+	</li>
+	<li class="opensource-cat">
+		<img src="Accelerate%20large-scale%20applications%20with%20BOLT%20-%20Facebook%20Code_files/backend.png" alt="backend">
+		<div class="opensource-cap">
+			BACKEND
+		</div>
+	</li>
+	<li class="opensource-cat">
+		<img src="Accelerate%20large-scale%20applications%20with%20BOLT%20-%20Facebook%20Code_files/hardware.png" alt="hardware">
+		<div class="opensource-cap">
+			HARDWARE
+		</div>
+	</li>
+</ul>
+
+<button class="btn opensource-btn" onclick="window.location.href='https://opensource.fb.com/'">
+	Learn More
+</button>
+
+</div></div><!-- .footer-widget -->
+			</div>
+
+		</div>
+
+	</div><!-- #wrapper-footer-full -->
+
+
+<!-- <php get_sidebar( 'footerfull' ); ?> -->
+
+<div class="wrapper-footer" id="wrapper-footer">
+
+	<div class="footer">
+
+		<div class="row">
+
+			<div class="col-md-12">
+
+				<footer class="site-footer" id="colophon">
+
+					<div class="site-info row justify-content-between">
+
+						<div class="col-md-4 copyright-container">
+							<div class="copyright"> Facebook © 2019 </div>
+						</div>
+
+						<!-- static footer -->
+						<div class="col-md-5 footer-links-container">
+							<ul class="footer-links">
+		<li class="footer-link"><a href="https://www.facebook.com/facebook">About</a></li><li class="footer-link"><a href="https://www.facebook.com/careers">Careers</a></li><li class="footer-link"><a href="https://www.facebook.com/about/privacy">Privacy</a></li><li class="footer-link"><a href="https://www.facebook.com/help/cookies">Cookies</a></li><li class="footer-link"><a href="https://www.facebook.com/policies">Terms</a></li><li class="footer-link"><a href="https://www.facebook.com/help">Help</a></li>							</ul>
+						</div>
+
+					</div><!-- .site-info -->
+
+				</footer><!-- #colophon -->
+
+			</div><!--col end -->
+
+		</div><!-- row end -->
+
+	</div><!-- container end -->
+
+</div><!-- wrapper end -->
+
+</div><!-- #page we need this extra closing tag here -->
+
+  <div class="gdprconsent-container" id="GDPRConsentBar" style="display: none;">
+    <div class="gdprconsent-wrapper">
+      <div class="gdprconsent-content">
+        <p>To help personalize content, tailor and measure ads, and 
+provide a safer experience, we use cookies. By clicking or navigating 
+the site, you agree to allow our collection of information on and off 
+Facebook through cookies. Learn more, including about available 
+controls: <a href="https://www.facebook.com/policies/cookies/">Cookies Policy</a></p>
+      </div>
+    </div>
+  </div>
+  	<div style="display:none">
+	</div>
+<script type="text/javascript" src="Accelerate%20large-scale%20applications%20with%20BOLT%20-%20Facebook%20Code_files/devicepx-jetpack.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var loadmore_params = {"ajaxurl":"https:\/\/code.fb.com\/wp-admin\/admin-ajax.php","posts":"{\"page\":0,\"name\":\"accelerate-large-scale-applications-with-bolt\",\"category_name\":\"data-infrastructure\",\"error\":\"\",\"m\":\"\",\"p\":0,\"post_parent\":\"\",\"subpost\":\"\",\"subpost_id\":\"\",\"attachment\":\"\",\"attachment_id\":0,\"static\":\"\",\"pagename\":\"\",\"page_id\":0,\"second\":\"\",\"minute\":\"\",\"hour\":\"\",\"day\":0,\"monthnum\":0,\"year\":0,\"w\":0,\"tag\":\"\",\"cat\":\"\",\"tag_id\":\"\",\"author\":\"\",\"author_name\":\"\",\"feed\":\"\",\"tb\":\"\",\"paged\":0,\"meta_key\":\"\",\"meta_value\":\"\",\"preview\":\"\",\"s\":\"\",\"sentence\":\"\",\"title\":\"\",\"fields\":\"\",\"menu_order\":\"\",\"embed\":\"\",\"category__in\":[],\"category__not_in\":[],\"category__and\":[],\"post__in\":[],\"post__not_in\":[],\"post_name__in\":[],\"tag__in\":[],\"tag__not_in\":[],\"tag__and\":[],\"tag_slug__in\":[],\"tag_slug__and\":[],\"post_parent__in\":[],\"post_parent__not_in\":[],\"author__in\":[],\"author__not_in\":[],\"ignore_sticky_posts\":false,\"suppress_filters\":false,\"cache_results\":false,\"update_post_term_cache\":true,\"lazy_load_term_meta\":true,\"update_post_meta_cache\":true,\"post_type\":\"\",\"posts_per_page\":12,\"nopaging\":false,\"comments_per_page\":\"50\",\"no_found_rows\":false,\"order\":\"DESC\"}","current_page":"1","max_page":"0"};
+var search_params = {"ajaxurl":"https:\/\/code.fb.com\/wp-admin\/admin-ajax.php","posts":"{\"page\":0,\"name\":\"accelerate-large-scale-applications-with-bolt\",\"category_name\":\"data-infrastructure\",\"error\":\"\",\"m\":\"\",\"p\":0,\"post_parent\":\"\",\"subpost\":\"\",\"subpost_id\":\"\",\"attachment\":\"\",\"attachment_id\":0,\"static\":\"\",\"pagename\":\"\",\"page_id\":0,\"second\":\"\",\"minute\":\"\",\"hour\":\"\",\"day\":0,\"monthnum\":0,\"year\":0,\"w\":0,\"tag\":\"\",\"cat\":\"\",\"tag_id\":\"\",\"author\":\"\",\"author_name\":\"\",\"feed\":\"\",\"tb\":\"\",\"paged\":0,\"meta_key\":\"\",\"meta_value\":\"\",\"preview\":\"\",\"s\":\"\",\"sentence\":\"\",\"title\":\"\",\"fields\":\"\",\"menu_order\":\"\",\"embed\":\"\",\"category__in\":[],\"category__not_in\":[],\"category__and\":[],\"post__in\":[],\"post__not_in\":[],\"post_name__in\":[],\"tag__in\":[],\"tag__not_in\":[],\"tag__and\":[],\"tag_slug__in\":[],\"tag_slug__and\":[],\"post_parent__in\":[],\"post_parent__not_in\":[],\"author__in\":[],\"author__not_in\":[],\"ignore_sticky_posts\":false,\"suppress_filters\":false,\"cache_results\":false,\"update_post_term_cache\":true,\"lazy_load_term_meta\":true,\"update_post_meta_cache\":true,\"post_type\":\"\",\"posts_per_page\":12,\"nopaging\":false,\"comments_per_page\":\"50\",\"no_found_rows\":false,\"order\":\"DESC\"}","current_page":"1","max_page":"0"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="Accelerate%20large-scale%20applications%20with%20BOLT%20-%20Facebook%20Code_files/a.js"></script>
+<script type="text/javascript" src="Accelerate%20large-scale%20applications%20with%20BOLT%20-%20Facebook%20Code_files/e-201915.js" async="async" defer="defer"></script>
+<script type="text/javascript">
+	_stq = window._stq || [];
+	_stq.push([ 'view', {v:'ext',j:'1:7.2.1',blog:'147945108',post:'8677',tz:'-7',srv:'code.fb.com'} ]);
+	_stq.push([ 'clickTrackerInit', '147945108', '8677' ]);
+</script>
+
+<script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","licenseKey":"949ceaf672","applicationID":"75923885","transactionName":"MQZWYhAFXhdYAUBfWwhMdVUWDV8KFhFdWFMKBg==","queueTime":0,"applicationTime":355,"atts":"HUFBFFgfTUgbAxYMTxse","errorBeacon":"bam.nr-data.net","agent":""}</script>
+
+
+<div id="fb-root" class=" fb_reset"><div style="position: absolute; top: -10000px; width: 0px; height: 0px;"><div><iframe name="fb_xdm_frame_https" allowtransparency="true" allowfullscreen="true" scrolling="no" allow="encrypted-media" id="fb_xdm_frame_https" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tabindex="-1" style="border: medium none;" src="Accelerate%20large-scale%20applications%20with%20BOLT%20-%20Facebook%20Code_files/d_vbiawPdxB.html" frameborder="0"></iframe></div><div></div></div></div></body></html>

@@ -71,11 +71,15 @@
 \contentsline {subsection}{\numberline {8.2.1}Templates}{89}{subsection.8.2.1}% 
 \contentsline {subsection}{\numberline {8.2.2}Data layout VS access patterns}{89}{subsection.8.2.2}% 
 \contentsline {subsection}{\numberline {8.2.3}Structural changes in record layouts}{90}{subsection.8.2.3}% 
-\contentsline {section}{\numberline {8.3}Conclusion}{91}{section.8.3}% 
-\contentsline {chapter}{\nonumberline Bibliography}{92}{chapter*.80}% 
-\contentsline {chapter}{\nonumberline List of Figures}{95}{chapter*.81}% 
-\contentsline {chapter}{\nonumberline List of Tables}{98}{chapter*.82}% 
-\contentsline {chapter}{\nonumberline List of Code}{99}{chapter*.84}% 
-\contentsline {chapter}{List of Abbreviations}{101}{section*.85}% 
-\contentsline {chapter}{\numberline {A}Anhang A}{102}{appendix.A}% 
-\contentsline {chapter}{\numberline {B}Anhang B}{103}{appendix.B}% 
+\contentsline {subsubsection}{\nonumberline Implementation dependent layout specifics}{91}{section*.80}% 
+\contentsline {subsection}{\numberline {8.2.4}Halting problem}{91}{subsection.8.2.4}% 
+\contentsline {subsection}{\numberline {8.2.5}PGO/LTO}{92}{subsection.8.2.5}% 
+\contentsline {subsection}{\numberline {8.2.6}High variety}{92}{subsection.8.2.6}% 
+\contentsline {section}{\numberline {8.3}Conclusion}{92}{section.8.3}% 
+\contentsline {chapter}{\nonumberline Bibliography}{95}{chapter*.81}% 
+\contentsline {chapter}{\nonumberline List of Figures}{98}{chapter*.82}% 
+\contentsline {chapter}{\nonumberline List of Tables}{101}{chapter*.83}% 
+\contentsline {chapter}{\nonumberline List of Code}{102}{chapter*.85}% 
+\contentsline {chapter}{List of Abbreviations}{104}{section*.86}% 
+\contentsline {chapter}{\numberline {A}Anhang A}{105}{appendix.A}% 
+\contentsline {chapter}{\numberline {B}Anhang B}{106}{appendix.B}% 
