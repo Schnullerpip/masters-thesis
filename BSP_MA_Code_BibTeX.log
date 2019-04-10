@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6930 64-bit) (preloaded format=pdflatex 2019.1.14)  9 APR 2019 13:34
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6930 64-bit) (preloaded format=pdflatex 2019.1.14)  10 APR 2019 11:09
 entering extended mode
 **./BSP_MA_Code_BibTeX.tex
 (BSP_MA_Code_BibTeX.tex
@@ -1357,27 +1357,27 @@ LaTeX Font Info:    Font shape `T1/phv/m/it' in size <10.95> not available
 ] (BSP_MA_Code_BibTeX.toc [-5
 
 ]
-Overfull \hbox (1.29184pt too wide) detected at line 81
+Overfull \hbox (1.29184pt too wide) detected at line 79
  []\T1/phv/b/n/10.95 101
  []
 
 
-Overfull \hbox (1.29184pt too wide) detected at line 82
+Overfull \hbox (1.29184pt too wide) detected at line 80
  []\T1/phv/b/n/10.95 102
  []
 
 
-Overfull \hbox (1.29184pt too wide) detected at line 83
+Overfull \hbox (1.29184pt too wide) detected at line 81
  []\T1/phv/b/n/10.95 104
  []
 
 
-Overfull \hbox (1.29184pt too wide) detected at line 84
+Overfull \hbox (1.29184pt too wide) detected at line 82
  []\T1/phv/b/n/10.95 105
  []
 
 
-Overfull \hbox (1.29184pt too wide) detected at line 85
+Overfull \hbox (1.29184pt too wide) detected at line 83
  []\T1/phv/b/n/10.95 106
  []
 
@@ -1390,7 +1390,7 @@ Overfull \hbox (1.29184pt too wide) detected at line 85
 
  (chapter/conflicting_paradigms.tex
 chapter 1.
-<PICs/lang_ratings.png, id=169, 685.05937pt x 290.58563pt>
+<PICs/lang_ratings.png, id=165, 685.05937pt x 290.58563pt>
 File: PICs/lang_ratings.png Graphic file (type png)
 <use PICs/lang_ratings.png>
 Package pdftex.def Info: PICs/lang_ratings.png  used on input line 14.
@@ -1413,7 +1413,7 @@ File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 )
 LaTeX Font Info:    Font shape `T1/pcr/bx/n' in size <9> not available
 (Font)              Font shape `T1/pcr/b/n' tried instead on input line 20.
-<PICs/npcs_in_memory.png, id=188, 1454.43375pt x 188.705pt>
+<PICs/npcs_in_memory.png, id=184, 1454.43375pt x 188.705pt>
 File: PICs/npcs_in_memory.png Graphic file (type png)
 <use PICs/npcs_in_memory.png>
 Package pdftex.def Info: PICs/npcs_in_memory.png  used on input line 31.
@@ -1429,7 +1429,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 40--41
  []
 
 [3 <./PICs/npcs_in_memory.png>]
-<PICs/cpu_memory_gap.png, id=230, 551.81157pt x 298.11375pt>
+<PICs/cpu_memory_gap.png, id=226, 551.81157pt x 298.11375pt>
 File: PICs/cpu_memory_gap.png Graphic file (type png)
 <use PICs/cpu_memory_gap.png>
 Package pdftex.def Info: PICs/cpu_memory_gap.png  used on input line 75.
@@ -1439,7 +1439,7 @@ LaTeX Font Info:    Font shape `T1/phv/bx/it' in size <10> not available
 LaTeX Font Info:    Font shape `T1/phv/b/it' in size <10> not available
 (Font)              Font shape `T1/phv/b/sl' tried instead on input line 83.
  [4]
-<PICs/cachelayout.png, id=246, 255.95625pt x 224.33812pt>
+<PICs/cachelayout.png, id=242, 255.95625pt x 224.33812pt>
 File: PICs/cachelayout.png Graphic file (type png)
 <use PICs/cachelayout.png>
 Package pdftex.def Info: PICs/cachelayout.png  used on input line 93.
@@ -1476,19 +1476,19 @@ Overfull \hbox (2.3214pt too wide) in paragraph at lines 236--252
 [11] [12]
 LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <9> not available
 (Font)              Font shape `T1/pcr/m/sl' tried instead on input line 274.
-<PICs/CacheUtilizationNPC.png, id=370, 1117.17375pt x 261.97874pt>
+<PICs/CacheUtilizationNPC.png, id=366, 1117.17375pt x 261.97874pt>
 File: PICs/CacheUtilizationNPC.png Graphic file (type png)
 <use PICs/CacheUtilizationNPC.png>
 Package pdftex.def Info: PICs/CacheUtilizationNPC.png  used on input line 290.
 (pdftex.def)             Requested size: 456.2543pt x 136.88132pt.
  [13]
-<PICs/soa_aos_cl_usage.png, id=397, 602.25pt x 372.39125pt>
+<PICs/soa_aos_cl_usage.png, id=393, 602.25pt x 372.39125pt>
 File: PICs/soa_aos_cl_usage.png Graphic file (type png)
 <use PICs/soa_aos_cl_usage.png>
 Package pdftex.def Info: PICs/soa_aos_cl_usage.png  used on input line 312.
 (pdftex.def)             Requested size: 273.76686pt x 191.63306pt.
  [14 <./PICs/CacheUtilizationNPC.png>]
-<PICs/CacheUtilizationNPCSOA.png, id=421, 1067.48813pt x 218.31563pt>
+<PICs/CacheUtilizationNPCSOA.png, id=417, 1067.48813pt x 218.31563pt>
 File: PICs/CacheUtilizationNPCSOA.png Graphic file (type png)
 <use PICs/CacheUtilizationNPCSOA.png>
 Package pdftex.def Info: PICs/CacheUtilizationNPCSOA.png  used on input line 32
@@ -1516,7 +1516,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 315--325
 
 [15 <./PICs/soa_aos_cl_usage.png (PNG copy)> <./PICs/CacheUtilizationNPCSOA.png
 >]
-<PICs/CacheUtilizationNPCComp.png, id=432, 660.96938pt x 253.69781pt>
+<PICs/CacheUtilizationNPCComp.png, id=428, 660.96938pt x 253.69781pt>
 File: PICs/CacheUtilizationNPCComp.png Graphic file (type png)
 <use PICs/CacheUtilizationNPCComp.png>
 Package pdftex.def Info: PICs/CacheUtilizationNPCComp.png  used on input line 3
@@ -1528,7 +1528,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 346--346
  []
 
 [16 <./PICs/CacheUtilizationNPCComp.png>]
-<PICs/memory_mountain.png, id=457, 640.64343pt x 424.58624pt>
+<PICs/memory_mountain.png, id=453, 640.64343pt x 424.58624pt>
 File: PICs/memory_mountain.png Graphic file (type png)
 <use PICs/memory_mountain.png>
 Package pdftex.def Info: PICs/memory_mountain.png  used on input line 376.
@@ -1566,7 +1566,7 @@ chapter 2.
 
  (chapter/compiler_as_mediator.tex
 chapter 3.
-<PICs/parse_tree.png, id=567, 943.27406pt x 321.45094pt>
+<PICs/parse_tree.png, id=563, 943.27406pt x 321.45094pt>
 File: PICs/parse_tree.png Graphic file (type png)
 <use PICs/parse_tree.png>
 Package pdftex.def Info: PICs/parse_tree.png  used on input line 16.
@@ -1575,7 +1575,7 @@ Package pdftex.def Info: PICs/parse_tree.png  used on input line 16.
 
 
  <./PICs/parse_tree.png>]
-<PICs/compiler_phases.png, id=585, 271.76532pt x 648.92438pt>
+<PICs/compiler_phases.png, id=581, 271.76532pt x 648.92438pt>
 File: PICs/compiler_phases.png Graphic file (type png)
 <use PICs/compiler_phases.png>
 Package pdftex.def Info: PICs/compiler_phases.png  used on input line 26.
@@ -1606,13 +1606,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 28--28
  []
 
 [26 <./PICs/compiler_phases.png>]
-<PICs/foo_code_ast_dump.png, id=602, 874.01532pt x 283.0575pt>
+<PICs/foo_code_ast_dump.png, id=598, 874.01532pt x 283.0575pt>
 File: PICs/foo_code_ast_dump.png Graphic file (type png)
 <use PICs/foo_code_ast_dump.png>
 Package pdftex.def Info: PICs/foo_code_ast_dump.png  used on input line 60.
 (pdftex.def)             Requested size: 456.25099pt x 228.13506pt.
  [27 <./PICs/foo_code_ast_dump.png (PNG copy)>]
-<PICs/clang_query_foo_code.png, id=624, 283.0575pt x 494.59781pt>
+<PICs/clang_query_foo_code.png, id=620, 283.0575pt x 494.59781pt>
 File: PICs/clang_query_foo_code.png Graphic file (type png)
 <use PICs/clang_query_foo_code.png>
 Package pdftex.def Info: PICs/clang_query_foo_code.png  used on input line 69.
@@ -1728,7 +1728,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 50--51
  []
 
 [32]
-<PICs/npc_crosscheck_matrix.png, id=691, 679.53876pt x 289.08pt>
+<PICs/npc_crosscheck_matrix.png, id=687, 679.53876pt x 289.08pt>
 File: PICs/npc_crosscheck_matrix.png Graphic file (type png)
 <use PICs/npc_crosscheck_matrix.png>
 Package pdftex.def Info: PICs/npc_crosscheck_matrix.png  used on input line 78.
@@ -1774,7 +1774,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 143--147
 
  []
 
-<PICs/npc_crosscheck_matrix_relations.png, id=751, 580.1675pt x 121.45375pt>
+<PICs/npc_crosscheck_matrix_relations.png, id=747, 580.1675pt x 121.45375pt>
 File: PICs/npc_crosscheck_matrix_relations.png Graphic file (type png)
 <use PICs/npc_crosscheck_matrix_relations.png>
 Package pdftex.def Info: PICs/npc_crosscheck_matrix_relations.png  used on inpu
@@ -1786,22 +1786,22 @@ Underfull \hbox (badness 10000) in paragraph at lines 150--163
  []
 
 [38] [39]
-<PICs/avg_as_delimiter_1.png, id=789, 340.27126pt x 372.39125pt>
+<PICs/avg_as_delimiter_1.png, id=785, 340.27126pt x 372.39125pt>
 File: PICs/avg_as_delimiter_1.png Graphic file (type png)
 <use PICs/avg_as_delimiter_1.png>
 Package pdftex.def Info: PICs/avg_as_delimiter_1.png  used on input line 173.
 (pdftex.def)             Requested size: 228.12593pt x 159.69325pt.
-<PICs/avg_as_delimiter_2.png, id=790, 340.27126pt x 372.39125pt>
+<PICs/avg_as_delimiter_2.png, id=786, 340.27126pt x 372.39125pt>
 File: PICs/avg_as_delimiter_2.png Graphic file (type png)
 <use PICs/avg_as_delimiter_2.png>
 Package pdftex.def Info: PICs/avg_as_delimiter_2.png  used on input line 180.
 (pdftex.def)             Requested size: 228.12593pt x 159.69325pt.
-<PICs/avg_as_delimiter_3.png, id=791, 412.54124pt x 396.48125pt>
+<PICs/avg_as_delimiter_3.png, id=787, 412.54124pt x 396.48125pt>
 File: PICs/avg_as_delimiter_3.png Graphic file (type png)
 <use PICs/avg_as_delimiter_3.png>
 Package pdftex.def Info: PICs/avg_as_delimiter_3.png  used on input line 186.
 (pdftex.def)             Requested size: 228.13217pt x 159.69075pt.
-<PICs/avg_as_delimiter_4.png, id=792, 412.54124pt x 396.48125pt>
+<PICs/avg_as_delimiter_4.png, id=788, 412.54124pt x 396.48125pt>
 File: PICs/avg_as_delimiter_4.png Graphic file (type png)
 <use PICs/avg_as_delimiter_4.png>
 Package pdftex.def Info: PICs/avg_as_delimiter_4.png  used on input line 192.
@@ -1816,12 +1816,12 @@ Overfull \hbox (18.86916pt too wide) in paragraph at lines 171--196
 []   [] 
  []
 
-<PICs/avg_as_delimiter_5.png, id=796, 412.54124pt x 396.48125pt>
+<PICs/avg_as_delimiter_5.png, id=792, 412.54124pt x 396.48125pt>
 File: PICs/avg_as_delimiter_5.png Graphic file (type png)
 <use PICs/avg_as_delimiter_5.png>
 Package pdftex.def Info: PICs/avg_as_delimiter_5.png  used on input line 203.
 (pdftex.def)             Requested size: 228.13217pt x 159.69075pt.
-<PICs/avg_as_delimiter_6.png, id=797, 612.2875pt x 396.48125pt>
+<PICs/avg_as_delimiter_6.png, id=793, 612.2875pt x 396.48125pt>
 File: PICs/avg_as_delimiter_6.png Graphic file (type png)
 <use PICs/avg_as_delimiter_6.png>
 Package pdftex.def Info: PICs/avg_as_delimiter_6.png  used on input line 210.
@@ -1854,12 +1854,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 168--218
 [40 <./PICs/npc_crosscheck_matrix_relations.png>] [41 <./PICs/avg_as_delimiter_
 1.png (PNG copy)> <./PICs/avg_as_delimiter_2.png (PNG copy)> <./PICs/avg_as_del
 imiter_3.png (PNG copy)> <./PICs/avg_as_delimiter_4.png (PNG copy)>]
-<PICs/top_2.png, id=813, 340.27126pt x 407.5225pt>
+<PICs/top_2.png, id=809, 340.27126pt x 407.5225pt>
 File: PICs/top_2.png Graphic file (type png)
 <use PICs/top_2.png>
 Package pdftex.def Info: PICs/top_2.png  used on input line 225.
 (pdftex.def)             Requested size: 228.12593pt x 182.50043pt.
-<PICs/top_2_bad.png, id=814, 340.27126pt x 407.5225pt>
+<PICs/top_2_bad.png, id=810, 340.27126pt x 407.5225pt>
 File: PICs/top_2_bad.png Graphic file (type png)
 <use PICs/top_2_bad.png>
 Package pdftex.def Info: PICs/top_2_bad.png  used on input line 230.
@@ -1869,12 +1869,12 @@ Overfull \hbox (18.86916pt too wide) in paragraph at lines 223--232
 [][]   [] 
  []
 
-<PICs/delimiter_tiers.png, id=816, 412.54124pt x 396.48125pt>
+<PICs/delimiter_tiers.png, id=812, 412.54124pt x 396.48125pt>
 File: PICs/delimiter_tiers.png Graphic file (type png)
 <use PICs/delimiter_tiers.png>
 Package pdftex.def Info: PICs/delimiter_tiers.png  used on input line 240.
 (pdftex.def)             Requested size: 228.13217pt x 159.69075pt.
-<PICs/delimiter_tiers_2.png, id=817, 340.27126pt x 372.39125pt>
+<PICs/delimiter_tiers_2.png, id=813, 340.27126pt x 372.39125pt>
 File: PICs/delimiter_tiers_2.png Graphic file (type png)
 <use PICs/delimiter_tiers_2.png>
 Package pdftex.def Info: PICs/delimiter_tiers_2.png  used on input line 245.
@@ -1892,7 +1892,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 220--251
 [42 <./PICs/avg_as_delimiter_5.png (PNG copy)> <./PICs/avg_as_delimiter_6.png (
 PNG copy)>] [43 <./PICs/top_2.png (PNG copy)> <./PICs/top_2_bad.png (PNG copy)>
 ]
-<PICs/delimiter_bad.png, id=834, 340.27126pt x 372.39125pt>
+<PICs/delimiter_bad.png, id=830, 340.27126pt x 372.39125pt>
 File: PICs/delimiter_bad.png Graphic file (type png)
 <use PICs/delimiter_bad.png>
 Package pdftex.def Info: PICs/delimiter_bad.png  used on input line 261.
@@ -1902,7 +1902,7 @@ Underfull \hbox (badness 3088) in paragraph at lines 262--262
 \T1/phv/m/n/10 rea-soned about and pro-vide equally
  []
 
-<PICs/sig_order.png, id=835, 596.2275pt x 396.48125pt>
+<PICs/sig_order.png, id=831, 596.2275pt x 396.48125pt>
 File: PICs/sig_order.png Graphic file (type png)
 <use PICs/sig_order.png>
 Package pdftex.def Info: PICs/sig_order.png  used on input line 268.
@@ -1939,12 +1939,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 253--276
 
 [44 <./PICs/delimiter_tiers.png> <./PICs/delimiter_tiers_2.png>] [45 <./PICs/de
 limiter_bad.png (PNG copy)> <./PICs/sig_order.png (PNG copy)>]
-<PICs/opt_possibility_1.png, id=853, 774.64406pt x 355.3275pt>
+<PICs/opt_possibility_1.png, id=849, 774.64406pt x 355.3275pt>
 File: PICs/opt_possibility_1.png Graphic file (type png)
 <use PICs/opt_possibility_1.png>
 Package pdftex.def Info: PICs/opt_possibility_1.png  used on input line 295.
 (pdftex.def)             Requested size: 228.12794pt x 136.88011pt.
-<PICs/opt_possibility_2.png, id=854, 774.64406pt x 355.3275pt>
+<PICs/opt_possibility_2.png, id=850, 774.64406pt x 355.3275pt>
 File: PICs/opt_possibility_2.png Graphic file (type png)
 <use PICs/opt_possibility_2.png>
 Package pdftex.def Info: PICs/opt_possibility_2.png  used on input line 302.
@@ -1960,7 +1960,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 287--309
  []
 
 [46]
-<PICs/sig_order_final.png, id=863, 596.2275pt x 396.48125pt>
+<PICs/sig_order_final.png, id=859, 596.2275pt x 396.48125pt>
 File: PICs/sig_order_final.png Graphic file (type png)
 <use PICs/sig_order_final.png>
 Package pdftex.def Info: PICs/sig_order_final.png  used on input line 319.
@@ -2007,7 +2007,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 361--364
  []
 
 [51] [52]
-<PICs/bss_data_comparison.png, id=927, 395.4775pt x 107.40125pt>
+<PICs/bss_data_comparison.png, id=923, 395.4775pt x 107.40125pt>
 File: PICs/bss_data_comparison.png Graphic file (type png)
 <use PICs/bss_data_comparison.png>
 Package pdftex.def Info: PICs/bss_data_comparison.png  used on input line 393.
@@ -2034,7 +2034,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 432--436
  []
 
 [56]
-<PICs/free_list_in_memory.png, id=1003, 907.89188pt x 202.50656pt>
+<PICs/free_list_in_memory.png, id=999, 907.89188pt x 202.50656pt>
 File: PICs/free_list_in_memory.png Graphic file (type png)
 <use PICs/free_list_in_memory.png>
 Package pdftex.def Info: PICs/free_list_in_memory.png  used on input line 483.
@@ -2122,12 +2122,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 84--86
 
  []
 
-<PICs/particles.png, id=1136, 585.18625pt x 516.93124pt>
+<PICs/particles.png, id=1132, 585.18625pt x 516.93124pt>
 File: PICs/particles.png Graphic file (type png)
 <use PICs/particles.png>
 Package pdftex.def Info: PICs/particles.png  used on input line 94.
 (pdftex.def)             Requested size: 228.13242pt x 159.687pt.
-<PICs/particles_faulty.png, id=1137, 589.20125pt x 449.68pt>
+<PICs/particles_faulty.png, id=1133, 589.20125pt x 449.68pt>
 File: PICs/particles_faulty.png Graphic file (type png)
 <use PICs/particles_faulty.png>
 Package pdftex.def Info: PICs/particles_faulty.png  used on input line 99.
@@ -2181,7 +2181,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 2--10
 
 
 ]
-<PICs/project_context.png, id=1224, 835.62187pt x 491.58656pt>
+<PICs/project_context.png, id=1220, 835.62187pt x 491.58656pt>
 File: PICs/project_context.png Graphic file (type png)
 <use PICs/project_context.png>
 Package pdftex.def Info: PICs/project_context.png  used on input line 15.
@@ -2192,7 +2192,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 12--27
  []
 
 [73] [74 <./PICs/project_context.png>] [75]
-<PICs/recursion_context.png, id=1261, 835.62187pt x 846.91406pt>
+<PICs/recursion_context.png, id=1257, 835.62187pt x 846.91406pt>
 File: PICs/recursion_context.png Graphic file (type png)
 <use PICs/recursion_context.png>
 Package pdftex.def Info: PICs/recursion_context.png  used on input line 50.
@@ -2245,28 +2245,28 @@ chapter 7.
 
 
 ]
-<PICs/test_file_d_refs.png, id=1287, 437.635pt x 270.00874pt>
+<PICs/test_file_d_refs.png, id=1283, 437.635pt x 270.00874pt>
 File: PICs/test_file_d_refs.png Graphic file (type png)
 <use PICs/test_file_d_refs.png>
 Package pdftex.def Info: PICs/test_file_d_refs.png  used on input line 41.
 (pdftex.def)             Requested size: 151.93248pt x 151.93309pt.
-<PICs/test_file_d1_misses.png, id=1288, 437.635pt x 270.00874pt>
+<PICs/test_file_d1_misses.png, id=1284, 437.635pt x 270.00874pt>
 File: PICs/test_file_d1_misses.png Graphic file (type png)
 <use PICs/test_file_d1_misses.png>
 Package pdftex.def Info: PICs/test_file_d1_misses.png  used on input line 46.
 (pdftex.def)             Requested size: 151.93248pt x 151.93309pt.
-<PICs/test_file_lld_misses.png, id=1289, 437.635pt x 270.00874pt>
+<PICs/test_file_lld_misses.png, id=1285, 437.635pt x 270.00874pt>
 File: PICs/test_file_lld_misses.png Graphic file (type png)
 <use PICs/test_file_lld_misses.png>
 Package pdftex.def Info: PICs/test_file_lld_misses.png  used on input line 51.
 (pdftex.def)             Requested size: 151.93248pt x 151.93309pt.
-<PICs/test_file_execution_times.png, id=1292, 633.36626pt x 391.4625pt>
+<PICs/test_file_execution_times.png, id=1288, 633.36626pt x 391.4625pt>
 File: PICs/test_file_execution_times.png Graphic file (type png)
 <use PICs/test_file_execution_times.png>
 Package pdftex.def Info: PICs/test_file_execution_times.png  used on input line
  60.
 (pdftex.def)             Requested size: 387.83151pt x 228.12955pt.
-<PICs/test_file_miss_rates.png, id=1293, 633.36626pt x 391.4625pt>
+<PICs/test_file_miss_rates.png, id=1289, 633.36626pt x 391.4625pt>
 File: PICs/test_file_miss_rates.png Graphic file (type png)
 <use PICs/test_file_miss_rates.png>
 Package pdftex.def Info: PICs/test_file_miss_rates.png  used on input line 69.
@@ -2284,18 +2284,18 @@ Underfull \hbox (badness 10000) in paragraph at lines 37--76
 [79 <./PICs/test_file_d_refs.png (PNG copy)> <./PICs/test_file_d1_misses.png (P
 NG copy)> <./PICs/test_file_lld_misses.png (PNG copy)>] [80 <./PICs/test_file_e
 xecution_times.png (PNG copy)>]
-<PICs/particle_field_weights.png, id=1327, 697.60625pt x 463.7325pt>
+<PICs/particle_field_weights.png, id=1323, 697.60625pt x 463.7325pt>
 File: PICs/particle_field_weights.png Graphic file (type png)
 <use PICs/particle_field_weights.png>
 Package pdftex.def Info: PICs/particle_field_weights.png  used on input line 84
 .
 (pdftex.def)             Requested size: 319.38058pt x 228.12955pt.
-<PICs/delta_times.png, id=1331, 920.43875pt x 569.12625pt>
+<PICs/delta_times.png, id=1327, 920.43875pt x 569.12625pt>
 File: PICs/delta_times.png Graphic file (type png)
 <use PICs/delta_times.png>
 Package pdftex.def Info: PICs/delta_times.png  used on input line 92.
 (pdftex.def)             Requested size: 365.00891pt x 273.76802pt.
-<PICs/delta_times_fire.png, id=1333, 920.43875pt x 569.12625pt>
+<PICs/delta_times_fire.png, id=1329, 920.43875pt x 569.12625pt>
 File: PICs/delta_times_fire.png Graphic file (type png)
 <use PICs/delta_times_fire.png>
 Package pdftex.def Info: PICs/delta_times_fire.png  used on input line 102.
@@ -2328,7 +2328,7 @@ lta_times_fire.png (PNG copy)>]
  (chapter/conclusion.tex
 chapter 8.
 
-Underfull \hbox (badness 10000) in paragraph at lines 14--17
+Underfull \hbox (badness 10000) in paragraph at lines 19--22
 
  []
 
@@ -2336,58 +2336,58 @@ Underfull \hbox (badness 10000) in paragraph at lines 14--17
 
 
 ] [86]
-<PICs/inheritance_split.png, id=1371, 1059.20718pt x 268.75406pt>
+<PICs/inheritance_split.png, id=1367, 1059.20718pt x 268.75406pt>
 File: PICs/inheritance_split.png Graphic file (type png)
 <use PICs/inheritance_split.png>
-Package pdftex.def Info: PICs/inheritance_split.png  used on input line 43.
+Package pdftex.def Info: PICs/inheritance_split.png  used on input line 48.
 (pdftex.def)             Requested size: 378.69603pt x 114.06517pt.
-<PICs/inheritance_split_2.png, id=1374, 1058.45438pt x 260.47313pt>
+<PICs/inheritance_split_2.png, id=1370, 1058.45438pt x 260.47313pt>
 File: PICs/inheritance_split_2.png Graphic file (type png)
 <use PICs/inheritance_split_2.png>
-Package pdftex.def Info: PICs/inheritance_split_2.png  used on input line 51.
+Package pdftex.def Info: PICs/inheritance_split_2.png  used on input line 56.
 (pdftex.def)             Requested size: 378.68529pt x 114.06401pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 39--58
+Underfull \hbox (badness 10000) in paragraph at lines 44--63
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 39--58
+Underfull \hbox (badness 10000) in paragraph at lines 44--63
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 39--58
+Underfull \hbox (badness 10000) in paragraph at lines 44--63
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 39--58
+Underfull \hbox (badness 10000) in paragraph at lines 44--63
 
  []
 
-[87 <./PICs/inheritance_split.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 65--70
+[87] [88 <./PICs/inheritance_split.png> <./PICs/inheritance_split_2.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 70--75
 
  []
 
-[88 <./PICs/inheritance_split_2.png>] [89]
-Underfull \hbox (badness 10000) in paragraph at lines 91--95
+[89] [90]
+Underfull \hbox (badness 10000) in paragraph at lines 96--100
 
  []
 
-[90] [91])
-Underfull \hbox (badness 10000) in paragraph at lines 117--148
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 117--148
+[91])
+Underfull \hbox (badness 10000) in paragraph at lines 119--148
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 117--148
+Underfull \hbox (badness 10000) in paragraph at lines 119--148
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 119--148
 
  []
 
@@ -2444,10 +2444,10 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 36354 strings out of 492946
- 677671 string characters out of 3125822
+ 36350 strings out of 492946
+ 677627 string characters out of 3125822
  1027524 words of memory out of 3000000
- 38875 multiletter control sequences out of 15000+200000
+ 38873 multiletter control sequences out of 15000+200000
  602110 words of font info for 98 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  71i,16n,80p,9151b,1956s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -2471,9 +2471,9 @@ rs/julian/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvbo8a.pf
 b><C:/Users/julian/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/helvetic/u
 hvr8a.pfb><C:/Users/julian/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/he
 lvetic/uhvro8a.pfb>
-Output written on BSP_MA_Code_BibTeX.pdf (112 pages, 3361735 bytes).
+Output written on BSP_MA_Code_BibTeX.pdf (112 pages, 3360962 bytes).
 PDF statistics:
- 2023 PDF objects out of 2073 (max. 8388607)
- 724 named destinations out of 1000 (max. 500000)
- 728 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 2013 PDF objects out of 2073 (max. 8388607)
+ 722 named destinations out of 1000 (max. 500000)
+ 712 words of extra memory for PDF output out of 10000 (max. 10000000)
 

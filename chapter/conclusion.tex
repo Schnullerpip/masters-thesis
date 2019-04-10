@@ -2,7 +2,12 @@
 This chapter will conclude the thesis, recapitulate the most important implications coming with a tool like COOP, discuss it's greatest weaknesses and shortcomings and will evaluate whether or not the author thinks that automated OOP to DoD transformation tools are a viable approach in general.
 
 \section{Future Work}
-There are numerous problems coming with a performance optimization approach like COOP. Some of them were already discussed in the previous sections as we solved them or found approximations that suffice a solution. In this section we will introduce some complications, that will dismiss COOP as a viable option as it is but can conceptually be solved in future work.
+There are numerous problems coming with a performance optimization approach like COOP. Some of them were already discussed in the previous sections as we solved them or found approximations that suffice a solution. In this section we will introduce some complications, that will dismiss COOP as a viable option as it is but could conceptually be solved in future work.
+
+\subsection{Language feature coverage and situational variety}
+First of all making a tool like COOP understand all kinds of language features there are, is conceptually not necessarily difficult but a lot of work. During development most of the work was adapting code to yet another language feature that came up in a new iteration of a test source-file.\\
+For example right now templates are not supported, also even just multi-variable declarations are unsupported. Not because multi-variable declarations would be hard to integrate but at some point it became clear, that focusing on language compliance is a time consuming rat hole. Especially in the beginning practically each new test file will reveal another feature or situation, that needs to be handled individually. Also while the LibTooling API is tremendously helpful it also still bears some bugs that require creative workarounds.
+
 \subsection{Hidden field usages}\label{hidden_field_usages}
 \begin{wrapfigure}[5]{r}{0.4\textwidth}
 \vspace{-20pt}
@@ -104,14 +109,11 @@ Since our optimization operates in an environment where we can't use \textit{siz
 Since virtual table pointers are inherently 'hidden' members (added by the compiler like padding Bytes) we can't unintentionally rearrange them in terms of descending type size, however when determining a record's size they need to be considered, as they occupy memory on their own and might as well induce additional structure padding.\\
 To properly adjust to these circumstances the user would need to be able to share information about the target compiler with COOP so it can invoke compiler dependent behavior and adjust certain routines.
 
-\subsection{Halting problem}
-can never analyze an algorithm reliably.
+%\subsection{Halting problem}
+%can never analyze an algorithm reliably.
 
-\subsection{PGO/LTO}
-No static analysis!
-
-\subsection{High variety}
-almost each new test file brings new cases COOP can't handle yet - years of work?!
+%\subsection{PGO/LTO}
+%No static analysis!
 
 \section{Conclusion}
 In the evolution of modern hardware the memory units the memory components of our today's systems pose a bottleneck in terms of throughput. Caching mechanisms implemented in complex memory hierarchies provide measures to counter this performance discrepancy but their correct utilization is the programmer's responsibility.\\
