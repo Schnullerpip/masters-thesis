@@ -1,7 +1,7 @@
 \chapter{Conclusions, major problems and future work}
 This chapter will conclude the thesis, recapitulate the most important implications coming with a tool like COOP, discuss it's greatest weaknesses and shortcomings and will evaluate whether or not the author thinks that automated OOP to DoD transformation tools are a viable approach in general.
 
-\section{Future Work}
+\section{Future Work}\label{future_work}
 There are numerous problems coming with a performance optimization approach like COOP. Some of them were already discussed in the previous sections as we solved them or found approximations that suffice a solution. In this section we will introduce some complications, that will dismiss COOP as a viable option as it is but could conceptually be solved in future work.
 
 \subsection{Language feature coverage and situational variety}
@@ -20,13 +20,17 @@ The foundation of our static analysis was on the one hand to identify the record
 In \refcode{hidden_field_usage} we invoke \textit{some\_function} that takes an int pointer as an argument with the address of our custom record's \textit{int\_field} field. At first glance this might be harmless, as the \textit{mr.int\_field} member usage is correctly registered by our AST matchers, however that function could invoke numerous other functions running an arbitrary amount of loops and recursion. Each consecutive use of that particular int would by our means represent a field usage however Clang won't recognize it as one.\\\\
 To fix this we could rely on further static analysis to trace member usages of this kind. Whenever we find a function, that is invoked with a field for a parameter we would need to treat this function similarly to how we treat functions, that directly use instances of our records and more specifically treat that variable as a field usage for the functions scope, as well as for all functions, that are in turn invoked as well.
 
-\subsection{False Positives}
+\subsection{False Positives}\label{false_positives}
 COOP analyzes all records that are found in the given source files and provide a definition. While some records are utilized with access patterns, that allow for optimization potential using a Hot/Cold split, others are not. As of now COOP is not smart enough to recognize for example a singleton pattern or really any kind of factory pattern. So while the single instance of such a record might appear on several loops it won't have the effect on the cache COOP anticipates.\\
 Right now COOP would ask the user before attempting an automated split including a user provided estimation of how many instances should be anticipated so externalizing the singleton's cold fields will not harm the instance or the systems performance, however it is an indicator, that false positives exist.\\
-As long as our heuristic provides true statements about a record's 'splitability' we don't need to fear splitting it. The obtained improvements will just be so insignificant that it won't really matter. What we do need to be careful about are further changes and implementations, as those would need to consider the possibility that we are handling false positives.\\
+As long as our heuristic provides true statements about a record's 'splitability' we don't need to fear splitting it. The obtained improvements will just be so insignificant that it won't really matter. What we do need to be careful about are further changes and implementations, as those would need to consider the possibility that we are handling false positives.\\\\
+On the other hand in our measurements we clearly determined that we are perfectly able to confuse COOP due to its inability of branch prediction. \Refsec{testing_oop} showed that COOP would blindly identify an exemplary particle record as a split candidate because it provided code that would results in domain heavy profiles yet those very code segments were positioned in control flow statements.\\
+The resulting 'optimization' proved to be beneficial as long as (and only if) all existing particles actually performed those domain specific computations.\\
+Further static analysis could reveal code segments as situational and weight them differently but ultimately, as e.g. particle amounts can vary entirely dependent on an in game situation there is no way of actually making a safe assumption about those code segments.\\
+Profile guided optimizations (PGO) might come closest to providing accurate meta data for those entities but whether or not PGO is an appropriate measure also depends on the target programs purpose. Performing automated splits on records can to a certain extend predictably influence a class in a positive way, but this shows, that even with given theoretically sophisticated static analysis or PGO we can't make reliable predictions as soon as we are dealing with purely run-time dependent properties. This conceptually disqualifies automated layout transformations to keep responsibility about split decisions.\\\\
 Right now the final decision and thus partially the responsibility are passed to the user that is however far from optimal. One of our initial goals for COOP was for the user to provide zero additional programming overhead. There is indeed no additional programming required however we demand information about a records anticipated instances.
 
-\subsection{Inheritance}
+\subsection{Inheritance}\label{inheritance}
 Inheritance is one of the core features that comes with an object oriented programming language. It also is one of those core features that enable the programmer for those intuitive abstraction concepts we talked about in \refsec{motivation}.\\
 Unfortunately it is also very complex in terms of making an automated split. On the one hand "\textit{Software engineer culture is drifting away from heavy use of inheritance anyway}" \mcp{nystrom}{285} but as OOP in general it is still used and may not be ignored.\\
 In \refcode{post_deriv_npc} we have seen, that the compiler will inject certain traits to a class so that it constitutes a \textit{is a} relation to its base classes. Since that injection is done at compile time, in terms of static analysis those inherited traits are only found in the base classes.\\
@@ -115,7 +119,7 @@ To properly adjust to these circumstances the user would need to be able to shar
 %\subsection{PGO/LTO}
 %No static analysis!
 
-\section{Conclusion}
+\section{Conclusion}\label{conclusion}
 In the evolution of modern hardware the memory units the memory components of our today's systems pose a bottleneck in terms of throughput. Caching mechanisms implemented in complex memory hierarchies provide measures to counter this performance discrepancy but their correct utilization is the programmer's responsibility.\\
 Object Oriented Programming is a powerful paradigm that allows for a programmer to model a problem in concepts he or she is familiar with. It offers a mechanism of abstraction that is intuitively adapted to a variety of problems. While a programmer benefits from abstraction in terms of maintainability it usually translates to a data layout, that inefficiently utilizes our modern hardware.\\
 Data oriented design practices focus on the problems data and pragmatically rationalizes abstraction in favor of locality principles. This may lead to code that is inferior in terms of maintainability but can and often will result in a performance boost as the resulting data layouts accommodate caching mechanisms better.\\

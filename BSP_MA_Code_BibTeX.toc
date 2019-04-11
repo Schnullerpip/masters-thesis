@@ -71,8 +71,8 @@
 \contentsline {section}{\numberline {8.2}Conceptual limitations}{89}{section.8.2}% 
 \contentsline {subsection}{\numberline {8.2.1}Templates}{89}{subsection.8.2.1}% 
 \contentsline {subsection}{\numberline {8.2.2}Data layout VS access patterns}{90}{subsection.8.2.2}% 
-\contentsline {subsection}{\numberline {8.2.3}Structural changes in record layouts}{90}{subsection.8.2.3}% 
-\contentsline {subsubsection}{\nonumberline Implementation dependent layout specifics}{91}{section*.80}% 
+\contentsline {subsection}{\numberline {8.2.3}Structural changes in record layouts}{91}{subsection.8.2.3}% 
+\contentsline {subsubsection}{\nonumberline Implementation dependent layout specifics}{92}{section*.80}% 
 \contentsline {section}{\numberline {8.3}Conclusion}{92}{section.8.3}% 
 \contentsline {chapter}{\nonumberline Bibliography}{95}{chapter*.81}% 
 \contentsline {chapter}{\nonumberline List of Figures}{98}{chapter*.82}% 
