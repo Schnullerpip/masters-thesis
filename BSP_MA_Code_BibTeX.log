@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6930 64-bit) (preloaded format=pdflatex 2019.1.14)  11 APR 2019 16:05
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6930 64-bit) (preloaded format=pdflatex 2019.1.14)  20 APR 2019 11:32
 entering extended mode
 **./BSP_MA_Code_BibTeX.tex
 (BSP_MA_Code_BibTeX.tex
@@ -1432,125 +1432,124 @@ Underfull \hbox (badness 10000) in paragraph at lines 36--37
 <PICs/cpu_memory_gap.png, id=232, 551.81157pt x 298.11375pt>
 File: PICs/cpu_memory_gap.png Graphic file (type png)
 <use PICs/cpu_memory_gap.png>
-Package pdftex.def Info: PICs/cpu_memory_gap.png  used on input line 71.
+Package pdftex.def Info: PICs/cpu_memory_gap.png  used on input line 72.
 (pdftex.def)             Requested size: 319.37749pt x 172.55128pt.
 LaTeX Font Info:    Font shape `T1/phv/bx/it' in size <10> not available
-(Font)              Font shape `T1/phv/b/it' tried instead on input line 79.
+(Font)              Font shape `T1/phv/b/it' tried instead on input line 80.
 LaTeX Font Info:    Font shape `T1/phv/b/it' in size <10> not available
-(Font)              Font shape `T1/phv/b/sl' tried instead on input line 79.
+(Font)              Font shape `T1/phv/b/sl' tried instead on input line 80.
  [5 <./PICs/cpu_memory_gap.png>]
 <PICs/cachelayout.png, id=251, 255.95625pt x 224.33812pt>
 File: PICs/cachelayout.png Graphic file (type png)
 <use PICs/cachelayout.png>
-Package pdftex.def Info: PICs/cachelayout.png  used on input line 89.
+Package pdftex.def Info: PICs/cachelayout.png  used on input line 90.
 (pdftex.def)             Requested size: 182.49944pt x 159.95552pt.
-LaTeX Font Info:    Try loading font information for OMS+phv on input line 97.
+LaTeX Font Info:    Try loading font information for OMS+phv on input line 98.
 
 ("C:\Users\julian\AppData\Local\Programs\MiKTeX 2.9\tex/latex/psnfss\omsphv.fd"
 File: omsphv.fd 
 )
 LaTeX Font Info:    Font shape `OMS/phv/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 97.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 98.
  [6 <./PICs/cachelayout.png>] [7] [8] [9]
-Underfull \hbox (badness 10000) in paragraph at lines 174--176
+Underfull \hbox (badness 10000) in paragraph at lines 175--177
 
  []
 
 [10]
-Underfull \hbox (badness 10000) in paragraph at lines 192--197
+Underfull \hbox (badness 10000) in paragraph at lines 193--198
 
  []
 
 [11]
 
 LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 222.
+               Default added (so using `tbp') on input line 223.
 
 
-Overfull \hbox (2.3214pt too wide) in paragraph at lines 232--248
+Overfull \hbox (2.3214pt too wide) in paragraph at lines 233--249
 []$[]$ $[]$ 
  []
 
 [12]
 LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <9> not available
-(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 271.
-<PICs/CacheUtilizationNPC.png, id=366, 1117.17375pt x 261.97874pt>
+(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 272.
+<PICs/CacheUtilizationNPC.png, id=368, 1117.17375pt x 261.97874pt>
 File: PICs/CacheUtilizationNPC.png Graphic file (type png)
 <use PICs/CacheUtilizationNPC.png>
-Package pdftex.def Info: PICs/CacheUtilizationNPC.png  used on input line 287.
+Package pdftex.def Info: PICs/CacheUtilizationNPC.png  used on input line 288.
 (pdftex.def)             Requested size: 456.2543pt x 136.88132pt.
  [13] [14 <./PICs/CacheUtilizationNPC.png>]
 <PICs/soa_aos_cl_usage.png, id=415, 602.25pt x 372.39125pt>
 File: PICs/soa_aos_cl_usage.png Graphic file (type png)
 <use PICs/soa_aos_cl_usage.png>
-Package pdftex.def Info: PICs/soa_aos_cl_usage.png  used on input line 310.
+Package pdftex.def Info: PICs/soa_aos_cl_usage.png  used on input line 311.
 (pdftex.def)             Requested size: 273.76686pt x 191.63306pt.
 <PICs/CacheUtilizationNPCSOA.png, id=419, 1067.48813pt x 218.31563pt>
 File: PICs/CacheUtilizationNPCSOA.png Graphic file (type png)
 <use PICs/CacheUtilizationNPCSOA.png>
 Package pdftex.def Info: PICs/CacheUtilizationNPCSOA.png  used on input line 31
-8.
+9.
 (pdftex.def)             Requested size: 456.2582pt x 77.56087pt.
 
-Underfull \hbox (badness 2005) in paragraph at lines 313--323
+Underfull \hbox (badness 2005) in paragraph at lines 314--324
 \T1/phv/m/n/10.95 here is the size of three floats
  []
 
 
-Underfull \hbox (badness 7168) in paragraph at lines 313--323
+Underfull \hbox (badness 7168) in paragraph at lines 314--324
 \T1/phv/m/n/10.95 cache-lines should be avoided,
  []
 
 
-Underfull \hbox (badness 1975) in paragraph at lines 313--323
+Underfull \hbox (badness 1975) in paragraph at lines 314--324
 \T1/phv/m/n/10.95 since ac-cess to it will re-sult in
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 313--323
+Underfull \hbox (badness 10000) in paragraph at lines 314--324
 
  []
 
-[15 <./PICs/soa_aos_cl_usage.png (PNG copy)> <./PICs/CacheUtilizationNPCSOA.png
->]
-Underfull \hbox (badness 1924) in paragraph at lines 336--339
+[15 <./PICs/soa_aos_cl_usage.png (PNG copy)>]
+Underfull \hbox (badness 1924) in paragraph at lines 337--340
 \T1/phv/m/n/10.95 log-i-cally re-lated data and cre-ate ar-rays of those
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 336--339
+Underfull \hbox (badness 10000) in paragraph at lines 337--340
 
  []
 
-<PICs/CacheUtilizationNPCComp.png, id=431, 660.96938pt x 253.69781pt>
+[16 <./PICs/CacheUtilizationNPCSOA.png>]
+<PICs/CacheUtilizationNPCComp.png, id=446, 660.96938pt x 253.69781pt>
 File: PICs/CacheUtilizationNPCComp.png Graphic file (type png)
 <use PICs/CacheUtilizationNPCComp.png>
 Package pdftex.def Info: PICs/CacheUtilizationNPCComp.png  used on input line 3
-44.
+45.
 (pdftex.def)             Requested size: 168.81223pt x 77.56158pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 345--345
+Underfull \hbox (badness 10000) in paragraph at lines 346--346
 [][]|\T1/phv/m/n/10 Uni-fied/-Grouped rel-e-vant
  []
 
-[16]
 <PICs/memory_mountain.png, id=453, 640.64343pt x 424.58624pt>
 File: PICs/memory_mountain.png Graphic file (type png)
 <use PICs/memory_mountain.png>
-Package pdftex.def Info: PICs/memory_mountain.png  used on input line 375.
+Package pdftex.def Info: PICs/memory_mountain.png  used on input line 376.
 (pdftex.def)             Requested size: 456.2579pt x 228.12643pt.
- [17 <./PICs/CacheUtilizationNPCComp.png>] [18 <./PICs/memory_mountain.png>]
+[17 <./PICs/CacheUtilizationNPCComp.png>] [18 <./PICs/memory_mountain.png>]
 LaTeX Font Info:    Font shape `T1/phv/bx/it' in size <10.95> not available
-(Font)              Font shape `T1/phv/b/it' tried instead on input line 404.
+(Font)              Font shape `T1/phv/b/it' tried instead on input line 405.
 LaTeX Font Info:    Font shape `T1/phv/b/it' in size <10.95> not available
-(Font)              Font shape `T1/phv/b/sl' tried instead on input line 404.
+(Font)              Font shape `T1/phv/b/sl' tried instead on input line 405.
 
-Underfull \hbox (badness 10000) in paragraph at lines 400--411
+Underfull \hbox (badness 10000) in paragraph at lines 401--412
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 400--411
+Underfull \hbox (badness 10000) in paragraph at lines 401--412
 
  []
 
@@ -1663,11 +1662,6 @@ Underfull \hbox (badness 4634) in paragraph at lines 71--73
 
 Underfull \hbox (badness 1184) in paragraph at lines 71--73
 \T1/phv/m/n/10.95 rather com-plex struc-ture a clang tool re-
- []
-
-
-Underfull \hbox (badness 1845) in paragraph at lines 71--73
-\T1/phv/m/n/10.95 don't even just match the main func-tion
  []
 
 
@@ -2041,37 +2035,32 @@ File: PICs/free_list_in_memory.png Graphic file (type png)
 Package pdftex.def Info: PICs/free_list_in_memory.png  used on input line 483.
 (pdftex.def)             Requested size: 392.38077pt x 136.88068pt.
  [57]
-Underfull \hbox (badness 10000) in paragraph at lines 490--495
+Underfull \hbox (badness 10000) in paragraph at lines 490--496
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 490--495
+Underfull \hbox (badness 10000) in paragraph at lines 490--496
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 490--495
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 490--495
+Underfull \hbox (badness 10000) in paragraph at lines 490--496
 
  []
 
 [58 <./PICs/free_list_in_memory.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 512--522
+Underfull \hbox (badness 10000) in paragraph at lines 511--521
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 512--522
+Underfull \hbox (badness 10000) in paragraph at lines 511--521
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 512--522
+Underfull \hbox (badness 10000) in paragraph at lines 511--521
 
  []
 
@@ -2464,9 +2453,9 @@ rs/julian/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvbo8a.pf
 b><C:/Users/julian/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/helvetic/u
 hvr8a.pfb><C:/Users/julian/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/he
 lvetic/uhvro8a.pfb>
-Output written on BSP_MA_Code_BibTeX.pdf (112 pages, 3366092 bytes).
+Output written on BSP_MA_Code_BibTeX.pdf (112 pages, 3367422 bytes).
 PDF statistics:
- 2033 PDF objects out of 2073 (max. 8388607)
+ 2034 PDF objects out of 2073 (max. 8388607)
  727 named destinations out of 1000 (max. 500000)
  712 words of extra memory for PDF output out of 10000 (max. 10000000)
 
