@@ -4,6 +4,7 @@ Compilers provide some of the most important features a programmer needs, like s
 
 \section{A compiler's understanding of the program}\label{compilers_understanding}
 \begin{wrapfigure}[8]{r}{0.4\textwidth}
+\vspace{-0.8cm}
 	\begin{lstlisting}[numbers=none, name={Exerpt of example context free grammar defining a (if)statement. Bold = terminal; italic = nonterminal}, emph={stmt, optexpr}, emphstyle=\itshape, morekeywords={expr, if}, mathescape=true, literate={->}{$\rightarrow{}$}{1}, label={bnf}]
 	stmt -> expr ;
 		| if ( expr ) stmt
@@ -22,6 +23,7 @@ A syntactical language definition can be done using the \textit{context free gra
 
 \subsubsection{Lexical analysis}
 \begin{wrapfigure}[20]{r}{0.2\textwidth}
+\vspace{-1cm}
 	\begin{center}
 		\includegraphics[width=.3\textwidth, height=0.45\textheight]{PICs/compiler_phases}
 	\end{center}

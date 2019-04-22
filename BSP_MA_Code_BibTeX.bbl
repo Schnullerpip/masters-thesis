@@ -2,15 +2,23 @@
 
 \bibitem{clang_tools}
 {\em Choosing the Right Interface for Your Application\/}.
+\newblock \url{http://clang.llvm.org/docs/Tooling.html}.
+\newblock [Online; accessed 25-Jan-2019].
 
 \bibitem{ispc}
 {\em Intel® SPMD Program Compiler User's Guide\/}.
+\newblock \url{http://ispc.github.io/ispc.html#structure-of-array-types}.
+\newblock [Online; accessed 25-Jan-2019].
 
 \bibitem{lang_ratings}
 {\em TIOBE Programming Community Index\/}.
+\newblock \url{https://www.tiobe.com/tiobe-index/}.
+\newblock [Online, accessed 14-Jan-2019].
 
 \bibitem{llvm_passes}
 {\em Writing an LLVM Pass\/}.
+\newblock \url{http://llvm.org/docs/WritingAnLLVMPass.html}.
+\newblock [Online; accessed 25-Jan-2019].
 
 \bibitem{aho}
 {\sc Aho, A.~V.}: {\em Compilers: principles, techniques and tools (for Anna
@@ -24,7 +32,11 @@
   1(3):195--200, 2007.
 
 \bibitem{denis}
-{\sc Bakhvalov, D.}: {\em Machine code layout optimizations\/}, 2018.
+{\sc Bakhvalov, D.}: {\em Machine code layout optimizations\/}.
+\newblock
+  \url{https://dendibakh.github.io/blog/2019/03/27/Machine-code-layout-optimizatoins},
+  2018.
+\newblock [Online; accessed 09-Apr-2019].
 
 \bibitem{tcclcc}
 {\sc Bieman, J.~M.} \btxandshort{.}\ {\sc B.-K. Kang}: {\em Cohesion and reuse
@@ -33,6 +45,8 @@
 
 \bibitem{jonblow}
 {\sc Blow, J.}: {\em Data-Oriented Demo: SOA, composition\/}.
+\newblock \url{https://www.youtube.com/watch?v=ZHqFrNyLlpA}.
+\newblock [Online; accessed 25-Jan-2019].
 
 \bibitem{bryant}
 {\sc Bryant, R.~E.}, {\sc O.~David~Richard} \btxandshort{.}\ {\sc
@@ -177,21 +191,39 @@
 \newblock Genever Benning, 2014.
 
 \bibitem{bolt}
-{\sc Panchenko, M.}: {\em Accelerate large-scale applications with BOLT\/},
+{\sc Panchenko, M.}: {\em Accelerate large-scale applications with BOLT\/}.
+\newblock
+  \url{https://code.fb.com/data-infrastructure/accelerate-large-scale-applications-with-bolt/},
   2018.
+\newblock [Online; accessed 09-Apr-2019].
 
 \bibitem{padding}
 {\sc Raymond, E.~S.}: {\em The Lost Art of Structure Packing\/}.
+\newblock
+  \url{http://www.catb.org/esr/structure-packing/#_structure_alignment_and_padding}.
+\newblock [Online; accessed 19-Jan-2019].
 
 \bibitem{hopl}
-{\sc Rebelsky, S.~A.}: {\em A Brief History of Programming Languages\/}, 1999.
+{\sc Rebelsky, S.~A.}: {\em A Brief History of Programming Languages\/}.
+\newblock
+  \url{http://www.math.grin.edu/~rebelsky/Courses/CS302/99S/Outlines/outline.02.html},
+  1999.
+\newblock [Online; accessed 15-Jan-2019].
 
 \bibitem{aosoa}
-{\sc S., A.}: {\em Memory Layout Transformations\/}, 2013.
+{\sc S., A.}: {\em Memory Layout Transformations\/}.
+\newblock
+  \url{https://software.intel.com/en-us/articles/memory-layout-transformations},
+  2013.
+\newblock [Online; accessed 24-Jan-2019].
 
 \bibitem{reinalter}
 {\sc Stefan~Reinalter, D.}: {\em Implementing a semi-automatic
-  structure-of-arrays data container\/}, 2013.
+  structure-of-arrays data container\/}.
+\newblock
+  \url{https://blog.molecular-matters.com/2013/10/22/implementing-a-semi-automatic-structure-of-arrays-data-container/},
+  2013.
+\newblock [Online; accessed 25-Jan-2019].
 
 \bibitem{stroustrup}
 {\sc Stroustrup, B.}: {\em Einf{\"u}hrung in die Programmierung mit C++\/}.

@@ -3,9 +3,9 @@
 \contentsline {lstlisting}{\numberline {1}Example of some hierarchical POD class definitions}{2}{lstlisting.1}% 
 \contentsline {lstlisting}{\numberline {2}OOP typical, simplified particle system implementation}{10}{lstlisting.2}% 
 \contentsline {lstlisting}{\numberline {3}Example code how OOP could handle collision between different particle systems' particles}{10}{lstlisting.3}% 
-\contentsline {lstlisting}{\numberline {4}NPC pod after derivation is done}{13}{lstlisting.4}% 
-\contentsline {lstlisting}{\numberline {5}SOA variant of the NPC}{14}{lstlisting.5}% 
-\contentsline {lstlisting}{\numberline {6}Consolidating related data}{16}{lstlisting.6}% 
+\contentsline {lstlisting}{\numberline {4}NPC pod after derivation is done}{14}{lstlisting.4}% 
+\contentsline {lstlisting}{\numberline {5}SOA variant of the NPC}{15}{lstlisting.5}% 
+\contentsline {lstlisting}{\numberline {6}Consolidating related data}{17}{lstlisting.6}% 
 \contentsline {lstlisting}{\numberline {7}The NPC class splitted into hot/cold data}{17}{lstlisting.7}% 
 \contentsline {lstlisting}{\numberline {8}AOSOA variant of grouped NPC traits}{19}{lstlisting.8}% 
 \contentsline {lstlisting}{\numberline {9}ISPC's native SOA support}{23}{lstlisting.9}% 
@@ -32,4 +32,4 @@
 \contentsline {lstlisting}{\numberline {30}Simple test code in order to make first tests. It will heavily use an NPC's positional properties (pos, vel) and basically disregard the fields name, age and mood, as they would be accessed based on user generated events.}{78}{lstlisting.30}% 
 \contentsline {lstlisting}{\numberline {31}Simple example of how to hide a field usage from the LibTooling API}{85}{lstlisting.31}% 
 \contentsline {lstlisting}{\numberline {32}Function/Member matrices for classes related by inheritance.}{87}{lstlisting.32}% 
-\contentsline {lstlisting}{\numberline {33}Simple example of why automated field rearrangements can't be considered legal.}{91}{lstlisting.33}% 
+\contentsline {lstlisting}{\numberline {33}Simple example of why automated field rearrangements can not be considered legal.}{91}{lstlisting.33}% 

@@ -9,46 +9,46 @@
 \contentsline {subsection}{\numberline {1.2.4}The CPUs cache utilization}{7}{subsection.1.2.4}% 
 \contentsline {section}{\numberline {1.3}Data Oriented Design}{9}{section.1.3}% 
 \contentsline {subsection}{\numberline {1.3.1}OOP and bad abstraction}{9}{subsection.1.3.1}% 
-\contentsline {subsection}{\numberline {1.3.2}Normalization of Data}{11}{subsection.1.3.2}% 
+\contentsline {subsection}{\numberline {1.3.2}Normalization of Data}{12}{subsection.1.3.2}% 
 \contentsline {subsection}{\numberline {1.3.3}Structure of Arrays / SOA}{13}{subsection.1.3.3}% 
-\contentsline {subsubsection}{\nonumberline AOS in the cache}{13}{section*.12}% 
-\contentsline {subsubsection}{\nonumberline SOA in the cache}{14}{section*.15}% 
+\contentsline {subsubsection}{\nonumberline AOS in the cache}{14}{section*.10}% 
+\contentsline {subsubsection}{\nonumberline SOA in the cache}{15}{section*.13}% 
 \contentsline {subsection}{\numberline {1.3.4}Regarding temporal- and spatial locality}{16}{subsection.1.3.4}% 
-\contentsline {subsubsection}{\nonumberline Hot/Cold Splitting}{17}{section*.23}% 
-\contentsline {subsubsection}{\nonumberline Components}{18}{section*.26}% 
-\contentsline {subsubsection}{\nonumberline Array Of Structure Of Arrays (AOSOA)}{19}{section*.27}% 
+\contentsline {subsubsection}{\nonumberline Hot/Cold Splitting}{17}{section*.21}% 
+\contentsline {subsubsection}{\nonumberline Components}{19}{section*.24}% 
+\contentsline {subsubsection}{\nonumberline Array Of Structure Of Arrays (AOSOA)}{19}{section*.25}% 
 \contentsline {chapter}{\numberline {2}Motivation}{22}{chapter.2}% 
-\contentsline {subsubsection}{\nonumberline The best out of both worlds}{22}{section*.29}% 
+\contentsline {subsubsection}{\nonumberline The best out of both worlds}{22}{section*.27}% 
 \contentsline {subsection}{\numberline {2.0.1}Native language support for DoD principles / ISPC / JAI}{23}{subsection.2.0.1}% 
-\contentsline {subsubsection}{\nonumberline Intel's ISPC}{23}{section*.30}% 
-\contentsline {subsubsection}{\nonumberline Jonathan Blow and JAI}{23}{section*.32}% 
+\contentsline {subsubsection}{\nonumberline Intel's ISPC}{23}{section*.28}% 
+\contentsline {subsubsection}{\nonumberline Jonathan Blow and JAI}{23}{section*.30}% 
 \contentsline {subsection}{\numberline {2.0.2}High level abstraction hiding DoD}{24}{subsection.2.0.2}% 
 \contentsline {chapter}{\numberline {3}Compiler technology as a mediator between OOP and DoD}{25}{chapter.3}% 
 \contentsline {section}{\numberline {3.1}A compiler's understanding of the program}{25}{section.3.1}% 
-\contentsline {subsubsection}{\nonumberline Syntax definition}{25}{section*.35}% 
-\contentsline {subsubsection}{\nonumberline Lexical analysis}{26}{section*.37}% 
-\contentsline {subsubsection}{\nonumberline Syntax analysis}{26}{section*.39}% 
-\contentsline {subsubsection}{\nonumberline Semantic analysis}{26}{section*.40}% 
+\contentsline {subsubsection}{\nonumberline Syntax definition}{25}{section*.33}% 
+\contentsline {subsubsection}{\nonumberline Lexical analysis}{26}{section*.35}% 
+\contentsline {subsubsection}{\nonumberline Syntax analysis}{26}{section*.37}% 
+\contentsline {subsubsection}{\nonumberline Semantic analysis}{26}{section*.38}% 
 \contentsline {section}{\numberline {3.2}A useful interface / LibTooling}{26}{section.3.2}% 
-\contentsline {subsubsection}{\nonumberline LLVM/Clang}{27}{section*.41}% 
+\contentsline {subsubsection}{\nonumberline LLVM/Clang}{27}{section*.39}% 
 \contentsline {chapter}{\numberline {4}A prototypical implementation for a source-to-source transformation tool generating cache friendly code / COOP}{29}{chapter.4}% 
-\contentsline {subsubsection}{\nonumberline Summarized Goals}{30}{section*.46}% 
+\contentsline {subsubsection}{\nonumberline Summarized Goals}{30}{section*.44}% 
 \contentsline {section}{\numberline {4.1}Stand Alone Tool}{30}{section.4.1}% 
 \contentsline {section}{\numberline {4.2}Automated split-candidate evaluation through static analysis}{32}{section.4.2}% 
 \contentsline {subsection}{\numberline {4.2.1}Data aggregation}{33}{subsection.4.2.1}% 
 \contentsline {subsection}{\numberline {4.2.2}Metric for evaluation of field usages}{34}{subsection.4.2.2}% 
-\contentsline {subsubsection}{\nonumberline Cohesion metrics}{35}{section*.48}% 
-\contentsline {subsubsection}{\nonumberline Asymptotic Notations}{36}{section*.49}% 
-\contentsline {subsubsection}{\nonumberline Quantitative cohesion alternation}{38}{section*.50}% 
+\contentsline {subsubsection}{\nonumberline Cohesion metrics}{35}{section*.46}% 
+\contentsline {subsubsection}{\nonumberline Asymptotic Notations}{36}{section*.47}% 
+\contentsline {subsubsection}{\nonumberline Quantitative cohesion alternation}{38}{section*.48}% 
 \contentsline {subsection}{\numberline {4.2.3}Field weight heuristics}{40}{subsection.4.2.3}% 
-\contentsline {subsubsection}{\nonumberline Scaling delimiters}{40}{section*.53}% 
-\contentsline {subsubsection}{\nonumberline Combined scaling delimiters}{42}{section*.56}% 
-\contentsline {subsubsection}{\nonumberline Order of significance / Significance groups}{44}{section*.59}% 
-\contentsline {subsubsection}{\nonumberline A brief discourse to data analysis in statistics}{49}{section*.63}% 
+\contentsline {subsubsection}{\nonumberline Scaling delimiters}{40}{section*.51}% 
+\contentsline {subsubsection}{\nonumberline Combined scaling delimiters}{42}{section*.54}% 
+\contentsline {subsubsection}{\nonumberline Order of significance / Significance groups}{44}{section*.57}% 
+\contentsline {subsubsection}{\nonumberline A brief discourse to data analysis in statistics}{49}{section*.61}% 
 \contentsline {section}{\numberline {4.3}COOP's affect on the data layout}{50}{section.4.3}% 
 \contentsline {subsection}{\numberline {4.3.1}Hot data allocations we want to adapt}{52}{subsection.4.3.1}% 
 \contentsline {subsection}{\numberline {4.3.2}Customized memory management for splitted records / COOP's free list}{53}{subsection.4.3.2}% 
-\contentsline {subsubsection}{\nonumberline Problematic fragmentation}{58}{section*.66}% 
+\contentsline {subsubsection}{\nonumberline Problematic fragmentation}{58}{section*.64}% 
 \contentsline {subsection}{\numberline {4.3.3}Structure Padding and field reordering}{59}{subsection.4.3.3}% 
 \contentsline {chapter}{\numberline {5}Source transformations and pitfalls of semantic integrity}{62}{chapter.5}% 
 \contentsline {subsection}{\numberline {5.0.1}Redirecting cold field access to the externalized subset}{64}{subsection.5.0.1}% 
@@ -72,12 +72,12 @@
 \contentsline {subsection}{\numberline {8.2.1}Templates}{89}{subsection.8.2.1}% 
 \contentsline {subsection}{\numberline {8.2.2}Data layout VS access patterns}{90}{subsection.8.2.2}% 
 \contentsline {subsection}{\numberline {8.2.3}Structural changes in record layouts}{91}{subsection.8.2.3}% 
-\contentsline {subsubsection}{\nonumberline Implementation dependent layout specifics}{92}{section*.80}% 
+\contentsline {subsubsection}{\nonumberline Implementation dependent layout specifics}{92}{section*.78}% 
 \contentsline {section}{\numberline {8.3}Conclusion}{92}{section.8.3}% 
-\contentsline {chapter}{\nonumberline Bibliography}{95}{chapter*.81}% 
-\contentsline {chapter}{\nonumberline List of Figures}{98}{chapter*.82}% 
-\contentsline {chapter}{\nonumberline List of Tables}{101}{chapter*.83}% 
-\contentsline {chapter}{\nonumberline List of Code}{102}{chapter*.85}% 
-\contentsline {chapter}{List of Abbreviations}{104}{section*.86}% 
+\contentsline {chapter}{\nonumberline Bibliography}{95}{chapter*.79}% 
+\contentsline {chapter}{\nonumberline List of Figures}{98}{chapter*.80}% 
+\contentsline {chapter}{\nonumberline List of Tables}{101}{chapter*.81}% 
+\contentsline {chapter}{\nonumberline List of Code}{102}{chapter*.83}% 
+\contentsline {chapter}{List of Abbreviations}{104}{section*.84}% 
 \contentsline {chapter}{\numberline {A}Anhang A}{105}{appendix.A}% 
 \contentsline {chapter}{\numberline {B}Anhang B}{106}{appendix.B}% 

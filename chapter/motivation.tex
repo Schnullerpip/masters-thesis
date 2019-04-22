@@ -13,6 +13,7 @@ There are languages in existence and under development, that aim to provide nati
 
 \subsubsection{Intel's ISPC}
 \begin{wrapfigure}[11]{r}{0.34\textwidth}
+\vspace{-0.8cm}
 \begin{lstlisting}[language=C++,name={ISPC's native SOA support},morekeywords={soa}, label={ispc_npc}]
 struct npc_group{
 	float x, y, z;
@@ -27,7 +28,8 @@ The \textit{Intel SPMD Program Compiler} (ISPC) is specifically designed to supp
 Those instructions depend on SOA data layouts, thus the language provides a \textit{soa} keyword to automatically transform an AOS defined struct into a SOA format. In \refcode{ispc_npc} an AOS \textit{npc\_group} is defined in line 1. In line 6 the \textit{pos\_and\_vel} is defined as a SOA holding 128 consecutive \textit{x}, \textit{y}, \textit{z}, \textit{v\_x}, \textit{v\_y}, and \textit{v\_z} respectively. This also easily enables for AOSOA format as can be seen in line 7.
 
 \subsubsection{Jonathan Blow and JAI}
-\begin{wrapfigure}[8]{r}{0.34\textwidth}
+\begin{wrapfigure}[6]{r}{0.34\textwidth}
+\vspace{-0.8cm}
 \begin{lstlisting}[language=C++,name={JAI's native SOA support},morekeywords={SOA}, label={jai_npc}]
 npc_group :: struct SOA{
 	xyz : [3] float;

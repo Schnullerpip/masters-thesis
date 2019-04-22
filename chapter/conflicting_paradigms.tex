@@ -194,17 +194,15 @@ Even though \refcode{collision} has some uncomfortable specifics (especially lin
 One could write an algorithm, that has a list of particle arrays; takes each particle system's particle array; unifies them to a big dynamically allocated array; then sorts it; then returns that array so it can be rendered. Each frame. This also implies changing the render pass, since now it is not the particle systems to render but one big array of particles.\\
 These changes are starting to proliferate really fast. One does not have those sort of issues with a real-world fireworks battery and might feel betrayed by the abstraction to it. Ultimately we come to a point where we understand, that a real-world projection of a problem domain into source code might not be the best choice. Its definitely possible, but does not provide the optimal attempts to solve the problems specific to certain tasks. So instead of realizing overly complex solutions to make our code fit our abstraction we realize that our abstraction is obsolete and we should focus on a solution that fits our tasks. In the end data is not generic in the way it is used\mcp{fabian}{15}. Different jobs might require different solutions and OOP might be optimal for a subset of problems, but has evolved into a pattern, that is forced on domains as a go to.\\
 Besides additional layers of abstraction do not equal superior usability/readability either. When using a third party library we hope the API designer provides functions that operate on data types we are already familiar with, like char pointers, instead of forcing us to learn how to use that developers self-made string class (KISS).\\\\
-So arguably Object Oriented Programming is not automatically superior, neither in terms of maintainability nor performance. Actually it appears to be inferior to DoD. So the question is: What does DoD do to be \textit{better}?
-
+So arguably Object Oriented Programming is not automatically superior, neither in terms of maintainability nor performance. Actually it appears to be inferior to DoD. So the question is: What does DoD do to be \textit{better}?\newpage
 \subsection{Normalization of Data}
 When thinking in terms of the problem and designing against the data \textit{Richard Fabian} references relational database models as a worthy category to look up to in his book \textit{Data-Oriented-Design: Software engineering for limited resources and short schedules} \mcp{fabian}{25}. After all a database should handle data correctly.\\
 We have already seen, that the object typical data-layout makes sense in terms of readability, but fails to be maintainable and in terms of cache utilization behaves poorly. In order to peel off of the OOP abstraction pattern we want our model to be a minimal, precise representation, that abides a format, that has proven to behave well. Fabian says:
 \begin{quote}
 	\textit{The structure of any data is a trade-off between performance, readability, maintenance, future proofing, extendibility, and reuse.} \mcp{fabian}{28}
 \end{quote}
-Therefore we could attempt to treat our data modeling process the way we would, when setting up a relational database. We normalize our data, according to the existing normalization stages developed by Edgar F. Codd and Raymond F. Boyce \mc{codd}. This is done because laying out your data in a linear fashion goes away from embedding meaning to its structure (Class/Struct) \mcp{fabian}{25} and has proven to give advantageous insights to the data, its domain and the relations between its subsets. Dealing with the problem's domain and the underlying data eventually led to technologies like JPEG and MP3 \mcp{fabian}{47}. Understanding the data will lead to an understanding of the solution.\\
-For our minimal example of a particle system, even just the first stages of normalization teaches us, that there should be no arrays of data in one element \mcp{fabian}{37} it also forces us to reconsider which data is accessed through which instance (key) and therefore whether or not there is a \textit{relation} to find \reftablep{normalized_ps}.\\
-\begin{table}
+Therefore we could attempt to treat our data modeling process the way we would, when setting up a relational database. We normalize our data, according to the existing normalization stages developed by Edgar F. Codd and Raymond F. Boyce \mc{codd}. This is done because laying out your data in a linear fashion goes away from embedding meaning to its structure (Class/Struct) \mcp{fabian}{25} and has proven to give advantageous insights to the data, its domain and the relations between its subsets. Dealing with the problem's domain and the underlying data eventually led to technologies like JPEG and MP3 \mcp{fabian}{47}. Understanding the data will lead to an understanding of the solution.
+\begin{table}[H]
 	\centering
 	\scalebox{0.7}{
 	\begin{tabular}{@{}lllllll@{}}
@@ -220,7 +218,7 @@ For our minimal example of a particle system, even just the first stages of norm
 	\bottomrule
 	\end{tabular}}
 \end{table}
-\begin{table}[]
+\begin{table}[H]
 	\parbox{0.5\linewidth}{
 		\centering
 		\scalebox{0.7}{
@@ -250,8 +248,7 @@ For our minimal example of a particle system, even just the first stages of norm
 	\caption{Example excerpt of a possible first normalization step for the particle system and how it indicates bad design}
 	\label{normalized_ps}
 \end{table}
-\\
-We will not implement a relational database for our application but generating this model can help us realize some things.
+For our minimal example of a particle system, even just the first stages of normalization teaches us, that there should be no arrays of data in one element \mcp{fabian}{37} it also forces us to reconsider which data is accessed through which instance (key) and therefore whether or not there is a \textit{relation} to find \reftablep{normalized_ps}.\\We will not implement a relational database for our application but generating this model can help us realize some things.
 \begin{enumerate}
 	\item particles are no longer represented block-wise, but are held in ONE unified table to begin with.
 	\item Instead of holding an array of particles we can just as well take its data subsets and link them against a unique key, which basically translates to each member is a column/array and each instance of a particle or particle system is now a mere index.
@@ -261,11 +258,10 @@ We will not implement a relational database for our application but generating t
 After \textit{laying out our data} in a linear fashion, we can now implement a \textit{data layout} that implements our new ideas.
 
 \subsection{Structure of Arrays / SOA}\label{soa}
-In contrast to the previously mentioned AOS \refsecp{OOP} a \textit{Structure of Arrays} (SOA) is the \textit{column-oriented database} pendant to a data layout that results in higher throughput by providing a cache friendlier structure \mcp{fabian}{163}. We already know now, that the hardware, specifically the cache uses certain strategies to provide data out of main memory, that is likely to be used soon. This happens both when loading data in cache-line sized blocks and through prefetching mechanisms \refsecp{cpucu}. Now when implementing the column-oriented approach that comes with data normalization we automatically almost perfectly conform to those auxiliary means by implementing columns as arrays. The original concept of an \textit{object} can now be simplified to an index, that retrieves the respective values in each column/array.
-
+In contrast to the previously mentioned AOS \refsecp{OOP} a \textit{Structure of Arrays} (SOA) is the \textit{column-oriented database} pendant to a data layout that results in higher throughput by providing a cache friendlier structure \mcp{fabian}{163}. We already know now, that the hardware, specifically the cache uses certain strategies to provide data out of main memory, that is likely to be used soon. This happens both when loading data in cache-line sized blocks and through prefetching mechanisms \refsecp{cpucu}. Now when implementing the column-oriented approach that comes with data normalization we automatically almost perfectly conform to those auxiliary means by implementing columns as arrays. The original concept of an \textit{object} can now be simplified to an index, that retrieves the respective values in each column/array.\newpage
 \subsubsection{AOS in the cache}
 \begin{wrapfigure}[11]{r}{.35\textwidth}
-\vspace{-0.6cm}
+\vspace{-1cm}
 \begin{lstlisting}[language=C++,numbers=none,name={NPC pod after derivation is done},label={post_deriv_npc}]
 struct NPC 
 {
@@ -385,7 +381,8 @@ In the classical component pattern we will keep a container object that holds in
 Components are one widely used mechanism to decouple parts of a formerly shared entity. This is applied to classes and is therefore a statement to how OOP and DoD can work hand in hand. Not only is the component pattern useful for decoupling and performance interests, it also solves issues, that would normally be solved by applying multiple inheritance \mcp{nystrom}{215}, which is a practice often despised even by OOP enthusiasts.\\
 Components can be stored domain wise, while still being contextually linked individually on an object instance level. Their decoupling mechanism has proven great maintainability and even provides a comparably light weight interface for game designers. Accessing them can be done domain wise as well -> optimal cache utilization. This elegant arrangement between OOP and DoD makes it a favored pattern for modern game engines \mcp{fabian}{83}.
 \subsubsection{Array Of Structure Of Arrays (AOSOA)}\label{aosoa}
-\begin{wrapfigure}[12]{r}{0.4\textwidth}
+\begin{wrapfigure}[9]{r}{0.4\textwidth}
+\vspace{-1.4cm}
 \begin{lstlisting}[language=C++,numbers=none,name={AOSOA variant of grouped NPC traits},label={aosoa_npc}]
 struct npc_bucket{
 	float
@@ -398,8 +395,7 @@ struct npc_bucket{
 npc_bucket npc_buckets[NUM_BUCKETS];
 \end{lstlisting}
 \end{wrapfigure}
-At first glance the idea of reintroducing the AOS concept seems confusing. In some cases depending on the original access patterns it might however be a good idea to separate the total amount of data into chunks that are often referred to as \textit{Buckets} or \textit{Tiles}. We already went a step back before, when we decided to unify logically related bits and make arrays of groups. We figured, that this might be an optimal solution for a very specific computation, but might behave poorly in other situations.\\
-Whenever data is grouped we might have the same problem, we tried to get rid of in the first place - possibly loading unwanted data into the cache, increasing access latency. The moment we decide, that for example our game should play a scary sound when the players distance to an NPC falls below a certain threshold, we again would be doomed to load adherent information about the NPC's velocity, mass and stuff that was grouped to make position updates faster. Because for this we actually only want the NPCs' positions.\\
+At first glance the idea of reintroducing the AOS concept seems confusing. In some cases depending on the original access patterns it might however be a good idea to separate the total amount of data into chunks that are often referred to as \textit{Buckets} or \textit{Tiles}. We already went a step back before, when we decided to unify logically related bits and make arrays of groups. We figured, that this might be an optimal solution for a very specific computation, but might behave poorly in other situations. Whenever data is grouped we might have the same problem, we tried to get rid of in the first place - possibly loading unwanted data into the cache, increasing access latency. The moment we decide, that for example our game should play a scary sound when the players distance to an NPC falls below a certain threshold, we again would be doomed to load adherent information about the NPC's velocity, mass and stuff that was grouped to make position updates faster. Because for this we actually only want the NPCs' positions.\\
 An attempt to solve this, is to yet again separate the relevant members, however to a certain extend gain back the advantage of spatial locality. Applied to our NPC it might look like \refcode{aosoa_npc}. We merely define our former \textit{columns}/arrays to hold only a subset of the total data respectively. The structures, that hold our member-arrays (the SOA) will however now be emplaced inside an array itself (the AO)! In Other words: We keep the data that will be used to transform each other close to prevent eviction. We enable the user to access specific subsets individually, to prevent/appease loading unnecessary information. \textit{The idea here is to get the benefit of locality at the outer-level and also unit-stride at the innermost-level} \mc{aosoa}. This attempt is compossible with grouping certain members, too. After all we are still able to access only specific sub arrays of buckets. A bucket should consist of logically related data, so we know that for a bucket's member array $a_{n}$ and an element index $npc_{e}$ each member array $a_{0\dotsc n-1}$ of a bucket contains data that is relevant to a distinct set of computations at position $npc_{e}$. For example $npc\_buckets[0].xyz[1]$ and $npc\_buckets[0].vel[1]$ will contribute to a distinct computation since they are used to describe a single abstract entity's state.\\
 Finding the NPC nearest to the player would now mean iterating the \textit{xyz} subsets of each bucket. Depending on the data bundled in a bucket (especially concerning alignment and padding) we still need to expect to load unwanted data subsequently to \textit{xyz} but this will now happen on a \textit{per-bucket} basis rather than on a \textit{per-NPC} basis.\\\\
 A crucial factor to the performance of an AOSOA data layout is its subset size and the resulting \textit{bucket-size\textbf{:}number-buckets} ratio. In case of our \refcode{aosoa_npc} example, taken to the extreme $\textit{NUM\_BUCKETS}=1$ would practically result in the classic SOA model, coming with all its advantages and disadvantages. On the other hand $\textit{SUB\_SET\_SIZE}=1$ would pretty much just be an object definition again (so AOS only needlessly more confusing and incomplete since we may have grouped the members).\\

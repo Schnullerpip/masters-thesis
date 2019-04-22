@@ -11,32 +11,36 @@ The style file: gerabbrv.bst
 Database file #1: Literatur.bib
 Warning--entry type for "about_oop" isn't style-file defined
 --line 30 of file Literatur.bib
+"{" immediately follows a field part---line 33 of file Literatur.bib
+ :   howpublished = \url
+ :                      {http://web.eecs.utk.edu/~huangj/CS302S04/notes/oo-intro.html},
+I'm skipping whatever remains of this entry
 Warning--entry type for "lang_ratings" isn't style-file defined
---line 46 of file Literatur.bib
+--line 47 of file Literatur.bib
 Warning--entry type for "hopl" isn't style-file defined
---line 90 of file Literatur.bib
+--line 93 of file Literatur.bib
 Warning--entry type for "aosoa" isn't style-file defined
---line 244 of file Literatur.bib
+--line 249 of file Literatur.bib
 Warning--entry type for "reinalter" isn't style-file defined
---line 266 of file Literatur.bib
+--line 272 of file Literatur.bib
 Warning--entry type for "jonblow" isn't style-file defined
---line 276 of file Literatur.bib
+--line 283 of file Literatur.bib
 Warning--entry type for "ispc" isn't style-file defined
---line 286 of file Literatur.bib
+--line 294 of file Literatur.bib
 Warning--entry type for "llvm_passes" isn't style-file defined
---line 327 of file Literatur.bib
+--line 336 of file Literatur.bib
 Warning--entry type for "clang_tools" isn't style-file defined
---line 335 of file Literatur.bib
-Repeated entry---line 363 of file Literatur.bib
+--line 345 of file Literatur.bib
+Repeated entry---line 375 of file Literatur.bib
  : @article{cohesion
  :                  ,
 I'm skipping whatever remains of this entry
 Warning--entry type for "padding" isn't style-file defined
---line 445 of file Literatur.bib
+--line 457 of file Literatur.bib
 Warning--entry type for "denis" isn't style-file defined
---line 469 of file Literatur.bib
+--line 482 of file Literatur.bib
 Warning--entry type for "bolt" isn't style-file defined
---line 478 of file Literatur.bib
+--line 492 of file Literatur.bib
 Warning--to sort, need author or key in lang_ratings
 Warning--to sort, need author or key in ispc
 Warning--to sort, need author or key in llvm_passes
@@ -45,4 +49,4 @@ Warning--empty journal in fabian
 Warning--empty journal in lcom
 Warning--can't use both volume and number fields in luk
 Warning--empty journal in bjarne_move
-(There was 1 error message)
+(There were 2 error messages)
