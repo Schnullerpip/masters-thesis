@@ -25,22 +25,24 @@ Warning--entry type for "reinalter" isn't style-file defined
 --line 272 of file Literatur.bib
 Warning--entry type for "jonblow" isn't style-file defined
 --line 283 of file Literatur.bib
+Warning--entry type for "jonblowtalk" isn't style-file defined
+--line 293 of file Literatur.bib
 Warning--entry type for "ispc" isn't style-file defined
---line 294 of file Literatur.bib
+--line 305 of file Literatur.bib
 Warning--entry type for "llvm_passes" isn't style-file defined
---line 336 of file Literatur.bib
+--line 347 of file Literatur.bib
 Warning--entry type for "clang_tools" isn't style-file defined
---line 345 of file Literatur.bib
-Repeated entry---line 375 of file Literatur.bib
+--line 356 of file Literatur.bib
+Repeated entry---line 386 of file Literatur.bib
  : @article{cohesion
  :                  ,
 I'm skipping whatever remains of this entry
 Warning--entry type for "padding" isn't style-file defined
---line 457 of file Literatur.bib
+--line 468 of file Literatur.bib
 Warning--entry type for "denis" isn't style-file defined
---line 482 of file Literatur.bib
+--line 493 of file Literatur.bib
 Warning--entry type for "bolt" isn't style-file defined
---line 492 of file Literatur.bib
+--line 503 of file Literatur.bib
 Warning--to sort, need author or key in lang_ratings
 Warning--to sort, need author or key in ispc
 Warning--to sort, need author or key in llvm_passes
