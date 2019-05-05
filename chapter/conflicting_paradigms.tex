@@ -14,13 +14,12 @@ OOP quickly established and rooted itself in the industry without solely being u
 	\includegraphics[width=1.0\linewidth]{PICs/lang_ratings}
 	\caption{Most popular programming languages throughout the years \mcpic{lang_ratings}.}\label{lang_ratings}
 \end{figure}
- This is however where OOP and modern computer architectures do not get along, so to say. OOP offers an elegant way to intuitively model an issue into code, but doing so it encourages us to implement our data in an inefficient way. Inefficient because creating monolithic models of our data usually lack cohesion, which means, that the classes' members tend to not be related/dependent \mc{cohesion} - at least in terms of computational order or domain affiliation. In a home office application, juggling a few dozens of entities every other minute, this will not appear as a problem. And in this case it might be preferable to program such application in a strict object oriented way, since the development can be done fast and reliably even by a novice. On the other hand and especially in the game development industry OOP has proven to result in poorly performing software, due to inefficient data layouts. Because especially for games where oftentimes lots of game entities are being processed several times per second: "\textit{data is performance}" \mcp{nystrom}{272}.\\
+ This is however where OOP and modern computer architectures do not get along, so to say. OOP offers an elegant way to intuitively model an issue into code, but doing so it encourages us to implement our data in an inefficient way. Inefficient because creating monolithic models of our data usually lack cohesion, which means, that the classes' members tend to not be related/dependent \mc{cohesion} - at least in terms of computational order or domain affiliation. In a home office application, juggling a few dozens of entities every other minute, this will not appear as a problem. And in this case it might be preferable to program such application in a strict object oriented way, since the development can be done fast and reliably even by a novice. On the other hand and especially in the game development industry OOP has proven to result in poorly performing software, due to inefficient data layouts. Because especially for games where oftentimes lots of game entities are being processed several times per second: "\textit{data is performance}" \mcp{nystrom}{272}.
  \begin{lstlisting}[language=C++,numbers=none,name={Example of some hierarchical POD class definitions},label={pods}]
 struct Obj {				struct Human : Obj {			struct NPC : Human {
 	float xyz[3];				char *name;						int mood;
 	float vel[3];				int age;						};
 };								};
-
 NPC npc_arr[3];
  \end{lstlisting}
 The abbreviation \textit{AOS} stands for \textit{Array Of Structures}\mc{intel} and it describes, what usually happens with Object Oriented Programming.\\
@@ -177,20 +176,17 @@ Concerning operations, that need to be applied to all particles right now this i
  \begin{lstlisting}[language=C++,name={Example code how OOP could handle collision between different particle systems' particles},label={collision}]
 void particle_system::particle_system_collision(
 	particle_system *ps1,
-	particle_system *ps2)
-{
-	for(unsigned i = 0; i < ps1->particles_alive; ++i)
-	{
+	particle_system *ps2){
+	for(unsigned i = 0; i < ps1->particles_alive; ++i){
 		particle *p1 = &ps1->particles[i];
-		for(unsigned o = (ps1 == ps2 ? i+1 : 0); o < ps2->particles_alive; ++o)
-		{
+		for(unsigned o = (ps1 == ps2 ? i+1 : 0); o < ps2->particles_alive; ++o){
 			particle *p2 = &ps2->particles[o];
 			[collision code]
 		}
 	}
 }
 \end{lstlisting}
-Even though \refcode{collision} has some uncomfortable specifics (especially line 8), it is still doable. The moment we start to render this particle system however one might notice that the particles are occasionally blurry. The particles' sprites make use of transparency and even though transparency is enabled in the render back-end it doesn't look right. For transparency to be applied correctly,the particles need to be rendered in a certain order. This circumstance might have not occurred to the programmer while designing the data model. It is easy enough to sort one particle system's particles according to their distance to camera respectively, but bringing EACH particle system's particles in order?\\
+Even though \refcode{collision} has some uncomfortable specifics (especially line 6), it is still doable. The moment we start to render this particle system however one might notice that the particles are occasionally blurry. The particles' sprites make use of transparency and even though transparency is enabled in the render back-end it doesn't look right. For transparency to be applied correctly,the particles need to be rendered in a certain order. This circumstance might have not occurred to the programmer while designing the data model. It is easy enough to sort one particle system's particles according to their distance to camera respectively, but bringing EACH particle system's particles in order?\\
 One could write an algorithm, that has a list of particle arrays; takes each particle system's particle array; unifies them to a big dynamically allocated array; then sorts it; then returns that array so it can be rendered. Each frame. This also implies changing the render pass, since now it is not the particle systems to render but one big array of particles.\\
 These changes are starting to proliferate really fast. One does not have those sort of issues with a real-world fireworks battery and might feel betrayed by the abstraction to it. Ultimately we come to a point where we understand, that a real-world projection of a problem domain into source code might not be the best choice. Its definitely possible, but does not provide the optimal attempts to solve the problems specific to certain tasks. So instead of realizing overly complex solutions to make our code fit our abstraction we realize that our abstraction is obsolete and we should focus on a solution that fits our tasks. In the end data is not generic in the way it is used\mcp{fabian}{15}. Different jobs might require different solutions and OOP might be optimal for a subset of problems, but has evolved into a pattern, that is forced on domains as a go to.\\
 Besides additional layers of abstraction do not equal superior usability/readability either. When using a third party library we hope the API designer provides functions that operate on data types we are already familiar with, like char pointers, instead of forcing us to learn how to use that developers self-made string class (KISS).\\\\

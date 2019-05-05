@@ -36,6 +36,7 @@ Unfortunately it is also very complex in terms of making an automated split. On 
 In \refcode{post_deriv_npc} we have seen, that the compiler will inject certain traits to a class so that it constitutes a \textit{is a} relation to its base classes. Since that injection is done at compile time, in terms of static analysis those inherited traits are only found in the base classes.\\
 Member expressions retrieved with the Clang API correctly associate inherited members to the respective base classes. Accordingly the process of analyzing and optimizing a record can not be done only for a subclass, as gathered data and transformations might actually happen in the base class. This does however greatly affect how we need to analyze fields. Since COOP assembles function/member and loop/member matrices per record inherited state will never appear among the inherent state of a sub class.\\
 If the new state variables heavily interact with inherited fields those correlations would not be considered as a split factor right now. For example imagine a struct \textit{Base} with a field \textit{a} and a struct \textit{Sub} with field \textit{b} that extends \textit{Base}. \textit{Sub} also defines a method \textit{Foo} that returns the accumulated values of \textit{a} and \textit{b}. The two funciton/member matrices for both \textit{Base} and \textit{Sub} would show no correlation between \textit{a} and \textit{b}.
+\newpage
 \begin{lstlisting}[language=C++, name={Function/Member matrices for classes related by inheritance.}, label={inheritance_fmm}]
 struct Base {						struct Sub : public A {
 	int a;								int b;
@@ -93,7 +94,7 @@ Eric S. Raymond explains, that
 \begin{quote}
 	"\textit{Automatic reordering would interfere with a systems programmer’s ability to lay out structures that exactly match the byte and bit-level layout of memory-mapped device control blocks}" \mc{padding}.
 \end{quote}
-Other than that since we are altering an existing code base reordering fields has another implication. In \refsec{hidden_field_usages} we explained how field usages can stay undetected due to C/C++'s ability to manually create pointers. When given a source code there is always the possibility that for whatever reasons fields are accessed through pointers or even pointer arithmetic.
+Other than that since we are altering an existing code base reordering fields has another implication. In \refsec{hidden_field_usages} we explained how field usages can stay undetected due to C/C++'s ability to manually create pointers. When given a source code there is always the possibility that for whatever reasons fields are accessed through pointers or even pointer arithmetic. \refcode{pointer_arithmetic_access} shows a simple example of how a record's field can be accessed without ever actually using it's identifier. Reordering fields inside a record would not break the target code, but induce bugs that are very hard to find and ultimately corrupt the semantic integrity of our 'optimized version'.
 \begin{lstlisting}[language=C++, name={Simple example of why automated field rearrangements can not be considered legal.}, label={pointer_arithmetic_access}]
 struct A{
 	int a = 1;
@@ -101,7 +102,6 @@ struct A{
 } foo;
 printf("%d\n", *(reinterpret_cast<int*>(&foo)+1)); //out: 2
 \end{lstlisting}
-\refcode{pointer_arithmetic_access} shows a simple example of how a record's field can be accessed without ever actually using it's identifier. Reordering fields inside a record would not break the target code, but induce bugs that are very hard to find and ultimately corrupt the semantic integrity of our 'optimized version'.\\
 The follow up question is now: Why does COOP grant itself the liberty of reordering fields? The reason for this is that it already breaks code like \refcode{pointer_arithmetic_access} anyways, even without field rearrangements. COOP not only reorders fields it extracts them completely. Any pointer gymnastics, that would originally lead to a certain field can now no longer trust their record's data layout anyway. This is a conceptual contradiction to an optimization like ours and consequently invalidates COOP in its entirety! At least in terms of language compliance.\\\\
 In conclusion an optimization process like COOP can only ever be executed in a reliable way when the user (or again further static analysis) can guarantee, that at no point in the target code base fields are accessed without invoking their identifiers.\\
 Comparably harmless pointers hiding a field will corrupt the results of our metrics/heuristics and might lead to hazardous splits and deteriorated performance but pointer arithmetic and type punning might actually result in corrupted semantics.

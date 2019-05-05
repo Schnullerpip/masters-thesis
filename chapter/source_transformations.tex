@@ -42,17 +42,13 @@ void bar(Foo *f){f->Foo::cold_data_ptr->cold_1 = 100;}
 \end{lstlisting}
 Extracting the cold fields implies changes to several parts of the target program so to further adapt it to the new data layout we will need to gather the AST nodes for several constructors and operators of the original record definition, the destructor, member expressions associating cold fields, calls of the new operator as well ad delete calls associating cold field and access spec declarations (to ensure code injections are placed with proper encapsulation).\\
 Some AST nodes like constructors and operators can usually be extracted out of the record definition's AST node, however this does not always work properly, especially when the actual definition of the wanted e.g. destructor is in another file. So we need to again traverse the ASTs searching for new information. Luckily this is again rather easy, as we can use the AST Matchers \refcodep{second_data_aggregation}.
-\begin{lstlisting}[language=C++, name={Shortened excerpts for some AST Matchers to retreive information we need to implement changes - second data aggregation.}, label={second_data_aggregation}]
-//find access specs:
-cxxRecordDecl(hasDescendant(accessSpecDecl().bind(coop_access_s)))
+\begin{lstlisting}[language=C++, name={Shortened excerpts for some AST Matchers to retreive some of the information we need to implement changes - second data aggregation.}, label={second_data_aggregation}]
 //find delete calls
 cxxDestructorDecl(isDefinition(), hasName(regex))
 //find constructor definitions
 cxxConstructorDecl(isDefinition(), unless(isImplicit()))
 //find copy assignment operator
 cxxMethodDecl(isDefinition(), isCopyAssignmentOperator(), unless(isImplicit()))
-//find move assignment operator
-cxxMethodDecl(isDefinition(), isMoveAssignmentOperator(), unless(isImplicit()))
 \end{lstlisting}
 \subsection{Redirecting cold field access to the externalized subset}
 In line 9 of \refcode{example_split_0} we see a function, that uses a member expression \textit{f->cold\_1} to assign the field \textit{cold\_1} a new value 100. The Expression is now broken after the externalization and needs to be fixed. With the prior AST Matchers we will find every member expression that associates cold data. COOP iterates them and redirects them appropriately. This is rather simple, since all there is to do is injecting access on the cold data pointer first. After retrieving the respective AST node we will assemble the code fragments, we need to constitute the correct access to the cold field.\\
