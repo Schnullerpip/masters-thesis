@@ -95,6 +95,7 @@ Eric S. Raymond explains, that
 	"\textit{Automatic reordering would interfere with a systems programmer’s ability to lay out structures that exactly match the byte and bit-level layout of memory-mapped device control blocks}" \mc{padding}.
 \end{quote}
 Other than that since we are altering an existing code base reordering fields has another implication. In \refsec{hidden_field_usages} we explained how field usages can stay undetected due to C/C++'s ability to manually create pointers. When given a source code there is always the possibility that for whatever reasons fields are accessed through pointers or even pointer arithmetic. \refcode{pointer_arithmetic_access} shows a simple example of how a record's field can be accessed without ever actually using it's identifier. Reordering fields inside a record would not break the target code, but induce bugs that are very hard to find and ultimately corrupt the semantic integrity of our 'optimized version'.
+\newpage
 \begin{lstlisting}[language=C++, name={Simple example of why automated field rearrangements can not be considered legal.}, label={pointer_arithmetic_access}]
 struct A{
 	int a = 1;
