@@ -7,7 +7,7 @@ In order to see the affects of our optimization on a target program, we will mea
 Cache utilization will be tested with \textit{Valgrind}'s dedicated tool \textit{Cachegrind} created by Nicholas Nethercote. Valgrind runs programs on a simulated CPU. When specifically regarding improvements in cache friendliness this saves us from external factors like other processes thrashing our cache-lines. This way we can run isolated tests to compare the un-/optimized versions of our target program. In case of Cachegrind it will explicitly simulate a cache hierarchy and observe e.g. accesses and misses for us. Cachegrind is an amazing tool, since it is easy to use, works out of the box and is completely free.
 
 \subsection{Low complexity test scenario}
-To quickly see where the strengths and weaknesses of COOP are we will first observe the results of a simple test case. This is the quickest way to see possible improvements/deteriorations and the easiest way to reason about how certain aspects impact certain numbers. For our first simple test we will define an arbitrary struct, its fields and some access patterns, that should enable COOP to refine the cache utilization. Let us just go with our NPC from the previous chapters.
+To quickly see where the strengths and weaknesses of COOP are we will first observe the results of a simple test case. This is the quickest way to see possible improvements/deterioration and the easiest way to reason about how certain aspects impact certain numbers. For our first simple test we will define an arbitrary struct, its fields and some access patterns, that should enable COOP to refine the cache utilization. We will proceed with the NPC definition from the previous chapters.
 \begin{lstlisting}[language=C++, name={Simple test code in order to make first tests. It will heavily use an NPC's positional properties (pos, vel) and basically disregard the fields name, age and mood, as they would be accessed based on user generated events.}, label={simple_test}]
 struct NPC {
 	float pos[3];
@@ -51,14 +51,14 @@ After running COOP on this code we will identify the fields \textit{name, age} a
 		\includegraphics[width=\textwidth,height=\textwidth]{PICs/test_file_lld_misses}
 	\end{minipage}
 \vspace{-0.5cm}
-\caption{Measurements for \textit{N} data entities and the resulting cache utilizations. The red line marks the 'post-optimization' values. Note that the \textit{D refs} graph uses a logarithmic scale so the increase in D refs as N grows actually becomes very large!}
+\caption{Measurements for \textit{N} data entities and the resulting cache utilization The red line marks the 'post-optimization' values. Note that the \textit{D refs} graph uses a logarithmic scale so the increase in D refs as N grows actually becomes very large!}
 \label{test_file_is_it_bad}
 \end{figure}
 When looking at the number of cache misses \reffig{test_file_is_it_bad} reveals alarming numbers. Despite our optimization, that specifically is designed to reduce cache misses we not only somehow managed to increase the amount of cache misses, but also the number of total data accesses! At this point COOP looks bad and further looking at the execution times we will see, that there is actually an observable deterioration in run time as well \reffigp{test_file_execution_times}.
 \begin{figure}[!htbp]
 	\centering
 	\includegraphics[width=0.85\textwidth, height=0.5\textwidth]{PICs/test_file_execution_times}
-	\caption{Measured runtimes for un-/optimized versions of our simple test code with rising N. These measurements have been made by using the Unix command \textit{time}.}
+	\caption{Measured run times for un-/optimized versions of our simple test code with rising N. These measurements have been made by using the Unix command \textit{time}.}
 	\label{test_file_execution_times}
 \end{figure}
 While moving time spent away from the operating system by interchanging heap allocations with placement news to our bss data works well in the beginning, the overhead of initializing our free list grows linearly with the amount of data. While the operating system's free list that will handle our heap allocations already exists on a user program start, our custom allocator introduces additional overhead to the program, that will ultimately pitch towards inferior initialization overhead that might outscale the benefits of its fast allocation times.\\
@@ -75,14 +75,14 @@ What about cache utilization? Even though increased initialization overhead adds
 While our affect on the data layout was beneficial, the assumption, that single heap allocation initializations are inherently bad depends on the target programs complexity and data flow. Further static analysis could potentially identify bad initialization patterns more precisely but more on that in \refsec{future_work}.
 
 \subsection{Testing an OOP particle system}\label{testing_oop}
-Our next test will work with a more complex target project, a particle system. While it will be deliberately programmed in a rather OOP manner and completely managed by the CPU, it will also provide us with an example of a program with undetermined runtime as there will be a 'game loop' and the user will trigger the program stop. In this case we would measure the targets delta times or FPS(frames per second), to see whether or not COOP can induce an improvement.\\
+Our next test will work with a more complex target project, a particle system. While it will be deliberately programmed in a rather OOP manner and completely managed by the CPU, it will also provide us with an example of a program with undetermined run time as there will be a 'game loop' and the user will trigger the program stop. In this case we would measure the targets delta times or FPS(frames per second), to see whether or not COOP can induce an improvement.\\
 Specifically we will create a scene with four particle systems each shooting a bunch of particles at a center point, so the particles from the different systems collide and bounce off each other. The systems load will increase with several parameters: The particles life time; The particle systems fire rate; the size of the bulks that are released at once. All those factors affect the total amount of particles that will be in the scene at one discrete time step.\\\\
 Besides the rendering there will be one other significant part to the program. The physics. The computation of all the collisions and resulting changes to velocities, accelerations and ultimately positions will demand most of the CPUs resources and will happen once per frame. When increasing the total amount of particles in the scene, we will experience higher delta times, as processing their individual state changes will consume more and more time. Besides observing our optimization's impact on the cache utilization we will compare the programs' delta times over a fixed amount of frames \reffigp{delta_times}.\\
 The particles' setup is a rather simple POD (plain old data) type with all the data we need, for example a particles position, acceleration, velocity, mass, lifetime, radius, texture and shader. COOP's static analysis will yield field weightings as can be seen in \reffig{particle_field_weights}.
 \begin{figure}[!htbp]
 	\centering
 	\includegraphics[width=0.7\textwidth,height=0.5\textwidth]{PICs/particle_field_weights}
-	\caption{The particle's field weighst according to COOP. The q1/2 are the quartiles, that together with the interquartile range define our spike points. Inside the mid fragment we will induce further significance grouping as discussed in \refsec{sig_groups}.}
+	\caption{The particle's field weights according to COOP. The q1/2 are the quartiles, that together with the interquartile range define our spike points. Inside the mid fragment we will induce further significance grouping as discussed in \refsec{sig_groups}.}
 	\label{particle_field_weights}
 \end{figure}
 The shader and texture fields were determined to be relatively cold enough to favor a split. This seems strange, as they will be used each frame, however our heuristic assumes, that hiving them off will benefit the other fields' computations enough to achieve improved cache utilization. In fact in the original version of the test program COOP would state, that it could not detect a favorable split, so it was deliberately worsened. Originally the shader and texture fields were merely pointers to their respective objects. To provoke bad cache utilization we instead let the particle directly hold their instances increasing the overall particles size to a point, where COOP would see optimization potential.\\\\
@@ -100,7 +100,7 @@ Right now (as mentioned before) the physics steps is a major part of our little 
 \begin{figure}[!htbp]
 	\centering
 	\includegraphics[width=0.8\textwidth,height=0.6\textwidth]{PICs/delta_times_fire}
-	\caption{Compared delta times of an optimized and an unoptimized build showing that COOP's metrics have major issues with variant behavior of splitted instances.}
+	\caption{Compared delta times of an optimized and an unoptimized build showing that COOP's metrics have major issues with variant behavior of split instances.}
 	\label{delta_times_fire}
 \end{figure}
 We introduced a mere 1000 fire particles to a scene handling up to 60,000 colliding particles. While a thousand particles not having to calculate collision would usually not have a great impact on our system, now it does. Taking away the 'field weights' of other fields like position, velocity, radius and acceleration that are all highly important to physics calculations the externalized fields shader and texture become relatively more significant.\\

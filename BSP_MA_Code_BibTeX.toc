@@ -47,7 +47,7 @@
 \contentsline {subsubsection}{\nonumberline A brief discourse to data analysis in statistics}{49}{section*.61}% 
 \contentsline {section}{\numberline {4.3}COOP's affect on the data layout}{50}{section.4.3}% 
 \contentsline {subsection}{\numberline {4.3.1}Hot data allocations we want to adapt}{52}{subsection.4.3.1}% 
-\contentsline {subsection}{\numberline {4.3.2}Customized memory management for splitted records / COOP's free list}{53}{subsection.4.3.2}% 
+\contentsline {subsection}{\numberline {4.3.2}Customized memory management for split records / COOP's free list}{53}{subsection.4.3.2}% 
 \contentsline {subsubsection}{\nonumberline Problematic fragmentation}{58}{section*.64}% 
 \contentsline {subsection}{\numberline {4.3.3}Structure Padding and field reordering}{59}{subsection.4.3.3}% 
 \contentsline {chapter}{\numberline {5}Source transformations and pitfalls of semantic integrity}{62}{chapter.5}% 
