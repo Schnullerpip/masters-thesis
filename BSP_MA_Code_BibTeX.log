@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7000 64-bit) (preloaded format=pdflatex 2019.5.5)  7 MAY 2019 13:25
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7000 64-bit) (preloaded format=pdflatex 2019.5.5)  11 MAY 2019 16:43
 entering extended mode
 **./BSP_MA_Code_BibTeX.tex
 (BSP_MA_Code_BibTeX.tex
@@ -1286,18 +1286,23 @@ LaTeX Font Info:    Font shape `T1/phv/m/it' in size <10.95> not available
 ] (BSP_MA_Code_BibTeX.toc [-5
 
 ]
-Overfull \hbox (1.29184pt too wide) detected at line 80
- []\T1/phv/b/n/10.95 102
+Overfull \hbox (1.29184pt too wide) detected at line 79
+ []\T1/phv/b/n/10.95 100
  []
 
 
-Overfull \hbox (1.29184pt too wide) detected at line 81
+Overfull \hbox (1.29184pt too wide) detected at line 80
  []\T1/phv/b/n/10.95 103
  []
 
 
+Overfull \hbox (1.29184pt too wide) detected at line 81
+ []\T1/phv/b/n/10.95 104
+ []
+
+
 Overfull \hbox (1.29184pt too wide) detected at line 82
- []\T1/phv/b/n/10.95 105
+ []\T1/phv/b/n/10.95 106
  []
 
 )
@@ -1341,92 +1346,93 @@ Underfull \hbox (badness 10000) in paragraph at lines 35--36
 
  []
 
-[3 <./PICs/npcs_in_memory.png>] [4]
-<PICs/cpu_memory_gap.png, id=229, 551.81157pt x 298.11375pt>
+[3 <./PICs/npcs_in_memory.png>]
+<PICs/cpu_memory_gap.png, id=223, 551.81157pt x 298.11375pt>
 File: PICs/cpu_memory_gap.png Graphic file (type png)
 <use PICs/cpu_memory_gap.png>
-Package pdftex.def Info: PICs/cpu_memory_gap.png  used on input line 71.
+Package pdftex.def Info: PICs/cpu_memory_gap.png  used on input line 70.
 (pdftex.def)             Requested size: 319.37749pt x 172.55128pt.
 LaTeX Font Info:    Font shape `T1/phv/bx/it' in size <10> not available
-(Font)              Font shape `T1/phv/b/it' tried instead on input line 79.
+(Font)              Font shape `T1/phv/b/it' tried instead on input line 78.
 LaTeX Font Info:    Font shape `T1/phv/b/it' in size <10> not available
-(Font)              Font shape `T1/phv/b/sl' tried instead on input line 79.
- [5 <./PICs/cpu_memory_gap.png>]
-<PICs/cachelayout.png, id=248, 255.95625pt x 224.33812pt>
+(Font)              Font shape `T1/phv/b/sl' tried instead on input line 78.
+ [4]
+<PICs/cachelayout.png, id=239, 255.95625pt x 224.33812pt>
 File: PICs/cachelayout.png Graphic file (type png)
 <use PICs/cachelayout.png>
-Package pdftex.def Info: PICs/cachelayout.png  used on input line 89.
+Package pdftex.def Info: PICs/cachelayout.png  used on input line 88.
 (pdftex.def)             Requested size: 182.49944pt x 159.95552pt.
-LaTeX Font Info:    Try loading font information for OMS+phv on input line 97.
+ [5 <./PICs/cpu_memory_gap.png>]
+LaTeX Font Info:    Try loading font information for OMS+phv on input line 96.
 
 ("C:\Program Files\MiKTeX 2.9\tex/latex/psnfss\omsphv.fd"
 File: omsphv.fd 
 )
 LaTeX Font Info:    Font shape `OMS/phv/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 97.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 96.
  [6 <./PICs/cachelayout.png>] [7] [8] [9]
-Underfull \hbox (badness 10000) in paragraph at lines 174--176
+Underfull \hbox (badness 10000) in paragraph at lines 173--175
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 189--193
+Underfull \hbox (badness 10000) in paragraph at lines 188--192
 
  []
 
 [10] [11]
-Overfull \hbox (2.3214pt too wide) in paragraph at lines 227--243
+Overfull \hbox (2.3214pt too wide) in paragraph at lines 226--242
 []$[]$ $[]$ 
  []
 
 [12] [13]
 LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <9> not available
-(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 264.
+(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 263.
 <PICs/CacheUtilizationNPC.png, id=367, 1117.17375pt x 261.97874pt>
 File: PICs/CacheUtilizationNPC.png Graphic file (type png)
 <use PICs/CacheUtilizationNPC.png>
-Package pdftex.def Info: PICs/CacheUtilizationNPC.png  used on input line 280.
+Package pdftex.def Info: PICs/CacheUtilizationNPC.png  used on input line 279.
 (pdftex.def)             Requested size: 456.2543pt x 136.88132pt.
  [14 <./PICs/CacheUtilizationNPC.png>]
 <PICs/soa_aos_cl_usage.png, id=398, 602.25pt x 372.39125pt>
 File: PICs/soa_aos_cl_usage.png Graphic file (type png)
 <use PICs/soa_aos_cl_usage.png>
-Package pdftex.def Info: PICs/soa_aos_cl_usage.png  used on input line 303.
+Package pdftex.def Info: PICs/soa_aos_cl_usage.png  used on input line 302.
 (pdftex.def)             Requested size: 273.76686pt x 191.63306pt.
 <PICs/CacheUtilizationNPCSOA.png, id=402, 1067.48813pt x 218.31563pt>
 File: PICs/CacheUtilizationNPCSOA.png Graphic file (type png)
 <use PICs/CacheUtilizationNPCSOA.png>
 Package pdftex.def Info: PICs/CacheUtilizationNPCSOA.png  used on input line 31
-1.
+0.
 (pdftex.def)             Requested size: 456.2582pt x 77.56087pt.
 
-Underfull \hbox (badness 2005) in paragraph at lines 306--316
+Underfull \hbox (badness 2005) in paragraph at lines 305--315
 \T1/phv/m/n/10.95 here is the size of three floats
  []
 
 
-Underfull \hbox (badness 7168) in paragraph at lines 306--316
+Underfull \hbox (badness 7168) in paragraph at lines 305--315
 \T1/phv/m/n/10.95 cache-lines should be avoided,
  []
 
 
-Underfull \hbox (badness 1975) in paragraph at lines 306--316
+Underfull \hbox (badness 1975) in paragraph at lines 305--315
 \T1/phv/m/n/10.95 since ac-cess to it will re-sult in
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 306--316
+Underfull \hbox (badness 10000) in paragraph at lines 305--315
 
  []
 
 [15 <./PICs/soa_aos_cl_usage.png (PNG copy)>] [16 <./PICs/CacheUtilizationNPCSO
 A.png>]
-Underfull \hbox (badness 1924) in paragraph at lines 329--332
+Underfull \hbox (badness 1924) in paragraph at lines 328--331
 \T1/phv/m/n/10.95 log-i-cally re-lated data and cre-ate ar-rays of those
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 329--332
+Underfull \hbox (badness 10000) in paragraph at lines 328--331
 
  []
 
@@ -1434,30 +1440,30 @@ Underfull \hbox (badness 10000) in paragraph at lines 329--332
 File: PICs/CacheUtilizationNPCComp.png Graphic file (type png)
 <use PICs/CacheUtilizationNPCComp.png>
 Package pdftex.def Info: PICs/CacheUtilizationNPCComp.png  used on input line 3
-37.
+36.
 (pdftex.def)             Requested size: 168.81223pt x 77.56158pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 338--338
+Underfull \hbox (badness 10000) in paragraph at lines 337--337
 [][]|\T1/phv/m/n/10 Uni-fied/-Grouped rel-e-vant
  []
 
 <PICs/memory_mountain.png, id=437, 640.64343pt x 424.58624pt>
 File: PICs/memory_mountain.png Graphic file (type png)
 <use PICs/memory_mountain.png>
-Package pdftex.def Info: PICs/memory_mountain.png  used on input line 368.
+Package pdftex.def Info: PICs/memory_mountain.png  used on input line 366.
 (pdftex.def)             Requested size: 456.2579pt x 228.12643pt.
 [17 <./PICs/CacheUtilizationNPCComp.png>] [18 <./PICs/memory_mountain.png>]
 LaTeX Font Info:    Font shape `T1/phv/bx/it' in size <10.95> not available
-(Font)              Font shape `T1/phv/b/it' tried instead on input line 397.
+(Font)              Font shape `T1/phv/b/it' tried instead on input line 395.
 LaTeX Font Info:    Font shape `T1/phv/b/it' in size <10.95> not available
-(Font)              Font shape `T1/phv/b/sl' tried instead on input line 397.
+(Font)              Font shape `T1/phv/b/sl' tried instead on input line 395.
 
-Underfull \hbox (badness 10000) in paragraph at lines 394--404
+Underfull \hbox (badness 10000) in paragraph at lines 392--402
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 394--404
+Underfull \hbox (badness 10000) in paragraph at lines 392--402
 
  []
 
@@ -2221,72 +2227,77 @@ Underfull \hbox (badness 10000) in paragraph at lines 19--22
 
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 24--32
+Underfull \hbox (badness 10000) in paragraph at lines 24--33
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 24--32
+Underfull \hbox (badness 10000) in paragraph at lines 24--33
 
  []
 
-[86] [87]
-<PICs/inheritance_split.png, id=1378, 1059.20718pt x 268.75406pt>
+
+Underfull \hbox (badness 10000) in paragraph at lines 24--33
+
+ []
+
+[86] [87] [88]
+<PICs/inheritance_split.png, id=1382, 1059.20718pt x 268.75406pt>
 File: PICs/inheritance_split.png Graphic file (type png)
 <use PICs/inheritance_split.png>
-Package pdftex.def Info: PICs/inheritance_split.png  used on input line 53.
+Package pdftex.def Info: PICs/inheritance_split.png  used on input line 54.
 (pdftex.def)             Requested size: 378.69603pt x 114.06517pt.
-<PICs/inheritance_split_2.png, id=1381, 1058.45438pt x 260.47313pt>
+<PICs/inheritance_split_2.png, id=1385, 1058.45438pt x 260.47313pt>
 File: PICs/inheritance_split_2.png Graphic file (type png)
 <use PICs/inheritance_split_2.png>
-Package pdftex.def Info: PICs/inheritance_split_2.png  used on input line 61.
+Package pdftex.def Info: PICs/inheritance_split_2.png  used on input line 62.
 (pdftex.def)             Requested size: 378.68529pt x 114.06401pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 49--68
+Underfull \hbox (badness 10000) in paragraph at lines 50--69
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 49--68
+Underfull \hbox (badness 10000) in paragraph at lines 50--69
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 49--68
+Underfull \hbox (badness 10000) in paragraph at lines 50--69
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 49--68
+Underfull \hbox (badness 10000) in paragraph at lines 50--69
 
  []
 
-[88 <./PICs/inheritance_split.png>] [89 <./PICs/inheritance_split_2.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 79--84
+[89 <./PICs/inheritance_split.png>] [90 <./PICs/inheritance_split_2.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 80--85
 
  []
 
-[90] [91]
-Underfull \hbox (badness 10000) in paragraph at lines 106--109
+[91] [92]
+Underfull \hbox (badness 10000) in paragraph at lines 107--110
 
  []
 
-[92])
-Underfull \hbox (badness 10000) in paragraph at lines 128--153
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 128--153
+[93])
+Underfull \hbox (badness 10000) in paragraph at lines 129--153
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 128--153
+Underfull \hbox (badness 10000) in paragraph at lines 129--153
 
  []
 
-[93] [94] [95] (BSP_MA_Code_BibTeX.bbl
+
+Underfull \hbox (badness 10000) in paragraph at lines 129--153
+
+ []
+
+[94] [95] [96] (BSP_MA_Code_BibTeX.bbl
 chapter without number
 LaTeX Font Info:    Font shape `OMS/phv/m/it' in size <10.95> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 9.
@@ -2296,10 +2307,10 @@ Underfull \hbox (badness 6380) in paragraph at lines 9--12
 .95 .  [][]$http : / / ispc . github . io / ispc . html #
  []
 
-[96
+[97
 
 
-] [97]
+] [98]
 Underfull \hbox (badness 1314) in paragraph at lines 199--204
 []\T1/phv/m/sc/10.95 Panchenko, M.\T1/phv/m/n/10.95 : \T1/phv/m/sl/10.95 Ac-cel
 -er-ate large-scale ap-pli-ca-tions with BOLT\T1/phv/m/n/10.95 .  [][]$https : 
@@ -2338,26 +2349,26 @@ Underfull \hbox (badness 6412) in paragraph at lines 226--232
 -[]data-[]container/$[][], 2013.  [On-line;
  []
 
-) [98] (BSP_MA_Code_BibTeX.lof [99
+) [99] (BSP_MA_Code_BibTeX.lof [100
 
-] [100])
+] [101])
 \tf@lof=\write6
 \openout6 = `BSP_MA_Code_BibTeX.lof'.
 
- [101] (BSP_MA_Code_BibTeX.lot)
+ [102] (BSP_MA_Code_BibTeX.lot)
 \tf@lot=\write7
 \openout7 = `BSP_MA_Code_BibTeX.lot'.
 
 
-[102
+[103
 
-] (BSP_MA_Code_BibTeX.lol [103
+] (BSP_MA_Code_BibTeX.lol [104
 
 ])
 \tf@lol=\write8
 \openout8 = `BSP_MA_Code_BibTeX.lol'.
 
- [104] [105
+ [105] [106
 
 ]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 205.
@@ -2373,8 +2384,8 @@ Package rerunfilecheck Info: File `BSP_MA_Code_BibTeX.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 36803 strings out of 492897
- 682176 string characters out of 3133496
+ 36804 strings out of 492897
+ 682186 string characters out of 3133496
  1030984 words of memory out of 3000000
  39341 multiletter control sequences out of 15000+200000
  602110 words of font info for 98 fonts, out of 3000000 for 9000
@@ -2395,9 +2406,9 @@ er/ucrro8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvb8a.pfb
 ><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvbo8a.pfb><C:/Program 
 Files/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvr8a.pfb><C:/Program Files/MiKTeX 2
 .9/fonts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on BSP_MA_Code_BibTeX.pdf (111 pages, 3375359 bytes).
+Output written on BSP_MA_Code_BibTeX.pdf (112 pages, 3376199 bytes).
 PDF statistics:
- 2042 PDF objects out of 2073 (max. 8388607)
- 718 named destinations out of 1000 (max. 500000)
+ 2046 PDF objects out of 2073 (max. 8388607)
+ 719 named destinations out of 1000 (max. 500000)
  704 words of extra memory for PDF output out of 10000 (max. 10000000)
 

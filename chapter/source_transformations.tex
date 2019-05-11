@@ -83,7 +83,7 @@ However what do we do if there is no constructor definition at all? Well there w
 \subsection{Semantic integrity and deep copy emulation}\label{deep_copy_emulation}
 The clear upside of a getter access method that creates cold struct instances on the spot is, that it will never try to dereference a null pointer due to nonexistent cold data. That is as long as we have enough space reserved in our pool allocator. The same goes for constructor adaptations/creations.\\
 At this point COOP faces a major problem. Both of the above attempts do not consider yet, that externalizing the data layout will very directly affect the data flow of the program even after redirecting cold field accesses correctly. The problem is that externalizing a subset of fields will not only affect the code, that is written by the original programmer, but also all of the implicitly generated code, that is yet to come from the compiler.\\
-For example for the purpose of testing COOP a program was written that implemented a simple particle system in a classic object oriented manner.
+For example for the purpose of testing COOP a program was written that implemented a simple particle system in a classic object-oriented manner.
 \begin{figure}[ht]
 	\begin{minipage}[b]{0.5\linewidth}
 		\centering
